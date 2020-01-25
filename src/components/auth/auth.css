@@ -1,0 +1,11 @@
+.divLogin{
+    height: 200px;
+    border-radius: 20px;
+
+}
+.loginp{
+    margin: 20px;
+    padding: 20px;
+    color:white;
+    text-align: center;
+}
