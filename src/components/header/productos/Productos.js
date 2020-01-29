@@ -26,13 +26,13 @@ class Productos extends Component{
         // });
         
 
-        const dbRef = db.collection("UNIVERSO/SUB_RUBRO/CATEGORIA");
-        console.log(dbRef.id);
+        // const dbRef = db.collection("UNIVERSO/SUB_RUBRO/CATEGORIA");
+        // console.log(dbRef.id);
         // dbRef.add({
         //     request: "buff akali"
         // }).then(function(){
         //     console.log("Añadido a la bd");
-        // }).catch(function(err){z
+        // }).catch(function(err){
         //     console.log("error: ",err);
         // });
         
