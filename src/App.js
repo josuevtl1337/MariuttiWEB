@@ -5,8 +5,7 @@ import Home from "./components/header/Home"
 import About from "./components/header/About"
 import Productos from "./components/header/productos/Productos"
 import Contact from "./components/header/Contact"
-import Admin from "./components/header/Admin"
-import Admin3 from "./components/header/admin/Admin3"
+import Admin from "./components/header/admin/Admin3"
 // import fbConfig from "./components/config/fbConfig"
 import firebase from "firebase/app";
 
@@ -21,7 +20,6 @@ class App  extends Component {
         <Route path="/productos" component={Productos} />
         <Route path="/contact" component={Contact} />
         <Route path="/admin" component={Admin} />
-        <Route path="/admin3" component={Admin3} />
         </div>
       </BrowserRouter>     
     );
