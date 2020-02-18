@@ -7,21 +7,21 @@ import "firebase/database";
 import "./admin.css"
 //Importar el storage
 import "firebase/firebase-storage";
+import AddRubro from "./addRubro";
+import Loading from "./Loading"
 
 
 
 class Admin3 extends Component { 
   state = {
+    loading:true,
     data:[],
-    enlaces:{}
+    enlaces:{},
+    rubros:[]
   };
-  componentDidMount(){
-    this.setState({
-      data:[],
-      enlaces:{}
-    });
-    const db = firebase.database();
 
+  componentDidMount(){
+    const db = firebase.database();
       // const record = { 
       //   titulo: 'Taco Fischer metálico FBS', 
       //   subtitulo: 'Una buena Selladora', 
@@ -29,33 +29,55 @@ class Admin3 extends Component {
       //   enlaces: "https://www.youtube.com/ watch?v=2DYYVp4QXew",
       //   fichaTecnica: 'https://www.youtube.com/ watch?v=2DYYVp4QXew'
       // }
-        const dbRef = db.ref("pictures/herramientas");
+
       //   const newPicture = dbRef.push();
       //   newPicture.set(record);
 
       const importingData = () =>{
+        // const record = {
+        //   titulo: "this.state.user.photoURL",
+        //   subtitulo: "this.state.user.displayName",
+        //   descripcion: "this.state.txt",
+        //   enlaces:"this.state.enlaces,",
+        //   pic: "task.snapshot.metadata.fullPath,",
+        //   fichaTecnica:"this.state.fichaTecnica"
+        // };
+        // const db = firebase.database();
+        // const dbRef = db.ref("rubro2/sub_rubro/catalogo");
+        // const newPicture = dbRef.push();
+        // newPicture.set(record);
+
+        //Cargo los datos de las tablas
+        const dbRef = db.ref("/Producto/");
         dbRef.on("child_added", snapshot => {
           this.setState({
             data: this.state.data.concat(snapshot.val())
           });
+          //Cargo los enlaces
           this.state.data.map((item , key)=>{
             this.setState({
               enlaces: item.enlaces
             })
           });
+          console.log(this.state.data);
         });
       }
+      //Cargo mis rubros
+      const importingRubros = () =>{
+        const dbRef = db.ref("/");
+        dbRef.on("value", snapshot => {
+          this.setState({
+            rubros: this.state.rubros.concat(snapshot.val())
+          });
+          console.log(this.state.rubros);
+          this.setState({
+            loading:false
+          })
+        })
+      }
+   
       importingData();
-
-
-
-      // console.log(this.snap);
-
-      // dbRef.on("value", function(snapshot) {
-      //   console.log(snapshot.val()); 
-      // }, function (errorObject) {
-      //   console.log("The read failed: " + errorObject.code);
-      // });  
+      importingRubros();
   }
 
   //Metodo que pushea a la BD
@@ -69,114 +91,120 @@ class Admin3 extends Component {
   //   task.on(
   //     //Lo que hacmeos ni bien subio la foto
   //     () => {
-  //       const record = {
-  //         titulo: this.state.user.photoURL,
-  //         subtitulo: this.state.user.displayName,
-  //         descripcion: this.state.txt,
-  //         enlaces:this.state.enlaces,
-  //         pic: task.snapshot.metadata.fullPath,
-  //         fichaTecnica:this.state.fichaTecnica
-  //       };
-  //       const db = firebase.database();
-  //       const dbRef = db.ref("pictures");
-  //       // const newPicture = dbRef.push();
-  //       // newPicture.set(record);
-  //     }
+        // const record = {
+        //   titulo: this.state.user.photoURL,
+        //   subtitulo: this.state.user.displayName,
+        //   descripcion: this.state.txt,
+        //   enlaces:this.state.enlaces,
+        //   pic: task.snapshot.metadata.fullPath,
+        //   fichaTecnica:this.state.fichaTecnica
+        // };
+        // const db = firebase.database();
+        // const dbRef = db.ref("rubro2/sub_rubro/catalogo");
+        // const newPicture = dbRef.push();
+        // newPicture.set(record);
+      // }
   //   );
   // };
-
   render(){ 
-    return (
-        <Grid container className="container per" spacing={2}>
-        <Grid container justify="center" item xs={6}>
-          <Catalogo />
-        </Grid>
-        <Grid item xs={6} >
-        <MaterialTable
-        actions={[
-          {
-            icon: 'delete',
-            tooltip: 'Borrar Producto',
-          },
-          {
-            icon:'edit',
-            tooltip:'editar producto'
-          },
-          {
-            icon: 'add',
-            tooltip: 'Add User',
-            isFreeAction: true,
-            onClick: (event) => alert("You want to add a new row")
-          }
-
-        ]}
-        options={{
-          search: true,
-          sorting: false,
-          columnsButton:true,
-          paging:false,         
-         }}
-          columns={[
-            { title: 'Titulo', field: 'titulo' },
-            { title: 'Subtitutlo', field: 'subtitulo' },
-            { title: 'Descripcion', field: 'descripcion',
-             cellStyle:{width:200,minWidth:200},
-             headerStlye:{width:200,minWidth:200}
-            },
-            // { title: 'Enlaces', field: 'enlaces'},
-            // { title: 'Imagen', field: 'imagen'},
-            // { title: 'Ficha Tecnica', field: 'fichaTecnica'}
-          ]}
-          // data={ () =>
-          //   new Promise((resolve, reject) => {
-          //       console.log(this.state.data);
-          //       // prepare your data and then call resolve like this:
-          //       resolve({
-          //           data: this.state.data
-          //       });
-          //   })
-          // }
-          data={this.state.data}
-          detailPanel={[
-            {
-              tooltip: 'Ver video',
-              render: rowData => {
-                return (
-                  <iframe
-                    width="100%"
-                    height="315"
-                    // src={`https://www.youtube.com/embed/${bqF5i4qloVE}`}
-                    src={this.state.enlaces}
-                    frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  />
-                )
-             },
-            },
-            {
-            icon: 'account_circle',
-            tooltip: 'Ver Imagen',
-            render: rowData => {
-              return (
-                <iframe
-                    width="100%"
-                    height="315"
-                    src={"https://www.nexon.com.ar/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/c/y/cyber016913_1.jpg"}
-                    frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  />
-              )
-            },
-          },      
-          ]}
-          title="Mariutti Admin"
-        />
-      </Grid>      
-      </Grid>
+        if(this.state.loading ){
+          return (
+          <Loading />
+          );
+        }
+        else{
+          return(
+            <Grid container className="container per" spacing={2}>  
+            <Grid container justify="center" item xs={3}>
+              <Catalogo rubros={this.state.rubros}/>
+              <AddRubro />
+            </Grid>
+            <Grid item xs={9} >
+            <MaterialTable
+            actions={[
+              {
+                icon: 'delete',
+                tooltip: 'Borrar Producto',
+              },
+              {
+                icon:'edit',
+                tooltip:'editar producto'
+              },
+              {
+                icon: 'add',
+                tooltip: 'Add User',
+                isFreeAction: true,
+                onClick: (event) => alert("You want to add a new row")
+              }
     
-    )
+            ]}
+            options={{
+              search: true,
+              sorting: false,
+              columnsButton:true,
+              paging:false,         
+              }}
+              columns={[
+                { title: 'Titulo', field: 'nombre' },
+                { title: 'Subtitutlo', field: 'categoria' },
+                { title: 'Descripcion', field: 'id',
+                  cellStyle:{width:200,minWidth:200},
+                  headerStlye:{width:200,minWidth:200}
+                },
+                // { title: 'Enlaces', field: 'enlaces'},
+                // { title: 'Imagen', field: 'imagen'},
+                // { title: 'Ficha Tecnica', field: 'fichaTecnica'}
+              ]}
+              // data={ () =>
+              //   new Promise((resolve, reject) => {
+              //       console.log(this.state.data);
+              //       // prepare your data and then call resolve like this:
+              //       resolve({
+              //           data: this.state.data
+              //       });
+              //   })
+              // }
+              data={this.state.data}
+              detailPanel={[
+                {
+                  tooltip: 'Ver video',
+                  render: rowData => {
+                    return (
+                      <iframe
+                        width="100%"
+                        height="315"
+                        // src={`https://www.youtube.com/embed/${bqF5i4qloVE}`}
+                        src={this.state.enlaces}
+                        frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                      />
+                    )
+                  },
+                },
+                {
+                icon: 'account_circle',
+                tooltip: 'Ver Imagen',
+                render: rowData => {
+                  return (
+                    <iframe
+                        width="100%"
+                        height="315"
+                        src={"https://www.nexon.com.ar/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/c/y/cyber016913_1.jpg"}
+                        frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                      />
+                  )
+                },
+              },      
+              ]}
+              title="Mariutti Admin"
+            />
+            </Grid>      
+            </Grid>
+          );
+        }    
   }
     
 }

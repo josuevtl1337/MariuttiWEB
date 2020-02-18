@@ -1,0 +1,21 @@
+.paperStyle{
+    padding: 10px;
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-evenly; */
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-gap: 5px;
+    height: 100%;
+}
+
+.productWrapper{
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    height: 200px;
+}
+
+.prodImg{
+    width: 200px;
+}
