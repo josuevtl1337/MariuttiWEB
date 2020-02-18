@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import ProductosCard from "./ProductoCard"
 import "./catalogoProductos.css"
+import Paper from '@material-ui/core/Paper'
 
 export class CatalogoProductos extends Component {
     render() {
         return (
-            <div className="contenedor">
+            <Paper className="contenedor">
                 <ProductosCard />
-            </div>
+                <ProductosCard />
+                <ProductosCard />
+            </Paper>
         )
     }
 }

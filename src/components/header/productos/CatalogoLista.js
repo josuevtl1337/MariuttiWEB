@@ -10,6 +10,7 @@ const useStyles = makeStyles({
     height: 216,
     flexGrow: 1,
     maxWidth: 400,
+    border: "2px solid black"
   },
 });
 
