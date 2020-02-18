@@ -7,7 +7,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Balde from "./taladroX.jpg"
+import Pic from "./taladroX.jpg"
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles({
   card: {
@@ -22,7 +23,7 @@ export default function MediaCard() {
   const classes = useStyles();
 
   return (
-    <Card className={classes.card}>
+    /*<Card className={classes.card}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -43,6 +44,15 @@ export default function MediaCard() {
           Ver Más
         </Button>
       </CardActions>
-    </Card>
+    </Card>*/
+    
+    <a href="">
+      <Paper variant="outlined">
+        <img src={Pic} alt=""/>
+        <p>Black & Decker</p>
+        <h2>TM600</h2>
+        <h4>Taladro 600w</h4>
+      </Paper>
+    </a>
   );
 }

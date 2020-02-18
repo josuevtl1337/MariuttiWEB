@@ -26,13 +26,13 @@ class Productos extends Component{
         // });
         
 
-        // const dbRef = db.collection("UNIVERSO/SUB_RUBRO/CATEGORIA");
-        // console.log(dbRef.id);
+        const dbRef = db.collection("UNIVERSO/SUB_RUBRO/CATEGORIA");
+        console.log(dbRef.id);
         // dbRef.add({
         //     request: "buff akali"
         // }).then(function(){
         //     console.log("Añadido a la bd");
-        // }).catch(function(err){
+        // }).catch(function(err){z
         //     console.log("error: ",err);
         // });
         
@@ -56,9 +56,18 @@ class Productos extends Component{
     render(){
         return (
             <div className="container">
-            <SearchBar />
-            <CatalogoLista />
-            <CatalogoProductos />
+                <div className="row">
+                    {/* <SearchBar /> */}
+                </div>
+                
+                <div className="row">
+                    <div className="col s12 l3">
+                        <CatalogoLista />
+                    </div>
+                    <div className="col s12 l9">
+                        <CatalogoProductos />
+                    </div>
+                </div>
             </div> 
         );
     }
