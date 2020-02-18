@@ -7,7 +7,6 @@ import Container from '@material-ui/core/Container';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-
 const Navbar = (props) =>{
     const [tabIndex, setTabIndex] = React.useState(0);
     console.log(props);
@@ -26,8 +25,8 @@ const Navbar = (props) =>{
                         <li className="items"><Link to="/News">Noticias</Link></li>
                         <li className="items"><Link to="/Contact">Contactanos</Link></li>
                     </ul> */}
-                    <Tabs variant="fullWidth" onChange={(e, index) => setTabIndex(index)} aria-label="full width tabs example">
-                        <Link to="/Home"><Tab label={'Inicio'} /></Link>
+                    <Tabs className="tablist" variant="fullWidth" onChange={(e, index) => setTabIndex(index)} indicatorColor="secondary" aria-label="simple tabs example">
+                        <Link to="/Home"><Tab label={'Inicio'} focusVisibleClassName="selected-tab" /></Link>
                         <Link to="/About"><Tab label={'Quienes Somos'} /></Link>
                         <Link to="/Productos"><Tab label={'Productos'} /></Link>
                         <Link to="/News"><Tab label={'Noticias'} /></Link>
