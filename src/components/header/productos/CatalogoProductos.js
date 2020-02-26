@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
 import ProductosCard from "./ProductoCard"
 import "./catalogoProductos.css"
-import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid'
 
-export class CatalogoProductos extends Component {
-    render() {
-        return (
-            <Paper className="contenedor">
-                <ProductosCard />
-                <ProductosCard />
-                <ProductosCard />
-            </Paper>
-        )
-    }
-}
+const CatalogoProductos = () =>{
+    return (
+        <div className="contenedor-catalogo">
+            <ProductosCard/>
+            <ProductosCard/>
+            <ProductosCard/>
+            <ProductosCard/>
+            <ProductosCard/>
+            <ProductosCard/>
+        </div>
+    )
+};
 
 export default CatalogoProductos

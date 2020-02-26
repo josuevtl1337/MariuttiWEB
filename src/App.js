@@ -40,16 +40,16 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <div style={{height: '100%'}}>
+        {/* <div style={{height: '100%'}}> */}
           <Navbar sidenavClickHandler={this.sidenavTriggerClickHandler}/>
           {sidenav}
           {backdrop}
-          <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
+          <Route exact path="/inicio" component={Home} />
+          <Route path="/nosotros" component={About} />
           <Route path="/productos" component={Productos} />
-          <Route path="/contact" component={Contact} />
+          <Route path="/contacto" component={Contact} />
           <Route path="/admin" component={Admin} />
-        </div>
+        {/* </div> */}
       </BrowserRouter>     
     );
   }

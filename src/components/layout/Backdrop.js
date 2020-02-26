@@ -5,7 +5,7 @@ const estilos = {
     width: '100%',
     height: '100%',
     background: 'rgba(0,0,0,0.3)',
-    zIndex: '100',
+    zIndex: '2500',
     top: '0',
     left: '0'
 };

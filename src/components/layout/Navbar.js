@@ -1,68 +1,72 @@
 import React from "react";
-import { Link, NavLink, withRouter } from "react-router-dom";
+import { Link, NavLink, withRouter, Router } from "react-router-dom";
 import './Navbar.css';
 import SidenavTrigger from "./SidenavTrigger.js";
+import Tab from './Tab.js';
 import Hidden from '@material-ui/core/Hidden';
 import Container from '@material-ui/core/Container';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import MailIcon from '@material-ui/icons/Mail';
+import PhoneIcon from '@material-ui/icons/Phone';
+import SearchIcon from '@material-ui/icons/Search';
 
-const Navbar = (props) =>{
-    const [tabIndex, setTabIndex] = React.useState(0);
-    console.log(props);
-    return (
-        <React.Fragment>
+class Navbar extends React.Component {
+    // const [tabIndex, setTabIndex] = React.useState(0);
+    
+    constructor(props) {
+		super(props);
+        this.state = {
+            sidenav: props.sidenavClickHandler
+        };
+    }
 
-        {/* // <!-- navbar --> */}
-        <div className="navbar">
-            <Container className="barra">
-                <Link to="/Home"><img className="logo" src="http://www.mariutti.com.ar/images/logo-plano.png"/></Link>
-                <Hidden mdDown>
-                    {/* <ul className="links">
-                        <li className="items"><Link to="/Home">Inicio</Link></li>
-                        <li className="items"><Link to="/About">Quienes Somos</Link></li>
-                        <li className="items"><Link to="/Productos">Productos</Link></li>
-                        <li className="items"><Link to="/News">Noticias</Link></li>
-                        <li className="items"><Link to="/Contact">Contactanos</Link></li>
-                    </ul> */}
-                    <Tabs className="tablist" variant="fullWidth" onChange={(e, index) => setTabIndex(index)} indicatorColor="secondary" aria-label="simple tabs example">
-                        <Link to="/Home"><Tab label={'Inicio'} focusVisibleClassName="selected-tab" /></Link>
-                        <Link to="/About"><Tab label={'Quienes Somos'} /></Link>
-                        <Link to="/Productos"><Tab label={'Productos'} /></Link>
-                        <Link to="/News"><Tab label={'Noticias'} /></Link>
-                        <Link to="/Contact"><Tab label={'Contactanos'} /></Link>
-                    </Tabs>
+    render(){
+        return (
+            <div className="backnav">
+                <div className="contact-info">
+                    <div className="contact-info-content">
+                        <div className="contact-divider"></div>
+                        <MailIcon style={{color: 'white', fontSize: 18, marginRight: '5px'}}/>
+                        <p style={{color: 'white', fontSize: 12}}>info@mariutti.com.ar</p>
+                        <div className="contact-divider"></div>
+                        <PhoneIcon style={{color: 'white', fontSize: 18, marginRight: '5px'}}/>
+                        <p style={{color: 'white', fontSize: 12}}>+54 342 453-5318</p>
+                    </div>
+                </div>
+                <div className="navbar">
+                    <Container className="barra">
+                        <Link to="/inicio"><img className="logo" src="http://www.mariutti.com.ar/images/logo-plano.png"/></Link>
+                        <Hidden mdDown>
+                            <div className="tabs-wrapper">
+                                <Link  to="/inicio">
+                                    <Tab isActive={window.location.href.includes('inicio')} titulo="Inicio"/>
+                                </Link>
+                                <Link  to="/nosotros">
+                                    <Tab isActive={window.location.href.includes('nosotros')} titulo="Quienes Somos"/>
+                                </Link>
+                                <Link  to="/productos">
+                                    <Tab isActive={window.location.href.includes('productos')} titulo="Productos"/>
+                                </Link>
+                                <Link  to="/noticias">
+                                    <Tab isActive={window.location.href.includes('noticias')} titulo="Noticias"/>
+                                </Link>
+                                <Link  to="/contacto">
+                                    <Tab isActive={window.location.href.includes('contacto')} titulo="Contactanos"/>
+                                </Link>
+                            </div>
+                            <SearchIcon style={{color: '#636363', fontSize: 20}}/>
+                        </Hidden>
+        
+                        <Hidden lgUp>
+                            <SidenavTrigger click={this.state.sidenav}/>
+                        </Hidden>
+                        
+                    </Container>
+                </div>
+            </div>
+        )
+    }
 
-                </Hidden>
-
-                {/* <a href="#" data-target="slide-out" className="hide-on-large-only burger sidenav-trigger">
-                    <i className="material-icons">menu</i>
-                </a> */}
-
-                <Hidden lgUp>
-                    <SidenavTrigger click={props.sidenavClickHandler}/>
-                </Hidden>
-                
-            </Container>
-        </div>
-
-
-
-
-
-
-
-        {/* /* <!-- Manu lateral movil -->
-        <ul id="slide-out" className="sidenav hide-on-large">
-            <img className="logoside" src="http://www.mariutti.com.ar/images/logo-plano.png"/>
-            <li className="items"><Link to="/Home">Inicio</Link></li>
-            <li className="items"><Link to="/About">Quienes Somos</Link></li>
-            <li className="items"><Link to="/Productos">Productos</Link></li>
-            <li className="items"><Link to="/News">Noticias</Link></li>
-            <li className="items"><Link to="/Contact">Contactanos</Link></li>
-        </ul> */}
-        </React.Fragment>
-    )
+    
 }
 
 export default withRouter(Navbar)
