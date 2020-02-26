@@ -7,15 +7,6 @@ import  "./ListaRubros.css"
 import Loading from "./Loading"
 
 
-// const useStyles = makeStyles({
-//   root: {
-//     height: 216,
-//     flexGrow: 1,
-//     maxWidth: 400,
-//   },
-// });
-// const classes = useStyles();
-
 class ListaRubros extends Component {
 state={
   rubros:"",
@@ -36,7 +27,6 @@ state={
 
   }
   render(){
-
       if(this.state.loading ){
         return (
         <Loading />
@@ -53,7 +43,6 @@ state={
           color:'grey'
         };
         return (
-          <div className="container">
 <TreeView
           style={classTree}
           defaultExpandIcon={<ChevronRightIcon />}
@@ -74,8 +63,7 @@ state={
             </TreeItem>
             <TreeItem onClick={()=>{handleOnClick("Producto")}} nodeId="3" label="PRODUCTO">
             </TreeItem>
-          </TreeView> 
-          </div>    
+          </TreeView>    
         );
       }
   }

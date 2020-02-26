@@ -7,7 +7,11 @@ import "firebase/database";
 import "./admin.css"
 //Importar el storage
 import "firebase/firebase-storage";
+//Botones "ADD"
 import AddRubro from "./addRubro";
+import AddSubRubro from "./addSubRubro";
+import AddProducto from "./addProducto";
+
 import Loading from "./Loading"
 //Botones
 import Button from '@material-ui/core/Button';
@@ -34,9 +38,27 @@ class Admin3 extends Component {
       display: param
     });     
   }
+  handleUpload = (nombre,rubro,ruta) =>{
+    const db = firebase.database();
+    const record = {
+      nombre: nombre,
+      rubro: rubro
+    };
+    const dbRef = db.ref(ruta);
+    const newPicture = dbRef.push();
+    newPicture.set(record);
+    const postId = newPicture.key;
+    console.log(postId);
+    newPicture.update({
+      "id":postId
+    })
 
+    
+    
+  }
   componentDidMount(){
     const db = firebase.database();
+    //Importo todos los datos necesarios a variables de una sola vez.
     const importingData = () =>{
         const dbRefRubro = db.ref("Rubro");
         dbRefRubro.on("child_added", snapshot => {
@@ -57,34 +79,31 @@ class Admin3 extends Component {
           });
         });
       }
+      //Doy un delay de 2segundos para cargar los datos
       setTimeout(() => {
         this.setState({
           loading:false
         })
       }, 2000);
+
       importingData();
+
+
 
   }
   render(){ 
-        const classTree = {
-          height: 216,
-          flexGrow: 1,
-          maxWidth: 400,
-          color:'grey'
-        };
         if(this.state.loading){
           return (
           <Loading />
           );
         }
         else{
-
           if(this.state.display=="Sub_Rubro"){
             return(
               <Grid container className="container per" spacing={2}>  
               <Grid container justify="center" item xs={3}>
                 <Catalogo parentCallback={this.handleClick}/>  
-                <AddRubro />
+                <AddSubRubro handleUpload={this.handleUpload}/>
               </Grid>
               <Grid item xs={9} >
               <MaterialTable
@@ -92,17 +111,23 @@ class Admin3 extends Component {
                         {
                           icon: 'delete',
                           tooltip: 'Borrar Producto',
-                        },
-                        {
-                          icon:'edit',
-                          tooltip:'editar producto'
-                        },
-                        {
-                          icon: 'add',
-                          tooltip: 'Add User',
-                          isFreeAction: true,
-                          onClick: (event) => alert("You want to add a new row")
-                        }  
+                          onClick: (event, rowData) => 
+                          {
+                            alert("You want to delete " + rowData.nombre)
+                            new Promise((resolve, reject) => {
+                              setTimeout(() => {
+                                {                             
+                                  const db = firebase.database();
+                                  const dbRef = db.ref("Sub_Rubro");
+                                  const refSB = dbRef.child(rowData.id) 
+                                  refSB.remove();                                 
+                                }
+                                resolve()
+                              }, 1000)
+                            })
+                          }
+
+                        }
                       ]}
                       options={{
                         search: true,
@@ -111,61 +136,37 @@ class Admin3 extends Component {
                         paging:false,         
                         }}
                         columns={[
-                          { title: 'Titulo', field: 'nombre' },
-                          { title: 'Subtitutlo', field: 'categoria' },
-                          { title: 'Descripcion', field: 'id',
-                            cellStyle:{width:200,minWidth:200},
-                            headerStlye:{width:200,minWidth:200}
-                          },
-                          // { title: 'Enlaces', field: 'enlaces'},
-                          // { title: 'Imagen', field: 'imagen'},
-                          // { title: 'Ficha Tecnica', field: 'fichaTecnica'}
+                        { title: 'Id', field: 'id',  editable: 'never'
+                        },
+                        { title: 'Nombre', field: 'nombre'
+                        },
+                        { title: 'Rubro', field: 'rubro', lookup:{r2:"Obras y Contruccion", r1:"Maquinas y Herramientas"}
+                        },
                         ]}
-                        // data={ () =>
-                        //   new Promise((resolve, reject) => {
-                        //       console.log(this.state.data);
-                        //       // prepare your data and then call resolve like this:
-                        //       resolve({
-                        //           data: this.state.data
-                        //       });
-                        //   })
-                        // }
-                        
                         data={this.state.Sub_Rubro}
-                        detailPanel={[
-                          {
-                            tooltip: 'Ver video',
-                            render: rowData => {
-                              return (
-                                <iframe
-                                  width="100%"
-                                  height="315"
-                                  // src={`https://www.youtube.com/embed/${bqF5i4qloVE}`}
-                                  src={this.state.enlaces}
-                                  frameborder="0"
-                                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                  allowfullscreen
-                                />
-                              )
-                            },
-                          },
-                          {
-                          icon: 'account_circle',
-                          tooltip: 'Ver Imagen',
-                          render: rowData => {
-                            return (
-                              <iframe
-                                  width="100%"
-                                  height="315"
-                                  src={"https://www.nexon.com.ar/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/c/y/cyber016913_1.jpg"}
-                                  frameborder="0"
-                                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                  allowfullscreen
-                                />
-                            )
-                          },
-                        },      
-                        ]}
+                        editable={{
+                          onRowUpdate: (newData, oldData) =>
+                            new Promise((resolve, reject) => {
+                              setTimeout(() => {
+                                {
+                                  const data = this.state.Sub_Rubro;
+                                  const index = data.indexOf(oldData);
+                                  data[index] = newData;
+                                  this.setState({ data }, () => resolve());
+                                  console.log(newData);
+                                  const db = firebase.database();
+                                  const dbRef = db.ref("Sub_Rubro");
+                                  const refSB = dbRef.child(data[index].id) 
+                                  refSB.update({
+                                    "nombre":newData.nombre,
+                                    "rubro":newData.rubro
+                                  })
+                                  
+                                }
+                                resolve()
+                              }, 1000)
+                            }),
+                        }}
                         title="Sub_Rubro/"
               />   
               </Grid>      
@@ -203,53 +204,16 @@ class Admin3 extends Component {
                         paging:false,         
                         }}
                         columns={[
-                          { title: 'Titulo', field: 'nombre' },
-                          { title: 'Subtitutlo', field: 'categoria' },
-                          { title: 'Descripcion', field: 'id',
+                          { title: 'Titulo', field: 'nombre' ,
+                          cellStyle:{width:'50%',minWidth:'50%'},
+                          headerStlye:{width:'50%',minWidth:'50%'}
+                          },
+                          { title: 'Id', field: 'id',
                             cellStyle:{width:200,minWidth:200},
                             headerStlye:{width:200,minWidth:200}
-                          },
-                          // { title: 'Enlaces', field: 'enlaces'},
-                          // { title: 'Imagen', field: 'imagen'},
-                          // { title: 'Ficha Tecnica', field: 'fichaTecnica'}
+                          }
                         ]}
-          
-                        
                         data={this.state.Rubro}
-                        detailPanel={[
-                          {
-                            tooltip: 'Ver video',
-                            render: rowData => {
-                              return (
-                                <iframe
-                                  width="100%"
-                                  height="315"
-                                  // src={`https://www.youtube.com/embed/${bqF5i4qloVE}`}
-                                  src={this.state.enlaces}
-                                  frameborder="0"
-                                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                  allowfullscreen
-                                />
-                              )
-                            },
-                          },
-                          {
-                          icon: 'account_circle',
-                          tooltip: 'Ver Imagen',
-                          render: rowData => {
-                            return (
-                              <iframe
-                                  width="100%"
-                                  height="315"
-                                  src={"https://www.nexon.com.ar/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/c/y/cyber016913_1.jpg"}
-                                  frameborder="0"
-                                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                  allowfullscreen
-                                />
-                            )
-                          },
-                        },      
-                        ]}
                         title="Rubro/"
               />   
               </Grid>      
@@ -260,7 +224,7 @@ class Admin3 extends Component {
               <Grid container className="container per" spacing={2}>  
               <Grid container justify="center" item xs={3}>
               <Catalogo parentCallback={this.handleClick}/>   
-                <AddRubro />
+                <AddProducto />
               </Grid>
               <Grid item xs={9} >
               <MaterialTable
@@ -370,53 +334,13 @@ class Admin3 extends Component {
                         paging:false,         
                         }}
                         columns={[
-                          { title: 'Titulo', field: 'nombre' },
-                          { title: 'Subtitutlo', field: 'categoria' },
-                          { title: 'Descripcion', field: 'id',
-                            cellStyle:{width:200,minWidth:200},
-                            headerStlye:{width:200,minWidth:200}
+                          { title: 'Titulo', field: 'nombre',
+                          cellStyle:{width:'50%',minWidth:'50%'},
+                          headerStlye:{width:'50%',minWidth:'50%'}
                           },
-                          // { title: 'Enlaces', field: 'enlaces'},
-                          // { title: 'Imagen', field: 'imagen'},
-                          // { title: 'Ficha Tecnica', field: 'fichaTecnica'}
+                          { title: 'Id', field: 'id'}
                         ]}
-      
-                        
                         data={this.state.Rubro}
-                        detailPanel={[
-                          {
-                            tooltip: 'Ver video',
-                            render: rowData => {
-                              return (
-                                <iframe
-                                  width="100%"
-                                  height="315"
-                                  // src={`https://www.youtube.com/embed/${bqF5i4qloVE}`}
-                                  src={this.state.enlaces}
-                                  frameborder="0"
-                                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                  allowfullscreen
-                                />
-                              )
-                            },
-                          },
-                          {
-                          icon: 'account_circle',
-                          tooltip: 'Ver Imagen',
-                          render: rowData => {
-                            return (
-                              <iframe
-                                  width="100%"
-                                  height="315"
-                                  src={"https://www.nexon.com.ar/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/c/y/cyber016913_1.jpg"}
-                                  frameborder="0"
-                                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                  allowfullscreen
-                                />
-                            )
-                          },
-                        },      
-                        ]}
                         title="Rubro/"
               />   
               </Grid>      

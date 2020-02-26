@@ -9,7 +9,7 @@ import Productos from "./components/header/productos/Productos"
 import Contact from "./components/header/Contact"
 import Admin from "./components/header/admin/Admin3"
 // import fbConfig from "./components/config/fbConfig"
-import firebase from "firebase/app";
+// import firebase from "firebase/app";
 
 
 
