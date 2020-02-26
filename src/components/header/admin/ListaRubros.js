@@ -44,7 +44,7 @@ state={
       }
       else{
         const handleOnClick = (name) =>{
-          alert(name);
+          this.props.parentCallback(name)
         }      
         const classTree = {
           height: 216,
@@ -68,13 +68,11 @@ state={
 
             );
           })} */}
-            <TreeItem onClick={()=>{handleOnClick("1")}} nodeId="1" label="RUBROS">
+            <TreeItem onClick={()=>{handleOnClick("Rubro")}} nodeId="1" label="RUBRO">
             </TreeItem>
-            <TreeItem nodeId="2" label="SUB RUBROS">
+            <TreeItem onClick={()=>{handleOnClick("Sub_Rubro")}} nodeId="2" label="SUB RUBRO">
             </TreeItem>
-            <TreeItem nodeId="3" label="CATEGORIAS">
-            </TreeItem>
-            <TreeItem nodeId="4" label="PRODUCTOS">
+            <TreeItem onClick={()=>{handleOnClick("Producto")}} nodeId="3" label="PRODUCTO">
             </TreeItem>
           </TreeView> 
           </div>    

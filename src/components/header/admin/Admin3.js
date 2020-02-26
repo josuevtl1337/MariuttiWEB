@@ -9,7 +9,13 @@ import "./admin.css"
 import "firebase/firebase-storage";
 import AddRubro from "./addRubro";
 import Loading from "./Loading"
-
+//Botones
+import Button from '@material-ui/core/Button';
+//TreeView
+import TreeView from '@material-ui/lab/TreeView';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import TreeItem from '@material-ui/lab/TreeItem';
 
 
 class Admin3 extends Component { 
@@ -17,193 +23,406 @@ class Admin3 extends Component {
     loading:true,
     data:[],
     enlaces:{},
-    rubros:[]
+    Rubro:[],
+    Sub_Rubro:[],
+    Categoria:[],
+    Producto:[],
+    display:""
   };
+  handleClick = (param) =>{
+    this.setState({
+      display: param
+    });     
+  }
 
   componentDidMount(){
     const db = firebase.database();
-      // const record = { 
-      //   titulo: 'Taco Fischer metálico FBS', 
-      //   subtitulo: 'Una buena Selladora', 
-      //   descripcion: 'Sellador adhesivo universal con tecnología híbrida de alta performance y agarre inmediato. Pega – Rellena – Sella', 
-      //   enlaces: "https://www.youtube.com/ watch?v=2DYYVp4QXew",
-      //   fichaTecnica: 'https://www.youtube.com/ watch?v=2DYYVp4QXew'
-      // }
-
-      //   const newPicture = dbRef.push();
-      //   newPicture.set(record);
-
-      const importingData = () =>{
-        // const record = {
-        //   titulo: "this.state.user.photoURL",
-        //   subtitulo: "this.state.user.displayName",
-        //   descripcion: "this.state.txt",
-        //   enlaces:"this.state.enlaces,",
-        //   pic: "task.snapshot.metadata.fullPath,",
-        //   fichaTecnica:"this.state.fichaTecnica"
-        // };
-        // const db = firebase.database();
-        // const dbRef = db.ref("rubro2/sub_rubro/catalogo");
-        // const newPicture = dbRef.push();
-        // newPicture.set(record);
-
-        //Cargo los datos de las tablas
-        const dbRef = db.ref("/Producto/");
-        dbRef.on("child_added", snapshot => {
+    const importingData = () =>{
+        const dbRefRubro = db.ref("Rubro");
+        dbRefRubro.on("child_added", snapshot => {
           this.setState({
-            data: this.state.data.concat(snapshot.val())
+            Rubro: this.state.Rubro.concat(snapshot.val())
           });
-          //Cargo los enlaces
-          this.state.data.map((item , key)=>{
-            this.setState({
-              enlaces: item.enlaces
-            })
+        });
+        const dbRefSub_Rubro = db.ref("Sub_Rubro");
+        dbRefSub_Rubro.on("child_added", snapshot => {
+          this.setState({
+            Sub_Rubro: this.state.Sub_Rubro.concat(snapshot.val())
           });
-          console.log(this.state.data);
+        });
+        const dbRefProducto = db.ref("Producto");
+        dbRefProducto.on("child_added", snapshot => {
+          this.setState({
+            Producto: this.state.Producto.concat(snapshot.val())
+          });
         });
       }
-      //Cargo mis rubros
-      const importingRubros = () =>{
-        const dbRef = db.ref("/");
-        dbRef.on("value", snapshot => {
-          this.setState({
-            rubros: this.state.rubros.concat(snapshot.val())
-          });
-          console.log(this.state.rubros);
-          this.setState({
-            loading:false
-          })
+      setTimeout(() => {
+        this.setState({
+          loading:false
         })
-      }
-   
+      }, 2000);
       importingData();
-      importingRubros();
-  }
 
-  //Metodo que pushea a la BD
-  // handleUpload = e => {
-  //   e.preventDefault();
-  //   //Seteo y referencia de la DB
-  //   const file = e.target.files[0];
-  //   const storageRef = firebase.storage().ref(`imagenes/${file.name}`);
-  //   //pusheo mi archivo file dentro de mi BD
-  //   const task = storageRef.put(file);
-  //   task.on(
-  //     //Lo que hacmeos ni bien subio la foto
-  //     () => {
-        // const record = {
-        //   titulo: this.state.user.photoURL,
-        //   subtitulo: this.state.user.displayName,
-        //   descripcion: this.state.txt,
-        //   enlaces:this.state.enlaces,
-        //   pic: task.snapshot.metadata.fullPath,
-        //   fichaTecnica:this.state.fichaTecnica
-        // };
-        // const db = firebase.database();
-        // const dbRef = db.ref("rubro2/sub_rubro/catalogo");
-        // const newPicture = dbRef.push();
-        // newPicture.set(record);
-      // }
-  //   );
-  // };
+  }
   render(){ 
-        if(this.state.loading ){
+        const classTree = {
+          height: 216,
+          flexGrow: 1,
+          maxWidth: 400,
+          color:'grey'
+        };
+        if(this.state.loading){
           return (
           <Loading />
           );
         }
         else{
-          return(
-            <Grid container className="container per" spacing={2}>  
-            <Grid container justify="center" item xs={3}>
-              <Catalogo rubros={this.state.rubros}/>
-              <AddRubro />
-            </Grid>
-            <Grid item xs={9} >
-            <MaterialTable
-            actions={[
-              {
-                icon: 'delete',
-                tooltip: 'Borrar Producto',
-              },
-              {
-                icon:'edit',
-                tooltip:'editar producto'
-              },
-              {
-                icon: 'add',
-                tooltip: 'Add User',
-                isFreeAction: true,
-                onClick: (event) => alert("You want to add a new row")
-              }
-    
-            ]}
-            options={{
-              search: true,
-              sorting: false,
-              columnsButton:true,
-              paging:false,         
-              }}
-              columns={[
-                { title: 'Titulo', field: 'nombre' },
-                { title: 'Subtitutlo', field: 'categoria' },
-                { title: 'Descripcion', field: 'id',
-                  cellStyle:{width:200,minWidth:200},
-                  headerStlye:{width:200,minWidth:200}
-                },
-                // { title: 'Enlaces', field: 'enlaces'},
-                // { title: 'Imagen', field: 'imagen'},
-                // { title: 'Ficha Tecnica', field: 'fichaTecnica'}
-              ]}
-              // data={ () =>
-              //   new Promise((resolve, reject) => {
-              //       console.log(this.state.data);
-              //       // prepare your data and then call resolve like this:
-              //       resolve({
-              //           data: this.state.data
-              //       });
-              //   })
-              // }
-              data={this.state.data}
-              detailPanel={[
-                {
-                  tooltip: 'Ver video',
-                  render: rowData => {
-                    return (
-                      <iframe
-                        width="100%"
-                        height="315"
-                        // src={`https://www.youtube.com/embed/${bqF5i4qloVE}`}
-                        src={this.state.enlaces}
-                        frameborder="0"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                      />
-                    )
-                  },
-                },
-                {
-                icon: 'account_circle',
-                tooltip: 'Ver Imagen',
-                render: rowData => {
-                  return (
-                    <iframe
-                        width="100%"
-                        height="315"
-                        src={"https://www.nexon.com.ar/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/c/y/cyber016913_1.jpg"}
-                        frameborder="0"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                      />
-                  )
-                },
-              },      
-              ]}
-              title="Mariutti Admin"
-            />
-            </Grid>      
-            </Grid>
-          );
+
+          if(this.state.display=="Sub_Rubro"){
+            return(
+              <Grid container className="container per" spacing={2}>  
+              <Grid container justify="center" item xs={3}>
+                <Catalogo parentCallback={this.handleClick}/>  
+                <AddRubro />
+              </Grid>
+              <Grid item xs={9} >
+              <MaterialTable
+                      actions={[
+                        {
+                          icon: 'delete',
+                          tooltip: 'Borrar Producto',
+                        },
+                        {
+                          icon:'edit',
+                          tooltip:'editar producto'
+                        },
+                        {
+                          icon: 'add',
+                          tooltip: 'Add User',
+                          isFreeAction: true,
+                          onClick: (event) => alert("You want to add a new row")
+                        }  
+                      ]}
+                      options={{
+                        search: true,
+                        sorting: false,
+                        columnsButton:true,
+                        paging:false,         
+                        }}
+                        columns={[
+                          { title: 'Titulo', field: 'nombre' },
+                          { title: 'Subtitutlo', field: 'categoria' },
+                          { title: 'Descripcion', field: 'id',
+                            cellStyle:{width:200,minWidth:200},
+                            headerStlye:{width:200,minWidth:200}
+                          },
+                          // { title: 'Enlaces', field: 'enlaces'},
+                          // { title: 'Imagen', field: 'imagen'},
+                          // { title: 'Ficha Tecnica', field: 'fichaTecnica'}
+                        ]}
+                        // data={ () =>
+                        //   new Promise((resolve, reject) => {
+                        //       console.log(this.state.data);
+                        //       // prepare your data and then call resolve like this:
+                        //       resolve({
+                        //           data: this.state.data
+                        //       });
+                        //   })
+                        // }
+                        
+                        data={this.state.Sub_Rubro}
+                        detailPanel={[
+                          {
+                            tooltip: 'Ver video',
+                            render: rowData => {
+                              return (
+                                <iframe
+                                  width="100%"
+                                  height="315"
+                                  // src={`https://www.youtube.com/embed/${bqF5i4qloVE}`}
+                                  src={this.state.enlaces}
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                  allowfullscreen
+                                />
+                              )
+                            },
+                          },
+                          {
+                          icon: 'account_circle',
+                          tooltip: 'Ver Imagen',
+                          render: rowData => {
+                            return (
+                              <iframe
+                                  width="100%"
+                                  height="315"
+                                  src={"https://www.nexon.com.ar/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/c/y/cyber016913_1.jpg"}
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                  allowfullscreen
+                                />
+                            )
+                          },
+                        },      
+                        ]}
+                        title="Sub_Rubro/"
+              />   
+              </Grid>      
+              </Grid>
+            );
+          }else if(this.state.display=="Rubro"){
+            return(
+              <Grid container className="container per" spacing={2}>  
+              <Grid container justify="center" item xs={3}>
+              <Catalogo parentCallback={this.handleClick}/>   
+                <AddRubro />
+              </Grid>
+              <Grid item xs={9} >
+              <MaterialTable
+                      actions={[
+                        {
+                          icon: 'delete',
+                          tooltip: 'Borrar Producto',
+                        },
+                        {
+                          icon:'edit',
+                          tooltip:'editar producto'
+                        },
+                        {
+                          icon: 'add',
+                          tooltip: 'Add User',
+                          isFreeAction: true,
+                          onClick: (event) => alert("You want to add a new row")
+                        }  
+                      ]}
+                      options={{
+                        search: true,
+                        sorting: false,
+                        columnsButton:true,
+                        paging:false,         
+                        }}
+                        columns={[
+                          { title: 'Titulo', field: 'nombre' },
+                          { title: 'Subtitutlo', field: 'categoria' },
+                          { title: 'Descripcion', field: 'id',
+                            cellStyle:{width:200,minWidth:200},
+                            headerStlye:{width:200,minWidth:200}
+                          },
+                          // { title: 'Enlaces', field: 'enlaces'},
+                          // { title: 'Imagen', field: 'imagen'},
+                          // { title: 'Ficha Tecnica', field: 'fichaTecnica'}
+                        ]}
+          
+                        
+                        data={this.state.Rubro}
+                        detailPanel={[
+                          {
+                            tooltip: 'Ver video',
+                            render: rowData => {
+                              return (
+                                <iframe
+                                  width="100%"
+                                  height="315"
+                                  // src={`https://www.youtube.com/embed/${bqF5i4qloVE}`}
+                                  src={this.state.enlaces}
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                  allowfullscreen
+                                />
+                              )
+                            },
+                          },
+                          {
+                          icon: 'account_circle',
+                          tooltip: 'Ver Imagen',
+                          render: rowData => {
+                            return (
+                              <iframe
+                                  width="100%"
+                                  height="315"
+                                  src={"https://www.nexon.com.ar/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/c/y/cyber016913_1.jpg"}
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                  allowfullscreen
+                                />
+                            )
+                          },
+                        },      
+                        ]}
+                        title="Rubro/"
+              />   
+              </Grid>      
+              </Grid>
+            );
+          }else if(this.state.display=="Producto"){
+            return(
+              <Grid container className="container per" spacing={2}>  
+              <Grid container justify="center" item xs={3}>
+              <Catalogo parentCallback={this.handleClick}/>   
+                <AddRubro />
+              </Grid>
+              <Grid item xs={9} >
+              <MaterialTable
+                      actions={[
+                        {
+                          icon: 'delete',
+                          tooltip: 'Borrar Producto',
+                        },
+                        {
+                          icon:'edit',
+                          tooltip:'editar producto'
+                        },
+                        {
+                          icon: 'add',
+                          tooltip: 'Add User',
+                          isFreeAction: true,
+                          onClick: (event) => alert("You want to add a new row")
+                        }  
+                      ]}
+                      options={{
+                        search: true,
+                        sorting: false,
+                        columnsButton:true,
+                        paging:false,         
+                        }}
+                        columns={[
+                          { title: 'Titulo', field: 'nombre' },
+                          { title: 'Subtitutlo', field: 'categoria' },
+                          { title: 'Descripcion', field: 'id',
+                            cellStyle:{width:200,minWidth:200},
+                            headerStlye:{width:200,minWidth:200}
+                          },
+                          // { title: 'Enlaces', field: 'enlaces'},
+                          // { title: 'Imagen', field: 'imagen'},
+                          // { title: 'Ficha Tecnica', field: 'fichaTecnica'}
+                        ]}
+                        
+                        data={this.state.Producto}
+                        detailPanel={[
+                          {
+                            tooltip: 'Ver video',
+                            render: rowData => {
+                              return (
+                                <iframe
+                                  width="100%"
+                                  height="315"
+                                  // src={`https://www.youtube.com/embed/${bqF5i4qloVE}`}
+                                  src={this.state.enlaces}
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                  allowfullscreen
+                                />
+                              )
+                            },
+                          },
+                          {
+                          icon: 'account_circle',
+                          tooltip: 'Ver Imagen',
+                          render: rowData => {
+                            return (
+                              <iframe
+                                  width="100%"
+                                  height="315"
+                                  src={"https://www.nexon.com.ar/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/c/y/cyber016913_1.jpg"}
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                  allowfullscreen
+                                />
+                            )
+                          },
+                        },      
+                        ]}
+                        title="Producto/"
+              />   
+              </Grid>      
+              </Grid>
+            );
+          }else {
+            return(
+              <Grid container className="container per" spacing={2}>  
+              <Grid container justify="center" item xs={3}>
+              <Catalogo parentCallback={this.handleClick}/>   
+                <AddRubro />
+              </Grid>
+              <Grid item xs={9} >
+              <MaterialTable
+                      actions={[
+                        {
+                          icon: 'delete',
+                          tooltip: 'Borrar Producto',
+                        },
+                        {
+                          icon:'edit',
+                          tooltip:'editar producto'
+                        },
+                        {
+                          icon: 'add',
+                          tooltip: 'Add User',
+                          isFreeAction: true,
+                          onClick: (event) => alert("You want to add a new row")
+                        }  
+                      ]}
+                      options={{
+                        search: true,
+                        sorting: false,
+                        columnsButton:true,
+                        paging:false,         
+                        }}
+                        columns={[
+                          { title: 'Titulo', field: 'nombre' },
+                          { title: 'Subtitutlo', field: 'categoria' },
+                          { title: 'Descripcion', field: 'id',
+                            cellStyle:{width:200,minWidth:200},
+                            headerStlye:{width:200,minWidth:200}
+                          },
+                          // { title: 'Enlaces', field: 'enlaces'},
+                          // { title: 'Imagen', field: 'imagen'},
+                          // { title: 'Ficha Tecnica', field: 'fichaTecnica'}
+                        ]}
+      
+                        
+                        data={this.state.Rubro}
+                        detailPanel={[
+                          {
+                            tooltip: 'Ver video',
+                            render: rowData => {
+                              return (
+                                <iframe
+                                  width="100%"
+                                  height="315"
+                                  // src={`https://www.youtube.com/embed/${bqF5i4qloVE}`}
+                                  src={this.state.enlaces}
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                  allowfullscreen
+                                />
+                              )
+                            },
+                          },
+                          {
+                          icon: 'account_circle',
+                          tooltip: 'Ver Imagen',
+                          render: rowData => {
+                            return (
+                              <iframe
+                                  width="100%"
+                                  height="315"
+                                  src={"https://www.nexon.com.ar/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/c/y/cyber016913_1.jpg"}
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                  allowfullscreen
+                                />
+                            )
+                          },
+                        },      
+                        ]}
+                        title="Rubro/"
+              />   
+              </Grid>      
+              </Grid>
+            );
+          }
         }    
   }
     
