@@ -85,6 +85,7 @@ export default function SimpleModal() {
         aria-describedby="simple-modal-description"
         open={open}
         onClose={handleClose}
+        style={{zIndex: 400}}
       >
         <Grid container  xs={9} className={classes.paper}>
               {/* Sub-Rubro */}
