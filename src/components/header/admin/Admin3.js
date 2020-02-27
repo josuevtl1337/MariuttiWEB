@@ -33,11 +33,13 @@ class Admin3 extends Component {
     Producto:[],
     display:""
   };
+  //Este método sirve para cambiar la tabla dependiendo a cual le das click
   handleClick = (param) =>{
     this.setState({
       display: param
     });     
   }
+  //Subiendo Sub_Rubro
   handleUpload = (nombre,rubro,ruta) =>{
     const db = firebase.database();
     const record = {
@@ -51,10 +53,7 @@ class Admin3 extends Component {
     console.log(postId);
     newPicture.update({
       "id":postId
-    })
-
-    
-    
+    }) 
   }
   componentDidMount(){
     const db = firebase.database();
@@ -71,6 +70,7 @@ class Admin3 extends Component {
           this.setState({
             Sub_Rubro: this.state.Sub_Rubro.concat(snapshot.val())
           });
+          console.log(this.state.Sub_Rubro);
         });
         const dbRefProducto = db.ref("Producto");
         dbRefProducto.on("child_added", snapshot => {
@@ -224,7 +224,7 @@ class Admin3 extends Component {
               <Grid container className="container per" spacing={2}>  
               <Grid container justify="center" item xs={3}>
               <Catalogo parentCallback={this.handleClick}/>   
-                <AddProducto />
+                <AddProducto sub_rubros={this.state.Sub_Rubro}/>
               </Grid>
               <Grid item xs={9} >
               <MaterialTable

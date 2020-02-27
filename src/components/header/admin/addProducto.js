@@ -32,7 +32,7 @@ const useStylesSelect = makeStyles(theme => ({
   }
 }));
 
-export default function SimpleModal() {
+export default function SimpleModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -49,6 +49,7 @@ export default function SimpleModal() {
   const [subtitulo, setSubtitulo] = React.useState('');
   const [descripcion, setDescripcion] = React.useState('');
   const [enlace, setEnlace] = React.useState('');
+  const [file, setFile] = React.useState('');
 
   const handleChangeSub = event => {
     setSub(event.target.value);
@@ -67,89 +68,103 @@ export default function SimpleModal() {
   const onChangeEnlace = e => {
     setEnlace(e.target.value);
   }
+  const handleFile = e =>{
+    setFile(e.target.files[0]);
+  }
 
   const handleOnClick = e => {
     console.log(nombre);
     console.log(subtitulo);
     console.log("Descripcion:",descripcion);
     console.log("Enlace:",enlace);
+    console.log("Imagen:",file);
+    console.log(props.sub_rubros);
   }
-  return (
-    <div>
-      <button type="button" onClick={handleOpen}>
-        Agregar
-      </button>
+  function Retornando () {
+    props.sub_rubros.map((item, key)=>{
+      return(
+      <MenuItem value={key}>{item.name}</MenuItem>
+      );
+    })
 
-      <Modal
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        open={open}
-        onClose={handleClose}
-      >
-        <Grid container  xs={9} className={classes.paper}>
-              {/* Sub-Rubro */}
-              <FormControl className={classesSelect.formControl}>
-                <div className="container">
-                <InputLabel id="subRubro">Sub-Rubro</InputLabel>
-                <Select
-                  labelId="subRubroId"
-                  id="subRubro"
-                  value={subRubro}
-                  onChange={handleChangeSub}
-                >
-                <MenuItem value={3}>Ferretería Industrial</MenuItem>
-                <MenuItem value={4}>Herramientas Eléctricas</MenuItem>
-                <MenuItem value={5}>Herramientas Explosión</MenuItem>
-                <MenuItem value={6}>Herramientas Neumáticas</MenuItem>
-                <MenuItem value={7}>Indumentaria Y Seguridad</MenuItem>
-          
-              </Select>
-              <br />
-              <br />
-              <br />
-              {/* Nombre Producto */}
-              <TextField id="standard-basic" label="Nombre Poroducto" onChange={onChangeNombre}/>
-              <br />
-              <br />
-              <br />
-              {/* Subtitulo */}
-              <TextField id="standard-basic" label="Subtitulo" onChange={onChangeSubtitulo}/>
-              <br />
-              <br />
-              <br />
-              {/* Descripcion */}
-              <TextField id="standard-basic" label="Descripción" onChange={onChangeDescripcion}/>
-              <br />
-              <br />
-              <br />
-              {/* Enlace */}
-              <TextField id="standard-basic" label="Enlace Youtbe" onChange={onChangeEnlace}/>
-              <br />
-              <br />
-              <br />
-
-              {/* {Imagen} */}
-              <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
-              <label  htmlFor="icon-button-file">
-                <IconButton  color="primary" aria-label="upload picture" component="span">
-                  <PhotoCamera />
-                </IconButton>
-              </label>
-
-              <br />
-              <br />
-              <br />
-              {/* Boton de enviar */}
-              <Button variant="contained" color="primary" onClick={handleOnClick}>
-                Enviar
-              </Button>
-              <br />
-              <br />
-              <br />
+  }
+    return (
+      <div>
+        <button type="button" onClick={handleOpen}>
+          Agregar
+        </button>
+  
+        <Modal
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          open={open}
+          onClose={handleClose}
+        >
+          <Grid container  xs={9} className={classes.paper}>
+                {/* Sub-Rubro */}
+                <FormControl className={classesSelect.formControl}>
+                  <div className="container">
+                  <InputLabel id="subRubro">Sub-Rubro</InputLabel>
+                  <Select
+                    labelId="subRubroId"
+                    id="subRubro"
+                    value={subRubro}
+                    onChange={handleChangeSub}
+                  >
+                  {/* <Retornando />              */}
+                  {/* <MenuItem value={3}>Ferretería Industrial</MenuItem>
+                  <MenuItem value={4}>Herramientas Eléctricas</MenuItem>
+                  <MenuItem value={5}>Herramientas Explosión</MenuItem>
+                  <MenuItem value={6}>Herramientas Neumáticas</MenuItem>
+                  <MenuItem value={7}>Indumentaria Y Seguridad</MenuItem> */}
+            
+                </Select>
+                <br />
+                <br />
+                <br />
+                {/* Nombre Producto */}
+                <TextField id="standard-basic" label="Nombre Producto" onChange={onChangeNombre}/>
+                <br />
+                <br />
+                <br />
+                {/* Subtitulo */}
+                <TextField id="standard-basic" label="Subtitulo" onChange={onChangeSubtitulo}/>
+                <br />
+                <br />
+                <br />
+                {/* Descripcion */}
+                <TextField id="standard-basic" label="Descripción" onChange={onChangeDescripcion}/>
+                <br />
+                <br />
+                <br />
+                {/* Enlace */}
+                <TextField id="standard-basic" label="Enlace Youtbe" onChange={onChangeEnlace}/>
+                <br />
+                <br />
+                <br />
+  
+                {/* {Imagen} */}
+                <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={handleFile} />
+                <label  htmlFor="icon-button-file">
+                  <IconButton  color="primary" aria-label="upload picture" component="span">
+                    <PhotoCamera />
+                  </IconButton>
+                </label>
+  
+                <br />
+                <br />
+                <br />
+                {/* Boton de enviar */}
+                <Button variant="contained" color="primary" onClick={handleOnClick}>
+                  Enviar
+                </Button>
+                <br />
+                <br />
+                <br />
                 </div>
-              </FormControl>
-       </Grid>     
-      </Modal>
-    </div>
-  );
+                </FormControl>
+         </Grid>     
+        </Modal>
+      </div>
+    );
 }
