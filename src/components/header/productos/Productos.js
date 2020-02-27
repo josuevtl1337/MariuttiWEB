@@ -1,73 +1,33 @@
 import React, { Component } from "react"
 import ReactDOM from 'react-dom';
-import SearchBar from "./SearchBar"
-import CatalogoLista from "./CatalogoLista"
-import CatListExp from "./CatListExp"
+import Container from '@material-ui/core/Container';
 import CatalogoProductos from "./CatalogoProductos"
 import firebase from "firebase/app"
 import "firebase/firestore";
+import Grid from '@material-ui/core/Grid';
+import Drawer from './Drawer.js'
 
-class Productos extends Component{
-    state={
-        data:[]
-    }
-    componentDidMount(){
-        this.setState({
-            data:[],
-        });
-        const db = firebase.firestore();
-        // const dbRef = db.collection("UNIVERSO").doc("SUB_RUBRO").collection("CATEGORIA").doc("Producto").get()
-        // .then(snapshot => {
-        //     console.log(snapshot);
-        //     snapshot.map((doc) => {
-        //     console.log(doc.id, '=>', doc.data());
-        //   });
-        // }).catch((err) => {
-        //   console.log('Error getting documents', err);
-        // });
-        
-
-        // const dbRef = db.collection("UNIVERSO/SUB_RUBRO/CATEGORIA");
-        // console.log(dbRef.id);
-        // dbRef.add({
-        //     request: "buff akali"
-        // }).then(function(){
-        //     console.log("Añadido a la bd");
-        // }).catch(function(err){
-        //     console.log("error: ",err);
-        // });
-        
-        // .add({
-        //     first: "Ada",
-        //     last: "Lovelace"
-        // })
-        // .then(function(dbRef) {
-        //     console.log("Document written with ID: ", dbRef.id);
-        // })
-        // .catch(function(error) {
-        //     console.error("Error adding document: ", error);
-        // });
-        // dbRef.on("child_added", snapshot=>{
-        //     this.setState({
-        //         data:this.state.data.concat(snapshot.val())
-        //     });
-        // });
-   
-    }
-    render(){
-        return (
-            <div className="container">
-                <div className="row">
-                    {/* <SearchBar/> */}
-                </div>
-                <div className="row">
-                    <div className="col l3 m12"> <CatListExp /> </div>
-                    <div className="col l9 m12"> <CatalogoProductos /> </div>
-                </div>
-                
-            </div> 
-        );
-    }
+const Productos = () => {
+    const construccion = ["1", "2", "3"];
+    const maquinas = ["4", "5", "6"];
+    return (
+        <Container style={{zIndex: 100}}>
+            <Grid container>
+                <Grid item lg={3} md={12}>
+                   {/* <Accordion titulo='Construcción' categoria={construccion} /> 
+                   <Accordion titulo='Máquinas y Herramientas' /> 
+                   <Accordion titulo='Ferretería Industrial' />  */}
+                   <Drawer titulo="Construcción" categorias={construccion}/>
+                   <Drawer titulo="Máquinas y Herramientas" categorias={maquinas}/>
+                </Grid>
+                <Grid item lg={9} md={12}>
+                    <CatalogoProductos />
+                    
+                </Grid>
+            </Grid>
+            
+        </Container>
+    );
 }
 
 export default Productos

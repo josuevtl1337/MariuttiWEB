@@ -13,3 +13,10 @@
     height: 2px;
     background: black;
 }
+
+.burger-menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

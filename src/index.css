@@ -1,13 +1,22 @@
+*{
+  box-sizing: border-box;
+}
+
 html{
   height: 100%;
+  font-family: 'Roboto';
 }
 
 body {
   margin :0;
   padding:0;
-  height: 100%;
+  /* background: #EEEEEE; */
+  background: white;
 }
 
+a{
+  text-decoration: none;
+}
 
 /* form{
   padding: 20px;

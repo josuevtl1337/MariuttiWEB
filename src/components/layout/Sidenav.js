@@ -22,13 +22,13 @@ const sideNav = props => {
         <List  component="side-nav" aria-label="">
 
             <Divider/>
-            <Link  to="/Home">
+            <Link  to="/inicio">
                 <ListItem button >
                     <ListItemText click={props.itemClickHandler} className="buttons" primary="Inicio"  />
                 </ListItem>
             </Link>
             <Divider/>
-            <Link to="/About">
+            <Link to="/nosotros">
                 <ListItem button>
                     <ListItemText className="buttons" primary="Quienes Somos" />
                 </ListItem>
