@@ -9,6 +9,8 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
@@ -17,9 +19,12 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 const useStyles = makeStyles(theme => ({
   paper: {
     backgroundColor: theme.palette.background.paper,
+    width:'50%',
     border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    display:'flex',
+    flexDirection:'column',
+    alignItems:'center',
+    justifyContent:'space-around'
   },
   input: {
     display: 'none',
@@ -81,7 +86,8 @@ export default function SimpleModal(props) {
     console.log(props.sub_rubros);
   }
 
-  function Retornando () {
+  const retornando = ()=> {
+    alert("AA");
     props.sub_rubros.map((item, key) => {
       return(
         <MenuItem value={key}>
@@ -96,16 +102,18 @@ export default function SimpleModal(props) {
       <button type="button" onClick={handleOpen}>
         Agregar
       </button>
+
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           open={open}
           onClose={handleClose}
         >
-          <Grid container  xs={9} className={classes.paper}>
+          <Container className={classes.paper}>
+          <div className="container">
                 {/* Sub-Rubro */}
                 <FormControl className={classesSelect.formControl}>
-                  <div className="container">
+
                   <InputLabel id="subRubro">Sub-Rubro</InputLabel>
                   <Select
                     labelId="subRubroId"
@@ -113,7 +121,7 @@ export default function SimpleModal(props) {
                     value={subRubro}
                     onChange={handleChangeSub}
                   >
-                  {/* <Retornando />              */}
+                  {retornando}            
                   {/* <MenuItem value={3}>Ferretería Industrial</MenuItem>
                   <MenuItem value={4}>Herramientas Eléctricas</MenuItem>
                   <MenuItem value={5}>Herramientas Explosión</MenuItem>
@@ -121,30 +129,21 @@ export default function SimpleModal(props) {
                   <MenuItem value={7}>Indumentaria Y Seguridad</MenuItem> */}
             
                 </Select>
-                <br />
-                <br />
-                <br />
                 {/* Nombre Producto */}
                 <TextField id="standard-basic" label="Nombre Producto" onChange={onChangeNombre}/>
-                <br />
-                <br />
-                <br />
                 {/* Subtitulo */}
                 <TextField id="standard-basic" label="Subtitulo" onChange={onChangeSubtitulo}/>
-                <br />
-                <br />
-                <br />
                 {/* Descripcion */}
                 <TextField id="standard-basic" label="Descripción" onChange={onChangeDescripcion}/>
-                <br />
-                <br />
-                <br />
                 {/* Enlace */}
                 <TextField id="standard-basic" label="Enlace Youtbe" onChange={onChangeEnlace}/>
-                <br />
-                <br />
-                <br />
-  
+                <FormControlLabel
+                  value="end"
+                  control={<Switch color="primary" />}
+                  label="Oferta"
+                  labelPlacement="end"
+                />
+
                 {/* {Imagen} */}
                 <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={handleFile} />
                 <label  htmlFor="icon-button-file">
@@ -153,19 +152,14 @@ export default function SimpleModal(props) {
                   </IconButton>
                 </label>
   
-                <br />
-                <br />
-                <br />
+    
                 {/* Boton de enviar */}
                 <Button variant="contained" color="primary" onClick={handleOnClick}>
                   Enviar
                 </Button>
-                <br />
-                <br />
-                <br />
-                </div>
                 </FormControl>
-         </Grid>     
+                </div>
+         </Container>     
         </Modal>
       </React.Fragment>
     );
