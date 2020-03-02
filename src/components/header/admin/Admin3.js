@@ -20,6 +20,8 @@ import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
+//Redux
+import { connect } from "react-redux";
 
 
 class Admin3 extends Component { 
@@ -56,6 +58,7 @@ class Admin3 extends Component {
     }) 
   }
   componentDidMount(){
+    console.log(JSON.stringify(this.props));
     const db = firebase.database();
     //Importo todos los datos necesarios a variables de una sola vez.
     const importingData = () =>{
@@ -92,6 +95,7 @@ class Admin3 extends Component {
 
   }
   render(){ 
+    console.log(this.props)
         if(this.state.loading){
           return (
           <Loading />
@@ -351,4 +355,9 @@ class Admin3 extends Component {
   }
     
 }
-export default Admin3;
+const mapStateToProps = (state) =>{
+  return{
+    posts : state.posts
+  }
+}
+export default connect(mapStateToProps)(Admin3);
