@@ -13,13 +13,11 @@ import AdminNav from "./components/header/admin/AdminNav"
 // import firebase from "firebase/app";
 
 
-
 class App extends Component {
 
   state = {
     sidenavOpen : false
   };
-
   sidenavTriggerClickHandler = () => {
     this.setState((prevState) => {
       return {sidenavOpen: !prevState.sidenavOpen}
@@ -28,15 +26,18 @@ class App extends Component {
 
   backdropClickHandler = () => {
     this.setState({sidenavOpen: false})
-  }
-
+  };
+ 
   render(){
+
+    
     let navbar;
     let backdrop;
     let sidenav;
     let adminnav;
 
     if (this.state.sidenavOpen) {
+      
       backdrop = <Backdrop click={this.backdropClickHandler}/>
       sidenav = <Sidenav itemClickHandler={this.sidenavTriggerClickHandler} show={this.state.sidenavOpen}/>
     }
@@ -60,6 +61,10 @@ class App extends Component {
         <Route path="/productos" component={Productos} />
         <Route path="/contacto" component={Contact} />
         <Route path="/admin" component={Admin} />
+        {/* <Route
+            path='/admin'
+            component={() => <Admin props={Rubro} />}
+        /> */}
       </BrowserRouter>
     );
   }

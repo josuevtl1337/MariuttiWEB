@@ -1,10 +1,24 @@
 import React from "react"
+import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
+import { useSelector } from 'react-redux'
 
 const Home = ()=>{
+    useFirebaseConnect([
+        { path: 'Rubro' },
+        { path: 'Sub_Rubro' }
+    ])
+    const rubros = useSelector(state => state.firebase.ordered.Rubro)
+    const sub_rubros = useSelector(state => state.firebase.ordered.Sub_Rubro)
+    // Show message while todos are loading
+    if (!isLoaded(rubros)) {
+        return <div>Loading...</div>
+    }
     return (
         <div className="container">
+             {console.log(sub_rubros)}
             <h4 className="center">Home</h4>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic, maiores necessitatibus. Nemo molestias quo at sunt dicta culpa, ipsum itaque aliquid, doloribus sequi quaerat perspiciatis voluptas fugit! Aspernatur, illum perspiciatis.</p>
+            <p>{JSON.stringify(rubros)}</p>
+            <p>{JSON.stringify(sub_rubros)}</p>
         </div>
     )
 }
