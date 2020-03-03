@@ -21,13 +21,18 @@ firebase.initializeApp({
 });
 // react-redux-firebase config
 const rrfConfig = {
-    rubros: 'Rubro'
+    // rubros: 'Rubro'
     // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
     // enableClaims: true // Get custom claims along with the profile
 }
 //Create Store
-const initialState = {}
-const store = createStore(rootReducer, initialState)
+const initialState = {
+}
+const store = createStore(
+    rootReducer, 
+    initialState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    )
 
 const rrfProps = {
     firebase,
