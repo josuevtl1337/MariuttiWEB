@@ -44,7 +44,7 @@ class Navbar extends React.Component {
                                     <Tab isActive={window.location.href.includes('nosotros')} titulo="Quienes Somos"/>
                                 </Link>
                                 <Link  to="/productos">
-                                    <Tab isActive={window.location.href.includes('productos')} titulo="Productos"/>
+                                    <Tab isActive={window.location.href.includes('productos') || window.location.href.includes('Productos')} titulo="Productos"/>
                                 </Link>
                                 <Link  to="/noticias">
                                     <Tab isActive={window.location.href.includes('noticias')} titulo="Noticias"/>
