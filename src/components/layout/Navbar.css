@@ -7,7 +7,6 @@ a{
   top: 0;
   width: 100%;
   height: 100px;
-  margin-bottom: 60px;
 }
 
 .navbar{
@@ -51,6 +50,7 @@ a{
 
 .tab{
   color: #636363;
+  font-weight: 600;
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
@@ -118,6 +118,8 @@ a{
   
   .backnav{
     background: transparent;
+    height: unset;
+    position:fixed;
   }
 
   .contact-info{

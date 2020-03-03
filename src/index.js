@@ -26,6 +26,7 @@ const rrfConfig = {
     // enableClaims: true // Get custom claims along with the profile
 }
 //Create Store
+<<<<<<< HEAD
 const initialState = {
 }
 const store = createStore(
@@ -33,6 +34,14 @@ const store = createStore(
     initialState,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
+=======
+const initialState = {}
+const store = createStore(
+    rootReducer, 
+    initialState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()    
+)
+>>>>>>> 55885da74095329d715907dfc9ee5ed88bfd251c
 
 const rrfProps = {
     firebase,
