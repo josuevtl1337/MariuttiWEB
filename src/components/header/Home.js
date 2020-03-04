@@ -11,7 +11,7 @@ const Home = ()=>{
     const sub_rubros = useSelector(state => state.firebase.data.Sub_Rubro)
     const sub_rubros1 = useSelector(state => state.firebase.ordered.Sub_Rubro)
     // Show message while todos are loading
-    if (!isLoaded(rubros)) {
+    if (!isLoaded(rubros) && !isLoaded(sub_rubros)) {
         return <div>Loading...</div>
     }
     return (

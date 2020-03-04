@@ -86,23 +86,17 @@ export default function SimpleModal(props) {
     console.log(props.sub_rubros);
   }
 
-  const retornando = ()=> {
-    alert("AA");
-    props.sub_rubros.map((item, key) => {
-      return(
-        <MenuItem value={key}>
-          {item.name}
-        </MenuItem>
-      );
-    })
-  }
+  const retornando = props.sub_rubros.map((item, key) => 
+      <MenuItem value={item.id}>
+        {item.nombre}
+      </MenuItem>
+  );
 
   return (
     <React.Fragment>
       <button type="button" onClick={handleOpen}>
         Agregar
       </button>
-
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
@@ -114,21 +108,22 @@ export default function SimpleModal(props) {
                 {/* Sub-Rubro */}
                 <FormControl className={classesSelect.formControl}>
 
-                  <InputLabel id="subRubro">Sub-Rubro</InputLabel>
+                  <InputLabel id="subRubros">Sub-Rubros</InputLabel>
+
                   <Select
                     labelId="subRubroId"
                     id="subRubro"
                     value={subRubro}
                     onChange={handleChangeSub}
-                  >
-                  {retornando}            
+                  >           
+                  {retornando}</Select>            
                   {/* <MenuItem value={3}>Ferretería Industrial</MenuItem>
                   <MenuItem value={4}>Herramientas Eléctricas</MenuItem>
                   <MenuItem value={5}>Herramientas Explosión</MenuItem>
                   <MenuItem value={6}>Herramientas Neumáticas</MenuItem>
                   <MenuItem value={7}>Indumentaria Y Seguridad</MenuItem> */}
             
-                </Select>
+             
                 {/* Nombre Producto */}
                 <TextField id="standard-basic" label="Nombre Producto" onChange={onChangeNombre}/>
                 {/* Subtitulo */}
