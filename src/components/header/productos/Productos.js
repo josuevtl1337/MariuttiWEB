@@ -21,13 +21,22 @@ const Productos = () => {
     ])
     const rubros = useSelector(state => state.firebase.ordered.Rubro)
     const sub_rubros = useSelector(state => state.firebase.ordered.Sub_Rubro)
+    const [ru, setRu] = React.useState("");
+    const handleChangeSub = () => {
+        setRu(rubros);
+        console.log(ru);
+    };
+
+
     // Show message while Rubros y Sub_Rubros are loading
     if (!isLoaded(rubros) && !isLoaded(sub_rubros) ) {
         return <div>Loading...</div>
     }
 
     return (
+
         <React.Fragment>
+            <button>A</button>
             <div className="heroimg"/>
             <Container style={{zIndex: 100}}>
                 

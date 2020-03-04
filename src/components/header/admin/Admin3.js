@@ -58,7 +58,7 @@ class Admin3 extends Component {
     }) 
   }
   componentDidMount(){
-    console.log(JSON.stringify(this.props));
+    
     const db = firebase.database();
     //Importo todos los datos necesarios a variables de una sola vez.
     const importingData = () =>{
