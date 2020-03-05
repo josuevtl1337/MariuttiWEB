@@ -5,16 +5,19 @@ import { useSelector } from 'react-redux'
 const Home = ()=>{
     useFirebaseConnect([
         { path: 'Rubro' },
-        { path: 'Sub_Rubro' }
+        { path: '/Sub_Rubro/' }
     ])
     const rubros = useSelector(state => state.firebase.ordered.Rubro)
-    const sub_rubros = useSelector(state => state.firebase.ordered.Sub_Rubro)
+    const sub_rubros = useSelector(state => state.firebase.data.Sub_Rubro)
+    const sub_rubros1 = useSelector(state => state.firebase.ordered.Sub_Rubro)
     // Show message while todos are loading
     if (!isLoaded(rubros) && !isLoaded(sub_rubros)) {
         return <div>Loading...</div>
     }
     return (
         <div className="container">
+             {console.log(sub_rubros)}
+             {console.log(sub_rubros1)}
             <h4 className="center">Home</h4>
             <p>{JSON.stringify(rubros)}</p>
             <p>{JSON.stringify(sub_rubros)}</p>
