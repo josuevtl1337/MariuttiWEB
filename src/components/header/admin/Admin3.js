@@ -28,12 +28,13 @@ class Admin3 extends Component {
   state = {
     loading:true,
     data:[],
-    enlaces:{},
+    Enlace:{},
     Rubro:[],
     Sub_Rubro:[],
     Categoria:[],
     Producto:[],
-    display:""
+    display:"",
+    url: null
   };
   //Este método sirve para cambiar la tabla dependiendo a cual le das click
   handleClick = (param) =>{
@@ -41,7 +42,7 @@ class Admin3 extends Component {
       display: param
     });     
   }
-  //Subiendo Sub_Rubro
+  //Subiendo SUB_RUBROS
   handleUpload = (nombre,rubro,ruta) =>{
     const db = firebase.database();
     const record = {
@@ -57,6 +58,50 @@ class Admin3 extends Component {
       "id":postId
     }) 
   }
+    //Subiendo PRODUCTOS
+    handleUploadProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f) =>{
+      const file = f;
+      const storageRef = firebase.storage().ref(`imagenes/${file.name}`);
+      //pusheo mi archivo file dentro de mi BD
+      const task = storageRef.put(file);
+      task.on(
+        //Lo que hacmeos mientras sube
+        "state_changed",
+        snapshot => {
+          this.setState({
+            loading: true
+          });
+        },
+        //Lo que hgacmeos con los errores
+        error => {
+          console.log(error.message);
+        },
+        //Lo que hacmeos ni bieen subio la foto
+        () => {
+          this.setState({
+            loading: false
+          });
+          const record = {
+            nombre: nombre,
+            subtitulo:subtitulo,
+            descripcion:descripcion,
+            enlace:enlace,
+            sub_rubro: sub_rubro,
+            img: task.snapshot.metadata.fullPath
+          };
+          const db = firebase.database();
+          const dbRef = db.ref("Producto");
+          const newPicture = dbRef.push();
+          newPicture.set(record);
+
+          const postId = newPicture.key;
+          console.log(postId);
+          newPicture.update({
+            "id":postId
+          }) 
+        }   
+      );
+    }
   componentDidMount(){
     
     const db = firebase.database();
@@ -73,14 +118,16 @@ class Admin3 extends Component {
           this.setState({
             Sub_Rubro: this.state.Sub_Rubro.concat(snapshot.val())
           });
-          console.log(this.state.Sub_Rubro);
         });
         const dbRefProducto = db.ref("Producto");
         dbRefProducto.on("child_added", snapshot => {
+          console.log(snapshot);
           this.setState({
-            Producto: this.state.Producto.concat(snapshot.val())
+            Producto: this.state.Producto.concat(snapshot.val()),
+            Enlace: this.state.Producto.enlace
           });
         });
+        
       }
       //Doy un delay de 2segundos para cargar los datos
       setTimeout(() => {
@@ -130,7 +177,6 @@ class Admin3 extends Component {
                               }, 1000)
                             })
                           }
-
                         }
                       ]}
                       options={{
@@ -228,7 +274,7 @@ class Admin3 extends Component {
               <Grid container className="container per" spacing={2}>  
               <Grid container justify="center" item xs={3}>
               <Catalogo parentCallback={this.handleClick}/>   
-                <AddProducto sub_rubros={this.state.Sub_Rubro}/>
+                <AddProducto sub_rubros={this.state.Sub_Rubro} handleUploadProducto={this.handleUploadProducto}/>
               </Grid>
               <Grid item xs={9} >
               <MaterialTable
@@ -236,17 +282,23 @@ class Admin3 extends Component {
                         {
                           icon: 'delete',
                           tooltip: 'Borrar Producto',
-                        },
-                        {
-                          icon:'edit',
-                          tooltip:'editar producto'
-                        },
-                        {
-                          icon: 'add',
-                          tooltip: 'Add User',
-                          isFreeAction: true,
-                          onClick: (event) => alert("You want to add a new row")
-                        }  
+                          onClick: (event, rowData) => 
+                          {
+                            alert("You want to delete " + rowData.nombre)
+                            new Promise((resolve, reject) => {
+                              setTimeout(() => {
+                                {     
+                                  console.log(rowData);                        
+                                  const db = firebase.database();
+                                  const dbRef = db.ref("Producto");
+                                  const refSB = dbRef.child(rowData.id) 
+                                  refSB.remove();                                 
+                                }
+                                resolve()
+                              }, 1000)
+                            })
+                          }
+                        }
                       ]}
                       options={{
                         search: true,
@@ -256,13 +308,12 @@ class Admin3 extends Component {
                         }}
                         columns={[
                           { title: 'Titulo', field: 'nombre' },
-                          { title: 'Subtitutlo', field: 'categoria' },
-                          { title: 'Descripcion', field: 'id',
+                          { title: 'Subtitutlo', field: 'subtitulo' },
+                          { title: 'Descripcion', field: 'descripcion',
                             cellStyle:{width:200,minWidth:200},
                             headerStlye:{width:200,minWidth:200}
                           },
-                          // { title: 'Enlaces', field: 'enlaces'},
-                          // { title: 'Imagen', field: 'imagen'},
+                          { title: 'Sub_Rubro', field: 'sub_rubro'}
                           // { title: 'Ficha Tecnica', field: 'fichaTecnica'}
                         ]}
                         
@@ -276,10 +327,10 @@ class Admin3 extends Component {
                                   width="100%"
                                   height="315"
                                   // src={`https://www.youtube.com/embed/${bqF5i4qloVE}`}
-                                  src={this.state.enlaces}
-                                  frameborder="0"
+                                  src={rowData.enlace}
+                                  frameBorder="0"
                                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                  allowfullscreen
+                                  allowFullScreen
                                 />
                               )
                             },
@@ -288,11 +339,24 @@ class Admin3 extends Component {
                           icon: 'account_circle',
                           tooltip: 'Ver Imagen',
                           render: rowData => {
+                            let imagen = rowData.img;
+                            if (imagen) {
+                              var pathImagen = firebase
+                                .storage()
+                                .ref(imagen)
+                                .getDownloadURL()
+                                .then(url => {
+                                  this.setState({ url });
+                                })
+                                .catch(error => {
+                                  console.log(error.message);
+                                });
+                            }
                             return (
                               <iframe
                                   width="100%"
                                   height="315"
-                                  src={"https://www.nexon.com.ar/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/c/y/cyber016913_1.jpg"}
+                                  src={this.state.url}
                                   frameborder="0"
                                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                   allowfullscreen

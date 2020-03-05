@@ -78,16 +78,18 @@ export default function SimpleModal(props) {
   }
 
   const handleOnClick = e => {
-    console.log(nombre);
-    console.log(subtitulo);
-    console.log("Descripcion:",descripcion);
-    console.log("Enlace:",enlace);
-    console.log("Imagen:",file);
-    console.log(props.sub_rubros);
+    // console.log(nombre);
+    // console.log(subtitulo);
+    // console.log("Descripcion:",descripcion);
+    // console.log("Enlace:",enlace);
+    // console.log("Imagen:",file);
+    // console.log(subRubro);
+    props.handleUploadProducto(nombre,subtitulo,descripcion,enlace,subRubro,file);
+    setOpen(false);
   }
 
   const retornando = props.sub_rubros.map((item, key) => 
-      <MenuItem value={item.id}>
+      <MenuItem value={item.id}  key={key}>
         {item.nombre}
       </MenuItem>
   );
@@ -112,8 +114,8 @@ export default function SimpleModal(props) {
 
                   <Select
                     labelId="subRubroId"
-                    id="subRubro"
-                    value={subRubro}
+                    id="sub_rubro"
+                    value={subRubro ? subRubro : " "}
                     onChange={handleChangeSub}
                   >           
                   {retornando}</Select>            
