@@ -12,10 +12,13 @@ import Grid from '@material-ui/core/Grid';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
+
+//Iconos
+import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -98,9 +101,14 @@ export default function SimpleModal(props) {
 
   return (
     <React.Fragment>
-      <Fab size="small" color="primary" aria-label="add" type="button" onClick={handleOpen}>
-      <AddIcon />
-      </Fab>
+      <Fab 
+        // onClick={(event) => props.action.onClick(event, props.data)}
+        onClick={handleOpen}
+        size="small"                          
+        aria-label="edit" 
+      >
+        <EditIcon color="action"/>
+      </Fab>   
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
@@ -120,14 +128,8 @@ export default function SimpleModal(props) {
                     value={subRubro ? subRubro : " "}
                     onChange={handleChangeSub}
                   >           
-                  {retornando}</Select>            
-                  {/* <MenuItem value={3}>Ferretería Industrial</MenuItem>
-                  <MenuItem value={4}>Herramientas Eléctricas</MenuItem>
-                  <MenuItem value={5}>Herramientas Explosión</MenuItem>
-                  <MenuItem value={6}>Herramientas Neumáticas</MenuItem>
-                  <MenuItem value={7}>Indumentaria Y Seguridad</MenuItem> */}
-            
-             
+                    {retornando}
+                  </Select>                         
                 {/* Nombre Producto */}
                 <TextField id="standard-basic" label="Nombre Producto" onChange={onChangeNombre}/>
                 {/* Subtitulo */}
