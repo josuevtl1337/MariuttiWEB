@@ -26,12 +26,7 @@ const rrfConfig = {
     // enableClaims: true // Get custom claims along with the profile
 }
 //Create Store
-<<<<<<< HEAD
-const initialState = {
-}
-=======
 const initialState = {};
->>>>>>> 830f6d73e58eb0eb9058bc5167e732fbec2b698d
 const store = createStore(
     rootReducer, 
     initialState,
@@ -42,7 +37,7 @@ const rrfProps = {
     firebase,
     config: rrfConfig,
     dispatch: store.dispatch
-    // createFirestoreInstance // <- needed if using firestore
+     // createFirestoreInstance // <- needed if using firestore
 }
 
 ReactDOM.render(<Provider store={store}><ReactReduxFirebaseProvider {...rrfProps}><App /></ReactReduxFirebaseProvider></Provider>, document.getElementById('root'));
