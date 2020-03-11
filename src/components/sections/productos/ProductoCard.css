@@ -1,0 +1,50 @@
+.paper-style{
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    height: 350px;
+    max-width: 280px;
+    cursor: pointer;
+    padding: 5px;
+    transition: all 0.2s;
+    border: 0px solid yellow;
+}
+
+.paper-style:hover{
+    /* box-shadow:
+    0 0px 6.4px rgba(0, 0, 0, 0.008),
+    0 0px 9px rgba(0, 0, 0, 0.016),
+    0 0px 10.7px rgba(0, 0, 0, 0.024),
+    0 0px 12.2px rgba(0, 0, 0, 0.032),
+    0 0px 14.1px rgba(0, 0, 0, 0.041),
+    0 0px 21px rgba(0, 0, 0, 0.07)
+    ; */
+    box-shadow:
+    0 0px 1.9px rgba(243, 146, 1, 0.459),
+    0 0px 6.5px rgba(243, 146, 1, 0.024),
+    0 0px 29px rgba(243, 146, 1, 0.04)
+    ;
+
+    border: 1px solid yellow;
+}
+
+.imgwrap{
+    height: 220px;
+    width: 220px;
+    border-radius: 10px;
+    padding: 10px;
+    align-self: center;
+}
+
+.prodimg{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.prodcardtitle{
+    font-size: 16px;
+    margin: 10px 10px;
+    align-self: center;
+}

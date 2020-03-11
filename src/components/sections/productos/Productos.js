@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component, useState } from "react"
 import ReactDOM from 'react-dom';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
@@ -12,19 +12,40 @@ import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 
 const Productos = () => {
-    const construccion = ["1", "2", "3"];
-    const maquinas = ["4", "5", "6"];
     //Hago la referencia para traer mis objetos Rubros, y Sub_Rubros
     useFirebaseConnect([
         { path: 'Rubro' },
         { path: 'Sub_Rubro' }
     ])
-    const rubros = useSelector(state => state.firebase.ordered.Rubro)
-    const sub_rubros = useSelector(state => state.firebase.ordered.Sub_Rubro)
+
+    const [categoriaActual, setCategoriaActual] = useState();
+
+    const rubros = useSelector(state => state.firebase.data.Rubro)
+    const sub_rubros = useSelector(state => state.firebase.data.Sub_Rubro)
+    const maquinas = [];
+    const construccion = [];
+    const ferreteria = [];
+
     // Show message while Rubros y Sub_Rubros are loading
-    if (!isLoaded(rubros) && !isLoaded(sub_rubros) ) {
-        return <div>Loading...</div>
+    if ( !isLoaded(rubros) && !isLoaded(sub_rubros) ) {
+        return <div>Cargando...</div>
     }
+
+    const r = Object.values(rubros);
+    console.log(r)
+    if(sub_rubros){
+        const categorias = Object.values(sub_rubros);
+        categorias.forEach(elemento => {
+            if (elemento.rubro == "r1") {
+                maquinas.push([elemento.id, elemento.nombre])
+            } else if (elemento.rubro == "r2") {
+                construccion.push([elemento.id, elemento.nombre])
+            } else {
+                ferreteria.push(new Object([Object.values(elemento)]))
+            }
+        })
+    }
+    
 
     return (
         <React.Fragment>
@@ -35,11 +56,9 @@ const Productos = () => {
                     <Grid item lg={3} md={12}>
                         <h4>Categorías</h4>
                         <Divider/>
-                        {/* <Accordion titulo='Construcción' categoria={construccion} /> 
-                        <Accordion titulo='Máquinas y Herramientas' /> 
-                        <Accordion titulo='Ferretería Industrial' />  */}
                         <Drawer titulo="Construcción" categorias={construccion}/>
                         <Drawer titulo="Máquinas y Herramientas" categorias={maquinas}/>
+                        <Drawer titulo="Ferretería Industrial" categorias={ferreteria}/>
                     </Grid>
                     <Grid item lg={9} md={12}>
                         <h4>Aspiradoras</h4>
@@ -52,5 +71,6 @@ const Productos = () => {
         </React.Fragment>
     );
 }
+
 
 export default Productos
