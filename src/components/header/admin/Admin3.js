@@ -11,10 +11,13 @@ import "firebase/firebase-storage";
 import AddRubro from "./addRubro";
 import AddSubRubro from "./addSubRubro";
 import AddProducto from "./addProducto";
+import EditProducto from "./EditProducto";
 
 import Loading from "./Loading"
 //Botones
 import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 //TreeView
 import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -23,6 +26,12 @@ import TreeItem from '@material-ui/lab/TreeItem';
 //Redux
 import { connect } from "react-redux";
 
+//Iconos
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class Admin3 extends Component { 
   state = {
@@ -56,10 +65,10 @@ class Admin3 extends Component {
     console.log(postId);
     newPicture.update({
       "id":postId
-    }) 
+    }).then(()=>window.location.reload()) 
   }
     //Subiendo PRODUCTOS
-    handleUploadProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f) =>{
+    handleUploadProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f) => (e) =>{
       const file = f;
       const storageRef = firebase.storage().ref(`imagenes/${file.name}`);
       //pusheo mi archivo file dentro de mi BD
@@ -68,9 +77,9 @@ class Admin3 extends Component {
         //Lo que hacmeos mientras sube
         "state_changed",
         snapshot => {
-          this.setState({
-            loading: true
-          });
+          // this.setState({
+          //   loading: true
+          // });
         },
         //Lo que hgacmeos con los errores
         error => {
@@ -78,9 +87,6 @@ class Admin3 extends Component {
         },
         //Lo que hacmeos ni bieen subio la foto
         () => {
-          this.setState({
-            loading: false
-          });
           const record = {
             nombre: nombre,
             subtitulo:subtitulo,
@@ -93,15 +99,68 @@ class Admin3 extends Component {
           const dbRef = db.ref("Producto");
           const newPicture = dbRef.push();
           newPicture.set(record);
-
           const postId = newPicture.key;
           console.log(postId);
           newPicture.update({
             "id":postId
+          }).then(()=>{
+            console.log(postId.id)
+            // this.setState({
+            //   loading: false
+            // });
+            window.location.reload();      
+            this.handleClick("Producto");
           }) 
         }   
       );
     }
+  //EDITANDO PRODUCTOS
+  handleEditProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f) => (e) =>{
+    const file = f;
+    const storageRef = firebase.storage().ref(`imagenes/${file.name}`);
+    //pusheo mi archivo file dentro de mi BD
+    const task = storageRef.put(file);
+    task.on(
+      //Lo que hacmeos mientras sube
+      "state_changed",
+      snapshot => {
+        // this.setState({
+        //   loading: true
+        // });
+      },
+      //Lo que hgacmeos con los errores
+      error => {
+        console.log(error.message);
+      },
+      //Lo que hacmeos ni bieen subio la foto
+      () => {
+        const record = {
+          nombre: nombre,
+          subtitulo:subtitulo,
+          descripcion:descripcion,
+          enlace:enlace,
+          sub_rubro: sub_rubro,
+          img: task.snapshot.metadata.fullPath
+        };
+        const db = firebase.database();
+        const dbRef = db.ref("Producto");
+        const newPicture = dbRef.push();
+        newPicture.set(record);
+        const postId = newPicture.key;
+        console.log(postId);
+        newPicture.update({
+          "id":postId
+        }).then(()=>{
+          console.log(postId.id)
+          // this.setState({
+          //   loading: false
+          // });
+          window.location.reload();      
+          this.handleClick("Producto");
+        }) 
+      }   
+    );
+  }
   componentDidMount(){
     
     const db = firebase.database();
@@ -135,11 +194,16 @@ class Admin3 extends Component {
           loading:false
         })
       }, 2000);
-
       importingData();
 
 
 
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.Producto !== this.state.Producto) {
+      console.log('pokemons state has changed.',prevState.Producto)
+      
+    }
   }
   render(){ 
     console.log(this.props)
@@ -171,7 +235,8 @@ class Admin3 extends Component {
                                   const db = firebase.database();
                                   const dbRef = db.ref("Sub_Rubro");
                                   const refSB = dbRef.child(rowData.id) 
-                                  refSB.remove();                                 
+                                  refSB.remove(); 
+                                  window.location.reload();                                
                                 }
                                 resolve()
                               }, 1000)
@@ -280,6 +345,11 @@ class Admin3 extends Component {
               <MaterialTable
                       actions={[
                         {
+                          icon: 'save',
+                          tooltip: 'Save User',
+                          onClick: (event, rowData) => alert("You saved " + rowData.name)
+                        },
+                        {
                           icon: 'delete',
                           tooltip: 'Borrar Producto',
                           onClick: (event, rowData) => 
@@ -291,8 +361,21 @@ class Admin3 extends Component {
                                   console.log(rowData);                        
                                   const db = firebase.database();
                                   const dbRef = db.ref("Producto");
-                                  const refSB = dbRef.child(rowData.id) 
-                                  refSB.remove();                                 
+                                  const refSB = dbRef.child(rowData.id); 
+                                  refSB.remove();   
+                                  // Create a reference to the file to delete
+                                  var storage = firebase.storage();
+                                  var storageRef = storage.ref();
+                                  var desertRef = storageRef.child(rowData.img);
+                                  // Delete the file
+                                  desertRef.delete().then(function() {
+                                    // File deleted successfully
+                                    alert("File deleted successfully");
+                                    window.location.reload();
+                                  }).catch(function(error) {
+                                    alert("Oh no");
+                                    // Uh-oh, an error occurred!
+                                  });                              
                                 }
                                 resolve()
                               }, 1000)
@@ -313,8 +396,8 @@ class Admin3 extends Component {
                             cellStyle:{width:200,minWidth:200},
                             headerStlye:{width:200,minWidth:200}
                           },
-                          { title: 'Sub_Rubro', field: 'sub_rubro'}
-                          // { title: 'Ficha Tecnica', field: 'fichaTecnica'}
+                          { title: 'Sub_Rubro', field: 'sub_rubro'},
+                          // { title: 'Ficha Tecnica', field: 'fichaTecnica'}                        
                         ]}
                         
                         data={this.state.Producto}
@@ -365,6 +448,22 @@ class Admin3 extends Component {
                           },
                         },      
                         ]}
+                        components={{
+                          Action: props => {
+                            if(props.action.icon === 'save'){
+                              return(
+                              <EditProducto sub_rubros={this.state.Sub_Rubro} handleEditProducto={this.handleEditProducto} datosProductos={props}/>        
+                              )
+                            }
+                            if(props.action.icon === 'delete'){
+                              return(
+                                <IconButton aria-label="delete" onClick={(event) => props.action.onClick(event, props.data)}>
+                                  <DeleteIcon fontSize="small" />
+                                </IconButton>
+                              )
+                          }                                                       
+                          }                   
+                        }}
                         title="Producto/"
               />   
               </Grid>      
