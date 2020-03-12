@@ -1,0 +1,15 @@
+.homediv-wrap{
+    width:100%;
+    display:flex;
+
+}
+
+.homediv-title{
+    color: initial;
+}
+
+.homediv-line{
+    width: 300px;
+    height: 2px;
+    background-color: gray;
+}

@@ -3,12 +3,12 @@ import Navbar from "./components/layout/Navbar";
 import Sidenav from "./components/layout/Sidenav";
 import Backdrop from "./components/layout/Backdrop";
 import { BrowserRouter, Route } from "react-router-dom";
-import Home from "./components/header/Home"
-import About from "./components/header/About"
-import Productos from "./components/header/productos/Productos"
-import Contact from "./components/header/Contact"
-import Admin from "./components/header/admin/Admin3"
-import AdminNav from "./components/header/admin/AdminNav"
+import Home from "./components/sections/inicio/Home"
+import About from "./components/sections/nosotros/About"
+import Productos from "./components/sections/productos/Productos"
+import Contact from "./components/sections/contacto/Contact"
+import Admin from "./components/admin/Admin3"
+import AdminNav from "./components/admin/AdminNav"
 // import fbConfig from "./components/config/fbConfig"
 // import firebase from "firebase/app";
 

@@ -486,13 +486,7 @@ class Admin3 extends Component {
                         {
                           icon:'edit',
                           tooltip:'editar producto'
-                        },
-                        {
-                          icon: 'add',
-                          tooltip: 'Add User',
-                          isFreeAction: true,
-                          onClick: (event) => alert("You want to add a new row")
-                        }  
+                        }
                       ]}
                       options={{
                         search: true,

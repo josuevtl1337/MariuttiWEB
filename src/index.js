@@ -29,10 +29,10 @@ const rrfConfig = {
 const initialState = {
 }
 const store = createStore(
-    rootReducer, 
+    rootReducer,
     initialState,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
+)
 
 const rrfProps = {
     firebase,

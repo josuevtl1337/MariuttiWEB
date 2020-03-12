@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link, NavLink, withRouter } from "react-router-dom";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -6,14 +6,22 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import './sidenav.css'
 
-const sideNav = props => {
+const SideNav = props => {
 
-    let sidenavClasses = 'side-nav';
+    const [sidenavClasses, setSidenavClasses] = React.useState("side-nav");
+
+    // let sidenavClasses = 'side-nav';
     
     if (props.show) {
-        sidenavClasses = 'side-nav open'
+        setSidenavClasses("side-nav open")
     } else {
-        sidenavClasses = 'side-nav'
+        setSidenavClasses("side-nav")
+    }
+
+    const changeClasses = () => {
+        if (sidenavClasses == 'sidenav open' && props.show) {
+            setSidenavClasses("side-nav")
+        }
     }
     
     return(
@@ -24,7 +32,7 @@ const sideNav = props => {
             <Divider/>
             <Link  to="/inicio">
                 <ListItem button >
-                    <ListItemText click={props.itemClickHandler} className="buttons" primary="Inicio"  />
+                    <ListItemText click={props.itemClickHandler} className="buttons" primary="Inicio" onClick={changeClasses} />
                 </ListItem>
             </Link>
             <Divider/>
@@ -58,4 +66,6 @@ const sideNav = props => {
     );
 };
 
-export default withRouter(sideNav)
+
+
+export default withRouter(SideNav)
