@@ -26,7 +26,8 @@ const rrfConfig = {
     // enableClaims: true // Get custom claims along with the profile
 }
 //Create Store
-const initialState = {};
+const initialState = {
+}
 const store = createStore(
     rootReducer,
     initialState,

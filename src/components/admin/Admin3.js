@@ -11,7 +11,7 @@ import "firebase/firebase-storage";
 import AddRubro from "./addRubro";
 import AddSubRubro from "./addSubRubro";
 import AddProducto from "./addProducto";
-// import EditProducto from "./EditProducto";
+import EditProducto from "./EditProducto";
 
 import Loading from "./Loading"
 //Botones
@@ -114,6 +114,53 @@ class Admin3 extends Component {
         }   
       );
     }
+  //EDITANDO PRODUCTOS
+  handleEditProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f) => (e) =>{
+    const file = f;
+    const storageRef = firebase.storage().ref(`imagenes/${file.name}`);
+    //pusheo mi archivo file dentro de mi BD
+    const task = storageRef.put(file);
+    task.on(
+      //Lo que hacmeos mientras sube
+      "state_changed",
+      snapshot => {
+        // this.setState({
+        //   loading: true
+        // });
+      },
+      //Lo que hgacmeos con los errores
+      error => {
+        console.log(error.message);
+      },
+      //Lo que hacmeos ni bieen subio la foto
+      () => {
+        const record = {
+          nombre: nombre,
+          subtitulo:subtitulo,
+          descripcion:descripcion,
+          enlace:enlace,
+          sub_rubro: sub_rubro,
+          img: task.snapshot.metadata.fullPath
+        };
+        const db = firebase.database();
+        const dbRef = db.ref("Producto");
+        const newPicture = dbRef.push();
+        newPicture.set(record);
+        const postId = newPicture.key;
+        console.log(postId);
+        newPicture.update({
+          "id":postId
+        }).then(()=>{
+          console.log(postId.id)
+          // this.setState({
+          //   loading: false
+          // });
+          window.location.reload();      
+          this.handleClick("Producto");
+        }) 
+      }   
+    );
+  }
   componentDidMount(){
     
     const db = firebase.database();
@@ -401,22 +448,22 @@ class Admin3 extends Component {
                           },
                         },      
                         ]}
-                        // components={{
-                        //   Action: props => {
-                        //     if(props.action.icon === 'save'){
-                        //       return(
-                        //       // <EditProducto sub_rubros={this.state.Sub_Rubro} handleUploadProducto={this.handleUploadProducto} />        
-                        //       )
-                        //     }
-                        //     if(props.action.icon === 'delete'){
-                        //       return(
-                        //         <IconButton aria-label="delete" onClick={(event) => props.action.onClick(event, props.data)}>
-                        //           <DeleteIcon fontSize="small" />
-                        //         </IconButton>
-                        //       )
-                        //   }                                                       
-                        //   }                   
-                        // }}
+                        components={{
+                          Action: props => {
+                            if(props.action.icon === 'save'){
+                              return(
+                              <EditProducto sub_rubros={this.state.Sub_Rubro} handleEditProducto={this.handleEditProducto} datosProductos={props}/>        
+                              )
+                            }
+                            if(props.action.icon === 'delete'){
+                              return(
+                                <IconButton aria-label="delete" onClick={(event) => props.action.onClick(event, props.data)}>
+                                  <DeleteIcon fontSize="small" />
+                                </IconButton>
+                              )
+                          }                                                       
+                          }                   
+                        }}
                         title="Producto/"
               />   
               </Grid>      
@@ -439,13 +486,7 @@ class Admin3 extends Component {
                         {
                           icon:'edit',
                           tooltip:'editar producto'
-                        },
-                        {
-                          icon: 'add',
-                          tooltip: 'Add User',
-                          isFreeAction: true,
-                          onClick: (event) => alert("You want to add a new row")
-                        }  
+                        }
                       ]}
                       options={{
                         search: true,

@@ -50,7 +50,6 @@ const Productos = () => {
     return (
 
         <React.Fragment>
-            <button>A</button>
             <div className="heroimg"/>
             <Container style={{zIndex: 100}}>
                 
