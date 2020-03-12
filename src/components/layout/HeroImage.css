@@ -1,5 +1,22 @@
 .heroimagewrap{
     width: 100%;
-    height: 100vh;
-    /* height: calc(100vh - 100px); */
+    height: calc(100vh + 100px);
+    overflow: hidden;
+    transform: translateY(-100px);
+}  
+
+.heroimg{
+    z-index: 100;
+}
+
+.textwrap{
+    width: 100%;
+    position: absolute;
+    z-index: 200;
+    color: ivory;
+    top: 100px;
+    height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

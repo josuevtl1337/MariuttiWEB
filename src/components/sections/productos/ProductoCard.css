@@ -1,40 +1,26 @@
 .paper-style{
-    margin: 10px auto;
+    margin: 8px 8px;
     display: flex;
     flex-direction: column;
     justify-content: start;
-    height: 350px;
-    max-width: 280px;
+    height: 380px;
+    max-width: 250px;
     cursor: pointer;
     padding: 5px;
     transition: all 0.2s;
-    border: 0px solid yellow;
-}
-
-.paper-style:hover{
-    /* box-shadow:
-    0 0px 6.4px rgba(0, 0, 0, 0.008),
-    0 0px 9px rgba(0, 0, 0, 0.016),
-    0 0px 10.7px rgba(0, 0, 0, 0.024),
-    0 0px 12.2px rgba(0, 0, 0, 0.032),
-    0 0px 14.1px rgba(0, 0, 0, 0.041),
-    0 0px 21px rgba(0, 0, 0, 0.07)
-    ; */
-    box-shadow:
-    0 0px 1.9px rgba(243, 146, 1, 0.459),
-    0 0px 6.5px rgba(243, 146, 1, 0.024),
-    0 0px 29px rgba(243, 146, 1, 0.04)
-    ;
-
-    border: 1px solid yellow;
+    background-color: white;
+    -webkit-box-shadow: 1px 1px 3px 0px rgba(235,235,235,1);
+    -moz-box-shadow: 1px 1px 3px 0px rgba(235,235,235,1);
+    box-shadow: 1px 1px 3px 0px rgba(235,235,235,1);
 }
 
 .imgwrap{
-    height: 220px;
-    width: 220px;
-    border-radius: 10px;
-    padding: 10px;
+    height: 250px;
+    width: 250px;
     align-self: center;
+    
+    
+    transition: all 0.2s;
 }
 
 .prodimg{
@@ -43,8 +29,83 @@
     object-fit: cover;
 }
 
+.fabGreen{
+    background-color: #F2BC02;
+    width: 70px;
+    height: 40px;
+    border-radius: 10px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow:
+    0 0px 1.4px rgba(0, 0, 0, 0.105),
+    0 0px 11px rgba(0, 0, 0, 0.21)
+    ;
+    opacity: 0;
+    transition: all 0.2s;
+    
+    transform: translate(100px, 10px);
+}
+
+.fabtitle{
+    font-size: 12px;
+    color: white;
+}
+
+.entericon{
+    font-size: 16px;
+    color: white;
+    transform: rotate(180deg)
+}
+
+.contentwrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    height: 120px;
+    margin: 0px 8px;
+}
+
 .prodcardtitle{
     font-size: 16px;
-    margin: 10px 10px;
-    align-self: center;
+    color: #3b3b3b;
+    transition: all 0.2s;
+    font-weight: 600;
+    margin-bottom: 8px;
+    margin-top: 16px;
+}
+
+.prodcardsub{
+    font-size: 14px;
+    color: #636363;
+    margin: 0;
+}
+
+.paper-style:hover .prodcardtitle{
+    /* box-shadow:
+    0 0px 6.4px rgba(0, 0, 0, 0.008),
+    0 0px 9px rgba(0, 0, 0, 0.016),
+    0 0px 10.7px rgba(0, 0, 0, 0.024),
+    0 0px 12.2px rgba(0, 0, 0, 0.032),
+    0 0px 14.1px rgba(0, 0, 0, 0.041),
+    0 0px 21px rgba(0, 0, 0, 0.07)
+    ; */
+    /* box-shadow:
+    0 0px 1.9px rgba(243, 146, 1, 0.459),
+    0 0px 6.5px rgba(243, 146, 1, 0.024),
+    0 0px 29px rgba(243, 146, 1, 0.04)
+    ; */
+    color: #F2BC02;
+}
+
+.paper-style:hover .imgwrap{
+    /* -webkit-box-shadow: 0px 0px 4px 0px rgba(242,188,2,0.65);
+    -moz-box-shadow: 0px 0px 4px 0px rgba(242,188,2,0.65);
+    box-shadow: 0px 0px 4px 0px rgba(242,188,2,0.65); */
+}
+
+.paper-style:hover .fabGreen{
+    opacity: 1;
+    transform: translate(160px, 10px);
 }

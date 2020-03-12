@@ -1,4 +1,5 @@
 import React from "react"
+import './HomeDivider.css'
 
 const HomeDivider = (props) => {
     return(

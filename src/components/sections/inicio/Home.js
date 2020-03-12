@@ -22,9 +22,14 @@ const Home = () => {
 
     return (
         <div className="container">
-            {/* <div className="heroimg home"/> */}
-            <HeroImage title="Inicio" image="https://st.depositphotos.com/2117297/2183/i/950/depositphotos_21832931-stock-photo-construction-worker.jpg" />
-            <HomeDivider title="Productos Destacados" />
+            <HeroImage title="INICIO" image="https://st.depositphotos.com/2117297/2183/i/950/depositphotos_21832931-stock-photo-construction-worker.jpg" />
+            
+            <Container>
+                <HomeDivider title="Productos Destacados" />
+                <HomeDivider title="Últimas Noticias" />
+                <div style={{height:'400vh', width:'100%'}}></div>    
+            </Container>
+            
         </div>
     )
 }

@@ -10,37 +10,11 @@ html{
 body {
   margin :0;
   padding:0;
-  /* background: #EEEEEE; */
-  background: white;
+  background: rgb(253, 253, 253);
+  /* background: white; */
+  -webkit-font-smoothing: antialiased;
 }
 
 a{
   text-decoration: none;
 }
-
-/* form{
-  padding: 20px;
-  margin-top: 60px;
-}
-form button, form h5{
-  margin:20px 0;
-}
-
-input[type=text]:not(.browser-default):focus:not([readonly]),
-input[type=email]:not(.browser-default):focus:not([readonly]),
-input[type=password]:not(.browser-default):focus:not([readonly]),
-textarea.materialize-textarea:focus:not([readonly]){
-  border-color: #ec407a;
-  box-shadow: none;
-}
-
-input[type=text]:not(.browser-default):focus:not([readonly]) + label,
-textarea.materialize-textarea:focus:not([readonly]) + label,
-input[type=email]:not(.browser-default):focus:not([readonly]) + label,
-input[type=password]:not(.browser-default):focus:not([readonly]) + label{
-  color: #ec407a !important;
-}
-
-.searchBar{
-  margin-left: 20%;
-} */

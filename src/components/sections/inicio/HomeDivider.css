@@ -1,15 +1,17 @@
 .homediv-wrap{
     width:100%;
     display:flex;
-
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .homediv-title{
-    color: initial;
+    color: #585858;
 }
 
 .homediv-line{
-    width: 300px;
-    height: 2px;
-    background-color: gray;
+    width: 80%;
+    height: 1px;
+    background-color: #d8d8d8;
 }
