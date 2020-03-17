@@ -32,9 +32,14 @@ export default function NestedList(props) {
 
   const [open, setOpen] = React.useState(false);
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     setOpen(!open);
+    console.log(e.target)
   };
+  const handleClickDragon = (e,e2) => {
+    props.handler(e,e2);
+  };
+
   return (
     <List
       component="nav"
@@ -47,7 +52,7 @@ export default function NestedList(props) {
       className={classes.root}
       
     >
-      <ListItem   button onClick={handleClick}>
+      <ListItem button onClick={handleClick}>
         <ListItemText  primary={props.titulo} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
@@ -56,7 +61,7 @@ export default function NestedList(props) {
 
           {props.categorias.map((categoria) => 
             <ListItem button className={classes.nested}>
-              <ListItemText className={classes2.primary} primary={categoria[1]} />
+              <ListItemText onClick={()=>{handleClickDragon(categoria[0],categoria[1])}} className={classes2.primary} primary={categoria[1]} />
             </ListItem>
           )}
 

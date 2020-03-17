@@ -5,6 +5,9 @@ import Balde from "./taladroX.jpg"
 import './ProductoCard.css'
 import Fab from '@material-ui/core/Fab';
 import TransitEnterexitIcon from '@material-ui/icons/TransitEnterexit';
+//Importar el storage
+import "firebase/firebase-storage";
+import firebase from "firebase/app"
 
 const useStyles = makeStyles({
   card: {
@@ -22,18 +25,30 @@ const useStyles = makeStyles({
   },
 });
 
-// Recortar texto
-const cardtext = "Al contrario del pensamiento popular, el texto de Lorem Ipsum no es simplemente texto aleatorio."
-var result = cardtext.substring(0, 80) + '...';
 
-
-export default function MediaCard() {
+export default function MediaCard(props) {
   const classes = useStyles();
+  const [url, setUrl] = React.useState('');
+  let imagen = props.img;
+  if (imagen) {
+    var pathImagen = firebase
+      .storage()
+      .ref(imagen)
+      .getDownloadURL()
+      .then(url => {
+        setUrl(url);
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
+}
+  // Recortar texto
+  var result = props.subtitulo.substring(0, 80) + '...';
 
   return (
     <div className="paper-style">
       <div className="imgwrap">
-        <img src={Balde} className="prodimg"/>
+        <img src={url} className="prodimg"/>
       </div>
       
       <div className="fabGreen">
@@ -45,7 +60,7 @@ export default function MediaCard() {
       </div>
       <div className="contentwrap">
         <p className="prodcardtitle">
-          Un nombre copado
+         {props.titulo}
         </p>
         <p className="prodcardsub">
           {result}
