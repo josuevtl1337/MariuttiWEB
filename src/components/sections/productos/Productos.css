@@ -1,10 +1,5 @@
-.heroimg{
+.heroimg-small{
     width: 100%;
     height: 300px;
     background-image: url('https://media.istockphoto.com/photos/set-of-hand-various-work-tools-on-grey-background-picture-id596042932');
-}
-
-.heroimg.home{
-    background-image: url('https://st.depositphotos.com/2117297/2183/i/950/depositphotos_21832931-stock-photo-construction-worker.jpg');
-    height: calc(100vh - 100px);
 }

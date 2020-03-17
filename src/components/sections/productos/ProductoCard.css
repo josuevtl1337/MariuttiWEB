@@ -3,8 +3,8 @@
     display: flex;
     flex-direction: column;
     justify-content: start;
-    height: 380px;
-    max-width: 250px;
+    height: 400px;
+    width: 280px;
     cursor: pointer;
     padding: 5px;
     transition: all 0.2s;
@@ -15,10 +15,12 @@
 }
 
 .imgwrap{
-    height: 250px;
-    width: 250px;
+    height: 280px;
+    width: 280px;
     align-self: center;
-    
+    padding-top: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
     
     transition: all 0.2s;
 }
@@ -77,9 +79,10 @@
 }
 
 .prodcardsub{
-    font-size: 14px;
+    font-size: 16px;
     color: #636363;
     margin: 0;
+    font-family: 'Roboto Condensed';
 }
 
 .paper-style:hover .prodcardtitle{
