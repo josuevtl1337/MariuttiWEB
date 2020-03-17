@@ -1,9 +1,16 @@
 import React from "react"
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
+import './Home.css'
 import HomeDivider from './HomeDivider.js'
+import HomeCard from './HomeCard.js'
 import HeroImage from '../../layout/HeroImage'
 import Container from '@material-ui/core/Container'
+import ConstIcon from '../../../visuals/wheelbarrow-y.svg'
+import IndustIcon from '../../../visuals/jackhammer.svg'
+import MaquinasIcon from '../../../visuals/screwdriver-y.svg'
+import Parallax from 'react-rellax'
+
 
 const Home = () => {
     useFirebaseConnect([
@@ -22,12 +29,46 @@ const Home = () => {
 
     return (
         <div className="container">
-            <HeroImage title="INICIO" image="https://st.depositphotos.com/2117297/2183/i/950/depositphotos_21832931-stock-photo-construction-worker.jpg" />
-            
+            <HeroImage 
+                title="INICIO"
+                text="Más de 50 años brindando soluciones para el hogar, la construcción y la industria"
+                image="https://st.depositphotos.com/2117297/2183/i/950/depositphotos_21832931-stock-photo-construction-worker.jpg" 
+            />
+
             <Container>
+
+                <div className="about-block">
+                    <div className="left">
+                        <Parallax speed={3}>
+                            <img src="https://www.mariutti.com.ar/images/negocio.jpg" alt=""/>
+                        </Parallax>
+                    </div>
+
+                    <div className="right">
+                        <h2></h2>
+                        <p></p>
+                    </div>
+                </div>
+
+                <div className="cards-container">
+                    <HomeCard
+                        icon={MaquinasIcon} 
+                        text="Máquinas y Herramientas"
+                    />
+                    <HomeCard 
+                        icon={ConstIcon}
+                        text="Obras y Construcción"
+                    />
+                    <HomeCard 
+                        icon={IndustIcon} 
+                        text="Ferretería Industrial"
+                    />
+                </div>
+
                 <HomeDivider title="Productos Destacados" />
                 <HomeDivider title="Últimas Noticias" />
-                <div style={{height:'400vh', width:'100%'}}></div>    
+                <div style={{height:'400vh', width:'100%'}}></div>
+                  
             </Container>
             
         </div>

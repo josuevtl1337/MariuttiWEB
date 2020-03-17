@@ -18,3 +18,8 @@ body {
 a{
   text-decoration: none;
 }
+
+::selection{
+  color: rgb(250, 250, 250);
+  background: #274582;
+}

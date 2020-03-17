@@ -29,8 +29,6 @@ class App extends Component {
   };
  
   render(){
-
-    
     let navbar;
     let backdrop;
     let sidenav;
@@ -65,6 +63,7 @@ class App extends Component {
             path='/admin'
             component={() => <Admin props={Rubro} />}
         /> */}
+
       </BrowserRouter>
     );
   }

@@ -120,6 +120,7 @@ a{
     background: transparent;
     height: unset;
     position:fixed;
+    z-index: 200;
   }
 
   .contact-info{
@@ -129,6 +130,8 @@ a{
   .navbar{
     width: 100%;
     height: 80px;
+    border-radius: 0;
+
   }
 
   .logo{

@@ -1,22 +1,57 @@
 .heroimagewrap{
     width: 100%;
-    height: calc(100vh + 100px);
+    height: calc(100vh + 80px);
     overflow: hidden;
     transform: translateY(-100px);
+    z-index: 100;
 }  
 
 .heroimg{
-    z-index: 100;
+    position: absolute;
+    width: 100%;
+    filter: brightness(0.8);
+
 }
 
 .textwrap{
     width: 100%;
     position: absolute;
     z-index: 200;
-    color: ivory;
+    /* top: 120px; */
     top: 100px;
     height: calc(100vh - 100px);
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.textbox{
+    /* color: #363636; */
+    /* background-color: rgba(255, 255, 255, 0.856); */
+    width: 80%;
+    /* height: 70vh; */
+    /* background-color: #274582b2; */
+    
+    color: white;
+    max-width: 900px;
+    max-height: 100vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.herotitle{
+    font-family: 'Roboto Slab';
+    font-size: 70px;
+    font-weight: 550;
+    text-transform: uppercase;
+    margin: 20px auto;
+}
+
+.herotext{
+    font-family: 'Roboto Condensed';
+    font-size: 32px;
+    font-weight: 200;
 }

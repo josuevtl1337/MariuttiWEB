@@ -3,14 +3,6 @@ import Parallax from 'react-rellax'
 import './HeroImage.css'
 
 
-const rendertext = (props) => {
-    if (props.text) {
-        return(
-            <p>{props.text}</p>
-        )
-    }
-}
-
 const HeroImage = (props) => {
     
     return(
@@ -21,10 +13,18 @@ const HeroImage = (props) => {
                 </Parallax>
                 
                 <div className="textwrap">
-                    <h1 className="herotitle">
-                        {props.title}
-                    </h1>
-                    {rendertext}
+                    <div className="textbox">
+                        <h2 className="herotitle">
+                            {props.title}
+                        </h2>
+
+                        <p className="herotext">
+                            {props.text}
+                        </p>
+
+                        <button>Mirá Nuestro Catálogo</button>
+                    </div>
+                    
                 </div>
                 
             </div>

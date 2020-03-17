@@ -65,7 +65,7 @@ const Productos = () => {
     return (
 
         <React.Fragment>
-            <div className="heroimg"/>
+            <div className="heroimg-small"/>
             <Container style={{zIndex: 100}}>
                 
                 <Grid container spacing={4}>
