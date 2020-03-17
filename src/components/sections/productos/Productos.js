@@ -2,7 +2,6 @@ import React, { Component, useState } from "react"
 import ReactDOM from 'react-dom';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
-import CatalogoProductos from "./CatalogoProductos"
 import firebase from "firebase/app";
 import "firebase/firestore";
 import Grid from '@material-ui/core/Grid';
@@ -10,6 +9,8 @@ import './Productos.css'
 import Drawer from './Drawer.js'
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
+import ProductosCard from "./ProductoCard"
+import "./catalogoProductos.css"
 
 const Productos = () => {
     //Hago la referencia para traer mis objetos Rubros, y Sub_Rubros
@@ -57,14 +58,21 @@ const Productos = () => {
                     <Grid item lg={3} md={12}>
                         <h4>Categorías</h4>
                         <Divider/>
-                        <Drawer titulo="Construcción" categorias={construccion}/>
+                        <Drawer titulo="Construcción" style="" categorias={construccion}/>
                         <Drawer titulo="Máquinas y Herramientas" categorias={maquinas}/>
                         <Drawer titulo="Ferretería Industrial" categorias={ferreteria}/>
                     </Grid>
                     <Grid item lg={9} md={12}>
                         <h4>Aspiradoras</h4>
                         <Divider/>
-                        <CatalogoProductos />
+                        <div className="contenedor-catalogo">
+                            <ProductosCard/>
+                            <ProductosCard/>
+                            <ProductosCard/>
+                            <ProductosCard/>
+                            <ProductosCard/>
+                            <ProductosCard/>
+                        </div>
                     </Grid>
                 </Grid>
                 

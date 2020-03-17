@@ -19,15 +19,22 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const useStyles2 = makeStyles(theme => ({
+  primary: {
+    color:'grey'
+  },
+}));
+
 export default function NestedList(props) {
   console.log(props.categorias);
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const classes2 = useStyles2();
+
+  const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen(!open);
   };
-
   return (
     <List
       component="nav"
@@ -38,9 +45,10 @@ export default function NestedList(props) {
       //   </ListSubheader>
       // }
       className={classes.root}
+      
     >
-      <ListItem button onClick={handleClick}>
-        <ListItemText primary={props.titulo} />
+      <ListItem   button onClick={handleClick}>
+        <ListItemText  primary={props.titulo} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
@@ -48,7 +56,7 @@ export default function NestedList(props) {
 
           {props.categorias.map((categoria) => 
             <ListItem button className={classes.nested}>
-              <ListItemText primary={categoria[1]} />
+              <ListItemText className={classes2.primary} primary={categoria[1]} />
             </ListItem>
           )}
 

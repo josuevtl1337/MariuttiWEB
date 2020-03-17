@@ -115,51 +115,26 @@ class Admin3 extends Component {
       );
     }
   //EDITANDO PRODUCTOS
-  handleEditProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f) => (e) =>{
-    const file = f;
-    const storageRef = firebase.storage().ref(`imagenes/${file.name}`);
-    //pusheo mi archivo file dentro de mi BD
-    const task = storageRef.put(file);
-    task.on(
-      //Lo que hacmeos mientras sube
-      "state_changed",
-      snapshot => {
-        // this.setState({
-        //   loading: true
-        // });
-      },
-      //Lo que hgacmeos con los errores
-      error => {
-        console.log(error.message);
-      },
-      //Lo que hacmeos ni bieen subio la foto
-      () => {
-        const record = {
-          nombre: nombre,
-          subtitulo:subtitulo,
-          descripcion:descripcion,
-          enlace:enlace,
-          sub_rubro: sub_rubro,
-          img: task.snapshot.metadata.fullPath
-        };
+  handleEditProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f,id) =>{
         const db = firebase.database();
         const dbRef = db.ref("Producto");
-        const newPicture = dbRef.push();
-        newPicture.set(record);
-        const postId = newPicture.key;
-        console.log(postId);
-        newPicture.update({
-          "id":postId
-        }).then(()=>{
-          console.log(postId.id)
-          // this.setState({
-          //   loading: false
-          // });
-          window.location.reload();      
-          this.handleClick("Producto");
-        }) 
-      }   
-    );
+        const productoRef = dbRef.child(id)
+        productoRef.update({
+          "nombre": nombre,
+          "subtitulo":subtitulo,
+          "descripcion":descripcion,
+          "enlace":enlace,
+          "sub_rubro": sub_rubro
+        }).then(()=>window.location.reload());
+        // newPicture.update(record).then(()=>{
+        //   // console.log(postId.id)
+        //   // this.setState({
+        //   //   loading: false
+        //   // });
+        //   window.location.reload();      
+        //   this.handleClick("Producto");
+        // }) 
+ 
   }
   componentDidMount(){
     
@@ -363,19 +338,25 @@ class Admin3 extends Component {
                                   const dbRef = db.ref("Producto");
                                   const refSB = dbRef.child(rowData.id); 
                                   refSB.remove();   
+                                  // Delete the file
+                                  if(rowData.img){
                                   // Create a reference to the file to delete
                                   var storage = firebase.storage();
                                   var storageRef = storage.ref();
                                   var desertRef = storageRef.child(rowData.img);
-                                  // Delete the file
                                   desertRef.delete().then(function() {
-                                    // File deleted successfully
-                                    alert("File deleted successfully");
+                                      // File deleted successfully
+                                      alert("File deleted successfully");
+                                      window.location.reload();
+                                    }).catch(function(error) {
+                                      alert("OH NO!", error);
+                                      window.location.reload();
+                                      // Uh-oh, an error occurred!
+                                    });      
+                                  }else{
                                     window.location.reload();
-                                  }).catch(function(error) {
-                                    alert("Oh no");
-                                    // Uh-oh, an error occurred!
-                                  });                              
+                                  }
+                                                          
                                 }
                                 resolve()
                               }, 1000)
@@ -394,7 +375,8 @@ class Admin3 extends Component {
                           { title: 'Subtitutlo', field: 'subtitulo' },
                           { title: 'Descripcion', field: 'descripcion',
                             cellStyle:{width:200,minWidth:200},
-                            headerStlye:{width:200,minWidth:200}
+                            headerStlye:{width:200,minWidth:200},
+                            hidden:true
                           },
                           { title: 'Sub_Rubro', field: 'sub_rubro'},
                           // { title: 'Ficha Tecnica', field: 'fichaTecnica'}                        
