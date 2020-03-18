@@ -53,7 +53,7 @@ export default function MediaCard(props) {
       
       <div className="fabGreen">
         <p className="fabtitle">Ver más</p>
-        <i class="material-icons entericon">
+        <i className="material-icons entericon">
           transit_enterexit
         </i>
         

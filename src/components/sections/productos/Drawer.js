@@ -30,7 +30,7 @@ export default function NestedList(props) {
   const classes = useStyles();
   const classes2 = useStyles2();
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   const handleClick = (e) => {
     setOpen(!open);

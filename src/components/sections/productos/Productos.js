@@ -13,7 +13,7 @@ import ProductosCard from "./ProductoCard"
 import "./catalogoProductos.css"
 import { connect } from 'react-redux'
 
-const Productos = () => {
+const Productos = (props) => {
     //Hago la referencia para traer mis objetos Rubros, y Sub_Rubros
     useFirebaseConnect([
         { path: 'Rubro' },
@@ -21,8 +21,9 @@ const Productos = () => {
         { path: 'Producto' }
     ])
 
-    const [categoriaActual, setCategoriaActual] = useState();
-    const [categoriaActualName, setCategoriaActualName] = useState();
+    const [categoriaActual, setCategoriaActual] = useState("-M163WoG-kWq-0jDt1CJ");
+    const [categoriaActualName, setCategoriaActualName] = useState("Aislantes");
+    const [productoState, setProductoState] = useState(false);
 
     const rubros = useSelector(state => state.firebase.data.Rubro)
     const sub_rubros = useSelector(state => state.firebase.data.Sub_Rubro)
@@ -54,22 +55,31 @@ const Productos = () => {
     if(productos){
         console.log(productos)
         re = Object.values(productos);
-        console.log(re)
+        console.log(props.history)
     }
     const handleClick = (e,categoriaNombre) =>{
-        console.log(categoriaNombre)
+        console.log(e,categoriaNombre)
         setCategoriaActual(e);
         setCategoriaActualName(categoriaNombre);
+    }
+    //Cambiando el history
+    const handlerOnClickProducto = (id) =>{
+        // e.preventDefault();
+        props.history.push("/producto?" + id);
+        setProductoState(true);
+        console.log(productoState);
     }
 
     return (
 
         <React.Fragment>
+            {/* banner */}
             <div className="heroimg-small"/>
             <Container style={{zIndex: 100}}>
-                
+                {/* Categorias  */}
                 <Grid container spacing={4}>
-                    <Grid item lg={3} md={12}>
+                    {/* Productos */}
+                    <Grid item lg={3} md={12}>       
                         <h4>Categorías</h4>
                         <Divider/>
                         <Drawer titulo="Construcción" style="" handler={handleClick} categorias={construccion}/>
@@ -80,23 +90,23 @@ const Productos = () => {
                         <h4>{categoriaActualName}</h4>
                         <Divider/>
                         <div className="contenedor-catalogo">
-                            {re.map((item, i) => {
-                                console.log(item.id);
+                            {re.map((item, i) => {                             
                                 if(categoriaActual == item.sub_rubro){
                                     return (
-                                        <ProductosCard
+                                        <div onClick={()=>handlerOnClickProducto(item.id,item.nombre,item.descripcion)}>
+                                        <ProductosCard                                      
                                         img={item.img}
                                         titulo={item.nombre}
                                         subtitulo={item.descripcion}
                                         key={i}
-                                        />
+                                        />   
+                                        </div>                                                                     
                                     );
                                 }                               
                             })}
                         </div>
                     </Grid>
-                </Grid>
-                
+                </Grid>              
             </Container>
         </React.Fragment>
     );

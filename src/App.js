@@ -3,10 +3,11 @@ import Navbar from "./components/layout/Navbar";
 import Sidenav from "./components/layout/Sidenav";
 import Backdrop from "./components/layout/Backdrop";
 import Footer from './components/layout/Footer.js'
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/sections/inicio/Home"
 import About from "./components/sections/nosotros/About"
 import Productos from "./components/sections/productos/Productos"
+import ProductoComponent from "./components/sections/productos/ProductoComponent"
 import Contact from "./components/sections/contacto/Contact"
 import Admin from "./components/admin/Admin3"
 import AdminNav from "./components/admin/AdminNav"
@@ -55,11 +56,14 @@ class App extends Component {
         {navbar}
         {sidenav}
         {backdrop}
+        <Switch>
         <Route exact path="/inicio" component={Home} />
         <Route path="/nosotros" component={About} />
         <Route path="/productos" component={Productos} />
+        <Route path="/producto" component={ProductoComponent} />
         <Route path="/contacto" component={Contact} />
         <Route path="/admin" component={Admin} />
+        </Switch>
         {/* <Route
             path='/admin'
             component={() => <Admin props={Rubro} />}
