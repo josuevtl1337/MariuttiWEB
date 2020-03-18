@@ -35,10 +35,12 @@ class App extends Component {
     let sidenav;
     let adminnav;
 
+    sidenav = <Sidenav itemClickHandler={this.sidenavTriggerClickHandler} show={this.state.sidenavOpen}/>
+
     if (this.state.sidenavOpen) {
       
       backdrop = <Backdrop click={this.backdropClickHandler}/>
-      sidenav = <Sidenav itemClickHandler={this.sidenavTriggerClickHandler} show={this.state.sidenavOpen}/>
+      // sidenav = <Sidenav itemClickHandler={this.sidenavTriggerClickHandler} show={this.state.sidenavOpen}/>
     }
 
     if (window.location.href.includes('admin')) {

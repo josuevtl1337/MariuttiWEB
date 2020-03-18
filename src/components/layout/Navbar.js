@@ -8,6 +8,8 @@ import Container from '@material-ui/core/Container';
 import MailIcon from '@material-ui/icons/Mail';
 import PhoneIcon from '@material-ui/icons/Phone';
 import SearchIcon from '@material-ui/icons/Search';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import CloseIcon from '@material-ui/icons/Close';
 
 class Navbar extends React.Component {
     // const [tabIndex, setTabIndex] = React.useState(0);
@@ -15,28 +17,62 @@ class Navbar extends React.Component {
     constructor(props) {
 		super(props);
         this.state = {
-            sidenav: props.sidenavClickHandler
+            sidenav: props.sidenavClickHandler,
+            search: false
         };
     }
 
+    showSearchbar = () => {
+        if (this.state.search == false) {
+            this.setState({search: true});
+        } else {
+            this.setState({search: false});
+        }
+        
+    }
+
     render(){
+
+        let tabwrapclasses
+        let searchbarclasses
+        let searchiconclasses
+        let submitclasses
+        let searchwrapclasses
+
+        if (this.state.search == true) {
+            tabwrapclasses = "tabs-wrapper hide";
+            // searchbarclasses = "searchbar";
+            searchiconclasses = "searchicon hide";
+            // submitclasses = "submiticon";
+            searchwrapclasses = "searchwrap"
+        } else {
+            tabwrapclasses = "tabs-wrapper";
+            // searchbarclasses = "searchbar hide";
+            searchiconclasses = "searchicon";
+            // submitclasses = "submiticon hide";
+            searchwrapclasses = "searchwrap hide"
+
+        }
+
         return (
-            <div className="backnav">
-                <div className="contact-info">
-                    <div className="contact-info-content">
-                        <div className="contact-divider"></div>
-                        <MailIcon style={{color: 'white', fontSize: 18, marginRight: '5px'}}/>
-                        <p style={{color: 'white', fontSize: 12}}>info@mariutti.com.ar</p>
-                        <div className="contact-divider"></div>
-                        <PhoneIcon style={{color: 'white', fontSize: 18, marginRight: '5px'}}/>
-                        <p style={{color: 'white', fontSize: 12}}>+54 342 453-5318</p>
+            <React.Fragment>
+                <div className="backnav">
+                    <div className="contact-info">
+                        <div className="contact-info-content">
+                            <div className="contact-divider"></div>
+                            <MailIcon style={{color: 'white', fontSize: 18, marginRight: '5px'}}/>
+                            <p style={{color: 'white', fontSize: 12}}>info@mariutti.com.ar</p>
+                            <div className="contact-divider"></div>
+                            <PhoneIcon style={{color: 'white', fontSize: 18, marginRight: '5px'}}/>
+                            <p style={{color: 'white', fontSize: 12}}>+54 342 453-5318</p>
+                        </div>
                     </div>
                 </div>
                 <div className="navbar">
                     <Container className="barra">
                         <Link to="/inicio"><img className="logo" src="http://www.mariutti.com.ar/images/logo-plano.png"/></Link>
-                        <Hidden mdDown>
-                            <div className="tabs-wrapper">
+                        <Hidden mdDown className="displayend">
+                            <div className={tabwrapclasses}>
                                 <Link  to="/inicio">
                                     <Tab isActive={window.location.href.includes('inicio')} titulo="Inicio"/>
                                 </Link>
@@ -53,7 +89,14 @@ class Navbar extends React.Component {
                                     <Tab isActive={window.location.href.includes('contacto')} titulo="Contactanos"/>
                                 </Link>
                             </div>
-                            <SearchIcon style={{color: '#636363', fontSize: 20}}/>
+                            <div className={searchwrapclasses}>
+                                <div className="searchbarwrap">
+                                    <input type="text" placeholder="Buscar en productos..." className="searchbar"/>
+                                    <ArrowForwardIcon className="submiticon" style={{color: '#636363', fontSize: 20}} onClick={this.showSearchbar}/>
+                                </div>
+                                <CloseIcon className="closeicon" style={{color: '#636363', fontSize: 20}} onClick={this.showSearchbar}/>
+                            </div>
+                            <SearchIcon className={searchiconclasses} style={{color: '#636363', fontSize: 20}} onClick={this.showSearchbar}/>
                         </Hidden>
         
                         <Hidden lgUp>
@@ -62,7 +105,8 @@ class Navbar extends React.Component {
                         
                     </Container>
                 </div>
-            </div>
+            </React.Fragment>
+            
         )
     }
 
