@@ -73,3 +73,15 @@
 .herobtn:hover{
     background-color: #1b469c;
 }
+
+@media only screen and (max-width: 1300px) {
+    .heroimagewrap{
+        /* width: auto;
+        height: 100%; */
+    }
+
+    .heroimg{
+        width: auto;
+        height: 100%;
+    }
+}

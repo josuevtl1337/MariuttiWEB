@@ -10,7 +10,7 @@ a{
 }
 
 .navbar{
-  width: 1300px;
+  width: 1220px;
   height: 100px;
   margin: 0px auto;
   background-color: #ffffff;
@@ -19,8 +19,10 @@ a{
   box-shadow: 0 12px 15px -16px rgba(0, 0, 0, 0.27);
   border-radius: 6px;
   z-index: 2000;
+  transform: translateY(-60px);
   position: sticky;
-  top: 0;
+  top:60px;
+  margin-bottom: -100px;
 }
 
 .contact-info{
@@ -46,6 +48,7 @@ a{
   text-transform: uppercase;
   display: flex;
   flex-direction: row;
+  animation: fadeIn 0.3s;
 }
 
 .tab{
@@ -112,6 +115,67 @@ a{
   width: 65%;
 }
 
+.searchicon{
+  cursor: pointer;
+  display: block ;
+  transition: all 0.6s;
+  animation: fadeIn 0.3s;
+}
+
+.searchbarwrap{
+  display: unset;
+  height: 50px;
+  padding: 0px 16px;
+  transition: all 0.2s;
+  border: #e6e6e6 solid 1px;
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation: fadeIn 0.3s;
+}
+
+.searchbar{
+  height: 100%;
+  width: 250px;
+  font-size: 16px;
+  font-family: 'Roboto Condensed';
+  outline: none;
+  border: none;
+}
+
+.submiticon{
+  cursor: pointer;
+}
+
+.searchwrap{
+  width: 350px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.searchwrap.hide{
+  display: none;
+}
+
+.tabs-wrapper.hide{
+  display: none;
+}
+
+.searchicon.hide{
+  display: none;
+}
+
+.closeicon{
+  cursor: pointer;
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+    to { opacity: 1; }
+}
 
 /* MEDIA QUERIES */
 @media only screen and (max-width: 1300px) {

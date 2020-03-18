@@ -8,31 +8,34 @@ import './sidenav.css'
 
 const SideNav = props => {
 
-    const [sidenavClasses, setSidenavClasses] = React.useState("side-nav");
+    // const [sidenavClasses, setSidenavClasses] = React.useState("side-nav");
 
-    // let sidenavClasses = 'side-nav';
+    let sidenavClasses = 'side-nav';
     
+    // if (props.show) {
+    //     setSidenavClasses("side-nav open")
+    // } else {
+    //     setSidenavClasses("side-nav")
+    // }
     if (props.show) {
-        setSidenavClasses("side-nav open")
+        sidenavClasses = 'side-nav open'
     } else {
-        setSidenavClasses("side-nav")
+        sidenavClasses = 'side-nav'
     }
 
     const changeClasses = () => {
-        if (sidenavClasses == 'sidenav open' && props.show) {
-            setSidenavClasses("side-nav")
-        }
+        sidenavClasses = 'side-nav'
     }
     
     return(
     <div className={sidenavClasses} >
         <img className="logoside" src="http://www.mariutti.com.ar/images/logo-plano.png"/>
-        <List  component="side-nav" aria-label="">
+        <List component="side-nav" aria-label="">
 
             <Divider/>
-            <Link  to="/inicio">
+            <Link to="/inicio">
                 <ListItem button >
-                    <ListItemText click={props.itemClickHandler} className="buttons" primary="Inicio" onClick={changeClasses} />
+                    <ListItemText click={props.itemClickHandler} className="buttons" primary="Inicio" />
                 </ListItem>
             </Link>
             <Divider/>
