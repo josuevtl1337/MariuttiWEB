@@ -55,3 +55,21 @@
     font-size: 32px;
     font-weight: 200;
 }
+
+.herobtn{
+    margin-top: 20px;
+    background-color: #2d61ca;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+    padding: 8px 20px;
+    border-radius: .5rem;
+    line-height: 2;
+    transition: all 0.1s;
+    font-family: 'Roboto Condensed';
+}
+
+.herobtn:hover{
+    background-color: #1b469c;
+}

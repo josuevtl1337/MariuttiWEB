@@ -22,7 +22,7 @@ const HeroImage = (props) => {
                             {props.text}
                         </p>
 
-                        <button>Mirá Nuestro Catálogo</button>
+                        <button className="herobtn">Mirá Nuestro Catálogo</button>
                     </div>
                     
                 </div>

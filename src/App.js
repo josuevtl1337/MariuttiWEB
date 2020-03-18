@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from "./components/layout/Navbar";
 import Sidenav from "./components/layout/Sidenav";
 import Backdrop from "./components/layout/Backdrop";
+import Footer from './components/layout/Footer.js'
 import { BrowserRouter, Route } from "react-router-dom";
 import Home from "./components/sections/inicio/Home"
 import About from "./components/sections/nosotros/About"
@@ -63,7 +64,7 @@ class App extends Component {
             path='/admin'
             component={() => <Admin props={Rubro} />}
         /> */}
-
+        <Footer></Footer>
       </BrowserRouter>
     );
   }

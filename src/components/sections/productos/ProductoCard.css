@@ -22,7 +22,7 @@
     padding-left: 8px;
     padding-right: 8px;
     
-    transition: all 0.2s;
+    transition: all 0.1s;
 }
 
 .prodimg{
@@ -45,7 +45,7 @@
     0 0px 11px rgba(0, 0, 0, 0.21)
     ;
     opacity: 0;
-    transition: all 0.2s;
+    transition: all 0.15s;
     
     transform: translate(100px, 10px);
 }

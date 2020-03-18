@@ -6,9 +6,11 @@ import HomeDivider from './HomeDivider.js'
 import HomeCard from './HomeCard.js'
 import HeroImage from '../../layout/HeroImage'
 import Container from '@material-ui/core/Container'
+import AtencionIcon from '../../../visuals/mail.svg'
 import ConstIcon from '../../../visuals/wheelbarrow-y.svg'
 import IndustIcon from '../../../visuals/jackhammer.svg'
-import MaquinasIcon from '../../../visuals/screwdriver-y.svg'
+// import MaquinasIcon from '../../../visuals/screwdriver-y.svg'
+import MaquinasIcon from '../../../visuals/saw.svg'
 import Parallax from 'react-rellax'
 
 
@@ -31,26 +33,36 @@ const Home = () => {
         <div className="container">
             <HeroImage 
                 title="INICIO"
-                text="Más de 50 años brindando soluciones para el hogar, la construcción y la industria"
+                // text="Más de 50 años brindando soluciones para el hogar, la construcción y la industria"
+                text="La ferretería industrial más completa de la región"
                 image="https://st.depositphotos.com/2117297/2183/i/950/depositphotos_21832931-stock-photo-construction-worker.jpg" 
             />
 
             <Container>
 
                 <div className="about-block">
+
                     <div className="left">
-                        <Parallax speed={3}>
-                            <img src="https://www.mariutti.com.ar/images/negocio.jpg" alt=""/>
+                        <Parallax speed={1}>
+                            <img className="aboutimg" src="https://www.mariutti.com.ar/images/negocio.jpg" alt=""/>
                         </Parallax>
                     </div>
-
                     <div className="right">
-                        <h2></h2>
-                        <p></p>
+                        <h2>Honestidad, Calidad y Familia</h2>
+                        <p>
+                            Somos una empresa familiar que hace más de 50 años 
+                            se dedica a brindar soluciones para el hogar, la construcción y la industria 
+                            
+                        </p>
+                        <button className="aboutbtn">Leer más ></button>
                     </div>
                 </div>
 
                 <div className="cards-container">
+                    <HomeCard
+                        icon={AtencionIcon} 
+                        text="Atención Personalizada"
+                    />
                     <HomeCard
                         icon={MaquinasIcon} 
                         text="Máquinas y Herramientas"
