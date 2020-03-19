@@ -55,7 +55,7 @@ const Productos = (props) => {
     if(productos){
         console.log(productos)
         re = Object.values(productos);
-        console.log(props.history)
+        console.log(props.history);
     }
     const handleClick = (e,categoriaNombre) =>{
         console.log(e,categoriaNombre)
@@ -102,7 +102,8 @@ const Productos = (props) => {
                                             />   
                                         </div>                                                                     
                                     );
-                                }                               
+                                }
+                                                               
                             })}
                         </div>
                     </Grid>

@@ -1,4 +1,4 @@
-import React from 'react';
+import  React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Balde from "./taladroX.jpg"
@@ -29,6 +29,7 @@ const useStyles = makeStyles({
 export default function MediaCard(props) {
   const classes = useStyles();
   const [url, setUrl] = React.useState('');
+
   let imagen = props.img;
   if (imagen) {
     var pathImagen = firebase

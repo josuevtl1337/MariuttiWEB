@@ -18,7 +18,8 @@ class Navbar extends React.Component {
 		super(props);
         this.state = {
             sidenav: props.sidenavClickHandler,
-            search: false
+            search: false,
+            busqueda:""
         };
     }
 
@@ -27,9 +28,23 @@ class Navbar extends React.Component {
             this.setState({search: true});
         } else {
             this.setState({search: false});
-        }
-        
+        }     
     }
+    closeDragon = () => {
+        this.setState({search: false})
+        this.props.history.push("/productos");
+    }
+    handleOnSubmitDragon = e => {
+        this.setState({search: false})
+        e.preventDefault();
+        this.props.history.push("/busqueda?"+this.state.busqueda);
+        this.props.buscando(this.state.busqueda);
+      };
+      onChange = e => {
+        this.setState({
+          busqueda: e.target.value
+        });
+      };
 
     render(){
 
@@ -95,13 +110,18 @@ class Navbar extends React.Component {
                                     <Tab isActive={window.location.href.includes('contacto')} titulo="Contactanos"/>
                                 </Link>
                             </div>
+                            {/* SearchBar */}
+                            <form   className=""
+                                    name="Form"
+                                    onSubmit={this.handleOnSubmitDragon}>
                             <div className={searchwrapclasses}>
                                 <div className="searchbarwrap">
-                                    <input type="text" placeholder="Buscar en productos..." className="searchbar"/>
-                                    <ArrowForwardIcon className="submiticon" style={{color: '#636363', fontSize: 20}} onClick={this.showSearchbar}/>
+                                    <input type="text" id="buscar" value={this.state.busqueda} onChange={this.onChange} placeholder="Buscar en productos..." className="searchbar"/>
+                                    <ArrowForwardIcon className="submiticon" style={{color: '#636363', fontSize: 20}} onClick={this.handleOnSubmitDragon}/>
                                 </div>
-                                <CloseIcon className="closeicon" style={{color: '#636363', fontSize: 20}} onClick={this.showSearchbar}/>
+                                <CloseIcon className="closeicon" style={{color: '#636363', fontSize: 20}} onClick={this.closeDragon}/>
                             </div>
+                            </form>                            
                             <SearchIcon className={searchiconclasses} style={{color: '#636363', fontSize: 20}} onClick={this.showSearchbar}/>
                             
                         </Hidden>

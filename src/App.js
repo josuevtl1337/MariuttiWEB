@@ -4,13 +4,14 @@ import Sidenav from "./components/layout/Sidenav";
 import Backdrop from "./components/layout/Backdrop";
 import Footer from './components/layout/Footer.js'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Home from "./components/sections/inicio/Home"
-import About from "./components/sections/nosotros/About"
-import Productos from "./components/sections/productos/Productos"
-import ProductoComponent from "./components/sections/productos/ProductoComponent"
-import Contact from "./components/sections/contacto/Contact"
-import Admin from "./components/admin/Admin3"
-import AdminNav from "./components/admin/AdminNav"
+import Home from "./components/sections/inicio/Home";
+import About from "./components/sections/nosotros/About";
+import Productos from "./components/sections/productos/Productos";
+import SearchResult from "./components/sections/productos/SearchResult";
+import ProductoComponent from "./components/sections/productos/ProductoComponent";
+import Contact from "./components/sections/contacto/Contact";
+import Admin from "./components/admin/Admin3";
+import AdminNav from "./components/admin/AdminNav";
 // import fbConfig from "./components/config/fbConfig"
 // import firebase from "firebase/app";
 
@@ -18,7 +19,8 @@ import AdminNav from "./components/admin/AdminNav"
 class App extends Component {
 
   state = {
-    sidenavOpen : false
+    sidenavOpen : false,
+    busqueda : ""
   };
   sidenavTriggerClickHandler = () => {
     this.setState((prevState) => {
@@ -29,12 +31,20 @@ class App extends Component {
   backdropClickHandler = () => {
     this.setState({sidenavOpen: false})
   };
- 
+  buscandoResultado = (param) =>{
+    this.setState({busqueda:param})
+  }
+  componentDidUpdate(){
+
+    console.log(this.state.busqueda)
+  }
   render(){
     let navbar;
     let backdrop;
     let sidenav;
     let adminnav;
+
+    // let productosComponent =  <Productos busquedaResult={this.state.busqueda} />
 
     sidenav = <Sidenav itemClickHandler={this.sidenavTriggerClickHandler} show={this.state.sidenavOpen}/>
 
@@ -48,7 +58,7 @@ class App extends Component {
       adminnav = <AdminNav />
       navbar = null;
     } else {
-      navbar = <Navbar sidenavClickHandler={this.sidenavTriggerClickHandler}/>
+      navbar = <Navbar sidenavClickHandler={this.sidenavTriggerClickHandler} buscando={this.buscandoResultado}/>
       adminnav = null
     }
 
@@ -61,15 +71,19 @@ class App extends Component {
         <Switch>
         <Route exact path="/inicio" component={Home} />
         <Route path="/nosotros" component={About} />
-        <Route path="/productos" component={Productos} />
+        {/* <Route path="/productos" component={productosComponent} />  */}
         <Route path="/producto" component={ProductoComponent} />
         <Route path="/contacto" component={Contact} />
         <Route path="/admin" component={Admin} />
         </Switch>
-        {/* <Route
-            path='/admin'
-            component={() => <Admin props={Rubro} />}
-        /> */}
+        <Route
+            path='/productos'
+            render={(props) => <Productos {...props} busquedaResult={this.state.busqueda} />}
+        />
+        <Route
+            path='/busqueda'
+            render={(props) => <SearchResult {...props} busquedaResult={this.state.busqueda} />}
+        />
         <Footer></Footer>
       </BrowserRouter>
     );
