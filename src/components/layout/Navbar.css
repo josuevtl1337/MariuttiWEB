@@ -45,10 +45,13 @@ a{
 }
 
 .tabs-wrapper{
+  height: 100%;
   text-transform: uppercase;
   display: flex;
   flex-direction: row;
   animation: fadeIn 0.3s;
+  display: flex;
+  align-items: center;
 }
 
 .tab{
@@ -170,6 +173,33 @@ a{
 .closeicon{
   cursor: pointer;
   animation: fadeIn 0.3s;
+}
+
+.prodtab{
+  height: 69px;
+  width: auto;
+  display: flex;
+  align-items: end;
+  align-self: flex-end;
+}
+
+.proddrop{
+  height: 500px;
+  width: 100%;
+  background: green;
+  position: absolute;
+  top: 100px;
+  display: none;
+}
+
+.prodtab:hover .proddrop{
+  display: block;
+  height: 200px;
+  animation: fadeIn 0.3s;
+} 
+
+.proddrop:hover{
+  display:block
 }
 
 @keyframes fadeIn {

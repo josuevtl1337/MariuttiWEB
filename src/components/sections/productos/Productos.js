@@ -94,12 +94,12 @@ const Productos = (props) => {
                                 if(categoriaActual == item.sub_rubro){
                                     return (
                                         <div onClick={()=>handlerOnClickProducto(item.id,item.nombre,item.descripcion)}>
-                                        <ProductosCard                                      
-                                        img={item.img}
-                                        titulo={item.nombre}
-                                        subtitulo={item.descripcion}
-                                        key={i}
-                                        />   
+                                            <ProductosCard                                      
+                                                img={item.img}
+                                                titulo={item.nombre}
+                                                subtitulo={item.descripcion}
+                                                key={i}
+                                            />   
                                         </div>                                                                     
                                     );
                                 }                               

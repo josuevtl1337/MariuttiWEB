@@ -73,19 +73,25 @@ class Navbar extends React.Component {
                         <Link to="/inicio"><img className="logo" src="http://www.mariutti.com.ar/images/logo-plano.png"/></Link>
                         <Hidden mdDown className="displayend">
                             <div className={tabwrapclasses}>
-                                <Link  to="/inicio">
+                                <Link to="/inicio">
                                     <Tab isActive={window.location.href.includes('inicio')} titulo="Inicio"/>
                                 </Link>
-                                <Link  to="/nosotros">
+                                <Link to="/nosotros">
                                     <Tab isActive={window.location.href.includes('nosotros')} titulo="Quienes Somos"/>
                                 </Link>
-                                <Link  to="/productos">
-                                    <Tab isActive={window.location.href.includes('productos') || window.location.href.includes('Productos')} titulo="Productos"/>
-                                </Link>
-                                <Link  to="/noticias">
+                                <div className="prodtab">
+                                    <Link to="/productos">
+                                        <Tab isActive={window.location.href.includes('productos') || window.location.href.includes('Productos')} titulo="Productos"/>
+                                    </Link>
+                                    <div className="proddrop">
+                                
+                                    </div>
+                                </div>
+                                
+                                <Link to="/noticias">
                                     <Tab isActive={window.location.href.includes('noticias')} titulo="Noticias"/>
                                 </Link>
-                                <Link  to="/contacto">
+                                <Link to="/contacto">
                                     <Tab isActive={window.location.href.includes('contacto')} titulo="Contactanos"/>
                                 </Link>
                             </div>
@@ -97,8 +103,9 @@ class Navbar extends React.Component {
                                 <CloseIcon className="closeicon" style={{color: '#636363', fontSize: 20}} onClick={this.showSearchbar}/>
                             </div>
                             <SearchIcon className={searchiconclasses} style={{color: '#636363', fontSize: 20}} onClick={this.showSearchbar}/>
+                            
                         </Hidden>
-        
+
                         <Hidden lgUp>
                             <SidenavTrigger click={this.state.sidenav}/>
                         </Hidden>
