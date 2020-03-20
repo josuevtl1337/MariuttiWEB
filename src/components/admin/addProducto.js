@@ -51,12 +51,13 @@ export default function SimpleModal(props) {
     setOpen(false);
   };
   const classesSelect = useStylesSelect();
-  const [subRubro, setSub] = React.useState('');
-  const [nombre, setNombre] = React.useState('');
-  const [subtitulo, setSubtitulo] = React.useState('');
-  const [descripcion, setDescripcion] = React.useState('');
-  const [enlace, setEnlace] = React.useState('');
-  const [file, setFile] = React.useState('');
+  const [subRubro , setSub] = React.useState('');
+  const [nombre , setNombre] = React.useState('');
+  const [subtitulo , setSubtitulo] = React.useState('');
+  const [descripcion , setDescripcion] = React.useState('');
+  const [enlace , setEnlace] = React.useState('');
+  const [file , setFile] = React.useState('');
+  const [oferta , setOferta] = React.useState(false);
 
   const handleChangeSub = event => {
     setSub(event.target.value);
@@ -78,6 +79,13 @@ export default function SimpleModal(props) {
   const handleFile = e =>{
     setFile(e.target.files[0]);
   }
+  const onClickOfertaHandler = e => {
+    if (oferta == false){
+      setOferta(true);  
+    }else {
+      setOferta(false);  
+    }
+  }
 
   const handleOnClick = e => {
     // console.log(nombre);
@@ -85,8 +93,9 @@ export default function SimpleModal(props) {
     // console.log("Descripcion:",descripcion);
     // console.log("Enlace:",enlace);
     // console.log("Imagen:",file);
-    // console.log(subRubro);
-    props.handleUploadProducto(nombre,subtitulo,descripcion,enlace,subRubro,file)(e);
+    // // console.log(subRubro);
+    props.handleUploadProducto(nombre,subtitulo,descripcion,enlace,subRubro,file,oferta)(e);
+    // console.log(oferta)
     setOpen(false);
   }
 
@@ -137,10 +146,11 @@ export default function SimpleModal(props) {
                 {/* Enlace */}
                 <TextField id="standard-basic" label="Enlace Youtbe" onChange={onChangeEnlace}/>
                 <FormControlLabel
-                  value="end"
+                  value={false}
                   control={<Switch color="primary" />}
                   label="Oferta"
                   labelPlacement="end"
+                  onClick={onClickOfertaHandler}
                 />
 
                 {/* {Imagen} */}

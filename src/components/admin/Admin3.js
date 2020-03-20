@@ -68,7 +68,7 @@ class Admin3 extends Component {
     }).then(()=>window.location.reload()) 
   }
     //Subiendo PRODUCTOS
-    handleUploadProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f) => (e) =>{
+    handleUploadProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f,oferta) => (e) =>{
       const file = f;
       const storageRef = firebase.storage().ref(`imagenes/${file.name}`);
       //pusheo mi archivo file dentro de mi BD
@@ -93,8 +93,11 @@ class Admin3 extends Component {
             descripcion:descripcion,
             enlace:enlace,
             sub_rubro: sub_rubro,
-            img: task.snapshot.metadata.fullPath
+            img: task.snapshot.metadata.fullPath,
+            off:oferta,
+            createdAt: firebase.database.ServerValue.TIMESTAMP
           };
+          
           const db = firebase.database();
           const dbRef = db.ref("Producto");
           const newPicture = dbRef.push();
@@ -137,8 +140,16 @@ class Admin3 extends Component {
  
   }
   componentDidMount(){
-    
     const db = firebase.database();
+    var Xmas95 = new Date();
+    var registro = Date.now();
+    var day = Xmas95.getDate();
+    var month = Xmas95.getMonth() + 1;
+    var year = Xmas95.getFullYear();
+    console.log("hoy es: ",day, month,year);
+    console.log(Xmas95);
+    console.log(Xmas95);
+    console.log(registro);
     //Importo todos los datos necesarios a variables de una sola vez.
     const importingData = () =>{
         const dbRefRubro = db.ref("Rubro");

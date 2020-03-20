@@ -51,9 +51,11 @@ const ProductoComponent = (props) =>{
                     {/* Productos */}
                     <Grid  className={classes.paper} item xs={12} md={12}>       
                        <h4>{search}</h4>
-                       {productosArray.map((item, i) => {                             
+                       {productosArray.map((item, i) => {   
+                                let fecha = new Date(item.createdAt);                        
                                 if(search == item.id){
                                     let imagen = item.img;
+                                    
                                     if (imagen) {
                                       var pathImagen = firebase
                                         .storage()
@@ -68,7 +70,8 @@ const ProductoComponent = (props) =>{
                                   }
                                     return (      
                                         <div>
-                                        <h2>nombre: {item.nombre}</h2>     
+                                        <h2>nombre: {item.nombre}</h2> 
+                                        <h2>date: {fecha.toString()}</h2>        
                                         <h2>subtitulo: {item.subtitulo}</h2>   
                                         <h2>descripcion: {item.descripcion}</h2>  
                                         <h2>enlace: {item.enlace}</h2>  
