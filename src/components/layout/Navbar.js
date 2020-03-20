@@ -98,8 +98,53 @@ class Navbar extends React.Component {
                                     <Link to="/productos">
                                         <Tab isActive={window.location.href.includes('productos') || window.location.href.includes('Productos')} titulo="Productos"/>
                                     </Link>
+
+                                    {/* Dropdown Productos */}
                                     <div className="proddrop">
-                                
+
+                                        
+                                        <ul className="drop-categorias-list">
+                                            <p className="drop-rubro">Máquinas y Herramientas</p>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <p className="drop-rubro">Obras y Construcción</p>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <p className="drop-rubro">Ferretería Industrial</p>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                            <li>asd</li>
+                                        </ul>
+
+                                        
+                                        
+
                                     </div>
                                 </div>
                                 
