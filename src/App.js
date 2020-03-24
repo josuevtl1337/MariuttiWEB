@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from "./components/layout/Navbar";
+import Navbar from "./components/layout/NavBarStateLess";
 import Sidenav from "./components/layout/Sidenav";
 import Backdrop from "./components/layout/Backdrop";
 import Footer from './components/layout/Footer.js'
@@ -12,15 +12,20 @@ import ProductoComponent from "./components/sections/productos/ProductoComponent
 import Contact from "./components/sections/contacto/Contact";
 import Admin from "./components/admin/Admin3";
 import AdminNav from "./components/admin/AdminNav";
+import Cfg from "./components/config/fbConfig"
+import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 // import fbConfig from "./components/config/fbConfig"
 // import firebase from "firebase/app";
+
+import { useSelector } from 'react-redux'
 
 
 class App extends Component {
 
   state = {
-    sidenavOpen : false,
-    busqueda : ""
+    sidenavOpen : true,
+    busqueda : "",
+    maquinas:[]
   };
   sidenavTriggerClickHandler = () => {
     this.setState((prevState) => {
@@ -34,18 +39,29 @@ class App extends Component {
   buscandoResultado = (param) =>{
     this.setState({busqueda:param})
   }
-  componentDidUpdate(){
 
-    console.log(this.state.busqueda)
-  }
+
   render(){
     let navbar;
     let backdrop;
     let sidenav;
     let adminnav;
+    let maquinas = [];
+    let cfg;
 
-    // let productosComponent =  <Productos busquedaResult={this.state.busqueda} />
 
+    const trayendoCategorias = (array1) => {
+      console.log(array1);
+      if(array1){
+        const arrayParse = Object.values(array1);
+        arrayParse.forEach(elemento => {
+          maquinas.push(elemento);
+        })
+      }
+    }
+
+   
+    cfg =  <Cfg trayendoCategorias={trayendoCategorias} />
     sidenav = <Sidenav itemClickHandler={this.sidenavTriggerClickHandler} show={this.state.sidenavOpen}/>
 
     if (this.state.sidenavOpen) {
@@ -58,12 +74,13 @@ class App extends Component {
       adminnav = <AdminNav />
       navbar = null;
     } else {
-      navbar = <Navbar sidenavClickHandler={this.sidenavTriggerClickHandler} buscando={this.buscandoResultado}/>
+      navbar = <Navbar sidenavClickHandler={this.sidenavTriggerClickHandler} buscando={this.buscandoResultado} maquinas={maquinas}/>
       adminnav = null
     }
 
     return (
       <BrowserRouter>
+        {cfg}
         {adminnav}
         {navbar}
         {sidenav}

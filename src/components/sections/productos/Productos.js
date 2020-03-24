@@ -42,6 +42,8 @@ const Productos = (props) => {
     console.log(r)
     if(sub_rubros){
         const categorias = Object.values(sub_rubros);
+        console.log(categorias)
+        console.log(sub_rubros)
         categorias.forEach(elemento => {
             if (elemento.rubro == "r1") {
                 maquinas.push([elemento.id, elemento.nombre])
@@ -51,6 +53,7 @@ const Productos = (props) => {
                 ferreteria.push(new Object([Object.values(elemento)]))
             }
         })
+        // props.trayendoCategorias(categorias);
     }
     if(productos){
         console.log(productos)

@@ -94,8 +94,9 @@ export default function SimpleModal(props) {
     // console.log("Enlace:",enlace);
     // console.log("Imagen:",file);
     // // console.log(subRubro);
-    props.handleUploadProducto(nombre,subtitulo,descripcion,enlace,subRubro,file,oferta)(e);
+    // props.handleUploadProducto(nombre,subtitulo,descripcion,enlace,subRubro,file,oferta)(e);
     // console.log(oferta)
+    console.log(props.sub_rubros);
     setOpen(false);
   }
 
