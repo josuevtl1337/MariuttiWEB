@@ -7,6 +7,7 @@
 
 .left{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -16,6 +17,31 @@
     -webkit-box-shadow: 1px 1px 3px 0px rgba(235,235,235,1);
     -moz-box-shadow: 1px 1px 3px 0px rgba(235,235,235,1);
     box-shadow: 1px 1px 3px 0px rgba(235,235,235,1);
+}
+
+.divline{
+    margin: 32px;
+    width: 420px;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.12);
+}
+
+.share-wrap{
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.share-icon{
+    filter: invert(60%);
+    transition: all 1s;
+    cursor: pointer;
+}
+
+.share-icon:hover{
+    filter: invert(0%);
 }
 
 .right{

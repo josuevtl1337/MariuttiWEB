@@ -33,17 +33,17 @@
 
 .fabGreen{
     background-color: #F2BC02;
-    width: 70px;
-    height: 40px;
+    width: 74px;
+    height: 35+
+    px;
     border-radius: 10px;
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow:
-    0 0px 1.4px rgba(0, 0, 0, 0.105),
-    0 0px 11px rgba(0, 0, 0, 0.21)
-    ;
+    -webkit-box-shadow: 1px 1px 3px 0px rgba(235,235,235,1);
+    -moz-box-shadow: 1px 1px 3px 0px rgba(235,235,235,1);
+    box-shadow: 1px 1px 3px 0px rgba(235,235,235,1);
     opacity: 0;
     transition: all 0.15s;
     
@@ -110,5 +110,5 @@
 
 .paper-style:hover .fabGreen{
     opacity: 1;
-    transform: translate(160px, 10px);
+    transform: translate(187px, 10px);
 }

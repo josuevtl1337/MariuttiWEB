@@ -148,7 +148,7 @@ class Navbar extends React.Component {
                                 </Link>
                                 <div className="prodtab">
                                     <Link to="/productos">
-                                        <Tab isActive={window.location.href.includes('productos') || window.location.href.includes('Productos')} titulo="Productos"/>
+                                        <Tab isActive={window.location.href.includes('producto') || window.location.href.includes('Producto')} titulo="Productos"/>
                                     </Link>
 
                                     {/* Dropdown Productos */} 
