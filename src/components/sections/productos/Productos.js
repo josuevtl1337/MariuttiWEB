@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react"
+import React, { Component, useState, useEffect  } from "react"
 import ReactDOM from 'react-dom';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
@@ -24,6 +24,15 @@ const Productos = (props) => {
     ])
 
     const [categoriaActual, setCategoriaActual] = useState("-M163WoG-kWq-0jDt1CJ");
+
+    // Similar to componentDidMount and componentDidUpdate:
+    useEffect(() => {
+        //si el resultado del dropdown es distinto a vacio lo busco
+        if(props.dropdownResult!=''){
+            setCategoriaActual(props.dropdownResult);      
+        }
+    });
+
     const [categoriaActualName, setCategoriaActualName] = useState("Aislantes");
     const [productoState, setProductoState] = useState(false);
 
@@ -60,12 +69,13 @@ const Productos = (props) => {
     if(productos){
         console.log(productos)
         re = Object.values(productos);
-        console.log(props.history);
     }
+
     const handleClick = (e,categoriaNombre) =>{
-        console.log(e,categoriaNombre)
+        props.cleanUp();
         setCategoriaActual(e);
         setCategoriaActualName(categoriaNombre);
+        console.log(categoriaActual)
     }
     //Cambiando el history
     const handlerOnClickProducto = (id) =>{
@@ -76,7 +86,6 @@ const Productos = (props) => {
     }
 
     return (
-
         <React.Fragment>
             {/* banner */}
             <div className="heroimg-small"/>

@@ -21,11 +21,11 @@ import { useSelector } from 'react-redux'
 
 
 class App extends Component {
-
   state = {
     sidenavOpen : true,
     busqueda : "",
-    maquinas:[]
+    maquinas:[],
+    dropdown:""
   };
   sidenavTriggerClickHandler = () => {
     this.setState((prevState) => {
@@ -39,6 +39,13 @@ class App extends Component {
   buscandoResultado = (param) =>{
     this.setState({busqueda:param})
   }
+  dropdownResultado = (param) =>{
+    this.setState({dropdown:param})
+  }
+  cleanUpDropdown = () =>{
+    this.setState({dropdown:''})
+  }
+
 
 
   render(){
@@ -74,7 +81,7 @@ class App extends Component {
       adminnav = <AdminNav />
       navbar = null;
     } else {
-      navbar = <Navbar sidenavClickHandler={this.sidenavTriggerClickHandler} buscando={this.buscandoResultado} maquinas={maquinas}/>
+      navbar = <Navbar sidenavClickHandler={this.sidenavTriggerClickHandler} buscando={this.buscandoResultado} dropdown={this.dropdownResultado}/>
       adminnav = null
     }
 
@@ -95,7 +102,7 @@ class App extends Component {
         </Switch>
         <Route
             path='/productos'
-            render={(props) => <Productos {...props} busquedaResult={this.state.busqueda} />}
+            render={(props) => <Productos {...props} dropdownResult={this.state.dropdown} cleanUp={this.cleanUpDropdown}/>}
         />
         <Route
             path='/busqueda'

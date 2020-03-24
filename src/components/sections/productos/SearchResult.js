@@ -37,10 +37,7 @@ const ProductoComponent = (props) =>{
     }
     if(productos){
         var searchresultSTR = props.busquedaResult;
-        console.log(searchresultSTR.toString());
-        console.log(productos);
         productosArray = Object.values(productos);
-        console.log(props.history);
     }
 
 
