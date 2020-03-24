@@ -8,10 +8,12 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 
+var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    maxWidth: 360,
+    // maxWidth: 500,
     backgroundColor: theme.palette.background.paper,
   },
   nested: {
@@ -30,7 +32,9 @@ export default function NestedList(props) {
   const classes = useStyles();
   const classes2 = useStyles2();
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
+
+  
 
   const handleClick = (e) => {
     setOpen(!open);
@@ -41,6 +45,7 @@ export default function NestedList(props) {
   };
 
   return (
+    
     <List
       component="nav"
       aria-labelledby="nested-list-subheader"
@@ -49,8 +54,7 @@ export default function NestedList(props) {
       //     Categorías
       //   </ListSubheader>
       // }
-      className={classes.root}
-      
+      className={classes.root}y
     >
       <ListItem button onClick={handleClick}>
         <ListItemText  primary={props.titulo} />

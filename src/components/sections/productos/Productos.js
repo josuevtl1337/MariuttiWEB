@@ -13,7 +13,9 @@ import ProductosCard from "./ProductoCard"
 import "./catalogoProductos.css"
 import { connect } from 'react-redux'
 
+
 const Productos = (props) => {
+
     //Hago la referencia para traer mis objetos Rubros, y Sub_Rubros
     useFirebaseConnect([
         { path: 'Rubro' },
@@ -79,14 +81,14 @@ const Productos = (props) => {
                 {/* Categorias  */}
                 <Grid container spacing={4}>
                     {/* Productos */}
-                    <Grid item lg={3} md={12}>       
+                    <Grid item xs={12} md={3}>       
                         <h4>Categorías</h4>
-                        <Divider/>
-                        <Drawer titulo="Construcción" style="" handler={handleClick} categorias={construccion}/>
+                        <Divider style={{marginBottom: 28}}/>
+                        <Drawer titulo="Construcción" handler={handleClick} categorias={construccion}/>
                         <Drawer titulo="Máquinas y Herramientas" handler={handleClick} categorias={maquinas}/>
                         <Drawer titulo="Ferretería Industrial" handler={handleClick} categorias={ferreteria}/>
                     </Grid>
-                    <Grid item lg={9} md={12}>
+                    <Grid item xs={12} md={9}>
                         <h4>{categoriaActualName}</h4>
                         <Divider/>
                         <div className="contenedor-catalogo">
