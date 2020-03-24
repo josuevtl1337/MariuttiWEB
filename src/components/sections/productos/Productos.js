@@ -10,6 +10,7 @@ import Drawer from './Drawer.js'
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 import ProductosCard from "./ProductoCard"
+import HeroImageSmall from "../../layout/HeroImageSmall"
 import "./catalogoProductos.css"
 import { connect } from 'react-redux'
 
@@ -88,7 +89,11 @@ const Productos = (props) => {
     return (
         <React.Fragment>
             {/* banner */}
-            <div className="heroimg-small"/>
+            {/* <div className="heroimg-small"/> */}
+            <HeroImageSmall 
+                title="Productos"
+                image='https://media.istockphoto.com/photos/set-of-hand-various-work-tools-on-grey-background-picture-id596042932'    
+            />
             <Container style={{zIndex: 100}}>
                 {/* Categorias  */}
                 <Grid container spacing={4}>

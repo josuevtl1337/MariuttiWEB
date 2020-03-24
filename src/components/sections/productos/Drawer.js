@@ -42,6 +42,7 @@ export default function NestedList(props) {
   };
   const handleClickDragon = (e,e2) => {
     props.handler(e,e2);
+    setOpen(!open)
   };
 
   return (
@@ -64,14 +65,11 @@ export default function NestedList(props) {
         <List component="div" disablePadding>
 
           {props.categorias.map((categoria) => 
-            <ListItem button className={classes.nested}>
-              <ListItemText onClick={()=>{handleClickDragon(categoria[0],categoria[1])}} className={classes2.primary} primary={categoria[1]} />
+            <ListItem button className={classes.nested} onClick={()=>{handleClickDragon(categoria[0],categoria[1])}}>
+              <ListItemText className={classes2.primary} primary={categoria[1]} />
             </ListItem>
           )}
-
-          {/* <ListItem button className={classes.nested}>
-            <ListItemText primary="Starred" />
-          </ListItem> */}
+          
         </List>
       </Collapse>
     </List>

@@ -12,16 +12,14 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import CloseIcon from '@material-ui/icons/Close';
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
-import MenuItem from '@material-ui/core/MenuItem';
-
 
 const NavBarStateLess = (props) => {
 
     useFirebaseConnect([
         { path: 'Sub_Rubro' }
     ])
+    
     const sub_rubros = useSelector(state => state.firebase.data.Sub_Rubro);
-    const [sidenav, setSidenav] = React.useState(props.sidenavClickHandler);
     const [busqueda, setBusqueda] = React.useState("");
     const [dropdown, setDropdown] = React.useState("");
     const [search, setSearch] = React.useState(false);
@@ -69,22 +67,16 @@ const NavBarStateLess = (props) => {
         // console.log(drop)
     };
     let tabwrapclasses
-    let searchbarclasses
     let searchiconclasses
-    let submitclasses
     let searchwrapclasses
 
     if (search == true) {
         tabwrapclasses = "tabs-wrapper hide";
-        // searchbarclasses = "searchbar";
         searchiconclasses = "searchicon hide";
-        // submitclasses = "submiticon";
         searchwrapclasses = "searchwrap"
     } else {
         tabwrapclasses = "tabs-wrapper";
-        // searchbarclasses = "searchbar hide";
         searchiconclasses = "searchicon";
-        // submitclasses = "submiticon hide";
         searchwrapclasses = "searchwrap hide"
 
     }
@@ -130,7 +122,7 @@ const NavBarStateLess = (props) => {
                             </Link>
                             <div className="prodtab">
                                 <Link to="/productos">
-                                    <Tab isActive={window.location.href.includes('productos') || window.location.href.includes('Productos')} titulo="Productos"/>
+                                    <Tab isActive={window.location.href.includes('producto') || window.location.href.includes('Producto')} titulo="Productos"/>
                                 </Link>
 
                                 {/* Dropdown Productos */} 
@@ -169,7 +161,7 @@ const NavBarStateLess = (props) => {
                     </Hidden>
 
                     <Hidden lgUp>
-                        <SidenavTrigger click={sidenav}/>
+                        <SidenavTrigger click={props.sidenavClickHandler}/>
                     </Hidden>
                     
                 </Container>

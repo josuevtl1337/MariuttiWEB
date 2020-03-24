@@ -10,6 +10,7 @@ import Productos from "./components/sections/productos/Productos";
 import SearchResult from "./components/sections/productos/SearchResult";
 import ProductoComponent from "./components/sections/productos/ProductoComponent";
 import Contact from "./components/sections/contacto/Contact";
+import Noticias from "./components/sections/noticias/Noticias";
 import Admin from "./components/admin/Admin3";
 import AdminNav from "./components/admin/AdminNav";
 import Cfg from "./components/config/fbConfig"
@@ -19,18 +20,22 @@ import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 
 import { useSelector } from 'react-redux'
 
-
 class App extends Component {
   state = {
-    sidenavOpen : true,
+    sidenavOpen : false,
     busqueda : "",
     maquinas:[],
     dropdown:""
   };
   sidenavTriggerClickHandler = () => {
-    this.setState((prevState) => {
-      return {sidenavOpen: !prevState.sidenavOpen}
-    })
+    // this.setState((prevState) => {
+    //   return {sidenavOpen: !prevState.sidenavOpen}
+    // })
+    if (this.state.sidenavOpen == false) {
+      this.setState({sidenavOpen: true})
+    } else {
+      this.setState({sidenavOpen: false})
+    }
   };
 
   backdropClickHandler = () => {
@@ -98,6 +103,7 @@ class App extends Component {
         {/* <Route path="/productos" component={productosComponent} />  */}
         <Route path="/producto" component={ProductoComponent} />
         <Route path="/contacto" component={Contact} />
+        <Route path="/noticias" component={Noticias} />
         <Route path="/admin" component={Admin} />
         </Switch>
         <Route

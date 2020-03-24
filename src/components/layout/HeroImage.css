@@ -74,6 +74,40 @@
     background-color: #1b469c;
 }
 
+/* Hero Image Chica */
+
+.heroimagesmall{
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(0px);
+}
+
+.textwrap-small{
+    width: 100%;
+    z-index: 200;
+    /* top: 120px; */
+    top: 100px;
+    height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.herotitle-small{
+    color: white;
+    width: 80%;
+    font-family: 'Roboto condensed';
+    font-size: 60px;
+    font-weight: 550;
+    /* text-transform: uppercase; */
+    margin: 20px auto;
+}
+
 @media only screen and (max-width: 1300px) {
     .heroimagewrap{
         /* width: auto;
