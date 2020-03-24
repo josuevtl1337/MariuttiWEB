@@ -11,7 +11,7 @@ const estilos = {
 };
 
 const backdrop = props => (
-    <div style={estilos} onClick={props.click}></div>
+    <div style={estilos} className="backdrop" onClick={props.click}></div>
 );
 
 export default backdrop
