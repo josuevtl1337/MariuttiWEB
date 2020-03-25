@@ -57,8 +57,8 @@ export default function MediaCard(props) {
         <i className="material-icons entericon">
           transit_enterexit
         </i>
-        
       </div>
+
       <div className="contentwrap">
         <p className="prodcardtitle">
          {props.titulo}
@@ -67,6 +67,7 @@ export default function MediaCard(props) {
           {result}
         </p>
       </div>
+      
     </div>
   );
 }
