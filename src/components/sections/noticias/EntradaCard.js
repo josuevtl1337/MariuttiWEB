@@ -12,12 +12,13 @@ const EntradaCard = (props) => {
                 <p className="entrada-cardtitle">
                     {props.title}
                 </p>
-                <p className="entrada-fecha">
+                <p className="entrada-date">
                     {props.date}
                 </p>
                 <p className="entrada-cardtext">
                     {props.text}
                 </p>
+                <a className="vermas" href="http://">Ver Más</a>
             </div>
         </div>
     )
