@@ -3,14 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
@@ -46,69 +42,33 @@ export default function SimpleModal(props) {
   const handleOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
   const classesSelect = useStylesSelect();
-  const [subRubro , setSub] = React.useState('');
   const [nombre , setNombre] = React.useState('');
-  const [subtitulo , setSubtitulo] = React.useState('');
   const [descripcion , setDescripcion] = React.useState('');
-  const [enlace , setEnlace] = React.useState('');
   const [file , setFile] = React.useState('');
-  const [oferta , setOferta] = React.useState(false);
 
-  const handleChangeSub = event => {
-    setSub(event.target.value);
-    console.log(subRubro);
-  };
-
-  const onChangeNombre = e => {
+  const onChangeTitulo = e => {
     setNombre(e.target.value);
-  }
-  const onChangeSubtitulo = e => {
-    setSubtitulo(e.target.value);
   }
   const onChangeDescripcion = e => {
     setDescripcion(e.target.value);
   }
-  const onChangeEnlace = e => {
-    setEnlace(e.target.value);
-  }
   const handleFile = e =>{
     setFile(e.target.files[0]);
   }
-  const onClickOfertaHandler = e => {
-    if (oferta == false){
-      setOferta(true);  
-    }else {
-      setOferta(false);  
-    }
-  }
 
   const handleOnClick = e => {
-    // console.log(nombre);
-    // console.log(subtitulo);
-    // console.log("Descripcion:",descripcion);
-    // console.log("Enlace:",enlace);
-    // console.log("Imagen:",file);
-    // // console.log(subRubro);
-    props.handleUploadProducto(nombre,subtitulo,descripcion,enlace,subRubro,file,oferta)(e);
-    // console.log(oferta)
     // console.log(props.sub_rubros);
+    props.handleUploadNoticia(nombre,descripcion,file)
     setOpen(false);
   }
 
-  const retornando = props.sub_rubros.map((item, key) => 
-      <MenuItem value={item.id}  key={key}>
-        {item.nombre}
-      </MenuItem>
-  );
-
   return (
     <React.Fragment>
-      <Fab size="small" color="primary" aria-label="add" type="button" onClick={handleOpen}>
+      <Fab size="small" color="secondary" aria-label="add" type="button" onClick={handleOpen}>
       <AddIcon />
       </Fab>
         <Modal
@@ -120,40 +80,11 @@ export default function SimpleModal(props) {
           <Container className={classes.paper}>
           <div className="container">
                 {/* Sub-Rubro */}
-                <FormControl className={classesSelect.formControl}>
-
-                  <InputLabel id="subRubros">Sub-Rubros</InputLabel>
-
-                  <Select
-                    labelId="subRubroId"
-                    id="sub_rubro"
-                    value={subRubro ? subRubro : " "}
-                    onChange={handleChangeSub}
-                  >           
-                  {retornando}</Select>            
-                  {/* <MenuItem value={3}>Ferretería Industrial</MenuItem>
-                  <MenuItem value={4}>Herramientas Eléctricas</MenuItem>
-                  <MenuItem value={5}>Herramientas Explosión</MenuItem>
-                  <MenuItem value={6}>Herramientas Neumáticas</MenuItem>
-                  <MenuItem value={7}>Indumentaria Y Seguridad</MenuItem> */}
-            
-             
-                {/* Nombre Producto */}
-                <TextField id="standard-basic" label="Nombre Producto" onChange={onChangeNombre}/>
-                {/* Subtitulo */}
-                <TextField id="standard-basic" label="Subtitulo" onChange={onChangeSubtitulo}/>
+                <FormControl className={classesSelect.formControl}>      
+                {/* Nombre Noticia */}
+                <TextField id="standard-basic" label="Titulo Noticia" onChange={onChangeTitulo}/>
                 {/* Descripcion */}
                 <TextField id="standard-basic" label="Descripción" onChange={onChangeDescripcion}/>
-                {/* Enlace */}
-                <TextField id="standard-basic" label="Enlace Youtbe" onChange={onChangeEnlace}/>
-                <FormControlLabel
-                  value={false}
-                  control={<Switch color="primary" />}
-                  label="Oferta"
-                  labelPlacement="end"
-                  onClick={onClickOfertaHandler}
-                />
-
                 {/* {Imagen} */}
                 <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={handleFile} />
                 <label  htmlFor="icon-button-file">
@@ -161,8 +92,6 @@ export default function SimpleModal(props) {
                     <PhotoCamera />
                   </IconButton>
                 </label>
-  
-    
                 {/* Boton de enviar */}
                 <Button variant="contained" color="primary" onClick={handleOnClick}>
                   Enviar

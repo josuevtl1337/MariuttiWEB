@@ -2,8 +2,23 @@ import React from 'react'
 import Container from '@material-ui/core/Container';
 import HeroImageSmall from "../../layout/HeroImageSmall"
 import EntradaCard from './EntradaCard'
+import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
+import { useSelector } from 'react-redux'
 
 const Noticias = () => {
+    useFirebaseConnect([
+        { path: 'Noticia' }
+    ])
+    var noticiasArray = [];
+    const noticias = useSelector(state => state.firebase.data.Noticia);
+    // Show message while Rubros y Sub_Rubros are loading
+    if ( !isLoaded(noticias)) {
+        return <div>Cargando...</div>
+    }
+    if(isLoaded(noticias)){
+        noticiasArray = Object.values(noticias);
+    }
+
     return(
         <React.Fragment>
 
@@ -16,18 +31,31 @@ const Noticias = () => {
 
                 {/* Listado de todas las noticias */}
                 <div className="listado-entradas">
-                    <EntradaCard
+                    {/* <EntradaCard
                         img="https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/blog-post-2.jpg"
                         title="Soft Wood Examples"
                         date="24 de Mayo, 2020"
                         text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna liqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
-                    />
-                    <EntradaCard
+                    /> */}
+                    {noticiasArray.map((item, i) => {                             
+                        return (
+                            <div>
+                                <EntradaCard                                      
+                                    img={item.img}
+                                    title={item.nombre}
+                                    date={item.createdAt}
+                                    text={item.descripcion}
+                                    key={i}
+                                />   
+                            </div>                                                                     
+                        );                                                       
+                    })}
+                    {/* <EntradaCard
                         img="https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/blog-post-3.jpg"
                         title="Laminate Flooring Ideas"
                         date="25 de mayo, 2020"
                         text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna liqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
-                    />
+                    /> */}
                 </div>
                 
                 

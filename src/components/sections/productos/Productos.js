@@ -45,10 +45,7 @@ const Productos = (props) => {
     const ferreteria = [];
     var re = [];
 
-    // Show message while Rubros y Sub_Rubros are loading
-    if ( !isLoaded(rubros) && !isLoaded(sub_rubros) && !isLoaded(productos)  ) {
-        return <div>Cargando...</div>
-    }
+
 
     const r = Object.values(rubros);
     console.log(r)

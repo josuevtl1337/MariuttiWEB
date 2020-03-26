@@ -63,6 +63,8 @@ state={
             </TreeItem>
             <TreeItem onClick={()=>{handleOnClick("Producto")}} nodeId="3" label="PRODUCTO">
             </TreeItem>
+            <TreeItem onClick={()=>{handleOnClick("Noticias")}} nodeId="4" label="NOTICIAS">
+            </TreeItem>
           </TreeView>    
         );
       }

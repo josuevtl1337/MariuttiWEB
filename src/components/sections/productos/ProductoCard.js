@@ -1,7 +1,5 @@
 import  React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Balde from "./taladroX.jpg"
 import './ProductoCard.css'
 import Fab from '@material-ui/core/Fab';
 import TransitEnterexitIcon from '@material-ui/icons/TransitEnterexit';

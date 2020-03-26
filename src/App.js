@@ -13,7 +13,7 @@ import Contact from "./components/sections/contacto/Contact";
 import Noticias from "./components/sections/noticias/Noticias";
 import Admin from "./components/admin/Admin3";
 import AdminNav from "./components/admin/AdminNav";
-import Cfg from "./components/config/fbConfig"
+import Cfg from "./components/config/fbConfig";
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 // import fbConfig from "./components/config/fbConfig"
 // import firebase from "firebase/app";
@@ -48,7 +48,7 @@ class App extends Component {
     this.setState({dropdown:param})
   }
   cleanUpDropdown = () =>{
-    this.setState({dropdown:''})
+      this.setState({dropdown:''})
   }
 
 
