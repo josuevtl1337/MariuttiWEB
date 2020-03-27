@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import './Home.css'
 import HomeDivider from './HomeDivider.js'
 import HomeCard from './HomeCard.js'
+import EntradaMini from './EntradaMini'
 import HeroImage from '../../layout/HeroImage'
 import Container from '@material-ui/core/Container'
 import AtencionIcon from '../../../visuals/mail.svg'
@@ -16,18 +17,25 @@ import Parallax from 'react-rellax'
 
 const Home = () => {
     useFirebaseConnect([
-        { path: 'Rubro' },
-        { path: 'Sub_Rubro' }
+        { path: 'Noticia' }
     ])
-    const rubros = useSelector(state => state.firebase.data.Rubro)
-    const sub_rubros = useSelector(state => state.firebase.ordered.Sub_Rubro)
-    // Show message while todos are loading
-    if (!isLoaded(rubros)) {
-        return <div>Loading...</div>
-    };
+    var noticiasArray = [];
+    var reversed=[];
+    var onlythree = [];
+    
+    const noticias = useSelector(state => state.firebase.data.Noticia);
 
-    const r = Object.values(rubros)
-    r.forEach(elemento => console.log(elemento.id))
+
+    // Show message while Rubros y Sub_Rubros are loading
+    if ( !isLoaded(noticias)) {
+        return <div>Cargando...</div>
+    }
+    if(isLoaded(noticias)){
+        noticiasArray = Object.values(noticias);
+        //Reversed para que los mapee por el ultimo cargado y luego mapeo los ultimos 3 con slice (crotada?)
+        reversed = noticiasArray.reverse();
+        onlythree = reversed.slice(0,3);
+    }
 
     return (
         <div className="container">
@@ -79,8 +87,42 @@ const Home = () => {
 
                 <HomeDivider title="Productos Destacados" />
                 <HomeDivider title="Últimas Noticias" />
+                <div className="noticias-inicio">
+
+                {onlythree.map((item, i) => {                             
+                        return (
+                            <EntradaMini                                      
+                                img={item.img}
+                                title={item.nombre}
+                                date={item.createdAt}
+                                text={item.descripcion}
+                                key={i}
+                            />                                                                  
+                        );                                                       
+                    })}  
+                   
+                    {/* <EntradaMini
+                        img='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/blog-post-3.jpg'
+                        title='Laminate Flooring Ideas'
+                        text='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna liqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque '
+                        key='3'
+                    />
+
+                    <EntradaMini
+                        img='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/blog-post-9.jpg'
+                        title='Gallery Of Scafolding'
+                        text='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna liqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque '
+                        key='4'
+                    />
+
+                    <EntradaMini
+                        img='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/blog-post-12.jpg'
+                        title='Obreros Trabajando'
+                        text='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna liqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque '
+                        key='5'
+                    /> */}
+                </div>
                 <div style={{height:'400vh', width:'100%'}}></div>
-                  
             </Container>
             
         </div>
