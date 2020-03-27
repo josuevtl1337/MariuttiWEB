@@ -13,6 +13,7 @@ import AddSubRubro from "./addSubRubro";
 import AddProducto from "./addProducto";
 import AddNoticia from "./addNoticia";
 import EditProducto from "./EditProducto";
+import EditNoticia from "./EditNoticia";
 import Loading from "./Loading";
 //Botones
 import Button from '@material-ui/core/Button';
@@ -33,9 +34,13 @@ import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
+//Progess
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 class Admin3 extends Component { 
   state = {
     loading:true,
+    loadingPic:true,
     data:[],
     Enlace:{},
     Rubro:[],
@@ -184,6 +189,16 @@ class Admin3 extends Component {
         // }) 
  
   }
+  //EDITANDO NOTICIAS
+  handleEditNoticia = (nombre,descripcion,id) =>{
+    const db = firebase.database();
+    const dbRef = db.ref("Noticia");
+    const productoRef = dbRef.child(id)
+    productoRef.update({
+      "nombre": nombre,
+      "descripcion":descripcion
+    }).then(()=>window.location.reload());
+}
   componentDidMount(){
     const db = firebase.database();
     var Xmas95 = new Date();
@@ -240,6 +255,24 @@ class Admin3 extends Component {
       console.log('pokemons state has changed.',prevState.Producto)
       
     }
+  }
+  importingImg = (img) =>{
+    let imagen = img;
+    if (imagen) {
+      var pathImagen = firebase
+        .storage()
+        .ref(imagen)
+        .getDownloadURL()
+        .then(url => {
+          this.setState({
+            url,
+            loadingPic:false
+          });
+        })
+        .catch(error => {
+          console.log(error.message);
+        });
+    } 
   }
   render(){ 
     console.log(this.props)
@@ -318,7 +351,7 @@ class Admin3 extends Component {
                               }, 1000)
                             }),
                         }}
-                        title="Sub_Rubro/"
+                        title="Sub_Rubros/"
               />   
               </Grid>      
               </Grid>
@@ -365,7 +398,7 @@ class Admin3 extends Component {
                           }
                         ]}
                         data={this.state.Rubro}
-                        title="Rubro/"
+                        title="Rubros/"
               />   
               </Grid>      
               </Grid>
@@ -461,37 +494,33 @@ class Admin3 extends Component {
                               )
                             },
                           },
-                          {
+                        {
                           icon: 'account_circle',
-                          tooltip: 'Ver Imagen',
-                          render: rowData => {   
-                            let imagen = rowData.img;
-                            var img = "https://storage.googleapis.com/support-forums-api/attachment/thread-6219249-11716624739372349952.png";
-                            if (imagen) {
-                              var pathImagen = firebase
-                                .storage()
-                                .ref(imagen)
-                                .getDownloadURL()
-                                .then(url => {
-                                  // this.setState({ url }); 
-                                  img = url;                             
-                                })
-                                .catch(error => {
-                                  console.log(error.message);
-                                });
-                                return (
-                                  <iframe
-                                      width="100%"
-                                      height="315"
-                                      src={img}
-                                      frameborder="0"
-                                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                      allowfullscreen
-                                    />
-                                )
-                            }                      
-                          },
-                        },      
+                          tooltip: 'Ver Imagen',                        
+                          render: rowData => {
+                            let imagen = rowData.img;                                
+                            this.importingImg(imagen);
+                            if(this.state.loadingPic==true){
+                              return(
+                                <CircularProgress />
+                              )
+                            }else{
+                              return(
+                                <iframe
+                                  width="100%"
+                                  height="315"
+                                  src={this.state.url}
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                  allowfullscreen
+                                />
+                              );
+                              this.setState({
+                                loadingPic:true
+                              });
+                            }                                                                         
+                          }                      
+                        },     
                         ]}
                         components={{
                           Action: props => {
@@ -509,7 +538,7 @@ class Admin3 extends Component {
                           }                                                       
                           }                   
                         }}
-                        title="Producto/"
+                        title="Productos/"
               />   
               </Grid>      
               </Grid>
@@ -525,6 +554,11 @@ class Admin3 extends Component {
               <Grid item xs={9} >
               <MaterialTable
                       actions={[
+                        {
+                          icon: 'save',
+                          tooltip: 'Save User',
+                          // onClick: (event, rowData) => alert("You saved " + rowData.name)
+                        },
                         {
                           icon: 'delete',
                           tooltip: 'Borrar Producto',
@@ -574,9 +608,9 @@ class Admin3 extends Component {
                         columns={[
                           { title: 'Titulo', field: 'nombre' },
                           { title: 'Descripcion', field: 'descripcion',
-                            cellStyle:{width:200,minWidth:200},
-                            headerStlye:{width:200,minWidth:200},
-                            hidden:true
+                            cellStyle:{minWidth:500},
+                            headerStlye:{minWidth:500},
+                            // hidden:true
                           },                    
                         ]}
                         
@@ -618,7 +652,7 @@ class Admin3 extends Component {
                           Action: props => {
                             if(props.action.icon === 'save'){
                               return(
-                              <EditProducto sub_rubros={this.state.Sub_Rubro} handleEditProducto={this.handleEditProducto} datosProductos={props}/>        
+                              <EditNoticia handleEditNoticia={this.handleEditNoticia} datosNoticia={props}/>        
                               )
                             }
                             if(props.action.icon === 'delete'){
