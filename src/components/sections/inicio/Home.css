@@ -38,3 +38,10 @@
 .aboutbtn:hover{
     background-color: #1b469c;
 }
+
+.noticias-inicio{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

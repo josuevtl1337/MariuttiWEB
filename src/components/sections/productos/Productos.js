@@ -47,8 +47,11 @@ const Productos = (props) => {
 
 
 
-    const r = Object.values(rubros);
-    console.log(r)
+    if(rubros){
+        const r = Object.values(rubros);
+        console.log(r)
+    }
+    
     if(sub_rubros){
         const categorias = Object.values(sub_rubros);
         console.log(categorias)

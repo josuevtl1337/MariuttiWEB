@@ -5,7 +5,7 @@ import "firebase/firebase-storage";
 import firebase from "firebase/app"
 
 
-export default function EntradaCard  (props) {
+export default function EntradaCard (props) {
 
     const [url, setUrl] = React.useState('');
 
@@ -31,11 +31,11 @@ export default function EntradaCard  (props) {
         .catch(error => {
           console.log(error.message);
         });
-  }
+    }
+
     return(
         <div className="entradacard">
             <div className="entradacard-imgwrap">
-                {/* <img src={"https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/blog-post-2.jpg"} className="entradacard-img"/> */}
                 <img src={url} className="entradacard-img"/>
             </div>
 
@@ -43,13 +43,8 @@ export default function EntradaCard  (props) {
                 <p className="entrada-cardtitle">
                     {props.title}
                 </p>
-<<<<<<< HEAD
-                <p className="entrada-fecha">
-                    {fechaParseada}
-=======
                 <p className="entrada-date">
-                    {props.date}
->>>>>>> 5f890188c6c21fd8a2f044639547261b057e2c40
+                    {fechaParseada}
                 </p>
                 <p className="entrada-cardtext">
                     {props.text}

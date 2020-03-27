@@ -49,7 +49,7 @@ const NavBarStateLess = (props) => {
     }
     const closeDragon = () => {
         setSearch(false);
-        props.history.push("/productos");
+        // props.history.push("/productos");
     }
     const handleOnSubmitDragon = e => {
         setSearch(false);
