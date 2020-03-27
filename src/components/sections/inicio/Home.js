@@ -6,6 +6,7 @@ import HomeDivider from './HomeDivider.js'
 import HomeCard from './HomeCard.js'
 import EntradaMini from './EntradaMini'
 import HeroImage from '../../layout/HeroImage'
+import ProductoMini from './ProductoMini'
 import Container from '@material-ui/core/Container'
 import AtencionIcon from '../../../visuals/mail.svg'
 import ConstIcon from '../../../visuals/wheelbarrow-y.svg'
@@ -86,42 +87,51 @@ const Home = () => {
                 </div>
 
                 <HomeDivider title="Productos Destacados" />
+
+                    <div className="destacados-inicio">
+
+                        <ProductoMini
+                            url='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/shop-img-1-635x755.jpg'
+                            titulo="Electric Drill"
+                            categoria="Drills"
+                            key='1'
+                        />
+                        <ProductoMini
+                            url='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/shop-img-1-635x755.jpg'
+                            titulo="Electric Drill"
+                            categoria="Drills"
+                            key='1'
+                        />
+                        <ProductoMini
+                            url='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/shop-img-1-635x755.jpg'
+                            titulo="Electric Drill"
+                            categoria="Drills"
+                            key='1'
+                        />
+                        <ProductoMini
+                            url='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/shop-img-1-635x755.jpg'
+                            titulo="Electric Drill"
+                            categoria="Drills"
+                            key='1'
+                        />
+
+                    </div>
+
                 <HomeDivider title="Últimas Noticias" />
-                <div className="noticias-inicio">
+                    <div className="noticias-inicio">
 
-                {onlythree.map((item, i) => {                             
-                        return (
-                            <EntradaMini                                      
-                                img={item.img}
-                                title={item.nombre}
-                                date={item.createdAt}
-                                text={item.descripcion}
-                                key={i}
-                            />                                                                  
-                        );                                                       
-                    })}  
-                   
-                    {/* <EntradaMini
-                        img='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/blog-post-3.jpg'
-                        title='Laminate Flooring Ideas'
-                        text='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna liqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque '
-                        key='3'
-                    />
-
-                    <EntradaMini
-                        img='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/blog-post-9.jpg'
-                        title='Gallery Of Scafolding'
-                        text='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna liqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque '
-                        key='4'
-                    />
-
-                    <EntradaMini
-                        img='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/blog-post-12.jpg'
-                        title='Obreros Trabajando'
-                        text='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna liqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque '
-                        key='5'
-                    /> */}
-                </div>
+                    {onlythree.map((item, i) => {                             
+                            return (
+                                <EntradaMini                                      
+                                    img={item.img}
+                                    title={item.nombre}
+                                    date={item.createdAt}
+                                    text={item.descripcion}
+                                    key={i}
+                                />                                                                  
+                            );                                                       
+                        })} 
+                    </div>
                 <div style={{height:'400vh', width:'100%'}}></div>
             </Container>
             

@@ -1,8 +1,6 @@
 import  React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import './ProductoCard.css'
-import Fab from '@material-ui/core/Fab';
-import TransitEnterexitIcon from '@material-ui/icons/TransitEnterexit';
+import '../productos/ProductoCard.css'
 //Importar el storage
 import "firebase/firebase-storage";
 import firebase from "firebase/app"
@@ -45,9 +43,9 @@ export default function MediaCard(props) {
   // var result = props.subtitulo.substring(0, 80) + '...';
 
   return (
-    <div className="paper-style">
+    <div className="paper-style mini">
       <div className="imgwrap">
-        <img src={url} className="prodimg"/>
+        <img src='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/shop-img-1-635x755.jpg' className="prodimg"/>
       </div>
       
       <div className="fabGreen">
@@ -57,12 +55,12 @@ export default function MediaCard(props) {
         </i>
       </div>
 
-      <div className="contentwrap">
-        <p className="prodcardtitle">
+      <div className="contentwrap mini">
+        <p className="prodcardtitle mini">
          {props.titulo}
         </p>
-        <p className="prodcardsub">
-          {props.subtitulo}
+        <p className="prodcard-cat">
+          {props.categoria}
         </p>
       </div>
       
