@@ -11,6 +11,7 @@ import SearchResult from "./components/sections/productos/SearchResult";
 import ProductoComponent from "./components/sections/productos/ProductoComponent";
 import Contact from "./components/sections/contacto/Contact";
 import Noticias from "./components/sections/noticias/Noticias";
+import Entrada from "./components/sections/noticias/Entrada";
 import Admin from "./components/admin/Admin3";
 import AdminNav from "./components/admin/AdminNav";
 import Cfg from "./components/config/fbConfig";
@@ -104,6 +105,7 @@ class App extends Component {
         <Route path="/producto" component={ProductoComponent} />
         <Route path="/contacto" component={Contact} />
         <Route path="/noticias" component={Noticias} />
+        <Route path="/entrada" component={Entrada} />
         <Route path="/admin" component={Admin} />
         </Switch>
         <Route
