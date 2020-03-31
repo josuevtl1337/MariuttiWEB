@@ -28,9 +28,10 @@ const Productos = (props) => {
 
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
-        //si el resultado del dropdown es distinto a vacio lo busco
+        //si el resultado del dropdown es distinto a vacio lo seteo
         if(props.dropdownResult!=''){
-            setCategoriaActual(props.dropdownResult);      
+            setCategoriaActual(props.dropdownResult);    
+            setCategoriaActualName(props.dropdownResultName);  
         }
     });
 
@@ -44,8 +45,6 @@ const Productos = (props) => {
     const construccion = [];
     const ferreteria = [];
     var re = [];
-
-
 
     if(rubros){
         const r = Object.values(rubros);

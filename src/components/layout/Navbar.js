@@ -14,7 +14,7 @@ import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 import MenuItem from '@material-ui/core/MenuItem';
 
-
+//ESTE NO SE ESTA RENDEREANDO EN CAMBIO BUSCAR NAVBARSTATELESS.JS
 class Navbar extends React.Component {
     // const [tabIndex, setTabIndex] = React.useState(0);
     constructor(props) {
@@ -73,9 +73,9 @@ class Navbar extends React.Component {
             searchwrapclasses = "searchwrap hide"
 
         }
-        const retornando = this.props.maquinas.map((elemento) => 
-        <ul>{elemento.nombre}</ul>
-        );
+        // const retornando = this.props.maquinas.map((elemento) => 
+        // <ul>{elemento.nombre}</ul>
+        // );
 
         const SimpleList = () => (
             <ul>
@@ -92,34 +92,6 @@ class Navbar extends React.Component {
                 <li key={i}>{this.props.maquinas[i]}</li>
             );
         }
-
-
-        // useFirebaseConnect([
-        //     { path: 'Sub_Rubro' }
-        // ]);
-        // const sub_rubros = useSelector(state => state.firebase.data.Sub_Rubro) 
-        // const maquinas = [];
-        // const construccion = [];
-        // const ferreteria = [];
-        // if(sub_rubros){
-        //     console.log(sub_rubros);
-        //     const categorias = Object.values(sub_rubros);
-        //     categorias.forEach(elemento => {
-        //         if (elemento.rubro == "r1") {
-        //             maquinas.push([elemento.id, elemento.nombre])
-        //         } else if (elemento.rubro == "r2") {
-        //             construccion.push([elemento.id, elemento.nombre])
-        //         } else {
-        //             ferreteria.push(new Object([Object.values(elemento)]))
-        //         }
-        //     })
-        // }
-        // const retornandoConstruccion = construccion.map((item, key) => 
-        // <li value={item.id} key={key}>{item.nombre}</li>
-        // );
-        // const retornandoFerreteria = ferreteria.map((item, key) => 
-        // <li value={item.id} key={key}>{item.nombre}</li>
-        // );
 
         return (
             <React.Fragment>
@@ -154,43 +126,13 @@ class Navbar extends React.Component {
                                     {/* Dropdown Productos */} 
                                     <div className="proddrop">
                                         <ul className="drop-categorias-list">
-                                            <p className="drop-rubro">Máquinas y Herramientas</p>
-                                            {/* <div>{array}</div>  */}
+                                            <p className="drop-rubro">Máquinas y Herramientas</p>             
                                             <div>
                                             {this.props.maquinas.map((item, index) => (
                                                 <li key={index}>{item.nombre}</li>
                                             ))}
                                             </div>
-                                            {/*<SimpleList/>  
-                                            {retornando}                             */}
-                                            {/* <p className="drop-rubro">Obras y Construcción</p>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <p className="drop-rubro">Ferretería Industrial</p>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li>
-                                            <li>asd</li> */}
+                                           
                                         </ul>                          
                                     </div>
                                 </div>

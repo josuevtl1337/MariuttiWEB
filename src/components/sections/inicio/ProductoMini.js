@@ -45,7 +45,7 @@ export default function MediaCard(props) {
   return (
     <div className="paper-style mini">
       <div className="imgwrap">
-        <img src='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/shop-img-1-635x755.jpg' className="prodimg"/>
+        <img src={url} className="prodimg"/>
       </div>
       
       <div className="fabGreen">
@@ -60,7 +60,7 @@ export default function MediaCard(props) {
          {props.titulo}
         </p>
         <p className="prodcard-cat">
-          {props.categoria}
+          {props.subtitulo}
         </p>
       </div>
       

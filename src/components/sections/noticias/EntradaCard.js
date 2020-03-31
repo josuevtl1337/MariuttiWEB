@@ -43,7 +43,7 @@ export default function EntradaCard (props) {
                 <p className="entrada-cardtitle">
                     {props.title}
                 </p>
-                <p className="entrada-fecha">
+                <p className="entrada-date">
                     {fechaParseada}
                 </p>
                 <p className="entrada-cardtext">

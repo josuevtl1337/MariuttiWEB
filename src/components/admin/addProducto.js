@@ -147,7 +147,7 @@ export default function SimpleModal(props) {
                 {/* Enlace */}
                 <TextField id="standard-basic" label="Enlace Youtbe" onChange={onChangeEnlace}/>
                 <FormControlLabel
-                  value={false}
+                  checked={oferta}
                   control={<Switch color="primary" />}
                   label="Oferta"
                   labelPlacement="end"

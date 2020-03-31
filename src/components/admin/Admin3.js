@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import MaterialTable from 'material-table'
 import Catalogo from './ListaRubros'
 import Grid from '@material-ui/core/Grid';
-import firebase from "firebase/app"
 import "firebase/database";
 import "./admin.css"
 //Importar el storage
 import "firebase/firebase-storage";
+import firebase from "firebase/app"
 //Botones "ADD"
 import AddRubro from "./addRubro";
 import AddSubRubro from "./addSubRubro";
@@ -15,6 +15,7 @@ import AddNoticia from "./addNoticia";
 import EditProducto from "./EditProducto";
 import EditNoticia from "./EditNoticia";
 import Loading from "./Loading";
+import ModalPic from "./ModalPic"
 //Botones
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
@@ -33,6 +34,7 @@ import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ImageRoundedIcon from '@material-ui/icons/ImageRounded';
 
 //Progess
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -168,7 +170,7 @@ class Admin3 extends Component {
     );
   }  
   //EDITANDO PRODUCTOS
-  handleEditProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f,id) =>{
+  handleEditProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,off,f,id) =>{
         const db = firebase.database();
         const dbRef = db.ref("Producto");
         const productoRef = dbRef.child(id)
@@ -177,6 +179,7 @@ class Admin3 extends Component {
           "subtitulo":subtitulo,
           "descripcion":descripcion,
           "enlace":enlace,
+          "off":off,
           "sub_rubro": sub_rubro
         }).then(()=>window.location.reload());
         // newPicture.update(record).then(()=>{
@@ -456,6 +459,11 @@ class Admin3 extends Component {
                               }, 1000)
                             })
                           }
+                        },
+                        {
+                          icon:'add',
+                          tooltip: 'Save User',
+                          onClick: (event, rowData) => alert("You saved " + rowData.name)
                         }
                       ]}
                       options={{
@@ -493,34 +501,32 @@ class Admin3 extends Component {
                                 />
                               )
                             },
-                          },
-                        {
-                          icon: 'account_circle',
-                          tooltip: 'Ver Imagen',                        
-                          render: rowData => {
-                            let imagen = rowData.img;                                
-                            this.importingImg(imagen);
-                            if(this.state.loadingPic==true){
-                              return(
-                                <CircularProgress />
-                              )
-                            }else{
-                              return(
-                                <iframe
-                                  width="100%"
-                                  height="315"
-                                  src={this.state.url}
-                                  frameborder="0"
-                                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                  allowfullscreen
-                                />
-                              );
-                              this.setState({
-                                loadingPic:true
-                              });
-                            }                                                                         
-                          }                      
-                        },     
+                          }
+                        // {
+                        //   icon: 'account_circle',
+                        //   tooltip: 'Ver Imagen',                        
+                        //   render: rowData => {
+                        //     let imagen = rowData.img;                                
+                        //     this.importingImg(imagen);
+                        //     console.log(this.state.url);
+                        //     if(this.state.loadingPic==true){
+                        //       return(
+                        //         <CircularProgress />
+                        //       )
+                        //     }else{
+                        //       return(
+                        //         <iframe
+                        //           width="100%"
+                        //           height="315"
+                        //           src={this.state.url}
+                        //           frameborder="0"
+                        //           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        //           allowfullscreen
+                        //         />
+                        //       );
+                        //     }                                                                         
+                        //   }                      
+                        // },     
                         ]}
                         components={{
                           Action: props => {
@@ -535,7 +541,12 @@ class Admin3 extends Component {
                                   <DeleteIcon fontSize="small" />
                                 </IconButton>
                               )
-                          }                                                       
+                            }
+                            if(props.action.icon === 'add'){
+                              return(
+                                <ModalPic file={props.data}/>
+                              )
+                            }    
                           }                   
                         }}
                         title="Productos/"

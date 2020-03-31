@@ -49,10 +49,12 @@ export default function SimpleModal(props) {
   const handleOpen = () => {
     setOpen(true);
     //Seteo los props en mi estado local
+    console.log(props.datosProductos.data.off);
     setNombre(props.datosProductos.data.nombre); 
     setSubtitulo(props.datosProductos.data.subtitulo); 
     setDescripcion(props.datosProductos.data.descripcion); 
     setSub(props.datosProductos.data.sub_rubro);
+    setOff(props.datosProductos.data.off);
     setEnlace(props.datosProductos.data.enlace);
   };
 
@@ -65,6 +67,7 @@ export default function SimpleModal(props) {
   const [subtitulo, setSubtitulo] = React.useState('');
   const [descripcion, setDescripcion] = React.useState('');
   const [enlace, setEnlace] = React.useState('');
+  const [off, setOff] = React.useState('');
   const [file, setFile] = React.useState('');
 
   const handleChangeSub = event => {
@@ -87,6 +90,13 @@ export default function SimpleModal(props) {
   const handleFile = e =>{
     setFile(e.target.files[0]);
   }
+  const onClickOfertaHandler = e => {
+    if (off == false){
+      setOff(true);  
+    }else {
+      setOff(false);  
+    }
+  }
 
   const handleOnClick = e => {
     // console.log(nombre);
@@ -96,7 +106,7 @@ export default function SimpleModal(props) {
     // console.log("Imagen:",file);
     // console.log(subRubro);
     // console.log(props.datosProductos.data);
-    props.handleEditProducto(nombre,subtitulo,descripcion,enlace,subRubro,file,props.datosProductos.data.id);
+    props.handleEditProducto(nombre,subtitulo,descripcion,enlace,subRubro,off,file,props.datosProductos.data.id);
     // recorriendoArray();
     setOpen(false);
   }
@@ -190,10 +200,11 @@ export default function SimpleModal(props) {
                 {/* Enlace */}
                 <TextField id="standard-basic" label="Enlace Youtbe" defaultValue={props.datosProductos.data.enlace} onChange={onChangeEnlace}/>
                 <FormControlLabel
-                  value="end"
+                  checked={off}
                   control={<Switch color="primary" />}
                   label="Oferta"
                   labelPlacement="end"
+                  onClick={onClickOfertaHandler}
                 />
 
                 {/* {Imagen} */}

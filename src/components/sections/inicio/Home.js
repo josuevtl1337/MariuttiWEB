@@ -14,21 +14,28 @@ import IndustIcon from '../../../visuals/jackhammer.svg'
 // import MaquinasIcon from '../../../visuals/screwdriver-y.svg'
 import MaquinasIcon from '../../../visuals/saw.svg'
 import Parallax from 'react-rellax'
+import ProductosCard from "../productos/ProductoCard"
 
 
-const Home = () => {
+const Home = (props) => {
     useFirebaseConnect([
-        { path: 'Noticia' }
+        { path: 'Noticia' },
+        { path: 'Producto' }
     ])
     var noticiasArray = [];
     var reversed=[];
     var onlythree = [];
+    var onlyProductos = [];
+    var reversedProduct = [];
+    var productosArray = [];
+    var only4Productos = [];
     
     const noticias = useSelector(state => state.firebase.data.Noticia);
+    const productos = useSelector(state => state.firebase.data.Producto);
 
 
     // Show message while Rubros y Sub_Rubros are loading
-    if ( !isLoaded(noticias)) {
+    if ( !isLoaded(noticias)  && !isLoaded(productos)) {
         return <div>Cargando...</div>
     }
     if(isLoaded(noticias)){
@@ -36,6 +43,31 @@ const Home = () => {
         //Reversed para que los mapee por el ultimo cargado y luego mapeo los ultimos 3 con slice (crotada?)
         reversed = noticiasArray.reverse();
         onlythree = reversed.slice(0,3);
+    }
+    if(isLoaded(productos)){
+        productosArray = Object.values(productos);
+        // Reversed para que los mapee por el ultimo cargado y luego mapeo los ultimos 3 con slice (crotada?)
+
+        productosArray.map((item, i) => { 
+            if(item.off == true){ 
+                onlyProductos.push(
+                    {'id':item.id,
+                    'nombre': item.nombre,
+                    'img':item.img,
+                    'subtitulo':item.subtitulo},
+                )
+            }                                                                                                    
+        })
+        reversedProduct = onlyProductos.reverse(); 
+        only4Productos = reversedProduct.slice(0,4);
+        console.log(productosArray);
+        console.log(onlyProductos);
+        console.log(only4Productos);
+    }
+    //Cambiando el history
+    const handlerOnClickProducto = (id) =>{
+        // e.preventDefault();
+        props.history.push("/producto?" + id);
     }
 
     return (
@@ -89,32 +121,25 @@ const Home = () => {
                 <HomeDivider title="Productos Destacados" />
 
                     <div className="destacados-inicio">
-
+                        {only4Productos.map((item, i) => { 
+                                return (
+                                    <div onClick={()=>handlerOnClickProducto(item.id)}     >
+                                        <ProductoMini                                                                   
+                                            img={item.img}
+                                            titulo={item.nombre}                                   
+                                            subtitulo={item.subtitulo}
+                                            key={i}
+                                        />    
+                                    </div>                                                                 
+                                );                                                                                                        
+                        })} 
+{/* 
                         <ProductoMini
                             url='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/shop-img-1-635x755.jpg'
                             titulo="Electric Drill"
-                            categoria="Drills"
+                            subtitulo="Drills"
                             key='1'
-                        />
-                        <ProductoMini
-                            url='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/shop-img-1-635x755.jpg'
-                            titulo="Electric Drill"
-                            categoria="Drills"
-                            key='1'
-                        />
-                        <ProductoMini
-                            url='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/shop-img-1-635x755.jpg'
-                            titulo="Electric Drill"
-                            categoria="Drills"
-                            key='1'
-                        />
-                        <ProductoMini
-                            url='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/shop-img-1-635x755.jpg'
-                            titulo="Electric Drill"
-                            categoria="Drills"
-                            key='1'
-                        />
-
+                        />                    */}
                     </div>
 
                 <HomeDivider title="Últimas Noticias" />
