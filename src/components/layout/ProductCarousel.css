@@ -1,0 +1,14 @@
+.slide-producto{
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide-inner{
+    height: 100%;
+    width: 100%;
+    background: white;
+}

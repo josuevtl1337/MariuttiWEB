@@ -7,6 +7,7 @@ import HomeCard from './HomeCard.js'
 import EntradaMini from './EntradaMini'
 import HeroImage from '../../layout/HeroImage'
 import ProductoMini from './ProductoMini'
+import ProductCarousel from '../../layout/ProductCarousel'
 import Container from '@material-ui/core/Container'
 import AtencionIcon from '../../../visuals/mail.svg'
 import ConstIcon from '../../../visuals/wheelbarrow-y.svg'
@@ -33,7 +34,7 @@ const Home = () => {
     }
     if(isLoaded(noticias)){
         noticiasArray = Object.values(noticias);
-        //Reversed para que los mapee por el ultimo cargado y luego mapeo los ultimos 3 con slice (crotada?)
+        //Reversed para que los mapee por el ultimo cargado y luego mapeo los ultimos 3 con slice (crotada?) // No, re bien
         reversed = noticiasArray.reverse();
         onlythree = reversed.slice(0,3);
     }
@@ -60,8 +61,7 @@ const Home = () => {
                         <h2>Honestidad, Calidad y Familia</h2>
                         <p>
                             Somos una empresa familiar que hace más de 50 años 
-                            se dedica a brindar soluciones para el hogar, la construcción y la industria 
-                            
+                            se dedica a brindar soluciones para el hogar, la construcción y la industria
                         </p>
                         <button className="aboutbtn">Leer más ></button>
                     </div>
@@ -88,7 +88,10 @@ const Home = () => {
 
                 <HomeDivider title="Productos Destacados" />
 
-                    <div className="destacados-inicio">
+                    {/* Carousel de productos destacados */}
+                    <ProductCarousel></ProductCarousel>
+
+                    {/* <div className="destacados-inicio">
 
                         <ProductoMini
                             url='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/shop-img-1-635x755.jpg'
@@ -96,26 +99,8 @@ const Home = () => {
                             categoria="Drills"
                             key='1'
                         />
-                        <ProductoMini
-                            url='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/shop-img-1-635x755.jpg'
-                            titulo="Electric Drill"
-                            categoria="Drills"
-                            key='1'
-                        />
-                        <ProductoMini
-                            url='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/shop-img-1-635x755.jpg'
-                            titulo="Electric Drill"
-                            categoria="Drills"
-                            key='1'
-                        />
-                        <ProductoMini
-                            url='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/shop-img-1-635x755.jpg'
-                            titulo="Electric Drill"
-                            categoria="Drills"
-                            key='1'
-                        />
 
-                    </div>
+                    </div> */}
 
                 <HomeDivider title="Últimas Noticias" />
                     <div className="noticias-inicio">

@@ -15,6 +15,7 @@ import "./catalogoProductos.css"
 import { connect } from 'react-redux'
 
 
+
 const Productos = (props) => {
 
     //Hago la referencia para traer mis objetos Rubros, y Sub_Rubros
