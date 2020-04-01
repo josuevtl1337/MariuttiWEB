@@ -6,7 +6,7 @@ import EntradaCard from './EntradaCard'
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 
-const Noticias = () => {
+const Noticias = (props) => {
     useFirebaseConnect([
         { path: 'Noticia' }
     ])
@@ -18,6 +18,13 @@ const Noticias = () => {
     }
     if(isLoaded(noticias)){
         noticiasArray = Object.values(noticias);
+    }
+    //Cambiando el history
+    const handlerOnClickNoticia = (id) =>{
+        // e.preventDefault();
+        props.history.push("/entrada?" + id);
+        // setProductoState(true);
+        // console.log(productoState);
     }
 
     return(
@@ -35,13 +42,16 @@ const Noticias = () => {
                     <h2 className="subtitulo-noticias">Últimas Noticias</h2>
                     {noticiasArray.map((item, i) => {                             
                         return (
-                            <EntradaCard                                      
-                                img={item.img}
-                                title={item.nombre}
-                                date={item.createdAt}
-                                text={item.descripcion}
-                                key={i}
-                            />                                                                  
+                            <div onClick={()=>handlerOnClickNoticia(item.id)}>
+                                <EntradaCard                                      
+                                    img={item.img}
+                                    title={item.nombre}
+                                    date={item.createdAt}
+                                    text={item.descripcion}
+                                    key={i}
+                                />  
+                            </div>
+                                                                                            
                         );                                                       
                     })}                 
                 </div>

@@ -130,20 +130,14 @@ export default function SimpleModal(props) {
                     value={subRubro ? subRubro : " "}
                     onChange={handleChangeSub}
                   >           
-                  {retornando}</Select>            
-                  {/* <MenuItem value={3}>Ferretería Industrial</MenuItem>
-                  <MenuItem value={4}>Herramientas Eléctricas</MenuItem>
-                  <MenuItem value={5}>Herramientas Explosión</MenuItem>
-                  <MenuItem value={6}>Herramientas Neumáticas</MenuItem>
-                  <MenuItem value={7}>Indumentaria Y Seguridad</MenuItem> */}
-            
-             
+                  {retornando}    
+                </Select>                                   
                 {/* Nombre Producto */}
                 <TextField id="standard-basic" label="Nombre Producto" onChange={onChangeNombre}/>
                 {/* Subtitulo */}
                 <TextField id="standard-basic" label="Subtitulo" onChange={onChangeSubtitulo}/>
                 {/* Descripcion */}
-                <TextField id="standard-basic" label="Descripción" onChange={onChangeDescripcion}/>
+                <TextField id="standard-basic" label="Descripción" multiline rows="4" onChange={onChangeDescripcion}/>
                 {/* Enlace */}
                 <TextField id="standard-basic" label="Enlace Youtbe" onChange={onChangeEnlace}/>
                 <FormControlLabel

@@ -50,7 +50,7 @@ class Admin3 extends Component {
     Categoria:[],
     Noticia:[],
     Producto:[],
-    display:"",
+    display:"Rubro",
     url: "https://storage.googleapis.com/support-forums-api/attachment/thread-6219249-11716624739372349952.png"
   };
   //Este método sirve para cambiar la tabla dependiendo a cual le das click
@@ -327,7 +327,7 @@ class Admin3 extends Component {
                         },
                         { title: 'Nombre', field: 'nombre'
                         },
-                        { title: 'Rubro', field: 'rubro', lookup:{r2:"Obras y Contruccion", r1:"Maquinas y Herramientas"}
+                        { title: 'Rubro', field: 'rubro', lookup:{r2:"Obras y Contruccion", r1:"Maquinas y Herramientas",r3:"Ferretería Industrial"}
                         },
                         ]}
                         data={this.state.Sub_Rubro}
@@ -364,25 +364,21 @@ class Admin3 extends Component {
               <Grid container className="container per" spacing={2}>  
               <Grid container justify="center" item xs={3}>
               <Catalogo parentCallback={this.handleClick}/>   
-                <AddRubro />
+                {/* <AddRubro /> */}
               </Grid>
               <Grid item xs={9} >
               <MaterialTable
                       actions={[
                         {
                           icon: 'delete',
-                          tooltip: 'Borrar Producto',
+                          tooltip: 'No se puede ejecutar esta accion',
+                          disabled:true
                         },
                         {
-                          icon:'edit',
-                          tooltip:'editar producto'
-                        },
-                        {
-                          icon: 'add',
-                          tooltip: 'Add User',
-                          isFreeAction: true,
-                          onClick: (event) => alert("You want to add a new row")
-                        }  
+                          icon:'edit',                 
+                          tooltip: 'No se puede ejecutar esta accion',
+                          disabled:true
+                        } 
                       ]}
                       options={{
                         search: true,
@@ -501,32 +497,7 @@ class Admin3 extends Component {
                                 />
                               )
                             },
-                          }
-                        // {
-                        //   icon: 'account_circle',
-                        //   tooltip: 'Ver Imagen',                        
-                        //   render: rowData => {
-                        //     let imagen = rowData.img;                                
-                        //     this.importingImg(imagen);
-                        //     console.log(this.state.url);
-                        //     if(this.state.loadingPic==true){
-                        //       return(
-                        //         <CircularProgress />
-                        //       )
-                        //     }else{
-                        //       return(
-                        //         <iframe
-                        //           width="100%"
-                        //           height="315"
-                        //           src={this.state.url}
-                        //           frameborder="0"
-                        //           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        //           allowfullscreen
-                        //         />
-                        //       );
-                        //     }                                                                         
-                        //   }                      
-                        // },     
+                          }   
                         ]}
                         components={{
                           Action: props => {
@@ -676,45 +647,6 @@ class Admin3 extends Component {
                           }                   
                         }}
                         title="Noticias/"
-              />   
-              </Grid>      
-              </Grid>
-            );
-          }
-          else {
-            return(
-              <Grid container className="container per" spacing={2}>  
-              <Grid container justify="center" item xs={3}>
-              <Catalogo parentCallback={this.handleClick}/>   
-                <AddRubro />
-              </Grid>
-              <Grid item xs={9} >
-              <MaterialTable
-                      actions={[
-                        {
-                          icon: 'delete',
-                          tooltip: 'Borrar Producto',
-                        },
-                        {
-                          icon:'edit',
-                          tooltip:'editar producto'
-                        }
-                      ]}
-                      options={{
-                        search: true,
-                        sorting: false,
-                        columnsButton:true,
-                        paging:false,         
-                        }}
-                        columns={[
-                          { title: 'Titulo', field: 'nombre',
-                          cellStyle:{width:'50%',minWidth:'50%'},
-                          headerStlye:{width:'50%',minWidth:'50%'}
-                          },
-                          { title: 'Id', field: 'id'}
-                        ]}
-                        data={this.state.Rubro}
-                        title="Rubro/"
               />   
               </Grid>      
               </Grid>
