@@ -68,7 +68,7 @@ export default function SimpleModal(props) {
 
   return (
     <React.Fragment>
-      <Fab size="small" color="secondary" aria-label="add" type="button" onClick={handleOpen}>
+      <Fab size="small" color="primary" aria-label="add" type="button" onClick={handleOpen}>
       <AddIcon />
       </Fab>
         <Modal

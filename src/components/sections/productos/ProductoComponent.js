@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from 'react';
 import HomeDivider from '../inicio/HomeDivider'
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
 const ProductoComponent = (props) =>{
     var productosArray = [];
     const [url, setUrl] = React.useState('');
+    const [enlace, setEnlace] = React.useState("https://storage.googleapis.com/support-forums-api/attachment/thread-6219249-11716624739372349952.png");
     const classes = useStyles();
     //Hago la referencia para traer mis objetos Rubros, y Sub_Rubros
     useFirebaseConnect([
@@ -61,6 +62,9 @@ const ProductoComponent = (props) =>{
                         .getDownloadURL()
                         .then(url => {
                             setUrl(url);
+                            if(item.enlace!=""){
+                                setEnlace(item.enlace)  
+                            }  
                         })
                         .catch(error => {
                             console.log(error.message);
@@ -85,12 +89,12 @@ const ProductoComponent = (props) =>{
                                     <iframe 
                                         width="450"
                                         height="250"
-                                        src={item.enlace}
+                                        src={enlace}
                                         frameborder="0" 
                                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
                                         allowfullscreen
                                     />
-                                    <a href={item.enlace} className="singleprod-enlace">enlace original</a>  
+                                    <a href={enlace} className="singleprod-enlace">enlace original</a>  
                                     
                                 </div>
                             </div>   

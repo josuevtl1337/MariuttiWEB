@@ -42,15 +42,16 @@ const Noticias = (props) => {
                     <h2 className="subtitulo-noticias">Últimas Noticias</h2>
                     {noticiasArray.map((item, i) => {                             
                         return (
-                            <div onClick={()=>handlerOnClickNoticia(item.id)}>
-                                <EntradaCard                                      
+                            // <div }>
+                                <EntradaCard   
+                                    click={()=>handlerOnClickNoticia(item.id)}                                 
                                     img={item.img}
                                     title={item.nombre}
                                     date={item.createdAt}
                                     text={item.descripcion}
                                     key={i}
                                 />  
-                            </div>
+                            // </div>
                                                                                             
                         );                                                       
                     })}                 

@@ -278,7 +278,6 @@ class Admin3 extends Component {
     } 
   }
   render(){ 
-    console.log(this.props)
         if(this.state.loading){
           return (
           <Loading />
@@ -579,6 +578,11 @@ class Admin3 extends Component {
                               }, 1000)
                             })
                           }
+                        },
+                        {
+                          icon:'add',
+                          tooltip: 'Save User',
+                          onClick: (event, rowData) => alert("You saved " + rowData.name)
                         }
                       ]}
                       options={{
@@ -597,39 +601,6 @@ class Admin3 extends Component {
                         ]}
                         
                         data={this.state.Noticia}
-                        detailPanel={[                        
-                          {
-                          icon: 'account_circle',
-                          tooltip: 'Ver Imagen',
-                          render: rowData => {   
-                            let imagen = rowData.img;
-                            var img = "https://storage.googleapis.com/support-forums-api/attachment/thread-6219249-11716624739372349952.png";
-                            if (imagen) {
-                              var pathImagen = firebase
-                                .storage()
-                                .ref(imagen)
-                                .getDownloadURL()
-                                .then(url => {
-                                  // this.setState({ url }); 
-                                  img = url;                             
-                                })
-                                .catch(error => {
-                                  console.log(error.message);
-                                });
-                                return (
-                                  <iframe
-                                      width="100%"
-                                      height="315"
-                                      src={img}
-                                      frameborder="0"
-                                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                      allowfullscreen
-                                    />
-                                )
-                            }                      
-                          },
-                        },      
-                        ]}
                         components={{
                           Action: props => {
                             if(props.action.icon === 'save'){
@@ -643,9 +614,14 @@ class Admin3 extends Component {
                                   <DeleteIcon fontSize="small" />
                                 </IconButton>
                               )
-                          }                                                       
+                          }
+                            if(props.action.icon === 'add'){
+                              return(
+                                <ModalPic file={props.data}/>
+                              )
+                            }                                                       
                           }                   
-                        }}
+                        }}                       
                         title="Noticias/"
               />   
               </Grid>      
