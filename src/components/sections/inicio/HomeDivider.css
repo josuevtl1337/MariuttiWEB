@@ -8,10 +8,15 @@
 
 .homediv-title{
     color: #585858;
+    font-family: 'oswald';
+    text-transform: uppercase;
+    min-width: fit-content;
+    font-size: 28px;
 }
 
 .homediv-line{
     width: 80%;
     height: 1px;
-    background-color: #d8d8d8;
+    background-color: #818181;
+    margin: 0 20px;
 }

@@ -60,10 +60,10 @@ const NavBarStateLess = (props) => {
     const onChange = e => {
         setBusqueda(e.target.value);
     };
-    const onChangeDropDown = (param) => {
+    const onChangeDropDown = (param,param2) => {
         props.history.push("/productos");
         // setDropdown(param);
-        props.dropdown(param);
+        props.dropdown(param,param2);
         // console.log(drop)
     };
     let tabwrapclasses
@@ -85,13 +85,13 @@ const NavBarStateLess = (props) => {
     let array = [];
     for(let i = 0; i < maquinas.length; i++) {
         array.push(
-            <li key={maquinas[i][0]} onClick={() => onChangeDropDown(maquinas[i][0])}>{maquinas[i][1]}</li>
+            <li key={maquinas[i][0]} onClick={() => onChangeDropDown(maquinas[i][0],maquinas[i][1])}>{maquinas[i][1]}</li>
         );
     }
     let arrayConstruccion = [];
     for(let i = 0; i < construccion.length; i++) {
         arrayConstruccion.push(
-            <li key={construccion[i][0]}  onClick={() => onChangeDropDown(construccion[i][0])}>{construccion[i][1]}</li>
+            <li key={construccion[i][0]}  onClick={() => onChangeDropDown(construccion[i][0],construccion[i][1])}>{construccion[i][1]}</li>
         );
     }
 

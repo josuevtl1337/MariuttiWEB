@@ -1,14 +1,117 @@
-.slide-producto{
-    height: 100%;
-    width: 100%;
+
+
+.car-wrap{ /*posiciona los botones!*/
+    position: relative;
+    height: 300px;
+    width: 600px;
+    margin-left: -50px;
+}
+
+.slide-wrapper{
     padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.slide-inner{
-    height: 100%;
+.car-prod-card{
+    margin-top: 8px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: start;
+    cursor: pointer;
+    padding: 5px;
+    transition: all 0.2s;
+    background-color: white;
+
+    /* -webkit-box-shadow: 1px 1px 3px 0px rgba(235,235,235,1);
+    -moz-box-shadow: 1px 1px 3px 0px rgba(235,235,235,1);
+    box-shadow: 1px 1px 3px 0px rgba(235,235,235,1); */
+
+    box-shadow:
+    0 0.3px 0.8px rgba(0, 0, 0, 0.028),
+    0 0.9px 2.7px rgba(0, 0, 0, 0.042),
+    0 4px 12px rgba(0, 0, 0, 0.07)
+    ;
+
+    animation: fadeIn 0.4s;
+    height: 250px;
+    width: 500px;
+}
+
+.car-prod-text{
+    margin: 8px;
+    margin-right: 10px;
+    width: 222px;
+}
+
+.car-button{
+    position: absolute;
+    top: 50%;
+    right: 0;
+
+    height: 30px;
+    width: 30px;
+    background: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    
+    border: 0px solid transparent;
+
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    outline: none;
+}
+
+#back{
+    left: 0;
+}
+
+.entrada-cardtitle.carousel{
+    margin-bottom: 4px;
+    font-family: 'oswald';
+    color: #565656;
+
+}
+
+.entrada-cardtext.carousel{
+    color: #7A7A7A;
     width: 100%;
-    background: white;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.imgwrap.carousel{
+    width: 48%;
+    height: 95%;
+    padding: 0;
+}
+
+.dotgroup{
+    margin-top: 28px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dotgroup > button {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    margin: 4px;
+    padding: 0;
+    background: #C4C4C4;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    transition: all 0.15s;
+    outline: none;
+}
+
+.dotgroup > button.carousel__dot--selected{
+    background: rgb(136, 136, 136);
 }

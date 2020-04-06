@@ -1,38 +1,64 @@
 import React, {useState} from 'react';
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext, DotGroup } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import './ProductCarousel.css'
+import ProductoCard from '../sections/productos/ProductoCard.js'
 
 export default function ProductCarousel (props) {
     
     return(
         <CarouselProvider
-            naturalSlideWidth={100}
-            naturalSlideHeight={400}
-            totalSlides={8}
-            visibleSlides={2}
+            naturalSlideWidth={150}
+            naturalSlideHeight={300}
+            totalSlides={2}
+            visibleSlides={1}
             infinite={true}
             isPlaying={true}
-            step={2}
+            step={1}
         >
-            <Slider style={{height: 400}}>
-                <Slide style={{height: '100%'}} index={0}>
-                    <div className="slide-producto">
-                        <div className="slide-inner">
-                            asd
+            <div className="car-wrap">
+                <Slider style={{height: 280}}>
+                    <Slide index={0}>
+                        <div className="slide-wrapper">
+                            <div className="car-prod-card">
+                                <div className="imgwrap carousel">
+                                    
+                                    <img className="prodimg" src="https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/shop-img-7-635x755.jpg"/>
+                                    
+                                </div>
+                                <div className="car-prod-text">
+                                    <p className="entrada-cardtitle carousel">Titulo</p>
+                                    <p className="entrada-cardtext carousel">Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </Slide>
-                <Slide className="slide-producto" index={1}><p>asd</p></Slide>
-                <Slide className="slide-producto" index={2}><p>asd</p></Slide>
-                <Slide className="slide-producto" index={3}><p>asd</p></Slide>
-                <Slide className="slide-producto" index={4}><p>asd</p></Slide>
-                <Slide className="slide-producto" index={5}><p>asd</p></Slide>
-                <Slide className="slide-producto" index={6}><p>asd</p></Slide>
-                <Slide className="slide-producto" index={7}><p>asd</p></Slide>
-            </Slider>
-            <ButtonBack>Back</ButtonBack>
-            <ButtonNext>Next</ButtonNext>
+                    </Slide>
+                    
+                    <Slide index={1}>
+                        <div className="slide-wrapper">
+                            <div className="car-prod-card">
+                                <div className="imgwrap carousel">
+                                    
+                                    <img className="prodimg" src="https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/shop-img-7-635x755.jpg"/>
+                                    
+                                </div>
+                                <div className="car-prod-text">
+                                    <p className="entrada-cardtitle carousel">Titulo</p>
+                                    <p className="entrada-cardtext">Subtitulo</p>
+                                </div>
+                            </div>
+                        </div>
+                    </Slide>
+                    
+                    
+                    
+
+                </Slider>
+                <ButtonBack className="car-button material-icons" id="back">keyboard_arrow_left</ButtonBack>
+                <ButtonNext className="car-button material-icons">keyboard_arrow_right</ButtonNext>
+                <DotGroup className="dotgroup"/>
+            </div>
+            
         </CarouselProvider>
     )
 

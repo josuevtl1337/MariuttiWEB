@@ -100,6 +100,7 @@ export default function SimpleModal(props) {
         >
           <MenuItem value={"r1"}>MAQUINAS Y HERRAMIENTAS</MenuItem>
           <MenuItem value={"r2"}>OBRA Y CONSTRUCCIÓN</MenuItem>
+          <MenuItem value={"r3"}>FERRETERIA INDUSTRIAL</MenuItem>
     
         </Select>
         </FormControl>

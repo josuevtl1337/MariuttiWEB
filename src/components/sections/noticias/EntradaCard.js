@@ -36,11 +36,11 @@ export default function EntradaCard (props) {
     return(
         <div className="entradacard">
             <div className="entradacard-imgwrap">
-                <img src={url} className="entradacard-img"/>
+                <img src={url} className="entradacard-img" onClick={props.click}/>
             </div>
 
             <div className="entrada-contentwrap">
-                <p className="entrada-cardtitle">
+                <p className="entrada-cardtitle" onClick={props.click}>
                     {props.title}
                 </p>
                 <p className="entrada-date">
@@ -49,7 +49,7 @@ export default function EntradaCard (props) {
                 <p className="entrada-cardtext">
                     {props.text}
                 </p>
-                <a className="vermas" href="http://">Ver Más</a>
+                <a className="vermas" onClick={props.click}>Ver Más</a>
             </div>
         </div>
     )

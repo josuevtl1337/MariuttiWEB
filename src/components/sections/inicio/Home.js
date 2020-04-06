@@ -15,21 +15,28 @@ import IndustIcon from '../../../visuals/jackhammer.svg'
 // import MaquinasIcon from '../../../visuals/screwdriver-y.svg'
 import MaquinasIcon from '../../../visuals/saw.svg'
 import Parallax from 'react-rellax'
+import aboutimg from '../../../visuals/about-block-img.png'
 
 
-const Home = () => {
+const Home = (props) => {
     useFirebaseConnect([
-        { path: 'Noticia' }
+        { path: 'Noticia' },
+        { path: 'Producto' }
     ])
     var noticiasArray = [];
     var reversed=[];
     var onlythree = [];
+    var onlyProductos = [];
+    var reversedProduct = [];
+    var productosArray = [];
+    var only4Productos = [];
     
     const noticias = useSelector(state => state.firebase.data.Noticia);
+    const productos = useSelector(state => state.firebase.data.Producto);
 
 
     // Show message while Rubros y Sub_Rubros are loading
-    if ( !isLoaded(noticias)) {
+    if ( !isLoaded(noticias)  && !isLoaded(productos)) {
         return <div>Cargando...</div>
     }
     if(isLoaded(noticias)){
@@ -38,88 +45,115 @@ const Home = () => {
         reversed = noticiasArray.reverse();
         onlythree = reversed.slice(0,3);
     }
+    if(isLoaded(productos)){
+        productosArray = Object.values(productos);
+        // Reversed para que los mapee por el ultimo cargado y luego mapeo los ultimos 3 con slice (crotada?)
+
+        productosArray.map((item, i) => { 
+            if(item.off == true){ 
+                onlyProductos.push(
+                    {'id':item.id,
+                    'nombre': item.nombre,
+                    'img':item.img,
+                    'subtitulo':item.subtitulo},
+                )
+            }                                                                                                    
+        })
+        reversedProduct = onlyProductos.reverse(); 
+        only4Productos = reversedProduct.slice(0,4);
+        console.log(productosArray);
+        console.log(onlyProductos);
+        console.log(only4Productos);
+    }
+    //Cambiando el history
+    const handlerOnClickProducto = (id) =>{
+        // e.preventDefault();
+        props.history.push("/producto?" + id);
+    }
 
     return (
         <div className="container">
             <HeroImage 
-                title="INICIO"
+                title="al servicio de la construccion"
                 // text="Más de 50 años brindando soluciones para el hogar, la construcción y la industria"
-                text="La ferretería industrial más completa de la región"
-                image="https://st.depositphotos.com/2117297/2183/i/950/depositphotos_21832931-stock-photo-construction-worker.jpg" 
+                // text="La ferretería industrial más completa de la región"
+                image="https://miro.medium.com/max/9856/1*gAG21NFA76ZlCbtK6SayVQ.jpeg" 
             />
 
-            <Container>
+            <div className="about-block">
 
-                <div className="about-block">
-
-                    <div className="left">
-                        <Parallax speed={1}>
-                            <img className="aboutimg" src="https://www.mariutti.com.ar/images/negocio.jpg" alt=""/>
-                        </Parallax>
+                <Container>
+                    <div className="cards-container">
+                        <HomeCard
+                            icon={AtencionIcon} 
+                            text="Atención Personalizada"
+                        />
+                        <HomeCard
+                            icon={MaquinasIcon} 
+                            text="Máquinas y Herramientas"
+                        />
+                        <HomeCard 
+                            icon={ConstIcon}
+                            text="Obras y Construcción"
+                        />
+                        <HomeCard 
+                            icon={IndustIcon} 
+                            text="Ferretería Industrial"
+                        />
                     </div>
-                    <div className="right">
-                        <h2>Honestidad, Calidad y Familia</h2>
-                        <p>
-                            Somos una empresa familiar que hace más de 50 años 
-                            se dedica a brindar soluciones para el hogar, la construcción y la industria
-                        </p>
-                        <button className="aboutbtn">Leer más ></button>
+
+                    <div className="about-content">
+                            <div className="abtleft">
+                                <p className="abt-cnt-title">Honestidad, Calidad y Familia</p>
+                                <p className="abt-cnt-text">
+                                    Somos una empresa familiar que hace más de 50 años se dedica a brindar soluciones para el hogar, 
+                                    la construcción y la industria, brindando siempre la mejor atención y asesoramiento.
+                                </p>
+                                <button className="aboutbtn">Conocenos</button>
+                            </div>
+
+                            <div className="abtright">
+                                <img className="aboutimg" src={aboutimg} alt=""/>
+                            </div>
                     </div>
-                </div>
+                </Container>
 
-                <div className="cards-container">
-                    <HomeCard
-                        icon={AtencionIcon} 
-                        text="Atención Personalizada"
-                    />
-                    <HomeCard
-                        icon={MaquinasIcon} 
-                        text="Máquinas y Herramientas"
-                    />
-                    <HomeCard 
-                        icon={ConstIcon}
-                        text="Obras y Construcción"
-                    />
-                    <HomeCard 
-                        icon={IndustIcon} 
-                        text="Ferretería Industrial"
-                    />
-                </div>
+                
+            </div>
 
-                <HomeDivider title="Productos Destacados" />
+            <div className="prod-block">
+                <Container>
+                    <HomeDivider title="Productos Destacados" />
 
                     {/* Carousel de productos destacados */}
-                    <ProductCarousel></ProductCarousel>
+                    <div style={{width: '100%', marginTop:'4px', marginBottom: '60px'}}>
+                        <div style={{maxWidth: 500, margin: '0 auto'}}>
+                        <ProductCarousel/>
+                        
+                        </div>
+                    </div>
 
-                    {/* <div className="destacados-inicio">
 
-                        <ProductoMini
-                            url='https://baumeister.qodeinteractive.com/wp-content/uploads/2017/11/shop-img-1-635x755.jpg'
-                            titulo="Electric Drill"
-                            categoria="Drills"
-                            key='1'
-                        />
-
-                    </div> */}
-
-                <HomeDivider title="Últimas Noticias" />
+                    <HomeDivider title="Últimas Noticias" />
                     <div className="noticias-inicio">
 
-                    {onlythree.map((item, i) => {                             
-                            return (
-                                <EntradaMini                                      
-                                    img={item.img}
-                                    title={item.nombre}
-                                    date={item.createdAt}
-                                    text={item.descripcion}
-                                    key={i}
-                                />                                                                  
-                            );                                                       
-                        })} 
-                    </div>
-                <div style={{height:'400vh', width:'100%'}}></div>
-            </Container>
-            
+                        {onlythree.map((item, i) => {                             
+                                return (
+                                    <EntradaMini                                      
+                                        img={item.img}
+                                        title={item.nombre}
+                                        date={item.createdAt}
+                                        text={item.descripcion}
+                                        key={i}
+                                    />                                                                  
+                                );                                                       
+                            })} 
+                        </div>
+                    <div style={{height:'400vh', width:'100%'}}></div>
+
+                </Container>
+                
+            </div>
         </div>
     )
 }
