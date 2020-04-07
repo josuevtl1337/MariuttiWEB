@@ -2,9 +2,8 @@
 
 .car-wrap{ /*posiciona los botones!*/
     position: relative;
-    height: 300px;
-    width: 600px;
-    margin-left: -50px;
+    width: 100%;
+    overflow: hidden;
 }
 
 .slide-wrapper{
@@ -38,7 +37,7 @@
 
     animation: fadeIn 0.4s;
     height: 250px;
-    width: 500px;
+    width: 100%;
 }
 
 .car-prod-text{
@@ -49,8 +48,8 @@
 
 .car-button{
     position: absolute;
-    top: 50%;
-    right: 0;
+    top: 44%;
+    right: -10px;
 
     height: 30px;
     width: 30px;
@@ -59,6 +58,7 @@
     
     border: 0px solid transparent;
 
+    color: rgb(95, 95, 95);
     font-size: 32px;
     display: flex;
     justify-content: center;
@@ -66,7 +66,7 @@
 }
 
 #back{
-    left: 0;
+    left: -10px;
 }
 
 .entrada-cardtitle.carousel{
@@ -114,4 +114,15 @@
 
 .dotgroup > button.carousel__dot--selected{
     background: rgb(136, 136, 136);
+}
+
+@media only screen and (max-width: 600px) {
+    .car-prod-text{
+        width: 150px;
+    }
+
+
+    .car-button{
+        display: none;
+    }
 }

@@ -30,6 +30,7 @@ export default function ProductCarousel (props) {
 
     
     return(
+        <div className="car-wrap">
         <CarouselProvider
             naturalSlideWidth={150}
             naturalSlideHeight={300}
@@ -39,7 +40,7 @@ export default function ProductCarousel (props) {
             isPlaying={true}
             step={1}
         >
-            <div className="car-wrap">
+ 
                 <Slider style={{height: 280}}>
                 {props.productos.map((item, i) => {     
                     console.log(props.productos)                   
@@ -54,9 +55,10 @@ export default function ProductCarousel (props) {
                 <ButtonBack className="car-button material-icons" id="back">keyboard_arrow_left</ButtonBack>
                 <ButtonNext className="car-button material-icons">keyboard_arrow_right</ButtonNext>
                 <DotGroup className="dotgroup"/>
-            </div>
-            
-        </CarouselProvider>
+                
+                
+            </CarouselProvider>
+        </div>
     )
 
 }
