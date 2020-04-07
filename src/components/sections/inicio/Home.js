@@ -4,18 +4,24 @@ import { useSelector } from 'react-redux'
 import './Home.css'
 import HomeDivider from './HomeDivider.js'
 import HomeCard from './HomeCard.js'
+import HomeCardCelu from './HomeCardCelu'
 import EntradaMini from './EntradaMini'
 import HeroImage from '../../layout/HeroImage'
-import ProductoMini from './ProductoMini'
 import ProductCarousel from '../../layout/ProductCarousel'
 import Container from '@material-ui/core/Container'
+
 import AtencionIcon from '../../../visuals/mail.svg'
 import ConstIcon from '../../../visuals/wheelbarrow-y.svg'
 import IndustIcon from '../../../visuals/jackhammer.svg'
-// import MaquinasIcon from '../../../visuals/screwdriver-y.svg'
 import MaquinasIcon from '../../../visuals/saw.svg'
-import Parallax from 'react-rellax'
+
+import AtencionIconCelu from '../../../visuals/mail-celu.svg'
+import ConstIconCelu from '../../../visuals/wheelbarrow-celu.svg'
+import IndustIconCelu from '../../../visuals/jackhammer-celu.svg'
+import MaquinasIconCelu from '../../../visuals/saw-celu.svg'
+
 import aboutimg from '../../../visuals/about-block-img.png'
+import BlueTriangle from '../../../visuals/bluetriangle.svg'
 
 
 const Home = (props) => {
@@ -79,6 +85,27 @@ const Home = (props) => {
                 // text="La ferretería industrial más completa de la región"
                 image="https://miro.medium.com/max/9856/1*gAG21NFA76ZlCbtK6SayVQ.jpeg" 
             />
+
+            <img src={BlueTriangle} className="bluetriangle"/>
+
+            <div className="cardscelu-container">
+                <HomeCardCelu
+                    icon={MaquinasIconCelu} 
+                    text="Máquinas y Herramientas"
+                />
+                <HomeCardCelu
+                    icon={ConstIconCelu}
+                    text="Obras y Construcción"
+                />
+                <HomeCardCelu
+                    icon={IndustIconCelu} 
+                    text="Ferretería Industrial"
+                />
+                <HomeCardCelu
+                    icon={AtencionIconCelu} 
+                    text="Atención Personalizada"
+                />
+            </div>
 
             <div className="about-block">
 

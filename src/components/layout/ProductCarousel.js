@@ -7,16 +7,17 @@ import ProductoCard from '../sections/productos/ProductoCard.js'
 export default function ProductCarousel (props) {
     
     return(
-        <CarouselProvider
-            naturalSlideWidth={150}
-            naturalSlideHeight={300}
-            totalSlides={2}
-            visibleSlides={1}
-            infinite={true}
-            isPlaying={true}
-            step={1}
-        >
-            <div className="car-wrap">
+        <div className="car-wrap">
+            <CarouselProvider
+                naturalSlideWidth={150}
+                naturalSlideHeight={300}
+                totalSlides={2}
+                visibleSlides={1}
+                infinite={true}
+                isPlaying={true}
+                step={1}
+            >
+                
                 <Slider style={{height: 280}}>
                     <Slide index={0}>
                         <div className="slide-wrapper">
@@ -57,9 +58,10 @@ export default function ProductCarousel (props) {
                 <ButtonBack className="car-button material-icons" id="back">keyboard_arrow_left</ButtonBack>
                 <ButtonNext className="car-button material-icons">keyboard_arrow_right</ButtonNext>
                 <DotGroup className="dotgroup"/>
-            </div>
-            
-        </CarouselProvider>
+                
+                
+            </CarouselProvider>
+        </div>
     )
 
 }

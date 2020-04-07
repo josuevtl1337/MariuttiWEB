@@ -20,3 +20,14 @@
     background-color: #818181;
     margin: 0 20px;
 }
+
+
+@media only screen and (max-width: 1200px) {
+    .homediv-title{
+        color: white;
+    }
+
+    .homediv-line{
+        display: none;
+    }
+}
