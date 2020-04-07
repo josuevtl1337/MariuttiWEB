@@ -6,6 +6,7 @@ import HomeDivider from './HomeDivider.js'
 import HomeCard from './HomeCard.js'
 import HomeCardCelu from './HomeCardCelu'
 import EntradaMini from './EntradaMini'
+import EntradaCelu from './EntradaCelu'
 import HeroImage from '../../layout/HeroImage'
 import ProductCarousel from '../../layout/ProductCarousel'
 import Container from '@material-ui/core/Container'
@@ -153,7 +154,7 @@ const Home = (props) => {
                     <HomeDivider title="Productos Destacados" />
 
                     {/* Carousel de productos destacados */}
-                    <div style={{width: '100%', marginTop:'4px', marginBottom: '60px'}}>
+                    <div style={{width: '100%', marginTop:'0px', marginBottom: '50px'}}>
                         <div style={{maxWidth: 500, margin: '0 auto'}}>
                         <ProductCarousel/>
                         
@@ -163,20 +164,31 @@ const Home = (props) => {
 
                     <HomeDivider title="Últimas Noticias" />
                     <div className="noticias-inicio">
-
                         {onlythree.map((item, i) => {                             
-                                return (
-                                    <EntradaMini                                      
-                                        img={item.img}
-                                        title={item.nombre}
-                                        date={item.createdAt}
-                                        text={item.descripcion}
-                                        key={i}
-                                    />                                                                  
-                                );                                                       
-                            })} 
-                        </div>
-                    <div style={{height:'400vh', width:'100%'}}></div>
+                            return (
+                                <EntradaMini                                      
+                                    img={item.img}
+                                    title={item.nombre}
+                                    text={item.descripcion}
+                                    key={i}
+                                />                                                                  
+                            );                                                       
+                        })} 
+                    </div>
+
+                    <div className="noticias-inicio-celu">
+                        {onlythree.map((item, i) => {                             
+                            return (
+                                <EntradaCelu                                      
+                                    img={item.img}
+                                    title={item.nombre}
+                                    date={item.createdAt}
+                                    text={item.descripcion}
+                                    key={i}
+                                />                                                                  
+                            );                                                       
+                        })} 
+                    </div>
 
                 </Container>
                 

@@ -151,8 +151,10 @@
         display: block;
         position: relative;
         height: 100%;
+        width: 100%;
         filter: brightness(0.5);
         object-fit: cover;
+        background-position: center;
     }
 
     .herotitle{
@@ -185,7 +187,11 @@
     }
 
     .herotitle{
-        font-size: 40px;
-        line-height: 40px;
+        font-size: 46px;
+        line-height: 46px;
+    }
+
+    .herobtn{
+        margin-top: 0px;
     }
 }

@@ -23,8 +23,18 @@
 
 
 @media only screen and (max-width: 1200px) {
+
+    .homediv-wrap{
+        margin-bottom: -8px;
+    }
+
     .homediv-title{
+        margin-top: 36px;
+        margin-left: 8px;
         color: white;
+        font-size: 28px;
+        text-align: center;
+        width: 100%;
     }
 
     .homediv-line{
