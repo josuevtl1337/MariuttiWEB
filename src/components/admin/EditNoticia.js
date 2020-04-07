@@ -86,7 +86,7 @@ export default function SimpleModal(props) {
           onClose={handleClose}
         >
           <Container className={classes.paper}>
-          <div className="container">   
+          <div >   
           <FormControl className={classesSelect.formControl}>           
                 {/* Nombre Producto */}
                 <TextField id="standard-basic" label="Nombre Producto" defaultValue={props.datosNoticia.data.nombre} onChange={onChangeNombre}/>

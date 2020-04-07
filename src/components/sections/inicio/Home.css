@@ -1,38 +1,80 @@
+.container{
+    background: rgb(12, 28, 58);
+}
+
 .about-block{
+    /* margin-top: -340px; */
     width: 100%;
-    height: 350px;
+    height: 850px;
+    background-image: url('../../../visuals/about-block-bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.about-content{
+    /* margin: 22px; */
+    margin-top: 55px;
+    width: 100%;
     display: flex;
-    font-family: 'Roboto Condensed';
+    flex-direction: row;
+    justify-content: space-around;
 }
 
-.left{
-    width: 50%;
-    height: 100%;
+.abtright{
+    width: 600px;
 }
 
-.right{
-    width: 50%;
-    height: 100%;
+.abtleft{
+    width: 500px;
+}
+
+.abt-cnt-title{
+    font-family: 'Oswald';
+    color: #FDB913;
+    font-size: 50px;
+    text-transform: uppercase;
+    margin: 0;
+    font-weight: 700;
+    width: 250px;
+    line-height: 60px;
+}
+
+.abt-cnt-text{
+    margin-top: 16px;
     font-size: 16px;
+    width: 450px;
+    letter-spacing: .7px;
+    line-height: 25px;
+    color: #8E8E8E;
+    font-weight: 500;
 }
 
 .aboutimg{
-    margin-top: 40px;
-    width: 90%;
+    /* margin-top: 40px; */
+    width: 100%;
     object-fit: fill;
+    box-shadow:
+    0 0.3px 0.8px rgba(0, 0, 0, 0.028),
+    0 0.9px 2.7px rgba(0, 0, 0, 0.042),
+    0 4px 12px rgba(0, 0, 0, 0.07)
+    ;
 }
 
 .aboutbtn{
-    margin-top: 20px;
+    margin-top: 18px;
     background-color: #2d61ca;
     color: white;
     border: none;
     cursor: pointer;
     font-size: 1rem;
     padding: 8px 16px;
-    border-radius: .3rem;
+    border-radius: 2rem;
     line-height: 1;
     transition: all 0.1s;
+    font-family: 'roboto';
+    height: 40px;
+    width: 135px;
 }
 
 .aboutbtn:hover{
@@ -40,10 +82,17 @@
 }
 
 .noticias-inicio{
+    margin-top: 12px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+.prod-block{
+    padding-top: 0;
+    margin-top: -2px;
+    background: #F2EFEB;
 }
 
 .destacados-inicio{

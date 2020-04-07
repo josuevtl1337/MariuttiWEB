@@ -286,7 +286,7 @@ class Admin3 extends Component {
         else{
           if(this.state.display=="Sub_Rubro"){
             return(
-              <Grid container className="container per" spacing={2}>  
+              <Grid container  spacing={2}>  
               <Grid container justify="center" item xs={3}>
                 <Catalogo parentCallback={this.handleClick}/>  
                 <AddSubRubro handleUpload={this.handleUpload}/>
@@ -360,7 +360,7 @@ class Admin3 extends Component {
             );
           }else if(this.state.display=="Rubro"){
             return(
-              <Grid container className="container per" spacing={2}>  
+              <Grid container spacing={2}>  
               <Grid container justify="center" item xs={3}>
               <Catalogo parentCallback={this.handleClick}/>   
                 {/* <AddRubro /> */}
@@ -403,7 +403,7 @@ class Admin3 extends Component {
             );
           }else if(this.state.display=="Producto"){
             return(
-              <Grid container className="container per" spacing={2}>  
+              <Grid container spacing={2}>  
               <Grid container justify="center" item xs={3}>
               <Catalogo parentCallback={this.handleClick}/>   
                 <AddProducto sub_rubros={this.state.Sub_Rubro} handleUploadProducto={this.handleUploadProducto}/>
@@ -524,10 +524,9 @@ class Admin3 extends Component {
               </Grid>      
               </Grid>
             );
-          }
-          else if(this.state.display=="Noticias"){
+          }else if(this.state.display=="Noticias"){
             return(
-              <Grid container className="container per" spacing={2}>  
+              <Grid container spacing={2}>  
               <Grid container justify="center" item xs={3}>
               <Catalogo parentCallback={this.handleClick}/>   
                 <AddNoticia handleUploadNoticia={this.handleUploadNoticia}/>

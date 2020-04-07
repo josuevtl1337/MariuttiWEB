@@ -7,6 +7,7 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import PinterestIcon from '@material-ui/icons/Pinterest';
 import EntradaReciente from './EntradaReciente'
+import Divider from '@material-ui/core/Divider';
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
@@ -54,6 +55,7 @@ export default function Entrada(props) {
                 image="https://image.shutterstock.com/z/stock-photo-industrial-factory-in-mechanical-engineering-for-the-manufacture-of-transformers-interior-of-a-1064126297.jpg"
             />
             <Container>
+                
                 {noticiasArray.map((item, i) => {   
                 console.log(item.id)                           
                 if(search == item.id){
@@ -105,19 +107,20 @@ export default function Entrada(props) {
                                 <Grid item xs={12} md={3}>
                                     <div className="postsrecientes-paper">
                                         <h4 className="postsrecientes">Noticias Recientes</h4>
+                                        <Divider style={{}}/>
                                         <div className="entradasrecienteswrap">
-                                        {onlythree.map((item, i) => {                             
-                                            return (
-                                                <div onClick={()=>handlerOnClickRecientes(item.id)}>
-                                                <EntradaReciente                                      
-                                                    img={item.img}
-                                                    title={item.nombre}
-                                                    date={fechaParseada}
-                                                    key={i}
-                                                />    
-                                                </div>                                                                                                             
-                                            );                                                       
-                                        })}          
+                                            {onlythree.map((item, i) => {                             
+                                                return (
+                                                    <div onClick={()=>handlerOnClickRecientes(item.id)}>
+                                                    <EntradaReciente                                      
+                                                        img={item.img}
+                                                        title={item.nombre}
+                                                        date={fechaParseada}
+                                                        key={i}
+                                                    />    
+                                                    </div>                                                                                                             
+                                                );                                                       
+                                            })}          
                                         </div>
                                     </div>
                                     

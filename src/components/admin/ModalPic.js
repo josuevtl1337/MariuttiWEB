@@ -82,7 +82,7 @@ export default function SimpleModal(props) {
           onClose={handleClose}
         >
           <Container className={classes.paper}>
-          <div className="container">
+          <div>
             <h2>{nombre}</h2>
             <div className="imgwrap">
             <img src={url} className="prodimg"/>

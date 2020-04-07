@@ -9,6 +9,7 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import Container from '@material-ui/core/Container';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -27,13 +28,13 @@ function getModalStyle() {
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    position: 'absolute',
-    width: '80%',
-    height: '80%',
     backgroundColor: theme.palette.background.paper,
+    width:'50%',
     border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    display:'flex',
+    flexDirection:'column',
+    alignItems:'center',
+    justifyContent:'space-around'
   },
 }));
 
@@ -87,9 +88,8 @@ export default function SimpleModal(props) {
         open={open}
         onClose={handleClose}
       >
-        <div style={modalStyle} className={classes.paper}>
-
-
+        <Container className={classes.paper}>
+        <div>
         <FormControl className={classesSelect.formControl}>
 
         {/* Rubro   */}
@@ -127,6 +127,8 @@ export default function SimpleModal(props) {
         <br />
         <label>{ruta}</label>
         </div>
+        </Container>
+
       </Modal>
     </div>
   );

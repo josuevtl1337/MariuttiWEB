@@ -18,8 +18,8 @@ import Cfg from "./components/config/fbConfig";
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 // import fbConfig from "./components/config/fbConfig"
 // import firebase from "firebase/app";
+import { withRouter } from 'react-router'
 
-import { useSelector } from 'react-redux'
 
 class App extends Component {
   state = {
@@ -29,6 +29,27 @@ class App extends Component {
     dropdown:"",
     dropdownName:""
   };
+
+  // static propTypes = {
+  //   location: React.PropTypes.object.isRequired
+  // }
+
+  // ...
+
+  componentWillMount() {
+    this.props.history.listen(() => {
+      console.log('You changed the page to: ')
+    });
+  }
+  componentWillUnmount() {
+      this.unlisten();
+  }
+
+
+  // }
+  // onRouteChanged() {
+  //   console.log("ROUTE CHANGED");
+  // }
   sidenavTriggerClickHandler = () => {
     // this.setState((prevState) => {
     //   return {sidenavOpen: !prevState.sidenavOpen}
@@ -126,5 +147,4 @@ class App extends Component {
   }
 }
 
-export default App;
-
+export default withRouter(App)

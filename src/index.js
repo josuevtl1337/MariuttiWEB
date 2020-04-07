@@ -8,6 +8,7 @@ import firebase from "firebase/app"
 import { createStore, combineReducers, compose } from 'redux'
 import { ReactReduxFirebaseProvider, firebaseReducer } from 'react-redux-firebase'
 import rootReducer from "./components/reducers/rootReducer"
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 firebase.initializeApp({
     apiKey: "AIzaSyDDIfY80bf_0UaCa3vSYoSnT4HuOjfAGjI",
@@ -42,10 +43,11 @@ const rrfProps = {
 }
 
 ReactDOM.render(
-    
         <Provider store={store}>
             <ReactReduxFirebaseProvider {...rrfProps}>
-                <App />
+                <Router>
+                    <App />
+                </Router>
             </ReactReduxFirebaseProvider>
         </Provider>, 
     document.getElementById('root')

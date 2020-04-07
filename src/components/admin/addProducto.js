@@ -118,7 +118,7 @@ export default function SimpleModal(props) {
           onClose={handleClose}
         >
           <Container className={classes.paper}>
-          <div className="container">
+          <div >
                 {/* Sub-Rubro */}
                 <FormControl className={classesSelect.formControl}>
 

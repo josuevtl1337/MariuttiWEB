@@ -139,18 +139,6 @@ export default function SimpleModal(props) {
 
   return (
     <React.Fragment>
-      {/* <Fab 
-        // onClick={(event) => props.action.onClick(event, props.data)}
-        onClick={handleOpen}
-        size="small"                          
-        // aria-label="edit" 
-      >
-       
-      </Fab>    */}
-  
-      {/* <Fab  color="secondary" > 
-      <CreateIcon color="action" onClick={handleOpen}/>
-      </Fab>  */}
       <IconButton>
       <EditIcon color="action" onClick={handleOpen}/>
       </IconButton>
@@ -162,22 +150,9 @@ export default function SimpleModal(props) {
           onClose={handleClose}
         >
           <Container className={classes.paper}>
-          <div className="container">
+          <div >
                 {/* Sub-Rubro */}
                 <FormControl className={classesSelect.formControl}>
-{/* 
-                  <InputLabel id="subRubros">Sub-Rubros</InputLabel>
-
-                  <Select
-                    labelId="subRubroId"
-                    id="sub_rubro"
-                    value={subRubro ? subRubro : " "}
-                    onChange={handleChangeSub}
-                    defaultValue={props.datosProductos.data.sub_rubro}
-                  >         
-                    {retornando}
-                  </Select>  */}
-
                   <InputLabel htmlFor="uncontrolled-native">Sub Rubros</InputLabel>
                   <NativeSelect
                     id="sub_rubro"

@@ -15,6 +15,7 @@ import "./catalogoProductos.css"
 import { connect } from 'react-redux'
 
 
+
 const Productos = (props) => {
 
     //Hago la referencia para traer mis objetos Rubros, y Sub_Rubros
@@ -61,7 +62,7 @@ const Productos = (props) => {
             } else if (elemento.rubro == "r2") {
                 construccion.push([elemento.id, elemento.nombre])
             } else {
-                ferreteria.push(new Object([Object.values(elemento)]))
+                ferreteria.push([elemento.id, elemento.nombre])
             }
         })
         // props.trayendoCategorias(categorias);
