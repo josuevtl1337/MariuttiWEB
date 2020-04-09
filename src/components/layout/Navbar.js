@@ -13,6 +13,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 import MenuItem from '@material-ui/core/MenuItem';
+import Logo from '../../visuals/logoplanosmall-png'
 
 //ESTE NO SE ESTA RENDEREANDO EN CAMBIO BUSCAR NAVBARSTATELESS.JS
 class Navbar extends React.Component {
@@ -109,7 +110,8 @@ class Navbar extends React.Component {
                 </div>
                 <div className="navbar">
                     <Container className="barra">
-                        <Link to="/inicio"><img className="logo" src="http://www.mariutti.com.ar/images/logo-plano.png"/></Link>
+                        {/* <Link to="/inicio"><img className="logo" src="http://www.mariutti.com.ar/images/logo-plano.png"/></Link> */}
+                        <Link to="/inicio"><img className="logo" src={Logo}/></Link>
                         <Hidden mdDown className="displayend">
                             <div className={tabwrapclasses}>
                                 <Link to="/inicio">

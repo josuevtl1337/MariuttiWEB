@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
+
+.quienes-block{
+    width: 100%;
+    height: 650px;
+    display: flex;
+    
+}
+
+.quienes-text{
+    width: 28%;
+    background: #1E2E50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.quienes-title{
+    font-family: 'oswald';
+    font-size: 62px;
+    line-height: 62px;
+    color: white;
+    text-transform: uppercase;
+    width: min-content;
+    margin: 0;
+    animation: fadeIn 0.4s;
+}
+
+.quienes-p{
+    font-family: 'roboto condensed';
+    color: white;
+    font-size: 15px;
+    font-weight: 400;
+    width: 215px;
+    text-align: left;
+    margin-top: 32px;
+    margin-bottom: 8px;
+    line-height: 20px;
+    letter-spacing: 1px;
+}
+
+.aboutbtn.quienes-btn{
+    background: white;
+    color: #1E2E50;
+    font-size: 14px;
+    width: 200px;
+}
+
+.quienes-img{
+    background-image: url('../../../visuals/quienes-img.png');
+    width: 72%;
+    height: 100%;
+}
+
+/* Segunda parte */
+
+.familia-block{
+    background: #F2EFEC;
+    width: 100%;
+    height: 450px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
+}
+
+.familia-text{
+    width: 500px;
+}
+
+.quienes-title.familia{
+    width: max-content;
+    /* color: #F09797; */
+    color: #FDB913;
+    font-size: 42px;
+}
+
+.quienes-p.familia{
+    color: rgb(140, 137, 151);
+    font-weight: 400;
+    width: 500px;
+    margin: 0px;
+    margin-top: 32px;
+    font-family: 'roboto';
+    letter-spacing: 0.8px;
+}
+
+.familia-img{
+    height: 320px;
+}
+
+.quienes-contacto{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1E2E50;
+}
+
+.quienes-contacto > h2 {
+    font-family: 'oswald';
+    font-size: 42px;
+    color: white;
+    text-align: center;
+    width: min-content;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+}
+
+.quienes-contacto > h2:hover{
+    color: #FDB913;
+}
+
+@media only screen and (max-width: 1200px) {
+    .quienes-img{
+        display: none;
+    }
+
+    .quienes-text{
+        width: 100%;
+    }
+
+    .familia-block{
+        height: 800px;
+        flex-direction: column;
+    }
+
+    #first{
+        flex-direction: column-reverse;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .familia-img{
+        height: unset;
+        width: 95%;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+
+    .familia-block{
+        height: 800px;
+        width: 100%;
+    }
+
+    .familia-text{
+        width: 90%;
+        height: unset;
+    }
+    
+    .quienes-title.familia{
+        width: 100%;
+        text-align: center;
+    }
+
+    .quienes-p.familia{
+        text-align: center;
+        width: 100%;
+    }
+}
