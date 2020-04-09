@@ -1,7 +1,6 @@
 import React from 'react'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid';
-import HeroImageSmall from '../../layout/HeroImageSmall'
 import './Entrada.css'
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -50,10 +49,9 @@ export default function Entrada(props) {
     }
     return(
         <React.Fragment>
-            <HeroImageSmall
-                title="Noticias"
-                image="https://image.shutterstock.com/z/stock-photo-industrial-factory-in-mechanical-engineering-for-the-manufacture-of-transformers-interior-of-a-1064126297.jpg"
-            />
+            <div className="noticiasbanner">
+                <h2>Noticias</h2>
+            </div>
             <Container>
                 
                 {noticiasArray.map((item, i) => {   

@@ -1,7 +1,6 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import HeroImageSmall from "../../layout/HeroImageSmall"
+import './Noticias.css'
 import EntradaCard from './EntradaCard'
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
@@ -31,15 +30,13 @@ const Noticias = (props) => {
 
         <div className="noticiasbody">
 
-            <HeroImageSmall
-                title="Noticias"
-                image="https://image.shutterstock.com/z/stock-photo-industrial-factory-in-mechanical-engineering-for-the-manufacture-of-transformers-interior-of-a-1064126297.jpg"
-            />
+            <div className="noticiasbanner">
+                <h2>Noticias</h2>
+            </div>
             <Container>
                 
                 {/* Listado de todas las noticias */}
                 <div className="listado-entradas">
-                    <h2 className="subtitulo-noticias">Últimas Noticias</h2>
                     {noticiasArray.map((item, i) => {                             
                         return (
                                 <EntradaCard     

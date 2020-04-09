@@ -12,6 +12,8 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import CloseIcon from '@material-ui/icons/Close';
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
+import Logo from '../../visuals/logoplano-small.png'
+
 
 const NavBarStateLess = (props) => {
 
@@ -118,6 +120,7 @@ const NavBarStateLess = (props) => {
             <div className="navbar">
                 <Container className="barra">
                     <Link to="/inicio"><img className="logo" src="http://www.mariutti.com.ar/images/logo-plano.png"/></Link>
+                    <Link to="/inicio"><img className="logosmall" src={Logo}/></Link>
                     <Hidden mdDown className="displayend">
                         <div className={tabwrapclasses}>
                             <Link to="/inicio">

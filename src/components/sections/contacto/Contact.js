@@ -1,16 +1,31 @@
 import React from "react"
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      '& .MuiTextField-root': {
+        margin: theme.spacing(1),
+        width: '25ch',
+      },
+    },
+  }));
 
 const Contact = (props)=>{
-    // console.log(props);
-    // setTimeout(()=>{
-    //     // Redirecciono programaticamente hacia about 
-    //     props.history.push("/about")
-    // },2000);
+    const classes = useStyles();
+
     return (
-        <div className="container">
+        <form className={classes.root}>
+        <div>
             <h4 className="center">Contact</h4>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic, maiores necessitatibus. Nemo molestias quo at sunt dicta culpa, ipsum itaque aliquid, doloribus sequi quaerat perspiciatis voluptas fugit! Aspernatur, illum perspiciatis.</p>
+            <p>Lorem, icta culpa, ipsum itaque aliquid, doloribus se perspiciatis.</p>
+            <TextField required id="standard-required" label="Nombre" defaultValue="Empresa" />
+            <TextField required id="standard-required" label="Email"  defaultValue="empresa@empresa.com" />
+            <TextField required id="standard-required" label="Asunto" multiline rows="4" defaultValue="Hello..." />
+            <Button variant="contained" color="primary">Enviar</Button>
         </div>
+        </form>
     )
 }
 
