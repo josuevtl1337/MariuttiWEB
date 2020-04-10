@@ -109,9 +109,11 @@ class App extends Component {
     }
 
     if (window.location.href.includes('admin')) {
-      footer = null;
+      footer = null
+      navbar = null;
     } else {
-      footer = <Footer></Footer>
+      navbar = <Navbar sidenavClickHandler={this.sidenavTriggerClickHandler} buscando={this.buscandoResultado} dropdown={this.dropdownResultado}/>
+      footer = <Footer/>
     }
 
     return (

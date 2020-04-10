@@ -39,6 +39,7 @@ export default function ProductCarousel (props) {
             infinite={true}
             isPlaying={true}
             step={1}
+            lockOnWindowScroll={true}
         >
  
                 <Slider style={{height: 280}}>

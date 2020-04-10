@@ -286,86 +286,86 @@ class Admin3 extends Component {
         else{
           if(this.state.display=="Sub_Rubro"){
             return(
-              <Grid container  spacing={2}>  
-              <Grid container justify="center" item xs={3}>
-                <Catalogo parentCallback={this.handleClick}/>  
-                <AddSubRubro handleUpload={this.handleUpload}/>
-              </Grid>
-              <Grid item xs={9} >
-              <MaterialTable
-                      actions={[
-                        {
-                          icon: 'delete',
-                          tooltip: 'Borrar Producto',
-                          onClick: (event, rowData) => 
-                          {
-                            alert("You want to delete " + rowData.nombre)
-                            new Promise((resolve, reject) => {
-                              setTimeout(() => {
-                                {                             
-                                  const db = firebase.database();
-                                  const dbRef = db.ref("Sub_Rubro");
-                                  const refSB = dbRef.child(rowData.id) 
-                                  refSB.remove(); 
-                                  window.location.reload();                                
-                                }
-                                resolve()
-                              }, 1000)
-                            })
-                          }
-                        }
-                      ]}
-                      options={{
-                        search: true,
-                        sorting: false,
-                        columnsButton:true,
-                        paging:false,         
-                        }}
-                        columns={[
-                        { title: 'Id', field: 'id',  editable: 'never'
-                        },
-                        { title: 'Nombre', field: 'nombre'
-                        },
-                        { title: 'Rubro', field: 'rubro', lookup:{r2:"Obras y Contruccion", r1:"Maquinas y Herramientas",r3:"Ferretería Industrial"}
-                        },
-                        ]}
-                        data={this.state.Sub_Rubro}
-                        editable={{
-                          onRowUpdate: (newData, oldData) =>
-                            new Promise((resolve, reject) => {
-                              setTimeout(() => {
-                                {
-                                  const data = this.state.Sub_Rubro;
-                                  const index = data.indexOf(oldData);
-                                  data[index] = newData;
-                                  this.setState({ data }, () => resolve());
-                                  console.log(newData);
-                                  const db = firebase.database();
-                                  const dbRef = db.ref("Sub_Rubro");
-                                  const refSB = dbRef.child(data[index].id) 
-                                  refSB.update({
-                                    "nombre":newData.nombre,
-                                    "rubro":newData.rubro
-                                  })
-                                  
-                                }
-                                resolve()
-                              }, 1000)
-                            }),
-                        }}
-                        title="Sub_Rubros/"
-              />   
-              </Grid>      
+              <Grid container spacing={2}>  
+                <Grid container justify="center" item xs={12}>
+                  <Catalogo parentCallback={this.handleClick}/>  
+                  <AddSubRubro handleUpload={this.handleUpload}/>
+                </Grid>
+                <Grid item xs={12} >
+                  <MaterialTable
+                          actions={[
+                            {
+                              icon: 'delete',
+                              tooltip: 'Borrar Producto',
+                              onClick: (event, rowData) => 
+                              {
+                                alert("You want to delete " + rowData.nombre)
+                                new Promise((resolve, reject) => {
+                                  setTimeout(() => {
+                                    {                             
+                                      const db = firebase.database();
+                                      const dbRef = db.ref("Sub_Rubro");
+                                      const refSB = dbRef.child(rowData.id) 
+                                      refSB.remove(); 
+                                      window.location.reload();                                
+                                    }
+                                    resolve()
+                                  }, 1000)
+                                })
+                              }
+                            }
+                          ]}
+                          options={{
+                            search: true,
+                            sorting: false,
+                            columnsButton:true,
+                            paging:false,         
+                            }}
+                            columns={[
+                            { title: 'Id', field: 'id',  editable: 'never'
+                            },
+                            { title: 'Nombre', field: 'nombre'
+                            },
+                            { title: 'Rubro', field: 'rubro', lookup:{r2:"Obras y Contruccion", r1:"Maquinas y Herramientas",r3:"Ferretería Industrial"}
+                            },
+                            ]}
+                            data={this.state.Sub_Rubro}
+                            editable={{
+                              onRowUpdate: (newData, oldData) =>
+                                new Promise((resolve, reject) => {
+                                  setTimeout(() => {
+                                    {
+                                      const data = this.state.Sub_Rubro;
+                                      const index = data.indexOf(oldData);
+                                      data[index] = newData;
+                                      this.setState({ data }, () => resolve());
+                                      console.log(newData);
+                                      const db = firebase.database();
+                                      const dbRef = db.ref("Sub_Rubro");
+                                      const refSB = dbRef.child(data[index].id) 
+                                      refSB.update({
+                                        "nombre":newData.nombre,
+                                        "rubro":newData.rubro
+                                      })
+                                      
+                                    }
+                                    resolve()
+                                  }, 1000)
+                                }),
+                            }}
+                            title="Sub_Rubros/"
+                  />   
+                </Grid>      
               </Grid>
             );
           }else if(this.state.display=="Rubro"){
             return(
               <Grid container spacing={2}>  
-              <Grid container justify="center" item xs={3}>
+              <Grid container justify="center" item xs={12}>
               <Catalogo parentCallback={this.handleClick}/>   
                 {/* <AddRubro /> */}
               </Grid>
-              <Grid item xs={9} >
+              <Grid item xs={12} >
               <MaterialTable
                       actions={[
                         {
@@ -404,11 +404,11 @@ class Admin3 extends Component {
           }else if(this.state.display=="Producto"){
             return(
               <Grid container spacing={2}>  
-              <Grid container justify="center" item xs={3}>
+              <Grid container justify="center" item xs={12}>
               <Catalogo parentCallback={this.handleClick}/>   
                 <AddProducto sub_rubros={this.state.Sub_Rubro} handleUploadProducto={this.handleUploadProducto}/>
               </Grid>
-              <Grid item xs={9} >
+              <Grid item xs={12} >
               <MaterialTable
                       actions={[
                         {
@@ -527,11 +527,11 @@ class Admin3 extends Component {
           }else if(this.state.display=="Noticias"){
             return(
               <Grid container spacing={2}>  
-              <Grid container justify="center" item xs={3}>
+              <Grid container justify="center" item xs={12}>
               <Catalogo parentCallback={this.handleClick}/>   
                 <AddNoticia handleUploadNoticia={this.handleUploadNoticia}/>
               </Grid>
-              <Grid item xs={9} >
+              <Grid item xs={12} >
               <MaterialTable
                       actions={[
                         {

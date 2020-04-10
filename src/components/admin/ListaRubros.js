@@ -57,7 +57,7 @@ state={
           //     <TreeItem onClick={()=>{handleOnClick("Noticias")}} nodeId="4" label="NOTICIAS">
           //     </TreeItem>
           // </TreeView>    
-          <div>
+          <div className="listarubroswrap">
             <div onClick={()=>{handleOnClick("Rubro")}}>
               Rubros
             </div>
