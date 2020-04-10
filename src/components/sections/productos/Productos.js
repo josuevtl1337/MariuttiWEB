@@ -91,10 +91,11 @@ const Productos = (props) => {
         <React.Fragment>
             {/* banner */}
             {/* <div className="heroimg-small"/> */}
-            <HeroImageSmall 
-                title="Productos"
-                image='https://media.istockphoto.com/photos/set-of-hand-various-work-tools-on-grey-background-picture-id596042932'    
-            />
+            <div className="noticiasbanner prodlist">
+                <h2>
+                    Productos
+                </h2>
+            </div>
             <Container style={{zIndex: 100}}>
                 {/* Categorias  */}
                 <Grid container spacing={4}>
