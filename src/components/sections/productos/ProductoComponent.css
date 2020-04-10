@@ -95,6 +95,7 @@
     color: #8e8e8e;
     margin-bottom: 28px;
     max-width: 600px;
+    white-space: pre-line;
 }
 
 .aboutbtn.prodstock{

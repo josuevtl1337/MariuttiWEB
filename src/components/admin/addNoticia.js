@@ -68,7 +68,7 @@ export default function SimpleModal(props) {
 
   return (
     <React.Fragment>
-      <Fab size="small" color="secondary" aria-label="add" type="button" onClick={handleOpen}>
+      <Fab size="small" color="primary" aria-label="add" type="button" onClick={handleOpen}>
       <AddIcon />
       </Fab>
         <Modal
@@ -78,13 +78,13 @@ export default function SimpleModal(props) {
           onClose={handleClose}
         >
           <Container className={classes.paper}>
-          <div className="container">
+          <div>
                 {/* Sub-Rubro */}
                 <FormControl className={classesSelect.formControl}>      
                 {/* Nombre Noticia */}
                 <TextField id="standard-basic" label="Titulo Noticia" onChange={onChangeTitulo}/>
                 {/* Descripcion */}
-                <TextField id="standard-basic" label="Descripción" onChange={onChangeDescripcion}/>
+                <TextField id="standard-basic"  multiline rows="5" label="Descripción" onChange={onChangeDescripcion}/>
                 {/* {Imagen} */}
                 <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={handleFile} />
                 <label  htmlFor="icon-button-file">

@@ -111,10 +111,10 @@ class Navbar extends React.Component {
                 <div className="navbar">
                     <Container className="barra">
                         {/* <Link to="/inicio"><img className="logo" src="http://www.mariutti.com.ar/images/logo-plano.png"/></Link> */}
-                        <Link to="/inicio"><img className="logo" src={Logo}/></Link>
+                        <Link to="/"><img className="logo" src={Logo}/></Link>
                         <Hidden mdDown className="displayend">
                             <div className={tabwrapclasses}>
-                                <Link to="/inicio">
+                                <Link to="/">
                                     <Tab isActive={window.location.href.includes('inicio')} titulo="Inicio"/>
                                 </Link>
                                 <Link to="/nosotros">

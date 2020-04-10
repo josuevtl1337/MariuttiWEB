@@ -37,7 +37,7 @@ const NavBarStateLess = (props) => {
             } else if (elemento.rubro == "r2") {
                 construccion.push([elemento.id, elemento.nombre])
             } else {
-                ferreteria.push(new Object([Object.values(elemento)]))
+                ferreteria.push([elemento.id, elemento.nombre])
             }
         })
     }
@@ -96,6 +96,12 @@ const NavBarStateLess = (props) => {
             <li key={construccion[i][0]}  onClick={() => onChangeDropDown(construccion[i][0],construccion[i][1])}>{construccion[i][1]}</li>
         );
     }
+    let arrayFerreteria = [];
+    for(let i = 0; i < ferreteria.length; i++) {
+        arrayFerreteria.push(
+            <li key={ferreteria[i][0]}  onClick={() => onChangeDropDown(ferreteria[i][0],ferreteria[i][1])}>{ferreteria[i][1]}</li>
+        );
+    }
 
     return (
         <React.Fragment>
@@ -113,11 +119,11 @@ const NavBarStateLess = (props) => {
             </div>
             <div className="navbar">
                 <Container className="barra">
-                    <Link to="/inicio"><img className="logo" src="http://www.mariutti.com.ar/images/logo-plano.png"/></Link>
-                    <Link to="/inicio"><img className="logosmall" src={Logo}/></Link>
+                    <Link to="/"><img className="logo" src="http://www.mariutti.com.ar/images/logo-plano.png"/></Link>
+                    <Link to="/"><img className="logosmall" src={Logo}/></Link>
                     <Hidden mdDown className="displayend">
                         <div className={tabwrapclasses}>
-                            <Link to="/inicio">
+                            <Link to="/">
                                 <Tab isActive={window.location.href.includes('inicio')} titulo="Inicio"/>
                             </Link>
                             <Link to="/nosotros">
@@ -136,6 +142,7 @@ const NavBarStateLess = (props) => {
                                         <p className="drop-rubro">Obras y Construcción</p>
                                         {arrayConstruccion}
                                         <p className="drop-rubro">Ferretería Industrial</p>
+                                        {arrayFerreteria}
                                     </ul>                          
                                 </div>
                             </div>

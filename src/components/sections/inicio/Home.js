@@ -62,7 +62,7 @@ const Home = (props) => {
                     {'id':item.id,
                     'nombre': item.nombre,
                     'img':item.img,
-                    'subtitulo':item.subtitulo},
+                    'descripcion':item.descripcion},
                 )
             }                                                                                                    
         })
@@ -156,8 +156,7 @@ const Home = (props) => {
                     {/* Carousel de productos destacados */}
                     <div style={{width: '100%', marginTop:'0px', marginBottom: '50px'}}>
                         <div style={{maxWidth: 500, margin: '0 auto'}}>
-                        <ProductCarousel/>
-                        
+                        <ProductCarousel productos={reversedProduct} handlerOnClickProducto={handlerOnClickProducto}/>              
                         </div>
                     </div>
 

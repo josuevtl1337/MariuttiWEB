@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from 'react';
 import HomeDivider from '../inicio/HomeDivider'
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
 const ProductoComponent = (props) =>{
     var productosArray = [];
     const [url, setUrl] = React.useState('');
+    const [enlace, setEnlace] = React.useState("https://storage.googleapis.com/support-forums-api/attachment/thread-6219249-11716624739372349952.png");
     const classes = useStyles();
     //Hago la referencia para traer mis objetos Rubros, y Sub_Rubros
     useFirebaseConnect([

@@ -15,6 +15,7 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
 import CreateIcon from '@material-ui/icons/Create';
+import FormControl from '@material-ui/core/FormControl';
 
 
 const useStyles = makeStyles(theme => ({
@@ -32,14 +33,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const useStylesSelect = makeStyles(theme => ({
-  formControl: {
-    margin: theme.spacing(1)
-  }
-}));
 
 export default function SimpleModal(props) {
-  const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -48,13 +43,21 @@ export default function SimpleModal(props) {
     setNombre(props.datosNoticia.data.nombre); 
     setDescripcion(props.datosNoticia.data.descripcion); 
   };
+  const useStylesSelect = makeStyles(theme => ({
+    formControl: {
+      margin: theme.spacing(1)
+    }
+  }));
 
   const handleClose = () => {
     setOpen(false);
   };
-  const classesSelect = useStylesSelect();
+  const classes = useStyles();
   const [nombre, setNombre] = React.useState('');
   const [descripcion, setDescripcion] = React.useState('');
+  const classesSelect = useStylesSelect();
+
+
 
   const onChangeNombre = e => {
     setNombre(e.target.value);
@@ -83,22 +86,17 @@ export default function SimpleModal(props) {
           onClose={handleClose}
         >
           <Container className={classes.paper}>
-          <div className="container">                     
+          <div >   
+          <FormControl className={classesSelect.formControl}>           
                 {/* Nombre Producto */}
                 <TextField id="standard-basic" label="Nombre Producto" defaultValue={props.datosNoticia.data.nombre} onChange={onChangeNombre}/>
                 {/* Descripcion */}
-                <TextField id="standard-basic" label="Descripción" defaultValue={props.datosNoticia.data.descripcion} onChange={onChangeDescripcion}/>          
-                {/* {Imagen}
-                <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={handleFile} />
-                <label  htmlFor="icon-button-file">
-                  <IconButton  color="primary" aria-label="upload picture" component="span">
-                    <PhotoCamera />
-                  </IconButton>
-                </label> */}
+                <TextField id="standard-basic" label="Descripción" multiline rows="5" defaultValue={props.datosNoticia.data.descripcion} onChange={onChangeDescripcion}/>          
                 {/* Boton de enviar */}
                 <Button variant="contained" color="primary" onClick={handleOnClick}>
                   Enviar
                 </Button>
+                </FormControl>       
                 </div>
          </Container>     
         </Modal>
