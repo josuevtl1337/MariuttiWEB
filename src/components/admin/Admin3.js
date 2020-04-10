@@ -6,7 +6,9 @@ import "firebase/database";
 import "./admin.css"
 //Importar el storage
 import "firebase/firebase-storage";
-import firebase from "firebase/app"
+import firebase, { auth } from "firebase/app"
+import "firebase/auth";
+
 //Botones "ADD"
 import AddRubro from "./addRubro";
 import AddSubRubro from "./addSubRubro";
@@ -35,14 +37,18 @@ import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ImageRoundedIcon from '@material-ui/icons/ImageRounded';
+import "firebase/auth";
 
 //Progess
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 class Admin3 extends Component { 
   state = {
+    user: null,
     loading:true,
     loadingPic:true,
+    email:"",
+    password:"",
     data:[],
     Enlace:{},
     Rubro:[],
@@ -249,16 +255,12 @@ class Admin3 extends Component {
         })
       }, 2000);
       importingData();
-
-
-
   }
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.Producto !== this.state.Producto) {
-      console.log('pokemons state has changed.',prevState.Producto)
-      
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.Producto !== this.state.Producto) {
+  //     console.log('pokemons state has changed.',prevState.Producto) 
+  //   }
+  // }
   importingImg = (img) =>{
     let imagen = img;
     if (imagen) {
@@ -277,12 +279,18 @@ class Admin3 extends Component {
         });
     } 
   }
+  handlerSignOut = () =>{
+    const auth= firebase.auth();
+    auth.signOut().then(()=>{
+      console.log("user sign out")
+    })
+  }
   render(){ 
         if(this.state.loading){
           return (
           <Loading />
           );
-        }
+        }       
         else{
           if(this.state.display=="Sub_Rubro"){
             return(
@@ -290,6 +298,7 @@ class Admin3 extends Component {
                 <Grid container justify="center" item xs={12}>
                   <Catalogo parentCallback={this.handleClick}/>  
                   <AddSubRubro handleUpload={this.handleUpload}/>
+                  <button onClick={this.handlerSignOut}></button>
                 </Grid>
                 <Grid item xs={12} >
                   <MaterialTable
