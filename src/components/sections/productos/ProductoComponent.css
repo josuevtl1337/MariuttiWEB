@@ -155,10 +155,6 @@
     background-color: transparent;
 }
 
-.makeStyles-root-90 > header {
-    /* box-shadow:none; */
-}
-
 .MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.MuiPaper-elevation4{
     box-shadow: none;
 }
