@@ -43,29 +43,34 @@ state={
           color:'grey'
         };
         return (
-<TreeView
-          style={classTree}
-          defaultExpandIcon={<ChevronRightIcon />}
-          defaultCollapseIcon={<ExpandMoreIcon />}
-          >
-          {/* {this.state.rubros.map((item,key)=> {
-            return (
-                <TreeItem nodeId={key} label={item}>
-                  <TreeItem nodeId={key} label={item}>
-                  </TreeItem>
-                </TreeItem>
-
-            );
-          })} */}
-            <TreeItem onClick={()=>{handleOnClick("Rubro")}} nodeId="1" label="RUBRO">
-            </TreeItem>
-            <TreeItem onClick={()=>{handleOnClick("Sub_Rubro")}} nodeId="2" label="SUB RUBRO">
-            </TreeItem>
-            <TreeItem onClick={()=>{handleOnClick("Producto")}} nodeId="3" label="PRODUCTO">
-            </TreeItem>
-            <TreeItem onClick={()=>{handleOnClick("Noticias")}} nodeId="4" label="NOTICIAS">
-            </TreeItem>
-          </TreeView>    
+          // <TreeView
+          // style={classTree}
+          // defaultExpandIcon={<ChevronRightIcon />}
+          // defaultCollapseIcon={<ExpandMoreIcon />}
+          // >
+          //     <TreeItem onClick={()=>{handleOnClick("Rubro")}} nodeId="1" label="RUBRO">
+          //     </TreeItem>
+          //     <TreeItem onClick={()=>{handleOnClick("Sub_Rubro")}} nodeId="2" label="SUB RUBRO">
+          //     </TreeItem>
+          //     <TreeItem onClick={()=>{handleOnClick("Producto")}} nodeId="3" label="PRODUCTO">
+          //     </TreeItem>
+          //     <TreeItem onClick={()=>{handleOnClick("Noticias")}} nodeId="4" label="NOTICIAS">
+          //     </TreeItem>
+          // </TreeView>    
+          <div>
+            <div onClick={()=>{handleOnClick("Rubro")}}>
+              Rubros
+            </div>
+            <div onClick={()=>{handleOnClick("Sub_Rubro")}}>
+              Subrubros
+            </div>
+            <div onClick={()=>{handleOnClick("Producto")}}>
+              Productos
+            </div>
+            <div onClick={()=>{handleOnClick("Noticias")}}>
+              Noticias
+            </div>
+          </div>
         );
       }
   }

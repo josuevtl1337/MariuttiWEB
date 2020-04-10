@@ -13,7 +13,6 @@ import Contact from "./components/sections/contacto/Contact";
 import Noticias from "./components/sections/noticias/Noticias";
 import Entrada from "./components/sections/noticias/Entrada";
 import Admin from "./components/admin/Admin3";
-import AdminNav from "./components/admin/AdminNav";
 import Cfg from "./components/config/fbConfig";
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 // import fbConfig from "./components/config/fbConfig"
@@ -62,7 +61,7 @@ class App extends Component {
     let navbar;
     let backdrop;
     let sidenav;
-    let adminnav;
+    let footer;
     let maquinas = [];
     let cfg;
 
@@ -88,17 +87,14 @@ class App extends Component {
     }
 
     if (window.location.href.includes('admin')) {
-      adminnav = <AdminNav />
-      navbar = null;
+      footer = null;
     } else {
-      navbar = <Navbar sidenavClickHandler={this.sidenavTriggerClickHandler} buscando={this.buscandoResultado} dropdown={this.dropdownResultado}/>
-      adminnav = null
+      footer = <Footer></Footer>
     }
 
     return (
       <BrowserRouter>
         {cfg}
-        {adminnav}
         {navbar}
         {sidenav}
         {backdrop}
@@ -120,7 +116,7 @@ class App extends Component {
             path='/busqueda'
             render={(props) => <SearchResult {...props} busquedaResult={this.state.busqueda} />}
         />
-        <Footer></Footer>
+        {footer}
       </BrowserRouter>
     );
   }
