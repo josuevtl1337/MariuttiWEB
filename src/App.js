@@ -45,22 +45,16 @@ class App extends Component {
       this.unlisten();
   }
 
-
-  // }
-  // onRouteChanged() {
-  //   console.log("ROUTE CHANGED");
-  // }
   sidenavTriggerClickHandler = () => {
-    // this.setState((prevState) => {
-    //   return {sidenavOpen: !prevState.sidenavOpen}
-    // })
     if (this.state.sidenavOpen == false) {
       this.setState({sidenavOpen: true})
     } else {
       this.setState({sidenavOpen: false})
     }
   };
-
+  cerrandosidenav = () =>{
+    this.setState({sidenavOpen: false})
+  }
   backdropClickHandler = () => {
     this.setState({sidenavOpen: false})
   };
@@ -100,7 +94,7 @@ class App extends Component {
 
    
     cfg =  <Cfg trayendoCategorias={trayendoCategorias} />
-    sidenav = <Sidenav itemClickHandler={this.sidenavTriggerClickHandler} show={this.state.sidenavOpen}/>
+    sidenav = <Sidenav itemClickHandler={this.sidenavTriggerClickHandler} show={this.state.sidenavOpen} cerrando={this.cerrandosidenav}/>
 
     if (this.state.sidenavOpen) {
       

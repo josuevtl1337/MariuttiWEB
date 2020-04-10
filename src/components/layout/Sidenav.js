@@ -26,40 +26,43 @@ const SideNav = props => {
     const changeClasses = () => {
         sidenavClasses = 'side-nav'
     }
+    const cerrandosidenav = () =>{
+        sidenavClasses = 'side-nav'
+        console.log("asd")
+    }
     
     return(
     <div className={sidenavClasses} >
         <img className="logoside" src="http://www.mariutti.com.ar/images/logo-plano.png"/>
-        <List component="side-nav" aria-label="">
-
+        <List>
             <Divider/>
             <Link to="/">
                 <ListItem button >
-                    <ListItemText click={props.itemClickHandler} className="buttons" primary="Inicio" />
+                    <ListItemText onClick={props.cerrando} click={props.itemClickHandler} className="buttons" primary="Inicio" />
                 </ListItem>
             </Link>
             <Divider/>
             <Link to="/nosotros">
                 <ListItem button>
-                    <ListItemText className="buttons" primary="Quienes Somos" />
+                    <ListItemText onClick={props.cerrando} className="buttons" primary="Quienes Somos" />
                 </ListItem>
             </Link>
             <Divider/>
             <Link to="/Productos">
                 <ListItem button>
-                    <ListItemText className="buttons" primary="Productos" />
+                    <ListItemText onClick={props.cerrando} className="buttons" primary="Productos" />
                 </ListItem>
             </Link>
             <Divider/>
             <Link to="/Noticias">
                 <ListItem button>
-                    <ListItemText className="buttons" primary="Noticias" />
+                    <ListItemText onClick={props.cerrando} className="buttons" primary="Noticias" />
                 </ListItem>
             </Link>
             <Divider/>
             <Link to="/Contact">
                 <ListItem button>
-                    <ListItemText className="buttons" primary="Contacto" />
+                    <ListItemText onClick={props.cerrando} className="buttons" primary="Contacto" />
                 </ListItem>
             </Link>
             <Divider/>
