@@ -13,6 +13,7 @@ import PinterestIcon from '@material-ui/icons/Pinterest';
 //Importar el storage
 import "firebase/firebase-storage";
 import firebase from "firebase/app"
+import ProductoTabs from './ProductoTabs'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -74,27 +75,28 @@ const ProductoComponent = (props) =>{
                                 <div className="product-block">
                                     <div className="left">
                                         <img className="singleprod-img" src={url} />
-                                        <div className="divline"/>
-                                        <h4>Compartir</h4>
-                                        <div className="share-wrap">
-                                            <FacebookIcon className="share-icon"/>
-                                            <TwitterIcon className="share-icon"/>
-                                            <PinterestIcon className="share-icon"/>
-                                        </div>
                                     </div>
                                     <div className="right">
                                         <h3 className="singleprod-title">{item.nombre}</h3>
-                                        <p className="singleprod-desc">{item.descripcion}</p>  
-                                        <iframe 
-                                            width="450"
-                                            height="250"
-                                            src={item.enlace}
-                                            frameborder="0" 
-                                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-                                            allowfullscreen
+                                        <p className="singleprod-sub">{item.subtitulo}</p>
+                                        <div className="divline" style={{marginLeft: 0, marginRight: 0, width: '100%'}}></div>
+                                        <ProductoTabs
+                                            descripcion={item.descripcion}
+                                            enlace={item.enlace}
                                         />
-                                        <a href={item.enlace} className="singleprod-enlace">enlace original</a>  
                                         
+                                        <button className="aboutbtn prodstock">
+                                                Consultar Stock
+                                        </button>   
+
+                                        <div className="share">
+                                            <h4 className="compartir">Compartir:</h4>
+                                            <div className="shareicons">
+                                                <FacebookIcon className="share-icon"/>
+                                                <TwitterIcon className="share-icon"/>
+                                                <PinterestIcon className="share-icon"/>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>   
                                 <HomeDivider title="Productos Relacionados"/>

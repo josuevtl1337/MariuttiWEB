@@ -37,6 +37,7 @@ class App extends Component {
   // ...
 
   componentWillMount() {
+    // this.props.history.push("/inicio");
     this.props.history.listen(() => {
       console.log('You changed the page to: ')
     });
@@ -124,7 +125,7 @@ class App extends Component {
         {sidenav}
         {backdrop}
         <Switch>
-        <Route exact path="/inicio" component={Home} />
+        <Route exact path="/" component={Home} />
         <Route path="/nosotros" component={About} />
         {/* <Route path="/productos" component={productosComponent} />  */}
         <Route path="/producto" component={ProductoComponent} />

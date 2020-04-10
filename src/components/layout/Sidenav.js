@@ -33,7 +33,7 @@ const SideNav = props => {
         <List component="side-nav" aria-label="">
 
             <Divider/>
-            <Link to="/inicio">
+            <Link to="/">
                 <ListItem button >
                     <ListItemText click={props.itemClickHandler} className="buttons" primary="Inicio" />
                 </ListItem>
