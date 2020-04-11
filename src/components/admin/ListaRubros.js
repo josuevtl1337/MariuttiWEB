@@ -5,7 +5,9 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
 import  "./ListaRubros.css"
 import Loading from "./Loading"
-
+import Catalogo from './ListaRubros'
+import CancelIcon from '@material-ui/icons/Cancel';
+import CloseSharpIcon from '@material-ui/icons/CloseSharp';
 
 class ListaRubros extends Component {
 state={
@@ -70,6 +72,9 @@ state={
             <div onClick={()=>{handleOnClick("Noticias")}}>
               Noticias
             </div>
+            <div>
+            <CloseSharpIcon color="error" fontSize="large" onClick={this.props.close}/>
+            </div>        
           </div>
         );
       }

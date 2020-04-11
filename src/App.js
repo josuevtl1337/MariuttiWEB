@@ -12,8 +12,8 @@ import ProductoComponent from "./components/sections/productos/ProductoComponent
 import Contact from "./components/sections/contacto/Contact";
 import Noticias from "./components/sections/noticias/Noticias";
 import Entrada from "./components/sections/noticias/Entrada";
-import Admin from "./components/admin/Admin3";
-import Login from "./components/admin/Login";
+// import Admin from "./components/admin/Admin3";
+import Login from "./components/admin/Admin3";
 import Cfg from "./components/config/fbConfig";
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 // import fbConfig from "./components/config/fbConfig"
@@ -38,12 +38,12 @@ class App extends Component {
 
   componentWillMount() {
     // this.props.history.push("/inicio");
-    this.props.history.listen(() => {
-      console.log('You changed the page to: ')
-    });
+    // this.props.history.listen(() => {
+    //   console.log('You changed the page to: ')
+    // });
   }
   componentWillUnmount() {
-      this.unlisten();
+      // this.unlisten();
   }
 
   sidenavTriggerClickHandler = () => {
@@ -102,7 +102,7 @@ class App extends Component {
       // sidenav = <Sidenav itemClickHandler={this.sidenavTriggerClickHandler} show={this.state.sidenavOpen}/>
     }
 
-    if (window.location.href.includes('admin')) {
+    if (window.location.href.includes('login')) {
       footer = null
       navbar = null;
     } else {
@@ -125,7 +125,6 @@ class App extends Component {
         <Route path="/noticias" component={Noticias} />
         <Route path="/entrada" component={Entrada} />
         <Route path="/login" component={Login} />
-        <Route path="/admin" component={Admin} />
         </Switch>
         <Route
             path='/productos'

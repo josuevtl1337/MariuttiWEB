@@ -1,59 +1,38 @@
-import React, { Component } from 'react'
-//Importar el storage
-import "firebase/firebase-storage";
-import firebase from "firebase/app"
-import "firebase/auth";
+import React, { useState, useEffect } from 'react';
+import  'firebase/database'
+import "./admin.css"
+import 'firebase/auth'
+//MaterialUi
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 
-class Login extends Component { 
-    state = {
-        user: null,
-        loading:true,
-  };
-    componentDidMount(){
-        firebase.auth().onAuthStateChanged(user => {
-            this.setState({ user });
-            if (this.state.user) {
-                console.log("user logueado");
-                this.props.history.push("/admin");
-            }
-        })
+const Login = (props) => {
+    const [user, setUser] = useState(null);
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const handleOnchangePW = (e) =>{
+        setPassword(e.target.value);
+      }
+    const handleOnchangeEmail = (e) =>{
+    setEmail(e.target.value);
     }
-    handleOnchangePW = (e) =>{
-        this.setState({
-          password: e.target.value
-        });
-      }
-      handleOnchangeEmail = (e) =>{
-        this.setState({
-          email: e.target.value
-        });
-      }
-      handleSubmitDragon = () => {
-        const auth= firebase.auth();
-        console.log("email: ",this.state.email, " pass:",this.state.password);
-        auth.signInWithEmailAndPassword(this.state.email,this.state.password).then(cred=>{
-          console.log(cred.user);
-      })
+    const handleSubmit = () =>{
+        props.handleSubmitDragon(email,password);
     }
-    render(){
-        return(
-            <Container>
-                <div className="contactblock">
-                <div>
-                    <form className="contactform">
-                        <h4 className="center">Admin Login</h4>
-                        <TextField required id="standard-required" label="Email"  onChange={this.handleOnchangeEmail} defaultValue="" />
-                        <TextField required id="standard-required" type="password" label="Password" onChange={this.handleOnchangePW} defaultValue="" />   
-                        <Button variant="contained" color="primary" onClick={this.handleSubmitDragon}>Enviar</Button>
-                    </form>
-                </div>
-                </div>
-            </Container>        
-        )
-      }
+      return(
+        <Container>
+            <div className="contactblock">
+                <form className="loginform">
+                    <h4 className="center">Login Admin</h4>
+                    <h4 style={{color: "red"}} className="center">{props.error}</h4>
+                    <TextField required id="standard-required" label="Email"  onChange={handleOnchangeEmail} defaultValue="" />
+                    <TextField required id="standard-required" type="password" label="Password" onChange={handleOnchangePW} defaultValue="" />   
+                    <Button variant="contained" color="primary" onClick={handleSubmit}>Enviar</Button>
+                </form>         
+            </div>
+        </Container>   
+        ) 
 }
-
 export default Login;
+

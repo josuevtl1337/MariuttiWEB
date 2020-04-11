@@ -22,7 +22,7 @@ export default function EntradaMini (props) {
     }
 
     return(
-        <div className="entradamini">
+        <div className="entradamini" onClick={props.handlerOnClickNoticia}>
             <div className="entradamini-imgwrap">
                 <img src={url} className="entradacard-img"/>
             </div>

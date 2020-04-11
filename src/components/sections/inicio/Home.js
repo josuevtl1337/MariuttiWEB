@@ -72,10 +72,15 @@ const Home = (props) => {
         console.log(onlyProductos);
         console.log(only4Productos);
     }
-    //Cambiando el history
+    //Cambiando el history Para los Productos
     const handlerOnClickProducto = (id) =>{
         // e.preventDefault();
         props.history.push("/producto?" + id);
+    }
+    //Cambiando el history Para las Noticias
+    const handlerOnClickNoticia = (id) =>{
+        // e.preventDefault();
+        props.history.push("/entrada?" + id);
     }
 
     return (
@@ -165,7 +170,8 @@ const Home = (props) => {
                     <div className="noticias-inicio">
                         {onlythree.map((item, i) => {                             
                             return (
-                                <EntradaMini                                      
+                                <EntradaMini 
+                                    handlerOnClickNoticia={()=>{handlerOnClickNoticia(item.id)}}                                     
                                     img={item.img}
                                     title={item.nombre}
                                     text={item.descripcion}
@@ -178,7 +184,8 @@ const Home = (props) => {
                     <div className="noticias-inicio-celu">
                         {onlythree.map((item, i) => {                             
                             return (
-                                <EntradaCelu                                      
+                                <EntradaCelu 
+                                    handlerOnClickNoticia={()=>{handlerOnClickNoticia(item.id)}}                                       
                                     img={item.img}
                                     title={item.nombre}
                                     date={item.createdAt}
