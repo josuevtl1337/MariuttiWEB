@@ -84,7 +84,7 @@ const Home = (props) => {
                 title="al servicio de la construccion"
                 // text="Más de 50 años brindando soluciones para el hogar, la construcción y la industria"
                 // text="La ferretería industrial más completa de la región"
-                image="https://miro.medium.com/max/9856/1*gAG21NFA76ZlCbtK6SayVQ.jpeg" 
+                image="https://miro.medium.com/max/9856/1*gAG21NFA76ZlCbtK6SayVQ.jpeg"
             />
 
             <img src={BlueTriangle} className="bluetriangle"/>

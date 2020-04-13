@@ -95,7 +95,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #1E2E50;
+    background: #293C64;
 }
 
 .quienes-contacto > h2 {
@@ -107,6 +107,14 @@
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.2s ease-out;
+}
+
+.quienes-block.hoy{
+    flex-direction: row-reverse;
+}
+
+.quienes-img.hoy{
+    background-image: url('../../../visuals/quieneshoy-img.png');
 }
 
 .quienes-contacto > h2:hover{

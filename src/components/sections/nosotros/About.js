@@ -58,7 +58,25 @@ const About = () => {
                         Asimismo, dispone de un depósito sectorizado muy importante, pudiendo abastecer a grandes empresas y a pequeños comercios del rubro ferretero.
                     </p>
                 </div>
-                
+            </div>
+
+            <div className="quienes-block hoy">
+                <div className="quienes-text">
+                    <h2 className="quienes-title">
+                        Hoy
+                    </h2>
+                    <p className="quienes-p">
+                        Con el objetivo de estar presentes en toda obra constructiva 
+                        y en cada hogar, MARIUTTI HNOS SRL continúa incorporando conocimientos 
+                        y experiencias, "base para comprender, solucionar y ofrecer lo que el 
+                        cliente necesita"
+                    </p>
+                    <button className="aboutbtn quienes-btn">
+                        Últimas Novedades
+                    </button>
+                </div>
+
+                <div className="quienes-img hoy" />
             </div>
 
             <div className="quienes-contacto">

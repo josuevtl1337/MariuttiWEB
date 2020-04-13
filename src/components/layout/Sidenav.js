@@ -8,15 +8,8 @@ import './sidenav.css'
 
 const SideNav = props => {
 
-    // const [sidenavClasses, setSidenavClasses] = React.useState("side-nav");
-
     let sidenavClasses = 'side-nav';
     
-    // if (props.show) {
-    //     setSidenavClasses("side-nav open")
-    // } else {
-    //     setSidenavClasses("side-nav")
-    // }
     if (props.show) {
         sidenavClasses = 'side-nav open'
     } else {
@@ -60,7 +53,7 @@ const SideNav = props => {
                 </ListItem>
             </Link>
             <Divider/>
-            <Link to="/Contact">
+            <Link to="/Contacto">
                 <ListItem button>
                     <ListItemText onClick={props.cerrando} className="buttons" primary="Contacto" />
                 </ListItem>

@@ -7,26 +7,6 @@ import ProductoCard from '../sections/productos/ProductoCard.js'
 import SlideWrapper from './SlideWrapper.js'
 
 export default function ProductCarousel (props) {
-  
-    // if(isLoaded(productos)){
-    //     productosArray = Object.values(productos);
-    //     // Reversed para que los mapee por el ultimo cargado y luego mapeo los ultimos 3 con slice (crotada?);
-    //     productosArray.map((item, i) => { 
-    //         if(item.off == true){ 
-    //             onlyProductos.push(
-    //                 {'id':item.id,
-    //                 'nombre': item.nombre,
-    //                 'img':item.img,
-    //                 'subtitulo':item.subtitulo},
-    //             )
-    //         }                                                                                                    
-    //     })
-    //     reversedProduct = onlyProductos.reverse(); 
-    //     only4Productos = reversedProduct.slice(0,4);
-    //     console.log(productosArray);
-    //     console.log(onlyProductos);
-    //     console.log(only4Productos);
-    // }
 
     
     return(
