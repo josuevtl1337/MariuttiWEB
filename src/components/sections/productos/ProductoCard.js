@@ -1,4 +1,4 @@
-import  React from 'react';
+import React, { useState, useEffect  } from "react"
 import { makeStyles } from '@material-ui/core/styles';
 import './ProductoCard.css'
 import Fab from '@material-ui/core/Fab';
@@ -25,6 +25,10 @@ const useStyles = makeStyles({
 
 
 export default function MediaCard(props) {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+  
   const classes = useStyles();
   const [url, setUrl] = React.useState('');
 

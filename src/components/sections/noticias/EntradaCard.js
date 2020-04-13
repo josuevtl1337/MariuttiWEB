@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import './EntradaCard.css'
 //Importar el storage
 import "firebase/firebase-storage";
@@ -6,6 +6,9 @@ import firebase from "firebase/app"
 
 
 export default function EntradaCard (props) {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
 
     const [url, setUrl] = React.useState('');
 

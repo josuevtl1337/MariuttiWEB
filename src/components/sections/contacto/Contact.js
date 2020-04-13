@@ -1,14 +1,16 @@
-import React from "react"
+import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import './Contact.css'
 
 const Contact = (props)=>{
-    
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
     return (
       <React.Fragment>
         <div className="noticiasbanner contact">
           <h2>
-            Contactanos
+            Contacto
           </h2>
         </div>
         <div className="contactblock">

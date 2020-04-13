@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from 'react';
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 import './Home.css'
@@ -30,6 +30,9 @@ const Home = (props) => {
         { path: 'Noticia' },
         { path: 'Producto' }
     ])
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
     var noticiasArray = [];
     var reversed=[];
     var onlythree = [];

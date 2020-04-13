@@ -1,9 +1,17 @@
-import React from "react"
+import React, { useState, useEffect } from 'react';
 import './About.css'
 import FactoryImg from '../../../visuals/factory.png'
 import WorkerImg from '../../../visuals/logistics.png'
 
-const About = () => {
+const About = (props) => {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+    //Cambiando el history Para Quienes somos
+    const handlerOnClick = (param) =>{
+        // e.preventDefault();
+        props.history.push("/"+param);
+    }
     return (
         <React.Fragment>
             <div className="quienes-block">
@@ -16,7 +24,7 @@ const About = () => {
                         desde el año 1969, asesoramiento técnico y soluciones para el hogar, 
                         para el sector de la construcción y la industria.
                     </p>
-                    <button className="aboutbtn quienes-btn">
+                    <button className="aboutbtn quienes-btn" onClick={()=>{handlerOnClick("productos")}}>
                         Mirá nuestro catálogo
                     </button>
                 </div>
@@ -71,7 +79,7 @@ const About = () => {
                         y experiencias, "base para comprender, solucionar y ofrecer lo que el 
                         cliente necesita"
                     </p>
-                    <button className="aboutbtn quienes-btn">
+                    <button className="aboutbtn quienes-btn" onClick={()=>{handlerOnClick("noticias")}}>
                         Últimas Novedades
                     </button>
                 </div>
@@ -80,7 +88,7 @@ const About = () => {
             </div>
 
             <div className="quienes-contacto">
-                <h2>Contactanos</h2>
+                <h2 onClick={()=>{handlerOnClick("contacto")}}>Contactanos</h2>
             </div>
 
         </React.Fragment>
