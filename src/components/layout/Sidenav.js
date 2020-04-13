@@ -41,19 +41,19 @@ const SideNav = props => {
                 </ListItem>
             </Link>
             <Divider/>
-            <Link to="/Productos">
+            <Link to="/productos">
                 <ListItem button>
                     <ListItemText onClick={props.cerrando} className="buttons" primary="Productos" />
                 </ListItem>
             </Link>
             <Divider/>
-            <Link to="/Noticias">
+            <Link to="/noticias">
                 <ListItem button>
                     <ListItemText onClick={props.cerrando} className="buttons" primary="Noticias" />
                 </ListItem>
             </Link>
             <Divider/>
-            <Link to="/Contacto">
+            <Link to="/contacto">
                 <ListItem button>
                     <ListItemText onClick={props.cerrando} className="buttons" primary="Contacto" />
                 </ListItem>

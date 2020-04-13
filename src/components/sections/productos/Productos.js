@@ -93,7 +93,7 @@ const Productos = (props) => {
             {/* <div className="heroimg-small"/> */}
             <div className="noticiasbanner prodlist">
                 <h2>
-                    Productos
+                    Catalogo
                 </h2>
             </div>
             <Container style={{zIndex: 100}}>

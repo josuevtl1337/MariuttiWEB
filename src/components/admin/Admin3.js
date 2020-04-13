@@ -1,14 +1,22 @@
 import React, { Component } from 'react'
-import MaterialTable from 'material-table'
-import Catalogo from './ListaRubros'
-import Grid from '@material-ui/core/Grid';
-import "firebase/database";
 import "./admin.css"
-//Importar el storage
+//Firebase
 import "firebase/firebase-storage";
 import firebase from "firebase/app"
+import "firebase/database";
+import 'firebase/auth'
+
+//Material UI
+import MaterialTable from 'material-table'
+import Grid from '@material-ui/core/Grid';
+
+//Progess
+import CircularProgress from '@material-ui/core/CircularProgress';
+//ListaRubros
+import Catalogo from './ListaRubros'
+import Login from "./Login"
+
 //Botones "ADD"
-import AddRubro from "./addRubro";
 import AddSubRubro from "./addSubRubro";
 import AddProducto from "./addProducto";
 import AddNoticia from "./addNoticia";
@@ -16,43 +24,72 @@ import EditProducto from "./EditProducto";
 import EditNoticia from "./EditNoticia";
 import Loading from "./Loading";
 import ModalPic from "./ModalPic"
-//Botones
-import Button from '@material-ui/core/Button';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-//TreeView
-import TreeView from '@material-ui/lab/TreeView';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import TreeItem from '@material-ui/lab/TreeItem';
 //Redux
 import { connect } from "react-redux";
-
-//Iconos
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import ImageRoundedIcon from '@material-ui/icons/ImageRounded';
-
-//Progess
-import CircularProgress from '@material-ui/core/CircularProgress';
 
 class Admin3 extends Component { 
   state = {
+    user: null,
     loading:true,
-    loadingPic:true,
-    data:[],
-    Enlace:{},
     Rubro:[],
     Sub_Rubro:[],
     Categoria:[],
     Noticia:[],
     Producto:[],
+    email:"",
+    password:"",
+    data:[],
+    Enlace:{},
     display:"Rubro",
-    url: "https://storage.googleapis.com/support-forums-api/attachment/thread-6219249-11716624739372349952.png"
+    displayError:""
   };
+  componentDidMount(){
+    const db = firebase.database();
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ user });
+    })
+    console.log("componente montado")
+
+    //Importo todos los datos necesarios a variables de una sola vez.
+     const importingData = () =>{
+        const dbRefRubro = db.ref("Rubro");
+        dbRefRubro.on("child_added", snapshot => {
+          console.log(snapshot.val())
+          this.setState({
+            Rubro: this.state.Rubro.concat(snapshot.val())
+          });
+          console.log(this.state.Rubro)
+        });
+        const dbRefSub_Rubro = db.ref("Sub_Rubro");
+        dbRefSub_Rubro.on("child_added", snapshot => {
+          this.setState({
+            Sub_Rubro: this.state.Sub_Rubro.concat(snapshot.val())
+          });
+        });
+        const dbRefProducto = db.ref("Producto");
+        dbRefProducto.on("child_added", snapshot => {
+          this.setState({
+            Producto: this.state.Producto.concat(snapshot.val()),
+            Enlace: this.state.Producto.enlace
+          });
+        });
+        const dbRefNoticia = db.ref("Noticia");
+        dbRefNoticia.on("child_added", snapshot => {
+          this.setState({
+            Noticia: this.state.Noticia.concat(snapshot.val())
+          });
+        });       
+      }
+      //Doy un delay de 2segundos para cargar los datos
+      setTimeout(() => {
+        this.setState({
+          loading:false
+        })
+      }, 2000);
+      importingData();
+  }
   //Este método sirve para cambiar la tabla dependiendo a cual le das click
   handleClick = (param) =>{
     this.setState({
@@ -202,61 +239,9 @@ class Admin3 extends Component {
       "descripcion":descripcion
     }).then(()=>window.location.reload());
 }
-  componentDidMount(){
-    const db = firebase.database();
-    var Xmas95 = new Date();
-    var registro = Date.now();
-    var day = Xmas95.getDate();
-    var month = Xmas95.getMonth() + 1;
-    var year = Xmas95.getFullYear();
-    console.log("hoy es: ",day, month,year);
-    console.log(Xmas95);
-    console.log(Xmas95);
-    console.log(registro);
-    //Importo todos los datos necesarios a variables de una sola vez.
-    const importingData = () =>{
-        const dbRefRubro = db.ref("Rubro");
-        dbRefRubro.on("child_added", snapshot => {
-          this.setState({
-            Rubro: this.state.Rubro.concat(snapshot.val())
-          });
-        });
-        const dbRefSub_Rubro = db.ref("Sub_Rubro");
-        dbRefSub_Rubro.on("child_added", snapshot => {
-          this.setState({
-            Sub_Rubro: this.state.Sub_Rubro.concat(snapshot.val())
-          });
-        });
-        const dbRefProducto = db.ref("Producto");
-        dbRefProducto.on("child_added", snapshot => {
-          this.setState({
-            Producto: this.state.Producto.concat(snapshot.val()),
-            Enlace: this.state.Producto.enlace
-          });
-        });
-        const dbRefNoticia = db.ref("Noticia");
-        dbRefNoticia.on("child_added", snapshot => {
-          this.setState({
-            Noticia: this.state.Noticia.concat(snapshot.val())
-          });
-        });
-        
-      }
-      //Doy un delay de 2segundos para cargar los datos
-      setTimeout(() => {
-        this.setState({
-          loading:false
-        })
-      }, 2000);
-      importingData();
-
-
-
-  }
+  
   componentDidUpdate(prevProps, prevState) {
     if (prevState.Producto !== this.state.Producto) {
-      console.log('pokemons state has changed.',prevState.Producto)
-      
     }
   }
   importingImg = (img) =>{
@@ -277,18 +262,41 @@ class Admin3 extends Component {
         });
     } 
   }
+  handlerSignOut = () =>{
+    const auth= firebase.auth();
+    auth.signOut().then(()=>{
+      console.log("user sign out")
+    })
+  }
+  handleSubmitDragon = (email,password) =>{
+    const auth= firebase.auth();
+    auth.signInWithEmailAndPassword(email,password).then(cred =>{
+      console.log(cred.user);
+    }).catch(err=>{
+      this.setState({
+        displayError: err.message
+      })
+    })
+
+  }
   render(){ 
         if(this.state.loading){
           return (
-          <Loading />
+          <Loading/>
           );
         }
+        if(this.state.user==null){
+          return(
+            <Login handleSubmitDragon={this.handleSubmitDragon} error={this.state.displayError}/> 
+          )
+        }       
         else{
           if(this.state.display=="Sub_Rubro"){
+            console.log(this.state.Sub_Rubro);
             return(
               <Grid container spacing={2}>  
                 <Grid container justify="center" item xs={12}>
-                  <Catalogo parentCallback={this.handleClick}/>  
+                  <Catalogo parentCallback={this.handleClick} close={this.handlerSignOut} />  
                   <AddSubRubro handleUpload={this.handleUpload}/>
                 </Grid>
                 <Grid item xs={12} >
@@ -362,7 +370,7 @@ class Admin3 extends Component {
             return(
               <Grid container spacing={2}>  
               <Grid container justify="center" item xs={12}>
-              <Catalogo parentCallback={this.handleClick}/>   
+              <Catalogo parentCallback={this.handleClick} close={this.handlerSignOut}/>   
                 {/* <AddRubro /> */}
               </Grid>
               <Grid item xs={12} >
@@ -405,7 +413,7 @@ class Admin3 extends Component {
             return(
               <Grid container spacing={2}>  
               <Grid container justify="center" item xs={12}>
-              <Catalogo parentCallback={this.handleClick}/>   
+              <Catalogo parentCallback={this.handleClick} close={this.handlerSignOut}/>   
                 <AddProducto sub_rubros={this.state.Sub_Rubro} handleUploadProducto={this.handleUploadProducto}/>
               </Grid>
               <Grid item xs={12} >
@@ -528,7 +536,7 @@ class Admin3 extends Component {
             return(
               <Grid container spacing={2}>  
               <Grid container justify="center" item xs={12}>
-              <Catalogo parentCallback={this.handleClick}/>   
+              <Catalogo parentCallback={this.handleClick} close={this.handlerSignOut}/>   
                 <AddNoticia handleUploadNoticia={this.handleUploadNoticia}/>
               </Grid>
               <Grid item xs={12} >
