@@ -24,7 +24,7 @@ const HeroImage = (props) => {
                             {props.text}
                         </p>
 
-                        <button className="herobtn">Mirá nuestro catálogo</button>
+                        <button className="herobtn" onClick={props.handlerOnClickCatalogo}>Mirá nuestro catálogo</button>
                     </div>
                     
                 </div>

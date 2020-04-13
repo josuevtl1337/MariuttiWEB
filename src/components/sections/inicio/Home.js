@@ -82,10 +82,21 @@ const Home = (props) => {
         // e.preventDefault();
         props.history.push("/entrada?" + id);
     }
+    //Cambiando el history Para los Productos
+    const handlerOnClickCatalogo = () =>{
+        // e.preventDefault();
+        props.history.push("/productos");
+    }
+        //Cambiando el history Para Quienes somos
+    const handlerOnClickAbout = () =>{
+        // e.preventDefault();
+        props.history.push("/nosotros");
+    }
 
     return (
         <div className="container">
             <HeroImage 
+                handlerOnClickCatalogo={handlerOnClickCatalogo}
                 title="al servicio de la construccion"
                 // text="Más de 50 años brindando soluciones para el hogar, la construcción y la industria"
                 // text="La ferretería industrial más completa de la región"
@@ -94,20 +105,24 @@ const Home = (props) => {
 
             <img src={BlueTriangle} className="bluetriangle"/>
 
-            <div className="cardscelu-container">
+            <div className="cardscelu-container" >
                 <HomeCardCelu
+                    handlerOnClickCatalogo={handlerOnClickCatalogo}
                     icon={MaquinasIconCelu} 
                     text="Máquinas y Herramientas"
                 />
                 <HomeCardCelu
+                    handlerOnClickCatalogo={handlerOnClickCatalogo}    
                     icon={ConstIconCelu}
                     text="Obras y Construcción"
                 />
                 <HomeCardCelu
+                    handlerOnClickCatalogo={handlerOnClickCatalogo}
                     icon={IndustIconCelu} 
                     text="Ferretería Industrial"
                 />
                 <HomeCardCelu
+                    handlerOnClickCatalogo={handlerOnClickCatalogo}
                     icon={AtencionIconCelu} 
                     text="Atención Personalizada"
                 />
@@ -118,18 +133,22 @@ const Home = (props) => {
                 <Container>
                     <div className="cards-container">
                         <HomeCard
+                            handlerOnClickCatalogo={handlerOnClickCatalogo}
                             icon={AtencionIcon} 
                             text="Atención Personalizada"
                         />
                         <HomeCard
+                            handlerOnClickCatalogo={handlerOnClickCatalogo}
                             icon={MaquinasIcon} 
                             text="Máquinas y Herramientas"
                         />
                         <HomeCard 
+                            handlerOnClickCatalogo={handlerOnClickCatalogo}
                             icon={ConstIcon}
                             text="Obras y Construcción"
                         />
                         <HomeCard 
+                            handlerOnClickCatalogo={handlerOnClickCatalogo}
                             icon={IndustIcon} 
                             text="Ferretería Industrial"
                         />
@@ -142,7 +161,7 @@ const Home = (props) => {
                                     Somos una empresa familiar que hace más de 50 años se dedica a brindar soluciones para el hogar, 
                                     la construcción y la industria, brindando siempre la mejor atención y asesoramiento.
                                 </p>
-                                <button className="aboutbtn">Conocenos</button>
+                                <button className="aboutbtn" onClick={handlerOnClickAbout}>Conocenos</button>
                             </div>
 
                             <div className="abtright">
