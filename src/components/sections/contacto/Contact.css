@@ -1,3 +1,12 @@
+.noticiasbanner.contact{
+    background: url("https://www.mariutti.com.ar/images/negocio.jpg");
+    background-size: 100%;
+}
+
+.noticiasbanner.contact > h2{
+    color: #DA0000;
+}
+
 .contactblock{
     padding-top: 24px;
     padding-bottom: 60px;
