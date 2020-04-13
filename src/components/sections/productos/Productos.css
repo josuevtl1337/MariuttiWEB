@@ -1,4 +1,5 @@
 .noticiasbanner.prodlist{
     background: url('../../../visuals/prodlistbanner.png');
     background-size: cover;
+    margin-bottom: 8px;
 }

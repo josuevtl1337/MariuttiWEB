@@ -5,6 +5,9 @@
     align-items: center;
     width: 100%;
     background: black;
+    background: url('../../../visuals/quieneshoy-img.png');
+    background-position: center;
+    background-size: 100%;
 }
 
 .noticiasbanner > h2{
