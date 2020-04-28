@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import './Contact.css'
+import Map from "./Map"
+import credentials from "./Credentials"
 
 const Contact = (props)=>{
     useEffect(() => {
       window.scrollTo(0, 0)
     }, [])
+    const mapURL = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${credentials.mapsKey}`;
     return (
       <React.Fragment>
         <div className="noticiasbanner contact">
@@ -24,7 +27,13 @@ const Contact = (props)=>{
 
           <div className="ubicacion">
             <h4 className="contactitle">Encontranos.</h4>
-            <div className="map"> </div>
+
+            <Map 
+              googleMapURL = {mapURL}
+              containerElement={<div style={{height:"400px"}} />}
+              mapElement={<div style={{height:"100%"}} />}
+              loadingElement={<h4>Cargando...</h4>}
+            />
             <p className="quienes-p familia contact">Francia 2399 esquina 1º JUNTA. (3000) Santa Fe, Argentina</p>
           </div>
         </div>

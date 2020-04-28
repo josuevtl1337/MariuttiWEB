@@ -106,14 +106,6 @@
     margin-left: 4px;
 }
 
-.aboutbtn.prodvideo{
-    color: #EE1818;
-    background: transparent;
-    width: calc(max-content + 10px);
-    height: 36px;
-    font-size: 15px;
-}
-
 .aboutbtn.prodficha{
     margin-top: 16px;
     width: 120px;

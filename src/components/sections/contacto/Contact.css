@@ -4,7 +4,7 @@
 }
 
 .noticiasbanner.contact > h2{
-    color: #DA0000;
+    color: white;
 }
 
 .contactblock{
@@ -48,11 +48,11 @@
     justify-content: start;
     width: 45%;
     height: 400px;
-
 }
 
 .map{
-    background: grey;
+    /* background: grey; */
+    background-image: url('../../../visuals/ubicacion.png');
     width: 100%;
     height: 100%;
 }
