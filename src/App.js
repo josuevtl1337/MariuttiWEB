@@ -18,8 +18,8 @@ import Cfg from "./components/config/fbConfig";
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 // import fbConfig from "./components/config/fbConfig"
 // import firebase from "firebase/app";
-import { withRouter } from 'react-router'
-
+import { withRouter } from 'react-router';
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 class App extends Component {
   state = {
@@ -112,6 +112,12 @@ class App extends Component {
 
     return (
       <BrowserRouter>
+        <div>
+        <MessengerCustomerChat
+          pageId="314180308659595"
+          appId="656192641884970"
+        />
+        </div>
         {cfg}
         {navbar}
         {sidenav}

@@ -34,6 +34,9 @@ const ProductoComponent = (props) =>{
     useFirebaseConnect([
         { path: 'Producto' }
     ])
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
     const productos = useSelector(state => state.firebase.data.Producto)
     // Show message while Rubros y Sub_Rubros are loading
     if (!isLoaded(productos)) {

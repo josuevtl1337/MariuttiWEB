@@ -33,7 +33,7 @@ export default function EntradaMini (props) {
     }
 
     return(
-        <div className="entradacelu">
+        <div className="entradacelu" onClick={props.handlerOnClickNoticia}>
             <div className="entradacelu-wrap">
                 <p className="entradacelu-title">
                     {props.title}

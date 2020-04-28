@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid';
 import './Entrada.css'
@@ -21,7 +21,9 @@ export default function Entrada(props) {
     const [url, setUrl] = React.useState('');
     var reversed=[];
     var onlythree = [];
-
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
     //Hago la referencia para traer mis objetos Rubros, y Sub_Rubros
     useFirebaseConnect([
         { path: 'Noticia' }
@@ -50,7 +52,7 @@ export default function Entrada(props) {
     return(
         <React.Fragment>
             <div className="noticiasbanner">
-                <h2>Noticias</h2>
+                <h2>Novedades</h2>
             </div>
             <Container>
                 

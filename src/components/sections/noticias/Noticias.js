@@ -32,7 +32,7 @@ const Noticias = (props) => {
         <div className="noticiasbody">
 
             <div className="noticiasbanner">
-                <h2>Noticias</h2>
+                <h2>Novedades</h2>
             </div>
             <Container>
                 

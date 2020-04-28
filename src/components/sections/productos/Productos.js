@@ -29,6 +29,7 @@ const Productos = (props) => {
 
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
+        window.scrollTo(0, 0)
         //si el resultado del dropdown es distinto a vacio lo seteo
         if(props.dropdownResult!=''){
             setCategoriaActual(props.dropdownResult);    
