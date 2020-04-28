@@ -25,8 +25,8 @@ export default function SlideWrapper (props) {
     return(
         <div className="slide-wrapper" onClick={()=>{props.handlerOnClickProducto(props.id)}}>
         <div className="car-prod-card">
-            <div className="imgwrap carousel">                                                   
-                <img className="prodimg" src={url}/>                                                 
+            <div className="imgwrap carousel">                                   
+                <img className="prodimg car" src={url}/>                                                 
             </div>
             <div className="car-prod-text">
                 <p className="entrada-cardtitle carousel">{props.nombre}</p>
