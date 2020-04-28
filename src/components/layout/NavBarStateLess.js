@@ -127,7 +127,7 @@ const NavBarStateLess = (props) => {
                                 <Tab isActive={window.location.href.includes('inicio')} titulo="Inicio"/>
                             </Link>
                             <Link to="/nosotros">
-                                <Tab isActive={window.location.href.includes('nosotros')} titulo="Quienes Somos"/>
+                                <Tab isActive={window.location.href.includes('nosotros')} titulo="Quiénes Somos"/>
                             </Link>
                             <div className="prodtab">
                                 <Link to="/productos">
@@ -151,7 +151,7 @@ const NavBarStateLess = (props) => {
                                 <Tab isActive={window.location.href.includes('noticias')} titulo="Noticias"/>
                             </Link>
                             <Link to="/contacto">
-                                <Tab isActive={window.location.href.includes('contacto')} titulo="Contactanos"/>
+                                <Tab isActive={window.location.href.includes('contacto')} titulo="Contáctenos"/>
                             </Link>
                         </div>
                         {/* SearchBar */}

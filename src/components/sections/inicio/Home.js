@@ -9,6 +9,7 @@ import EntradaMini from './EntradaMini'
 import EntradaCelu from './EntradaCelu'
 import HeroImage from '../../layout/HeroImage'
 import ProductCarousel from '../../layout/ProductCarousel'
+import ProductCarouselGrande from '../../layout/ProductCarouselGrande'
 import Container from '@material-ui/core/Container'
 
 import AtencionIcon from '../../../visuals/mail.svg'
@@ -97,7 +98,7 @@ const Home = (props) => {
         <div className="container">
             <HeroImage 
                 handlerOnClickCatalogo={handlerOnClickCatalogo}
-                title="al servicio de la construccion"
+                title="al servicio de la construcción"
                 // text="Más de 50 años brindando soluciones para el hogar, la construcción y la industria"
                 // text="La ferretería industrial más completa de la región"
                 image="https://miro.medium.com/max/9856/1*gAG21NFA76ZlCbtK6SayVQ.jpeg"
@@ -178,9 +179,15 @@ const Home = (props) => {
                     <HomeDivider title="Productos Destacados" />
 
                     {/* Carousel de productos destacados */}
-                    <div style={{width: '100%', marginTop:'0px', marginBottom: '50px'}}>
+                    <div className="carouselcontainer celu">
                         <div style={{maxWidth: 500, margin: '0 auto'}}>
                         <ProductCarousel productos={reversedProduct} handlerOnClickProducto={handlerOnClickProducto}/>              
+                        </div>
+                    </div>
+
+                    <div className="carouselcontainer desk">
+                        <div style={{margin: '0 auto'}}>
+                        <ProductCarouselGrande productos={reversedProduct} handlerOnClickProducto={handlerOnClickProducto}/>              
                         </div>
                     </div>
 

@@ -25,10 +25,6 @@
     transition: all 0.2s;
     background-color: white;
 
-    /* -webkit-box-shadow: 1px 1px 3px 0px rgba(235,235,235,1);
-    -moz-box-shadow: 1px 1px 3px 0px rgba(235,235,235,1);
-    box-shadow: 1px 1px 3px 0px rgba(235,235,235,1); */
-
     box-shadow:
     0 0.3px 0.8px rgba(0, 0, 0, 0.028),
     0 0.9px 2.7px rgba(0, 0, 0, 0.042),
@@ -116,11 +112,43 @@
     background: rgb(136, 136, 136);
 }
 
+@media only screen and (min-width: 900px){
+    .slide-wrapper{
+        padding: 14px;
+        height: 400px;
+    }
+    .car-prod-card{
+        height: 100%;
+        flex-direction: column;
+    }
+    .car-prod-text{
+        width: 90%;
+        height: 100%;
+    }
+    #back{
+        left: -10px;
+    }
+    .prodimg.car{
+        width: 190px;
+    }
+    .imgwrap.carousel{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .entrada-cardtext.carousel{
+        -webkit-line-clamp: 3;
+    }
+    .entrada-cardtitle.carousel{
+        margin-bottom: 8px;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .car-prod-text{
         width: 150px;
     }
-
 
     .car-button{
         display: none;

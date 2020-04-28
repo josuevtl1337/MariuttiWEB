@@ -6,7 +6,8 @@
     /* margin-top: -340px; */
     width: 100%;
     height: 850px;
-    background-image: url('../../../visuals/about-block-bg.png');
+    /* background-image: url('../../../visuals/about-block-bg.png'); */
+    background: #F2EFEC;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -165,5 +166,21 @@
     .aboutbtn{
         margin-top: 24px;
         margin-left: 8px;
+    }
+}
+
+.carouselcontainer.celu{
+    display: none;
+}
+
+@media only screen and (max-width: 900px){
+    .carouselcontainer.celu{
+        width: 100%;
+        margin-top: 0;
+        margin-bottom: 50px;
+        display: block;
+    }
+    .carouselcontainer.desk{
+        display: none;
     }
 }
