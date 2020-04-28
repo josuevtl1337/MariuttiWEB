@@ -9,7 +9,7 @@ const About = () => {
             <div className="quienes-block">
                 <div className="quienes-text">
                     <h2 className="quienes-title">
-                        Quienes Somos
+                        Quiénes Somos
                     </h2>
                     <p className="quienes-p">
                         Mariutti Hnos es una empresa familiar comprometida en brindar, 
@@ -80,7 +80,7 @@ const About = () => {
             </div>
 
             <div className="quienes-contacto">
-                <h2>Contactanos</h2>
+                <h2>Contáctenos</h2>
             </div>
 
         </React.Fragment>

@@ -93,6 +93,11 @@ const Home = (props) => {
         // e.preventDefault();
         props.history.push("/nosotros");
     }
+    //Cambiando el history Para Quienes somos
+    const handlerOnClickContact = () =>{
+        // e.preventDefault();
+        props.history.push("/contacto");
+    }
 
     return (
         <div className="container">
@@ -123,7 +128,7 @@ const Home = (props) => {
                     text="Ferretería Industrial"
                 />
                 <HomeCardCelu
-                    handlerOnClickCatalogo={handlerOnClickCatalogo}
+                    handlerOnClickCatalogo={handlerOnClickContact}
                     icon={AtencionIconCelu} 
                     text="Atención Personalizada"
                 />
@@ -134,7 +139,7 @@ const Home = (props) => {
                 <Container>
                     <div className="cards-container">
                         <HomeCard
-                            handlerOnClickCatalogo={handlerOnClickCatalogo}
+                            handlerOnClickCatalogo={handlerOnClickContact}
                             icon={AtencionIcon} 
                             text="Atención Personalizada"
                         />
