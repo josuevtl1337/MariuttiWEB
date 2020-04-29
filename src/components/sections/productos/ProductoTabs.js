@@ -65,13 +65,15 @@ export default function SimpleTabs(props) {
         </p>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <iframe 
-            width="100%" 
-            height="300" 
+        <div className="videowrapper">
+          <iframe 
+            className="ytvideo"
             src={props.enlace} 
             frameborder="0" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" 
             allowfullscreen
-        />
+          />  
+        </div>
+        
         <a href={props.ficha} className="singleprod-ficha">
             <button className="aboutbtn prodficha">
                 Ver Ficha Técnica

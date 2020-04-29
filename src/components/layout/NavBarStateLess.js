@@ -148,7 +148,7 @@ const NavBarStateLess = (props) => {
                             </div>
                             
                             <Link to="/noticias">
-                                <Tab isActive={window.location.href.includes('noticias')} titulo="Noticias"/>
+                                <Tab isActive={window.location.href.includes('noticias')} titulo="Novedades"/>
                             </Link>
                             <Link to="/contacto">
                                 <Tab isActive={window.location.href.includes('contacto')} titulo="Contáctenos"/>
