@@ -48,6 +48,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+
 }
 
 .herotitle{
@@ -57,7 +59,9 @@
     text-transform: uppercase;
     margin: 8px auto;
     margin-bottom: 0px;
-    line-height: 70px;
+    line-height: 78px;
+    animation: aparecer 0.5s;
+
 }
 
 .herotext{
@@ -196,3 +200,15 @@
         margin-top: 0px;
     }
 }
+
+
+
+@keyframes aparecer {
+    from { 
+        opacity: 0; 
+        transform: translateY(80px);
+    }
+    to { 
+        opacity: 1; 
+    }
+  }

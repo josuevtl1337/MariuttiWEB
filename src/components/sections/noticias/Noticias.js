@@ -2,6 +2,7 @@ import React from 'react'
 import Container from '@material-ui/core/Container';
 import './Noticias.css'
 import EntradaCard from './EntradaCard'
+import EntradaMini from '../inicio/EntradaMini'
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 
@@ -39,15 +40,14 @@ const Noticias = (props) => {
                 <div className="listado-entradas">
                     {noticiasArray.map((item, i) => {                             
                         return (
-                                <EntradaCard     
-                                    click={()=>handlerOnClickNoticia(item.id)}                     
-                                    img={item.img}
-                                    title={item.nombre}
-                                    date={item.createdAt}
-                                    text={item.descripcion}
-                                    key={i}
-                                /> 
-                                                                                            
+                            <EntradaMini     
+                                click={()=>handlerOnClickNoticia(item.id)}                     
+                                img={item.img}
+                                title={item.nombre}
+                                date={item.createdAt}
+                                text={item.descripcion}
+                                key={i}
+                            />                                                              
                         );                                                       
                     })}                 
                 </div>

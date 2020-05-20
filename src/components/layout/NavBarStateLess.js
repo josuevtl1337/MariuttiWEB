@@ -87,19 +87,19 @@ const NavBarStateLess = (props) => {
     let array = [];
     for(let i = 0; i < maquinas.length; i++) {
         array.push(
-            <li key={maquinas[i][0]} onClick={() => onChangeDropDown(maquinas[i][0],maquinas[i][1])}>{maquinas[i][1]}</li>
+            <li className="dropli" key={maquinas[i][0]} onClick={() => onChangeDropDown(maquinas[i][0],maquinas[i][1])}>{maquinas[i][1]}</li>
         );
     }
     let arrayConstruccion = [];
     for(let i = 0; i < construccion.length; i++) {
         arrayConstruccion.push(
-            <li key={construccion[i][0]}  onClick={() => onChangeDropDown(construccion[i][0],construccion[i][1])}>{construccion[i][1]}</li>
+            <li className="dropli" key={construccion[i][0]}  onClick={() => onChangeDropDown(construccion[i][0],construccion[i][1])}>{construccion[i][1]}</li>
         );
     }
     let arrayFerreteria = [];
     for(let i = 0; i < ferreteria.length; i++) {
         arrayFerreteria.push(
-            <li key={ferreteria[i][0]}  onClick={() => onChangeDropDown(ferreteria[i][0],ferreteria[i][1])}>{ferreteria[i][1]}</li>
+            <li className="dropli" key={ferreteria[i][0]}  onClick={() => onChangeDropDown(ferreteria[i][0],ferreteria[i][1])}>{ferreteria[i][1]}</li>
         );
     }
 
@@ -148,7 +148,7 @@ const NavBarStateLess = (props) => {
                             </div>
                             
                             <Link to="/noticias">
-                                <Tab isActive={window.location.href.includes('noticias')} titulo="Noticias"/>
+                                <Tab isActive={window.location.href.includes('noticias')} titulo="Novedades"/>
                             </Link>
                             <Link to="/contacto">
                                 <Tab isActive={window.location.href.includes('contacto')} titulo="Contáctenos"/>

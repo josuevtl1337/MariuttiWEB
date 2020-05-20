@@ -132,6 +132,8 @@
         width: 190px;
     }
     .imgwrap.carousel{
+        height: 200px;
+        margin-top: 8px;
         width: 100%;
         display: flex;
         justify-content: center;

@@ -8,6 +8,10 @@
     margin-top: -110px;
 }
 
+.cards-container:nth-child(1){
+    animation: cards 0.4s ease-in-out;
+}
+
 .homecard{
     background-color: white;
     box-shadow:
@@ -100,4 +104,12 @@
     100% {transform: translateY(0px)}
 }
 
-
+@keyframes cards {
+    from { 
+        opacity: 0; 
+        transform: translateX(80px);
+    }
+    to { 
+        opacity: 1; 
+    }
+  }

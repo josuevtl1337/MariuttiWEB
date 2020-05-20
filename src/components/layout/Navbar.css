@@ -189,6 +189,7 @@ a{
 
 .proddrop{
   padding: 8px;
+  padding-bottom: 16px;
   width: 1210px;
   background: #f5f5f5fb;
   position: absolute;
@@ -207,15 +208,17 @@ a{
   display: flex;
   justify-content: start;
   align-content: center;
-  height: 50vh;
+  /* height: 50vh; */
+  height: 320px;
 } 
 
 .drop-rubro{
   color: #274582;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 800;
   margin: 8px;
   width: 220px;
+  font-family: 'oswald';
 }
 
 .drop-categorias-list{
@@ -225,16 +228,18 @@ a{
   height: 100%;
 }
 
+
 .drop-categorias-list li{
   /* height: 30px; */
   cursor: pointer;
   font-family: 'roboto condensed';
+  text-transform: capitalize;
   color: rgb(121, 121, 121);
   margin: 2px;
-  font-size: 14px;
+  font-size: 14.2px;
   list-style: none;
-  line-height: 2;
-  width: 220px;
+  line-height: 1.8;
+  width: 200px;
   padding-left: 10px;
   transition: all 0.2s;
   border-radius: 0.5em;

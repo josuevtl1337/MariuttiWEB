@@ -17,7 +17,7 @@ const About = (props) => {
             <div className="quienes-block">
                 <div className="quienes-text">
                     <h2 className="quienes-title">
-                        Quienes Somos
+                        Quiénes Somos
                     </h2>
                     <p className="quienes-p">
                         Mariutti Hnos es una empresa familiar comprometida en brindar, 

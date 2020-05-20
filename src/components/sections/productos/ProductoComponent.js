@@ -99,10 +99,15 @@ const ProductoComponent = (props) =>{
                                                 <TwitterIcon className="share-icon"/>
                                                 <PinterestIcon className="share-icon"/>
                                             </div>
+                                            
                                         </div>
+                                        <div className="divline share"></div>
                                     </div>
                                 </div>   
-                                <HomeDivider title="Productos Relacionados"/>
+                                <h3 className="homediv-title prodrel">
+                                    Productos Relacionados
+                                </h3>
+                                <div className="divline prod" style={{marginTop: 0}}></div>
                             </React.Fragment>    
                                                                                                             
                         );

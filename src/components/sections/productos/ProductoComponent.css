@@ -166,6 +166,54 @@
     background: transparent;
 }
 
+.videowrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9, for an aspect ratio of 1:1 change to this value to 100% */ 
+}
+    
+.ytvideo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.prodrel{
+    margin-bottom: 4px;
+}
+
+.divline.prod{
+    width: 90%;
+    margin-left: 0;
+    background-color: #818181;
+    max-width: 400px;
+}
+
+.divline.share{
+    margin: 0;
+    margin-left: 24px;
+    width: 90%;
+}
+
+@media only screen and (max-width: 1200px) {
+    .prodrel{
+        color: #585858;
+        margin-left: 0;
+    }
+
+    .divline.share{
+        margin: 0 auto;
+        margin-top: 16px;
+        width: 90%;
+    }
+
+    .divline.prod{
+        margin: 0 auto;
+        margin-bottom: 16px;
+    }
+}
+
 @media only screen and (max-width: 999px) {
     .product-block{
         flex-direction: column;
