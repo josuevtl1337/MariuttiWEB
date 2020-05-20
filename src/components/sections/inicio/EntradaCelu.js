@@ -38,12 +38,13 @@ export default function EntradaMini (props) {
                 <p className="entradacelu-title">
                     {props.title}
                 </p>
-                <p className="entradacelu-text">
-                    {props.text}
-                </p>
                 <p className="entradacelu-date">
                     {fechaParseada}
                 </p>
+                <p className="entradacelu-text">
+                    {props.text}
+                </p>
+                
                 
             </div>
             <div className="hcc-divider entrada"/>

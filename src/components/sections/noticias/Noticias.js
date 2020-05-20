@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import './Noticias.css'
 import EntradaCard from './EntradaCard'
 import EntradaMini from '../inicio/EntradaMini'
+import EntradaCelu from '../inicio/EntradaCelu'
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 
@@ -19,6 +20,10 @@ const Noticias = (props) => {
     if(isLoaded(noticias)){
         noticiasArray = Object.values(noticias);
     }
+
+    var tresnoticias = noticiasArray.reverse().slice(0,3);
+    var restonoticias = noticiasArray.slice(3)
+
     //Cambiando el history
     const handlerOnClickNoticia = (id) =>{
         // e.preventDefault();
@@ -38,7 +43,7 @@ const Noticias = (props) => {
                 
                 {/* Listado de todas las noticias */}
                 <div className="listado-entradas">
-                    {noticiasArray.map((item, i) => {                             
+                    {tresnoticias.map((item, i) => {                             
                         return (
                             <EntradaMini     
                                 click={()=>handlerOnClickNoticia(item.id)}                     
@@ -50,6 +55,21 @@ const Noticias = (props) => {
                             />                                                              
                         );                                                       
                     })}                 
+                </div>
+
+                <div className="noticias-inicio-celu desk">
+                    {restonoticias.map((item, i) => {                             
+                        return (
+                            <EntradaCelu 
+                                handlerOnClickNoticia={()=>{handlerOnClickNoticia(item.id)}}                                       
+                                img={item.img}
+                                title={item.nombre}
+                                date={item.createdAt}
+                                text={item.descripcion}
+                                key={i}
+                            />                                                                  
+                        );                                                       
+                    })} 
                 </div>
             </Container>
 

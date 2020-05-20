@@ -114,6 +114,10 @@
     display: none;
 }
 
+.noticias-inicio-celu.desk{
+    display: block;
+}
+
 @media only screen and (max-width: 1200px) {
     .bluetriangle{
         display: block;
@@ -125,7 +129,7 @@
         background: #1E2E50;
     }
 
-    .noticias-inicio{
+    .listado-entradas.home{
         display: none;
     }
 

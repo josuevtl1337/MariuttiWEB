@@ -201,8 +201,8 @@ const Home = (props) => {
 
 
                     <HomeDivider title="Últimas Noticias" />
-                    <div className="noticias-inicio">
-                        {onlythree.map((item, i) => {                             
+                    <div className="listado-entradas home">
+                        {onlythree.map((item, i) => {
                             return (
                                 <EntradaMini 
                                     handlerOnClickNoticia={()=>{handlerOnClickNoticia(item.id)}}                                     
