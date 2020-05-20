@@ -83,14 +83,25 @@ const ProductoComponent = (props) =>{
                                         <h3 className="singleprod-title">{item.nombre}</h3>
                                         <p className="singleprod-sub">{item.subtitulo}</p>
                                         <div className="divline" style={{marginLeft: 0, marginRight: 0, width: '100%'}}></div>
-                                        <ProductoTabs
+                                        {/* <ProductoTabs
                                             descripcion={item.descripcion}
                                             enlace={item.enlace}
-                                        />
+                                        /> */}
+
+                                        <p className="singleprod-desc">{item.descripcion}</p>
                                         
                                         <button className="aboutbtn prodstock">
                                                 Consultar Stock
                                         </button>   
+
+                                        <div className="videowrapper">
+                                            <iframe 
+                                                className="ytvideo"
+                                                src={item.enlace} 
+                                                frameborder="0" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" 
+                                                allowfullscreen
+                                            />  
+                                        </div>
 
                                         <div className="share">
                                             <h4 className="compartir">Compartir:</h4>

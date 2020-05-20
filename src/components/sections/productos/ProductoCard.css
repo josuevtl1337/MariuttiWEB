@@ -81,7 +81,7 @@
     flex-direction: column;
     justify-content: start;
     height: 120px;
-    margin: 0px 3px;
+    margin: 0px 10px;
 }
 
 .contentwrap.mini{
@@ -107,7 +107,7 @@
     color: #636363;
     margin: 0;
     font-family: 'Roboto Condensed';
-    
+    text-align: justify;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;

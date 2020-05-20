@@ -1,9 +1,29 @@
 .contenedor-catalogo{
     margin-top: 20px;
     width: 100%;
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-around; */
+    display: grid;
     margin-bottom: 52px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 410px; 
+    column-gap: 8px;
+    row-gap: 10px;
+    justify-items: center;
+    align-items: center;
+    justify-content: left;
+}
+
+@media only screen and (max-width: 1250px) {
+    .contenedor-catalogo{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width: 649px) {
+    .contenedor-catalogo{
+        grid-template-columns: 1fr;
+    }
 }
