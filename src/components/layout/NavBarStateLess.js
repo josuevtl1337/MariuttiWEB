@@ -62,11 +62,11 @@ const NavBarStateLess = (props) => {
     const onChange = e => {
         setBusqueda(e.target.value);
     };
-    const onChangeDropDown = (param,param2) => {
+    const onChangeDropDown = (param,param2,param3) => {
         props.history.push("/productos");
         // setDropdown(param);
-        props.dropdown(param,param2);
-        // console.log(drop)
+        props.dropdown(param,param2,param3);
+        console.log(param3)
     };
     let tabwrapclasses
     let searchiconclasses
@@ -87,19 +87,19 @@ const NavBarStateLess = (props) => {
     let array = [];
     for(let i = 0; i < maquinas.length; i++) {
         array.push(
-            <li className="dropli" key={maquinas[i][0]} onClick={() => onChangeDropDown(maquinas[i][0],maquinas[i][1])}>{maquinas[i][1]}</li>
+            <li className="dropli" key={maquinas[i][0]} onClick={() => onChangeDropDown(maquinas[i][0],maquinas[i][1],"Máquinas y Herramientas > " )}>{maquinas[i][1]}</li>
         );
     }
     let arrayConstruccion = [];
     for(let i = 0; i < construccion.length; i++) {
         arrayConstruccion.push(
-            <li className="dropli" key={construccion[i][0]}  onClick={() => onChangeDropDown(construccion[i][0],construccion[i][1])}>{construccion[i][1]}</li>
+            <li className="dropli" key={construccion[i][0]}  onClick={() => onChangeDropDown(construccion[i][0],construccion[i][1],"Obras y Construcción > " )}>{construccion[i][1]}</li>
         );
     }
     let arrayFerreteria = [];
     for(let i = 0; i < ferreteria.length; i++) {
         arrayFerreteria.push(
-            <li className="dropli" key={ferreteria[i][0]}  onClick={() => onChangeDropDown(ferreteria[i][0],ferreteria[i][1])}>{ferreteria[i][1]}</li>
+            <li className="dropli" key={ferreteria[i][0]}  onClick={() => onChangeDropDown(ferreteria[i][0],ferreteria[i][1],"Ferretería Industrial > " )}>{ferreteria[i][1]}</li>
         );
     }
 

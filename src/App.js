@@ -62,10 +62,10 @@ class App extends Component {
   buscandoResultado = (param) =>{
     this.setState({busqueda:param})
   }
-  dropdownResultado = (param, param2) =>{
+  dropdownResultado = (param, param2, param3) =>{
     this.setState({
       dropdown:param, 
-      dropdownName:param2
+      dropdownName:param3+param2
     })
   }
   cleanUpDropdown = () =>{
