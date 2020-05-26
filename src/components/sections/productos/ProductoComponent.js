@@ -90,9 +90,14 @@ const ProductoComponent = (props) =>{
 
                                         <p className="singleprod-desc">{item.descripcion}</p>
                                         
-                                        <button className="aboutbtn prodstock">
-                                                Consultar Stock
-                                        </button>   
+                                        <div>
+                                            <button className="aboutbtn prodstock">
+                                                    Consultar Stock
+                                            </button>
+                                        </div>
+                                         
+
+
 
                                         <div className="videowrapper">
                                             <iframe 
