@@ -52,6 +52,7 @@ export default function SimpleModal(props) {
   };
   const classesSelect = useStylesSelect();
   const [subRubro , setSub] = React.useState('');
+  const [subNombre , setSubNombre] = React.useState('');
   const [nombre , setNombre] = React.useState('');
   const [subtitulo , setSubtitulo] = React.useState('');
   const [descripcion , setDescripcion] = React.useState('');
@@ -60,10 +61,16 @@ export default function SimpleModal(props) {
   const [oferta , setOferta] = React.useState(false);
 
   const handleChangeSub = event => {
+    // setSubNombre(event.target.name);
+    // console.log(event.target.getAttribute('name'));
     setSub(event.target.value);
-    console.log(subRubro);
+    console.log(event);
+    
   };
-
+  const handleChangeSubNombre = (event) => {
+    console.log(event.taget)
+    // setSubNombre(event.target.name);
+  }
   const onChangeNombre = e => {
     setNombre(e.target.value);
   }
@@ -101,8 +108,8 @@ export default function SimpleModal(props) {
   }
 
   const retornando = props.sub_rubros.map((item, key) => 
-      <MenuItem value={item.id}  key={key}>
-        {item.nombre}
+      <MenuItem name={item.nombre} value={item.id}  key={key} children={item.nombre} >
+        {item.nombre} 
       </MenuItem>
   );
 
@@ -127,7 +134,8 @@ export default function SimpleModal(props) {
                   <Select
                     labelId="subRubroId"
                     id="sub_rubro"
-                    value={subRubro ? subRubro : " "}
+                    value={subRubro}
+                    name={subNombre}
                     onChange={handleChangeSub}
                   >           
                   {retornando}    

@@ -25,8 +25,8 @@ const Productos = (props) => {
         { path: 'Producto' }
     ])
 
-    const [categoriaActual, setCategoriaActual] = useState("-M163WoG-kWq-0jDt1CJ");
-
+    // const [categoriaActual, setCategoriaActual] = useState("-M163WoG-kWq-0jDt1CJ");
+    const [categoriaActual, setCategoriaActual] = useState("");
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -37,7 +37,8 @@ const Productos = (props) => {
         }
     });
 
-    const [categoriaActualName, setCategoriaActualName] = useState("Aislantes");
+    const [categoriaRuta, setCategoriaRuta] = useState("");
+    const [categoriaActualName, setCategoriaActualName] = useState("Productos Destacados");
     const [productoState, setProductoState] = useState(false);
 
     const rubros = useSelector(state => state.firebase.data.Rubro)
@@ -46,6 +47,8 @@ const Productos = (props) => {
     const maquinas = [];
     const construccion = [];
     const ferreteria = [];
+    var onlyProductos = [];
+    var productosArray = [];
     var re = [];
 
     if(rubros){
@@ -72,12 +75,32 @@ const Productos = (props) => {
         console.log(productos)
         re = Object.values(productos);
     }
+    if(isLoaded(productos)){
+        productosArray = Object.values(productos);
+        // Reversed para que los mapee por el ultimo cargado y luego mapeo los ultimos 3 con slice (crotada?)
 
-    const handleClick = (e,categoriaNombre) =>{
+        productosArray.map((item, i) => { 
+            if(item.off == true){ 
+                onlyProductos.push(
+                    {'id':item.id,
+                    'nombre': item.nombre,
+                    'img':item.img,
+                    'descripcion':item.descripcion},
+                )
+            }                                                                                                    
+        })
+        console.log(onlyProductos);
+    }
+
+    const handleClick = (e,categoriaNombre) => {
+        console.log(e,categoriaNombre);
         props.cleanUp();
         setCategoriaActual(e);
         setCategoriaActualName(categoriaNombre);
-        console.log(categoriaActual)
+    }
+    const handleClickRubro = (e) => {
+        console.log(e);
+        setCategoriaRuta(e + " > ");
     }
     //Cambiando el history
     const handlerOnClickProducto = (id) =>{
@@ -94,7 +117,7 @@ const Productos = (props) => {
             {/* <div className="heroimg-small"/> */}
             <div className="noticiasbanner prodlist">
                 <h2>
-                    Catalogo
+                    Productos
                 </h2>
             </div>
             <Container style={{zIndex: 100}}>
@@ -102,14 +125,15 @@ const Productos = (props) => {
                 <Grid container spacing={4}>
                     {/* Productos */}
                     <Grid item xs={12} md={3}>       
+                        {/* <h4>Categorías</h4> */}
                         <h4>Categorías</h4>
                         <Divider style={{marginBottom: 28}}/>
-                        <Drawer titulo="Construcción" handler={handleClick} categorias={construccion}/>
-                        <Drawer titulo="Máquinas y Herramientas" handler={handleClick} categorias={maquinas}/>
-                        <Drawer titulo="Ferretería Industrial" handler={handleClick} categorias={ferreteria}/>
+                        <Drawer titulo="Obras y Construcción" handlerRuta={handleClickRubro} handler={handleClick} categorias={construccion}/>
+                        <Drawer titulo="Máquinas y Herramientas" handlerRuta={handleClickRubro} handler={handleClick} categorias={maquinas}/>
+                        <Drawer titulo="Ferretería Industrial" handlerRuta={handleClickRubro} handler={handleClick} categorias={ferreteria}/>
                     </Grid>
                     <Grid item xs={12} md={9}>
-                        <h4>{categoriaActualName}</h4>
+                        <h4>{categoriaRuta}{categoriaActualName}</h4>
                         <Divider/>
                         <div className="contenedor-catalogo">
                             {re.map((item, i) => {                             
@@ -125,8 +149,23 @@ const Productos = (props) => {
                                         </div>                                                                     
                                     );
                                 }
-                                                               
-                            })}
+                            })}    
+                            {                                       
+                                onlyProductos.map((item, i) =>{
+                                    if(categoriaActual == ""){
+                                        return(                                 
+                                            <div onClick={()=>handlerOnClickProducto(item.id,item.nombre,item.descripcion)}>
+                                            <ProductosCard                                      
+                                                img={item.img}
+                                                titulo={item.nombre}
+                                                subtitulo={item.descripcion}
+                                                key={i}
+                                            />   
+                                        </div>    
+                                        )
+                                    }                                     
+                                })
+                            }
                         </div>
                     </Grid>
                 </Grid>              

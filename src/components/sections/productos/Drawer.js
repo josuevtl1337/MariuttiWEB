@@ -38,10 +38,14 @@ export default function NestedList(props) {
 
   const handleClick = (e) => {
     setOpen(!open);
-    console.log(e.target)
+    console.log(e)
   };
+  // const handleClick = (e) => {
+  //   // props.handlerRuta(e)
+  // };
   const handleClickDragon = (e,e2) => {
     props.handler(e,e2);
+    props.handlerRuta(props.titulo);
     setOpen(!open)
   };
 
@@ -55,7 +59,7 @@ export default function NestedList(props) {
       //     Categorías
       //   </ListSubheader>
       // }
-      className={classes.root}y
+      className={classes.root}
     >
       <ListItem button onClick={handleClick}>
         <ListItemText  primary={props.titulo} />

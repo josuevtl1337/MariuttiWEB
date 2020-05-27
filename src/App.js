@@ -22,7 +22,7 @@ import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 // import fbConfig from "./components/config/fbConfig"
 // import firebase from "firebase/app";
 import { withRouter } from 'react-router';
-// import MessengerCustomerChat from 'react-messenger-customer-chat';
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 class App extends Component {
   state = {
@@ -58,10 +58,10 @@ class App extends Component {
   buscandoResultado = (param) =>{
     this.setState({busqueda:param})
   }
-  dropdownResultado = (param, param2) =>{
+  dropdownResultado = (param, param2, param3) =>{
     this.setState({
       dropdown:param, 
-      dropdownName:param2
+      dropdownName:param3+param2
     })
   }
   cleanUpDropdown = () =>{
@@ -118,11 +118,10 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          {/* AQUI ESTA COMENTADO LO DE MESSENGER !!!!! */}
-        {/* <MessengerCustomerChat
+        <MessengerCustomerChat
           pageId="314180308659595"
           appId="656192641884970"
-        /> */}
+        />
         </div>
         {cfg}
         {navbar}

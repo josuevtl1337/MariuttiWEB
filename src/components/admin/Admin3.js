@@ -143,22 +143,19 @@ class Admin3 extends Component {
           createdAt: firebase.database.ServerValue.TIMESTAMP
         };
         
-        const db = firebase.database();
-        const dbRef = db.ref("Producto");
-        const newPicture = dbRef.push();
-        newPicture.set(record);
-        const postId = newPicture.key;
-        console.log(postId);
-        newPicture.update({
-          "id":postId
-        }).then(()=>{
-          console.log(postId.id)
-          // this.setState({
-          //   loading: false
-          // });
-          window.location.reload();      
-          this.handleClick("Producto");
-        }) 
+        // const db = firebase.database();
+        // const dbRef = db.ref("Producto");
+        // const newPicture = dbRef.push();
+        // newPicture.set(record);
+        // const postId = newPicture.key;
+        // console.log(postId);
+        // newPicture.update({
+        //   "id":postId
+        // }).then(()=>{
+        //   console.log(postId.id)
+        //   window.location.reload();      
+        //   this.handleClick("Producto");
+        // }) 
       }   
     );
   }
