@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Navbar from "./components/layout/NavBarStateLess";
 import Sidenav from "./components/layout/Sidenav";
 import Backdrop from "./components/layout/Backdrop";
-import Footer from './components/layout/Footer.js'
+import SearchBar from "./components/layout/SearchBar";
+import Footer from './components/layout/Footer.js';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/sections/inicio/Home";
 import About from "./components/sections/nosotros/About";
@@ -16,6 +17,8 @@ import Entrada from "./components/sections/noticias/Entrada";
 import Login from "./components/admin/Admin3";
 import Cfg from "./components/config/fbConfig";
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
+//    --------------AQUI ESTA COMENTADO TODO LO DE MESSENGER !!!!!! --------------
+//    -------TAMBIEN ESTA COMENTADO EL MAPA !!!--------
 // import fbConfig from "./components/config/fbConfig"
 // import firebase from "firebase/app";
 import { withRouter } from 'react-router';
@@ -24,27 +27,12 @@ import { withRouter } from 'react-router';
 class App extends Component {
   state = {
     sidenavOpen : false,
+    searchOpen: false,
     busqueda : "",
     maquinas:[],
     dropdown:"",
     dropdownName:""
   };
-
-  // static propTypes = {
-  //   location: React.PropTypes.object.isRequired
-  // }
-
-  // ...
-
-  componentWillMount() {
-    // this.props.history.push("/inicio");
-    // this.props.history.listen(() => {
-    //   console.log('You changed the page to: ')
-    // });
-  }
-  componentWillUnmount() {
-      // this.unlisten();
-  }
 
   sidenavTriggerClickHandler = () => {
     if (this.state.sidenavOpen == false) {
@@ -53,11 +41,19 @@ class App extends Component {
       this.setState({sidenavOpen: false})
     }
   };
+  searchClickHandler = () => {
+    if (this.state.searchOpen == false) {
+      this.setState({searchOpen: true})
+    } else {
+      this.setState({searchOpen: false})
+    }
+  };
   cerrandosidenav = () =>{
     this.setState({sidenavOpen: false})
   }
   backdropClickHandler = () => {
-    this.setState({sidenavOpen: false})
+    this.setState({sidenavOpen: false});
+    this.setState({searchOpen: false});
   };
   buscandoResultado = (param) =>{
     this.setState({busqueda:param})
@@ -78,6 +74,7 @@ class App extends Component {
     let navbar;
     let backdrop;
     let sidenav;
+    let searchbar;
     let footer;
     let maquinas = [];
     let cfg;
@@ -99,20 +96,29 @@ class App extends Component {
     if (this.state.sidenavOpen) {
       
       backdrop = <Backdrop click={this.backdropClickHandler}/>
-      // sidenav = <Sidenav itemClickHandler={this.sidenavTriggerClickHandler} show={this.state.sidenavOpen}/>
+
     }
+
+    
 
     if (window.location.href.includes('login')) {
       footer = null
       navbar = null;
     } else {
-      navbar = <Navbar sidenavClickHandler={this.sidenavTriggerClickHandler} buscando={this.buscandoResultado} dropdown={this.dropdownResultado}/>
+      navbar = <Navbar searchClickHandler={this.searchClickHandler} sidenavClickHandler={this.sidenavTriggerClickHandler} buscando={this.buscandoResultado} dropdown={this.dropdownResultado}/>
       footer = <Footer/>
+    }
+
+    if (this.state.searchOpen) {
+      backdrop = <Backdrop click={this.backdropClickHandler}/>
+      searchbar = <SearchBar/>
+      // navbar = null
     }
 
     return (
       <BrowserRouter>
         <div>
+          {/* AQUI ESTA COMENTADO LO DE MESSENGER !!!!! */}
         {/* <MessengerCustomerChat
           pageId="314180308659595"
           appId="656192641884970"
@@ -122,15 +128,15 @@ class App extends Component {
         {navbar}
         {sidenav}
         {backdrop}
+        {searchbar}
         <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/nosotros" component={About} />
-        {/* <Route path="/productos" component={productosComponent} />  */}
-        <Route path="/producto" component={ProductoComponent} />
-        <Route path="/contacto" component={Contact} />
-        <Route path="/noticias" component={Noticias} />
-        <Route path="/entrada" component={Entrada} />
-        <Route path="/login" component={Login} />
+          <Route exact path="/" component={Home} />
+          <Route path="/nosotros" component={About} />
+          <Route path="/producto" component={ProductoComponent} />
+          <Route path="/contacto" component={Contact} />
+          <Route path="/noticias" component={Noticias} />
+          <Route path="/entrada" component={Entrada} />
+          <Route path="/login" component={Login} />
         </Switch>
         <Route
             path='/productos'

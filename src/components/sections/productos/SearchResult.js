@@ -1,6 +1,7 @@
 import React , {useState } from "react";
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
 import "./catalogoProductos.css";
 import ProductosCard from "./ProductoCard";
 import { makeStyles } from '@material-ui/core/styles';
@@ -50,14 +51,17 @@ const ProductoComponent = (props) =>{
     }
 
     return (
-        <div className="container">
+        <Container>
             <div className="heroimg-small"/>
             <Container style={{zIndex: 100}}>
                 {/* Categorias  */}
                 <Grid container spacing={4}>
                     {/* Productos */}
-                    <Grid  className={classes.paper} item xs={12} md={12}>       
-                       {productosArray.map((item, i) => {    
+                    <Grid item xs={12} md={12}> 
+                        <h4 style={{marginTop: 38}}>Resultados de la Búsqueda</h4>
+                        <Divider/>
+                        <div className="contenedor-catalogo">
+                            {productosArray.map((item, i) => {    
                                 if(props.busquedaResult == ""){
                                     props.history.push("/productos");
                                 }                           
@@ -74,10 +78,12 @@ const ProductoComponent = (props) =>{
                                     );
                                 }                             
                             })}
+                        </div>      
+                       
                     </Grid>
                 </Grid>              
             </Container>       
-        </div>
+        </Container>
     )
 }
 

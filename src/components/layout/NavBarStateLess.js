@@ -2,6 +2,7 @@ import React, { Component, useState } from "react"
 import { Link, NavLink, withRouter, Router } from "react-router-dom";
 import './Navbar.css';
 import SidenavTrigger from "./SidenavTrigger.js";
+import SearchTrigger from "./SearchTrigger.js";
 import Tab from './Tab.js';
 import Hidden from '@material-ui/core/Hidden';
 import Container from '@material-ui/core/Container';
@@ -160,7 +161,7 @@ const NavBarStateLess = (props) => {
                                 onSubmit={handleOnSubmitDragon}>
                         <div className={searchwrapclasses}>
                             <div className="searchbarwrap">
-                                <input type="text" id="buscar" value={busqueda} onChange={onChange} placeholder="Buscar en productos..." className="searchbar"/>
+                                <input autoFocus type="text" id="buscar" value={busqueda} onChange={onChange} placeholder="Buscar en productos..." className="searchbar"/>
                                 <ArrowForwardIcon className="submiticon" style={{color: '#636363', fontSize: 20}} onClick={handleOnSubmitDragon}/>
                             </div>
                             <CloseIcon className="closeicon" style={{color: '#636363', fontSize: 20}} onClick={closeDragon}/>
@@ -171,7 +172,12 @@ const NavBarStateLess = (props) => {
                     </Hidden>
 
                     <Hidden lgUp>
-                        <SidenavTrigger click={props.sidenavClickHandler}/>
+                        <div className="phonebtns">
+                            <SearchTrigger click={props.searchClickHandler}/>
+                            {/* <SearchIcon className={searchiconclasses} style={{color: '#636363', fontSize: 20}} onClick={showSearchbar}/> */}
+                            <SidenavTrigger click={props.sidenavClickHandler}/>
+                        </div>
+                        
                     </Hidden>
                     
                 </Container>

@@ -4,7 +4,7 @@ const estilos = {
     position: 'fixed',
     width: '100%',
     height: '100%',
-    background: 'rgba(0,0,0,0.3)',
+    background: 'rgba(0,0,0,0.5)',
     zIndex: '2500',
     top: '0',
     left: '0',
