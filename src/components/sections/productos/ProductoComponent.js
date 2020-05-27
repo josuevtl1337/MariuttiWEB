@@ -11,14 +11,12 @@ import "./ProductoComponent.css"
 import { makeStyles } from '@material-ui/core/styles';
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
-import { connect } from 'react-redux'
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import PinterestIcon from '@material-ui/icons/Pinterest';
 //Importar el storage
 import "firebase/firebase-storage";
 import firebase from "firebase/app"
-import ProductoTabs from './ProductoTabs'
 
 const useStyles = makeStyles(theme => ({
     root: {
