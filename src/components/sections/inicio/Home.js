@@ -208,6 +208,7 @@ const Home = (props) => {
                                     handlerOnClickNoticia={()=>{handlerOnClickNoticia(item.id)}}                                     
                                     img={item.img}
                                     title={item.nombre}
+                                    date={item.createdAt}
                                     text={item.descripcion}
                                     key={i}
                                 />                                                                  

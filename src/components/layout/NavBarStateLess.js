@@ -64,6 +64,7 @@ const NavBarStateLess = (props) => {
         setBusqueda(e.target.value);
     };
     const onChangeDropDown = (param,param2,param3) => {
+        //cambio la categoria segun el click 
         props.history.push("/productos");
         // setDropdown(param);
         props.dropdown(param,param2,param3);

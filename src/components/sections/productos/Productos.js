@@ -32,7 +32,8 @@ const Productos = (props) => {
         window.scrollTo(0, 0)
         //si el resultado del dropdown es distinto a vacio lo seteo
         if(props.dropdownResult!=''){
-            setCategoriaActual(props.dropdownResult);    
+            setCategoriaActual(props.dropdownResult); 
+            setCategoriaRuta("");   
             setCategoriaActualName(props.dropdownResultName);  
         }
     });
