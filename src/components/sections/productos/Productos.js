@@ -9,7 +9,10 @@ import './Productos.css'
 import Drawer from './Drawer.js'
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
+import CatalogoProductos from "./CatalogoProductos"
 import ProductosCard from "./ProductoCard"
+import ProdComp from "./ProdComp";
+
 import HeroImageSmall from "../../layout/HeroImageSmall"
 import "./catalogoProductos.css"
 import { connect } from 'react-redux'
@@ -39,8 +42,13 @@ const Productos = (props) => {
     });
 
     const [categoriaRuta, setCategoriaRuta] = useState("");
+    const [nombre, setNombre] = useState("");
+    const [descripcion, setDescripcion] = useState("");
+    const [imagen, setImg] = useState("");
+    const [subtitulo, setSubtitulo] = useState("");
     const [categoriaActualName, setCategoriaActualName] = useState("Productos Destacados");
     const [productoState, setProductoState] = useState(false);
+    const [productTrigger, setProductTrigger] = useState(false);
 
     const rubros = useSelector(state => state.firebase.data.Rubro)
     const sub_rubros = useSelector(state => state.firebase.data.Sub_Rubro)
@@ -98,19 +106,35 @@ const Productos = (props) => {
         props.cleanUp();
         setCategoriaActual(e);
         setCategoriaActualName(categoriaNombre);
+        setProductTrigger(false);
+
     }
     const handleClickRubro = (e) => {
         console.log(e);
         setCategoriaRuta(e + " > ");
     }
     //Cambiando el history
-    const handlerOnClickProducto = (id) =>{
-        // e.preventDefault();
-        props.history.push("/producto?" + id);
-        setProductoState(true);
-        console.log(productoState);
-    }
+    // const handlerOnClickProducto = (id) =>{
+    //     // e.preventDefault();
+    //     // props.history.push("/producto?" + id);
+    //     setProductoState(true);
+    //     console.log(productoState);
+    // }
+    const handlerProductTrigger = (id,nombre,descripcion,img,subt) =>{
+        if(productTrigger==true){
+            setProductTrigger(false);
+        }else{
+            setProductTrigger(true);
+        }
 
+        setNombre(nombre);
+        setDescripcion(descripcion);
+        setImg(img);
+        setSubtitulo(subt);
+
+
+        console.log(productTrigger);
+    }
 
     return (
         <React.Fragment>
@@ -136,7 +160,15 @@ const Productos = (props) => {
                     <Grid item xs={12} md={9}>
                         <h4>{categoriaRuta}{categoriaActualName}</h4>
                         <Divider/>
+                        {productTrigger ? <ProdComp nombre={nombre} descripcion={descripcion} img={imagen} subtitulo={subtitulo}/> 
+                        : <CatalogoProductos categoriaActual={categoriaActual} productTrigger={handlerProductTrigger}/>
+                        }
+                        {/* <CatalogoProductos categoriaActual={categoriaActual} productTrigger={handlerProductTrigger}/> */}
+                        
+
+                        {/* 
                         <div className="contenedor-catalogo">
+                            
                             {re.map((item, i) => {                             
                                 if(categoriaActual == item.sub_rubro){
                                     return (
@@ -151,7 +183,8 @@ const Productos = (props) => {
                                     );
                                 }
                             })}    
-                            {                                       
+                            {            
+                                //Productos destacados                           
                                 onlyProductos.map((item, i) =>{
                                     if(categoriaActual == ""){
                                         return(                                 
@@ -166,8 +199,8 @@ const Productos = (props) => {
                                         )
                                     }                                     
                                 })
-                            }
-                        </div>
+                            } 
+                        </div>*/}
                     </Grid>
                 </Grid>              
             </Container>

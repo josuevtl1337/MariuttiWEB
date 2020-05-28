@@ -1,11 +1,31 @@
-import React from 'react'
+import React, { Component, useState, useEffect  } from "react"
 import Divider from '@material-ui/core/Divider';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import PinterestIcon from '@material-ui/icons/Pinterest';
+import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
+import firebase from "firebase/app"
 
 const ProdComp = (props) =>{
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
 
+      const [url, setUrl] = React.useState('');
+    
+      let imagen = props.img;
+      if (imagen) {
+        var pathImagen = firebase
+          .storage()
+          .ref(imagen)
+          .getDownloadURL()
+          .then(url => {
+            setUrl(url);
+          })
+          .catch(error => {
+            console.log(error.message);
+        });
+    }
 
     return(
         <div className="singleprod-wrap" style={{zIndex: 100}}>
@@ -51,7 +71,6 @@ const ProdComp = (props) =>{
                 Productos Relacionados
             </h3>
             <div className="divline prod" style={{marginTop: 0}}></div>
-
         </div>
     )
 }
