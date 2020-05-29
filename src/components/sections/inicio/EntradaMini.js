@@ -41,7 +41,9 @@ export default function EntradaMini (props) {
                 <p className="entradamini-cardtitle">
                     {props.title}
                 </p>
-                <h5>{fechaParseada}</h5>
+                <p className="entrada-date">
+                    {fechaParseada}
+                </p>
                 <p className="entrada-cardtext" style={{marginBottom: 8, fontSize: 15, letterSpacing: 'unset'}}>
                     {props.text}
                 </p>

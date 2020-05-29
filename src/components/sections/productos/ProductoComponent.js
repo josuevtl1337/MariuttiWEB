@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 
 import Divider from '@material-ui/core/Divider';
 import Drawer from './Drawer.js'
-
+import Tooltip from '@material-ui/core/Tooltip';
 
 import "./ProductoComponent.css"
 import { makeStyles } from '@material-ui/core/styles';
@@ -113,6 +113,20 @@ const ProductoComponent = (props) =>{
     let search = props.history.location.search.substr(1);
     console.log(search);
 
+    const ifvidexists = (string) => {
+        if(string){
+            return(
+                <div className="videowrapper">
+                    <iframe 
+                        className="ytvideo"
+                        src={string} 
+                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" 
+                        allowfullscreen
+                    />  
+                </div>
+            )
+        }
+    }
 
     return (
         <div className="containerprod">
@@ -134,6 +148,8 @@ const ProductoComponent = (props) =>{
                     </Grid>
                     <Grid item xs={12} md={9}>
                         <div className="singleprod-wrap" style={{zIndex: 100}}>
+                            <h4>Rubro / Subrubro / Producto</h4>
+                            <Divider style={{marginBottom: 28}}/>
                             {productosArray.map((item, i) => {  
                             let fecha = new Date(item.createdAt);                               
                             if(search == item.id){
@@ -153,39 +169,39 @@ const ProductoComponent = (props) =>{
                                 return (  
                                     <React.Fragment>
                                         <div className="product-block">
-                                            <div className="left">
-                                                <img className="singleprod-img" src={url} />
+                                            <div className="prodtop">
+                                                
+                                                <div className="left">
+                                                    <img className="singleprod-img" src={url} />
+                                                </div>
+                                                <div className="right">
+                                                    <h3 className="singleprod-title">{item.nombre}</h3>
+                                                    <div className="divline right" style={{marginLeft: 0, marginRight: 0, width: '100%'}}></div>
+                                                    <h4 className="precio">$3.500,00</h4>
+                                                    <div className="buttonscontainer">
+                                                        <button className="aboutbtn prodstock">
+                                                            Consultar Stock
+                                                        </button>
+                                                        <Tooltip arrow title="Descargar Ficha Técnica" placement="right">
+                                                            <button className="aboutbtn fichatecnica">
+                                                                <i className="material-icons ficha">play_for_work</i>
+                                                            </button>
+                                                        </Tooltip>
+                                                        
+                                                    </div>
+                                                </div>
+                                                
                                             </div>
-                                            <div className="right">
-                                                <h3 className="singleprod-title">{item.nombre}</h3>
+                                            <div className="desc">
+                                                <div className="divline descr"></div>
                                                 <p className="singleprod-sub">{item.subtitulo}</p>
-                                                <div className="divline" style={{marginLeft: 0, marginRight: 0, width: '100%'}}></div>
-                                                {/* <ProductoTabs
-                                                    descripcion={item.descripcion}
-                                                    enlace={item.enlace}
-                                                /> */}
+
 
                                                 <p className="singleprod-desc">{item.descripcion}</p>
-                                                
-                                                <div>
-                                                    <button className="aboutbtn prodstock">
-                                                            Consultar Stock
-                                                    </button>
-                                                </div>
-                                                
 
+                                                {ifvidexists(item.enlace)}
 
-
-                                                <div className="videowrapper">
-                                                    <iframe 
-                                                        className="ytvideo"
-                                                        src={item.enlace} 
-                                                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" 
-                                                        allowfullscreen
-                                                    />  
-                                                </div>
-
-                                                <div className="share">
+                                                {/* <div className="share">
                                                     <h4 className="compartir">Compartir:</h4>
                                                     <div className="shareicons">
                                                         <FacebookIcon className="share-icon"/>
@@ -194,13 +210,13 @@ const ProductoComponent = (props) =>{
                                                     </div>
                                                     
                                                 </div>
-                                                <div className="divline share"></div>
+                                                <div className="divline share"></div> */}
+
+                                                <div className="divline descr"></div>
+
                                             </div>
                                         </div>   
-                                        <h3 className="homediv-title prodrel">
-                                            Productos Relacionados
-                                        </h3>
-                                        <div className="divline prod" style={{marginTop: 0}}></div>
+                                        
                                     </React.Fragment>    
                                                                                                                     
                                         );
@@ -208,93 +224,13 @@ const ProductoComponent = (props) =>{
                                 })}     
                         </div> 
                     </Grid>
-                </Grid>              
+                </Grid>
+
+                <h3 className="homediv-title prodrel">
+                    Productos Relacionados
+                </h3>
+                <div className="divline prod" style={{marginTop: 0}}></div>              
             </Container>
-
-
-
-
-
-
-
-            {/* <div className="noticiasbanner prod">
-                <h2>Productos</h2>
-            </div> */}
-
-            {/* <div className="singleprod-wrap" style={{zIndex: 100}}>
-                {productosArray.map((item, i) => {  
-                    let fecha = new Date(item.createdAt);                               
-                    if(search == item.id){
-                        let imagen = item.img;
-                        if (imagen) {
-                            var pathImagen = firebase
-                            .storage()
-                            .ref(imagen)
-                            .getDownloadURL()
-                            .then(url => {
-                                setUrl(url);
-                            })
-                            .catch(error => {
-                                console.log(error.message);
-                            });
-                        }
-                        return (  
-                            <React.Fragment>
-                                <div className="product-block">
-                                    <div className="left">
-                                        <img className="singleprod-img" src={url} />
-                                    </div>
-                                    <div className="right">
-                                        <h3 className="singleprod-title">{item.nombre}</h3>
-                                        <p className="singleprod-sub">{item.subtitulo}</p>
-                                        <div className="divline" style={{marginLeft: 0, marginRight: 0, width: '100%'}}></div>
-                                        {/* <ProductoTabs
-                                            descripcion={item.descripcion}
-                                            enlace={item.enlace}
-                                        /> */}
-{/* 
-                                        <p className="singleprod-desc">{item.descripcion}</p>
-                                        
-                                        <div>
-                                            <button className="aboutbtn prodstock">
-                                                    Consultar Stock
-                                            </button>
-                                        </div>
-                                         
-
-
-
-                                        <div className="videowrapper">
-                                            <iframe 
-                                                className="ytvideo"
-                                                src={item.enlace} 
-                                                frameborder="0" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" 
-                                                allowfullscreen
-                                            />  
-                                        </div>
-
-                                        <div className="share">
-                                            <h4 className="compartir">Compartir:</h4>
-                                            <div className="shareicons">
-                                                <FacebookIcon className="share-icon"/>
-                                                <TwitterIcon className="share-icon"/>
-                                                <PinterestIcon className="share-icon"/>
-                                            </div>
-                                            
-                                        </div>
-                                        <div className="divline share"></div>
-                                    </div>
-                                </div>   
-                                <h3 className="homediv-title prodrel">
-                                    Productos Relacionados
-                                </h3>
-                                <div className="divline prod" style={{marginTop: 0}}></div>
-                            </React.Fragment>    
-                                                                                                            
-                        );
-                    }                               
-                })}     
-            </div>       */}
 
         </div>
     )

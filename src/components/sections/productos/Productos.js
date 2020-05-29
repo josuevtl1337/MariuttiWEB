@@ -94,6 +94,7 @@ const Productos = (props) => {
                     {'id':item.id,
                     'nombre': item.nombre,
                     'img':item.img,
+                    'subtitulo': item.subtitulo,
                     'descripcion':item.descripcion},
                 )
             }                                                                                                    
@@ -132,6 +133,9 @@ const Productos = (props) => {
         setImg(img);
         setSubtitulo(subt);
 
+        // <---LEER: Esto de abajo agrega el id de producto a la url, pero luego no funciona clickear una categoria de la izquierda.
+        // e.preventDefault();
+        // props.history.push("/producto?" + id);
 
         console.log(productTrigger);
     }
@@ -139,7 +143,6 @@ const Productos = (props) => {
     return (
         <React.Fragment>
             {/* banner */}
-            {/* <div className="heroimg-small"/> */}
             <div className="noticiasbanner prodlist">
                 <h2>
                     Productos
@@ -163,7 +166,6 @@ const Productos = (props) => {
                         {productTrigger ? <ProdComp nombre={nombre} descripcion={descripcion} img={imagen} subtitulo={subtitulo}/> 
                         : <CatalogoProductos categoriaActual={categoriaActual} productTrigger={handlerProductTrigger}/>
                         }
-                        {/* <CatalogoProductos categoriaActual={categoriaActual} productTrigger={handlerProductTrigger}/> */}
                         
 
                         {/* 
