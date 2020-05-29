@@ -67,7 +67,9 @@ const NavBarStateLess = (props) => {
         //cambio la categoria segun el click 
         props.history.push("/productos");
         // setDropdown(param);
-        props.dropdown(param,param2,param3);
+        //este trigger es para cambiar entre productocard y el catalogo
+        let trigger = false;
+        props.dropdown(param,param2,param3,trigger);
         console.log(param3)
     };
     let tabwrapclasses

@@ -39,6 +39,9 @@ const Productos = (props) => {
             setCategoriaRuta("");   
             setCategoriaActualName(props.dropdownResultName);  
         }
+        // if(props.trigger==false){
+        //     setProductTrigger(true);
+        // }
     });
 
     const [categoriaRuta, setCategoriaRuta] = useState("");
@@ -46,6 +49,7 @@ const Productos = (props) => {
     const [descripcion, setDescripcion] = useState("");
     const [imagen, setImg] = useState("");
     const [subtitulo, setSubtitulo] = useState("");
+    const [video, setVideo] = useState("");
     const [categoriaActualName, setCategoriaActualName] = useState("Productos Destacados");
     const [productoState, setProductoState] = useState(false);
     const [productTrigger, setProductTrigger] = useState(false);
@@ -121,23 +125,25 @@ const Productos = (props) => {
     //     setProductoState(true);
     //     console.log(productoState);
     // }
-    const handlerProductTrigger = (id,nombre,descripcion,img,subt) =>{
+    const handlerProductTrigger = (id,nomb,descripcion,img,subt,vid) =>{
         if(productTrigger==true){
             setProductTrigger(false);
         }else{
             setProductTrigger(true);
         }
 
-        setNombre(nombre);
+
+        setNombre(nomb);
+        setSubtitulo(subt);
         setDescripcion(descripcion);
         setImg(img);
-        setSubtitulo(subt);
+        setVideo(vid);
+ 
 
         // <---LEER: Esto de abajo agrega el id de producto a la url, pero luego no funciona clickear una categoria de la izquierda.
         // e.preventDefault();
         // props.history.push("/producto?" + id);
-
-        console.log(productTrigger);
+        console.log(nombre);
     }
 
     return (
@@ -161,9 +167,10 @@ const Productos = (props) => {
                         <Drawer titulo="Ferretería Industrial" handlerRuta={handleClickRubro} handler={handleClick} categorias={ferreteria}/>
                     </Grid>
                     <Grid item xs={12} md={9}>
-                        <h4>{categoriaRuta}{categoriaActualName}</h4>
+                        <h4>{categoriaRuta}{categoriaActualName}{productTrigger ? " >" : ""}</h4>
+                        {/* <h4>{nombre}{subtitulo}{video}</h4> */}
                         <Divider/>
-                        {productTrigger ? <ProdComp nombre={nombre} descripcion={descripcion} img={imagen} subtitulo={subtitulo}/> 
+                        {productTrigger ? <ProdComp nombre={nombre} descripcion={descripcion} img={imagen} subtitulo={subtitulo} enlace={video}/> 
                         : <CatalogoProductos categoriaActual={categoriaActual} productTrigger={handlerProductTrigger}/>
                         }
                         

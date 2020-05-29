@@ -29,15 +29,18 @@ const CatalogoProductos = (props) =>{
                     {'id':item.id,
                     'nombre': item.nombre,
                     'img':item.img,
-                    'descripcion':item.descripcion},
+                    'subtitulo':item.subtitulo,
+                    'descripcion':item.descripcion,
+                    'enlace':item.enlace
+                },
                 )
             }                                                                                                    
         })
         console.log(onlyProductos);
         console.log(re);
     }
-    const handlerOnClickProducto = (id,nombre,descripcion,img,subtitulo) =>{
-        props.productTrigger(id,nombre,descripcion,img,subtitulo);
+    const handlerOnClickProducto = (id,nombre,descripcion,img,subtitulo,video) =>{
+        props.productTrigger(id,nombre,descripcion,img,subtitulo,video);
         // e.preventDefault();
         // props.history.push("/producto?" + id);
         // setProductoState(true);
@@ -50,7 +53,7 @@ return(
     {re.map((item, i) => {                             
         if(props.categoriaActual == item.sub_rubro){
             return (
-                <div onClick={()=>handlerOnClickProducto(item.id,item.nombre,item.descripcion,item.img,item.subtitulo)}>
+                <div onClick={()=>handlerOnClickProducto(item.id,item.nombre,item.descripcion,item.img,item.subtitulo,item.enlace)}>
                     <ProductosCard                                      
                         img={item.img}
                         titulo={item.nombre}
@@ -66,7 +69,7 @@ return(
         onlyProductos.map((item, i) =>{
             if(props.categoriaActual == ""){
                 return(                                 
-                    <div onClick={()=>handlerOnClickProducto(item.id,item.nombre,item.descripcion,item.img,item.subtitulo)}>
+                    <div onClick={()=>handlerOnClickProducto(item.id,item.nombre,item.descripcion,item.img,item.subtitulo,item.enlace)}>
                     <ProductosCard                                      
                         img={item.img}
                         titulo={item.nombre}
