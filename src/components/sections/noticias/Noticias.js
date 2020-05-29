@@ -40,6 +40,7 @@ const Noticias = (props) => {
                 <h2>Novedades</h2>
             </div>
             <Container>
+                <h4 className="contactitle ultimas">más recientes</h4>
                 
                 {/* Listado de todas las noticias */}
                 <div className="listado-entradas">
@@ -57,7 +58,9 @@ const Noticias = (props) => {
                     })}                 
                 </div>
 
-                <div className="noticias-inicio-celu desk">
+                <div className="noticias-celu">
+                    <h4 className="contactitle news">Noticias Anteriores</h4>
+
                     {restonoticias.map((item, i) => {                             
                         return (
                             <EntradaCelu 

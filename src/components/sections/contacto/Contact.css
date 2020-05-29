@@ -25,13 +25,16 @@
     color: #424242;
 }
 
+.izquierda{
+    width: 45%;
+}
+
 .contactform{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 45%;
     height: 400px;
-    margin-bottom: 32px;
+    margin-bottom: 42px;
 }
 
 .aboutbtn.contact{
@@ -42,6 +45,51 @@
     margin-top: 4px;
     margin-bottom: 0;
 }
+
+.redes{
+    margin-top: 16px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: auto;
+}
+
+.red{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    width: max-content;
+}
+
+.redimg{
+    width: 42px;
+}
+
+.redimg.tel{
+    filter: invert(51%) sepia(66%) saturate(4344%) hue-rotate(90deg) brightness(98%) contrast(108%);
+}
+
+.redtxt{
+    margin-left: 12px;
+    font-weight: 600;
+    color: rgb(93, 93, 93);
+    transition: all 0.2s;
+}
+
+.red:hover .redtxt.fb{
+    color: rgb(12, 96, 199);
+}
+
+.red:hover .redtxt.msn{
+    color: rgb(24, 116, 196);
+}
+
+.red:hover .redtxt.tel{
+    color: rgb(7, 153, 7);
+}
+
 
 .ubicacion{
     display: flex;
@@ -63,6 +111,11 @@
 }
 
 @media only screen and (max-width: 750px) {
+
+    .izquierda{
+        width: 95%;
+    }
+
     .contactblock{
         flex-direction: column;
         align-items: center;
@@ -74,11 +127,23 @@
         margin-bottom: 32px;
     }
 
-    .contactform{
-        width: 90%;
-    }
-
     .map{
         height: 400px;
+    }
+
+    .redes{
+        height: 175px;
+    }
+
+    .redtxt.fb{
+        color: rgb(12, 96, 199);
+    }
+    
+    .redtxt.msn{
+        color: rgb(24, 116, 196);
+    }
+    
+    .redtxt.tel{
+        color: rgb(7, 153, 7);
     }
 }

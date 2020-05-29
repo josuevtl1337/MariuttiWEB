@@ -16,7 +16,10 @@ import { useSelector } from 'react-redux'
 import Logo from '../../visuals/logoplano-small.png'
 
 
+
 const NavBarStateLess = (props) => {
+
+    
 
     useFirebaseConnect([
         { path: 'Sub_Rubro' }
@@ -24,6 +27,7 @@ const NavBarStateLess = (props) => {
     
     const sub_rubros = useSelector(state => state.firebase.data.Sub_Rubro);
     const [busqueda, setBusqueda] = React.useState("");
+    const [scroll, setScroll] = React.useState(false);
     const [dropdown, setDropdown] = React.useState("");
     const [search, setSearch] = React.useState(false);
     const maquinas = [];
