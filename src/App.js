@@ -31,7 +31,8 @@ class App extends Component {
     busqueda : "",
     maquinas:[],
     dropdown:"",
-    dropdownName:""
+    dropdownName:"",
+    trigger:""
   };
 
   sidenavTriggerClickHandler = () => {
@@ -58,10 +59,11 @@ class App extends Component {
   buscandoResultado = (param) =>{
     this.setState({busqueda:param})
   }
-  dropdownResultado = (param, param2, param3) =>{
+  dropdownResultado = (param, param2, param3, param4) =>{
     this.setState({
       dropdown:param, 
-      dropdownName:param3+param2
+      dropdownName:param3+param2,
+      trigger:param4
     })
   }
   cleanUpDropdown = () =>{
@@ -139,7 +141,7 @@ class App extends Component {
         </Switch>
         <Route
             path='/productos'
-            render={(props) => <Productos {...props} dropdownResult={this.state.dropdown} dropdownResultName={this.state.dropdownName} cleanUp={this.cleanUpDropdown}/>}
+            render={(props) => <Productos {...props} dropdownResult={this.state.dropdown} dropdownResultName={this.state.dropdownName} trigger={this.state.trigger} cleanUp={this.cleanUpDropdown}/>}
         />
         <Route
             path='/busqueda'

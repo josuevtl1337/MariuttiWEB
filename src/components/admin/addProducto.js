@@ -64,8 +64,6 @@ export default function SimpleModal(props) {
     // setSubNombre(event.target.name);
     // console.log(event.target.getAttribute('name'));
     setSub(event.target.value);
-    console.log(event);
-    
   };
   const handleChangeSubNombre = (event) => {
     console.log(event.taget)
@@ -103,7 +101,7 @@ export default function SimpleModal(props) {
     // // console.log(subRubro);
     props.handleUploadProducto(nombre,subtitulo,descripcion,enlace,subRubro,file,oferta)(e);
     // console.log(oferta)
-    // console.log(props.sub_rubros);
+    console.log(nombre,subtitulo,descripcion,enlace,subRubro,file,oferta);
     setOpen(false);
   }
 

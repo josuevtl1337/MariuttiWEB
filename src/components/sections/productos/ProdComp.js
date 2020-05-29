@@ -43,7 +43,6 @@ const ProdComp = (props) =>{
         }
     }
 
-    console.log(props.subtitulo)
 
     return(
         <div className="singleprod-wrap" style={{zIndex: 100}}>
