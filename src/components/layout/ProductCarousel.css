@@ -76,10 +76,11 @@
 }
 
 .entrada-cardtext.carousel{
+    margin-top: 16px;
     color: #7A7A7A;
     width: 100%;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
