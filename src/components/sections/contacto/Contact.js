@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import PinterestIcon from '@material-ui/icons/Pinterest';
 import './Contact.css'
 import Map from "./Map"
 import credentials from "./Credentials"
@@ -23,17 +26,22 @@ const Contact = (props)=>{
               <TextField required id="standard-required" label="Correo Electrónico"  defaultValue="" />
               <TextField required id="standard-required" label="Asunto" multiline rows="4" defaultValue="" />
               <button className="aboutbtn contact">Enviar</button>
+
+              
             </form>
 
           <div className="ubicacion">
             <h4 className="contactitle">Encontranos.</h4>
-
-            <Map 
-              googleMapURL = {mapURL}
-              containerElement={<div style={{height:"400px"}} />}
-              mapElement={<div style={{height:"100%"}} />}
-              loadingElement={<h4>Cargando...</h4>}
-            />
+            <div className="map">
+              <Map 
+                className="map"
+                googleMapURL = {mapURL}
+                containerElement={<div style={{height:"100%"}} />}
+                mapElement={<div style={{height:"100%"}} />}
+                loadingElement={<h4>Cargando...</h4>}
+              />
+            </div>
+            
             <p className="quienes-p familia contact">Francia 2399 esquina 1º JUNTA. (3000) Santa Fe, Argentina</p>
           </div>
         </div>

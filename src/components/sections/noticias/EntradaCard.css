@@ -196,6 +196,7 @@
     /* align-items: center; */
     flex-direction: row;
     margin-bottom: 4px;
+    cursor: pointer;
 }
 
 .er-img{
@@ -242,9 +243,12 @@
 
 .entradacelu{
     width: 100%;
-    height: 200px;
-    margin-top: 4px;
+    min-height: 170px;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .entradacelu-wrap{
@@ -258,13 +262,12 @@
 }
 
 .entradacelu-title{
-    width: 80%;
+    width: 100%;
     font-size: 26px;
     font-weight: 600;
     font-family: 'oswald';
     color: #F2BC02;
     margin: 0;
-    margin-top: 16px;
 }
 
 .entradacelu-text{
@@ -274,7 +277,7 @@
     color: #E1E1E1;
     margin: 0;
     margin-top: 24px;
-    margin-bottom: -16px;
+    margin-bottom: 0;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -294,25 +297,19 @@
 .hcc-divider.entrada{
     width: 95%;
     margin: 0px auto;
-    margin-top: 12px;
+    margin-top: 32px;
     margin-bottom: 32px;
 }
 
 /* Entradacard en celu */
 
-@media only screen and (max-width: 500px) {
-    .entradacard-imgwrap{
-        height: 250px;
-    }
-
-    .entradacard{
-        margin-bottom: 16px;
-    }
-}
-
 @media only screen and (max-width: 750px) {
     .listado-entradas{
         flex-direction: column;
+    }
+
+    .entradacelu-wrap{
+        height: 80%;
     }
 }
 
@@ -322,6 +319,25 @@
     }
 
     .entradacelu{
+        max-height: 300px;
+    }
+
+    .entradacelu-wrap{
+        max-height: 100%;
+    }
+
+    .entradacard-imgwrap{
         height: 250px;
+    }
+
+    .entradacard{
+        margin-bottom: 16px;
+    }
+
+    .entradacelu-title{
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 }

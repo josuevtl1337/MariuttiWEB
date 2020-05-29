@@ -46,7 +46,7 @@ const Noticias = (props) => {
                     {tresnoticias.map((item, i) => {                             
                         return (
                             <EntradaMini     
-                                click={()=>handlerOnClickNoticia(item.id)}                     
+                                handlerOnClickNoticia={()=>handlerOnClickNoticia(item.id)}                     
                                 img={item.img}
                                 title={item.nombre}
                                 date={item.createdAt}
