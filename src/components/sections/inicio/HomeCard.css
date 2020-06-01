@@ -28,6 +28,10 @@
     align-items: center;
     font-family: 'Roboto Condensed';
     cursor: pointer;
+
+    border-radius: 1.1em;
+    border-radius: 50%;
+
 }
 
 .homecard-img{
@@ -44,6 +48,7 @@
     width: 100%;
     text-align: center;
     transition: all 0.2s;
+    margin-top: 4px;
 }
 
 .homecard:hover .homecard-text{

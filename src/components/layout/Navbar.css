@@ -15,7 +15,7 @@ a{
   width: 1220px;
   height: 100px;
   margin: 0px auto;
-  background-color: #ffffff;
+  background-color: #fffffff3;
   font-size: 15px;
   /* box-shadow: 0 0px 21px -3px rgba(0, 0, 0, 0.07); */
   box-shadow: 0 12px 15px -16px rgba(0, 0, 0, 0.27);
@@ -224,13 +224,13 @@ a{
   overflow: visible;
 }
 
-.prodtab:hover .proddrop, .proddrop:hover{  /* HOVER DROPDOWN */
+/* HOVER DROPDOWN */
+/* .prodtab:hover .proddrop, .proddrop:hover{  
   display: flex;
   justify-content: start;
   align-content: center;
-  /* height: 50vh; */
   height: 320px;
-} 
+}  */
 
 .drop-rubro{
   color: #274582;

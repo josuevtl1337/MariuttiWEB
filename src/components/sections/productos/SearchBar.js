@@ -13,7 +13,8 @@ const useStyles = makeStyles(theme => ({
   root: {
     padding: '2px 0px',
     display: 'flex',
-    width: 500,
+    width: '100%',
+    marginBottom: 4
   },
   input: {
     marginLeft: theme.spacing(3),
