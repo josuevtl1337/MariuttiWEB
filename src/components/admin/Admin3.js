@@ -634,7 +634,6 @@ class Admin3 extends Component {
           }
         }    
   }
-    
 }
 const mapStateToProps = (state) =>{
   return{
