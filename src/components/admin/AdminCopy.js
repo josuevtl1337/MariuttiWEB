@@ -42,7 +42,7 @@ class Admin3 extends Component {
     password:"",
     data:[],
     Enlace:{},
-    display:"Producto",
+    display:"Rubro",
     displayError:""
   };
   componentDidMount(){
@@ -50,25 +50,29 @@ class Admin3 extends Component {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user });
     })
+    console.log("componente montado")
+
     //Importo todos los datos necesarios a variables de una sola vez.
      const importingData = () =>{
-      const dbRefRubro = db.ref("Rubro");
-      dbRefRubro.on("child_added", snapshot => {
-        this.setState({
-          Rubro: this.state.Rubro.concat(snapshot.val())
+        const dbRefRubro = db.ref("Rubro");
+        dbRefRubro.on("child_added", snapshot => {
+          console.log(snapshot.val())
+          this.setState({
+            Rubro: this.state.Rubro.concat(snapshot.val())
+          });
+          console.log(this.state.Rubro)
         });
-      });
         const dbRefSub_Rubro = db.ref("Sub_Rubro");
         dbRefSub_Rubro.on("child_added", snapshot => {
           this.setState({
             Sub_Rubro: this.state.Sub_Rubro.concat(snapshot.val())
           });
-
         });
         const dbRefProducto = db.ref("Producto");
         dbRefProducto.on("child_added", snapshot => {
           this.setState({
-            Producto: this.state.Producto.concat(snapshot.val())       
+            Producto: this.state.Producto.concat(snapshot.val()),
+            Enlace: this.state.Producto.enlace
           });
         });
         const dbRefNoticia = db.ref("Noticia");
@@ -85,7 +89,6 @@ class Admin3 extends Component {
         })
       }, 2000);
       importingData();
-
   }
   //Este método sirve para cambiar la tabla dependiendo a cual le das click
   handleClick = (param) =>{
@@ -110,10 +113,8 @@ class Admin3 extends Component {
     }).then(()=>window.location.reload()) 
   }
   //Subiendo PRODUCTOS
-  handleUploadProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f,oferta,pdf) => (e) =>{
+  handleUploadProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f,oferta) => (e) =>{
     const file = f;
-    const filePdf = pdf;
-    
     const storageRef = firebase.storage().ref(`imagenes/${file.name}`);
     //pusheo mi archivo file dentro de mi BD
     const task = storageRef.put(file);
@@ -288,19 +289,14 @@ class Admin3 extends Component {
         }       
         else{
           if(this.state.display=="Sub_Rubro"){
-            console.log(this.state.Rubro)
-            var obj = this.state.Rubro.reduce(function(acc, cur, i) {
-              acc[cur.id] = cur.nombre;
-              return acc;
-            }, {});
-            console.log(obj);
+            console.log(this.state.Sub_Rubro);
             return(
               <Grid container spacing={2}>  
                 <Grid container justify="center" item xs={12}>
                   <Catalogo parentCallback={this.handleClick} close={this.handlerSignOut} />  
                   <AddSubRubro handleUpload={this.handleUpload}/>
                 </Grid>
-                <Grid  container justify="center" item xs={12} >
+                <Grid item xs={12} >
                   <MaterialTable
                           actions={[
                             {
@@ -328,15 +324,14 @@ class Admin3 extends Component {
                             search: true,
                             sorting: false,
                             columnsButton:true,
-                            paging:false,    
-                            filtering:true     
+                            paging:false,         
                             }}
                             columns={[
-                            { title: 'Id', field: 'id',  editable: 'never', filtering:false
+                            { title: 'Id', field: 'id',  editable: 'never'
                             },
-                            { title: 'Nombre', field: 'nombre' , filtering:false
+                            { title: 'Nombre', field: 'nombre'
                             },
-                            { title: 'Rubro', field: 'rubro', lookup:obj
+                            { title: 'Rubro', field: 'rubro', lookup:{r2:"Obras y Contruccion", r1:"Maquinas y Herramientas",r3:"Ferretería Industrial"}
                             },
                             ]}
                             data={this.state.Sub_Rubro}
@@ -363,26 +358,62 @@ class Admin3 extends Component {
                                   }, 1000)
                                 }),
                             }}
-                            title="SUB_RUBROS"
+                            title="Sub_Rubros/"
                   />   
                 </Grid>      
               </Grid>
             );
+          }else if(this.state.display=="Rubro"){
+            return(
+              <Grid container spacing={2}>  
+              <Grid container justify="center" item xs={12}>
+              <Catalogo parentCallback={this.handleClick} close={this.handlerSignOut}/>   
+                {/* <AddRubro /> */}
+              </Grid>
+              <Grid item xs={12} >
+              <MaterialTable
+                      actions={[
+                        {
+                          icon: 'delete',
+                          tooltip: 'No se puede ejecutar esta accion',
+                          disabled:true
+                        },
+                        {
+                          icon:'edit',                 
+                          tooltip: 'No se puede ejecutar esta accion',
+                          disabled:true
+                        } 
+                      ]}
+                      options={{
+                        search: true,
+                        sorting: false,
+                        columnsButton:true,
+                        paging:false,         
+                        }}
+                        columns={[
+                          { title: 'Titulo', field: 'nombre' ,
+                          cellStyle:{width:'50%',minWidth:'50%'},
+                          headerStlye:{width:'50%',minWidth:'50%'}
+                          },
+                          { title: 'Id', field: 'id',
+                            cellStyle:{width:200,minWidth:200},
+                            headerStlye:{width:200,minWidth:200}
+                          }
+                        ]}
+                        data={this.state.Rubro}
+                        title="Rubros/"
+              />   
+              </Grid>      
+              </Grid>
+            );
           }else if(this.state.display=="Producto"){
-            console.log(this.state.Sub_Rubro);
-            var obj = this.state.Sub_Rubro.reduce(function(acc, cur, i) {
-              acc[cur.id] = cur.nombre;
-          
-              return acc;
-            }, {});
-            console.log(obj);
             return(
               <Grid container spacing={2}>  
               <Grid container justify="center" item xs={12}>
               <Catalogo parentCallback={this.handleClick} close={this.handlerSignOut}/>   
                 <AddProducto sub_rubros={this.state.Sub_Rubro} handleUploadProducto={this.handleUploadProducto}/>
               </Grid>
-              <Grid container justify="center" item xs={12} >
+              <Grid item xs={12} >
               <MaterialTable
                       actions={[
                         {
@@ -436,22 +467,20 @@ class Admin3 extends Component {
                         }
                       ]}
                       options={{
-                        filtering:true,
                         search: true,
                         sorting: false,
                         columnsButton:true,
                         paging:false,         
                         }}
                         columns={[
-                          { title: 'Titulo', field: 'nombre', filtering:false },
-                          { title: 'Subtitutlo', field: 'subtitulo', filtering:false },
+                          { title: 'Titulo', field: 'nombre' },
+                          { title: 'Subtitutlo', field: 'subtitulo' },
                           { title: 'Descripcion', field: 'descripcion',
                             cellStyle:{width:200,minWidth:200},
                             headerStlye:{width:200,minWidth:200},
-                            hidden:true,
-                            filtering:false
+                            hidden:true
                           },
-                          { title: 'Sub_Rubro', field: 'sub_rubro' , lookup: obj },
+                          { title: 'Sub_Rubro', field: 'sub_rubro'},
                           // { title: 'Ficha Tecnica', field: 'fichaTecnica'}                        
                         ]}
                         
@@ -495,7 +524,7 @@ class Admin3 extends Component {
                             }    
                           }                   
                         }}
-                        title="PRODUCTOS"
+                        title="Productos/"
               />   
               </Grid>      
               </Grid>
@@ -507,7 +536,7 @@ class Admin3 extends Component {
               <Catalogo parentCallback={this.handleClick} close={this.handlerSignOut}/>   
                 <AddNoticia handleUploadNoticia={this.handleUploadNoticia}/>
               </Grid>
-              <Grid container justify="center" item xs={12} >
+              <Grid item xs={12} >
               <MaterialTable
                       actions={[
                         {
@@ -571,7 +600,7 @@ class Admin3 extends Component {
                           { title: 'Descripcion', field: 'descripcion',
                             cellStyle:{minWidth:500},
                             headerStlye:{minWidth:500},
-                            hidden:true
+                            // hidden:true
                           },                    
                         ]}
                         
@@ -597,7 +626,7 @@ class Admin3 extends Component {
                             }                                                       
                           }                   
                         }}                       
-                        title="NOTICIAS"
+                        title="Noticias/"
               />   
               </Grid>      
               </Grid>

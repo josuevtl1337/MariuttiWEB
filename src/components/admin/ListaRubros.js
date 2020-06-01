@@ -60,9 +60,6 @@ state={
           //     </TreeItem>
           // </TreeView>    
           <div className="listarubroswrap">
-            <div onClick={()=>{handleOnClick("Rubro")}}>
-              Rubros
-            </div>
             <div onClick={()=>{handleOnClick("Sub_Rubro")}}>
               Subrubros
             </div>
@@ -72,8 +69,11 @@ state={
             <div onClick={()=>{handleOnClick("Noticias")}}>
               Noticias
             </div>
-            <div>
+            {/* <div>
             <CloseSharpIcon color="error" fontSize="large" onClick={this.props.close}/>
+            </div> */}
+            <div style={{color:"red"}} onClick={this.props.close}>
+              Cerrar Sesion
             </div>        
           </div>
         );

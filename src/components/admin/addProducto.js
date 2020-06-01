@@ -8,9 +8,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
@@ -57,7 +57,10 @@ export default function SimpleModal(props) {
   const [subtitulo , setSubtitulo] = React.useState('');
   const [descripcion , setDescripcion] = React.useState('');
   const [enlace , setEnlace] = React.useState('');
+  //Imagen
   const [file , setFile] = React.useState('');
+  //PDF
+  const [pdf , setPdf] = React.useState('');
   const [oferta , setOferta] = React.useState(false);
 
   const handleChangeSub = event => {
@@ -84,6 +87,10 @@ export default function SimpleModal(props) {
   const handleFile = e =>{
     setFile(e.target.files[0]);
   }
+  //PDF Handler
+  const handlePdf = e =>{
+    setPdf(e.target.files[0]);
+  }
   const onClickOfertaHandler = e => {
     if (oferta == false){
       setOferta(true);  
@@ -99,9 +106,9 @@ export default function SimpleModal(props) {
     // console.log("Enlace:",enlace);
     // console.log("Imagen:",file);
     // // console.log(subRubro);
-    props.handleUploadProducto(nombre,subtitulo,descripcion,enlace,subRubro,file,oferta)(e);
+    props.handleUploadProducto(nombre,subtitulo,descripcion,enlace,subRubro,file,oferta,pdf)(e);
     // console.log(oferta)
-    console.log(nombre,subtitulo,descripcion,enlace,subRubro,file,oferta);
+    console.log(nombre,subtitulo,descripcion,enlace,subRubro,file,oferta,pdf);
     setOpen(false);
   }
 
@@ -159,6 +166,14 @@ export default function SimpleModal(props) {
                 <label  htmlFor="icon-button-file">
                   <IconButton  color="primary" aria-label="upload picture" component="span">
                     <PhotoCamera />
+                  </IconButton>
+                </label>
+  
+                {/* PDF */}
+                <input className={classes.input} id="icon-button-file" type="file" accept="application/pdf" onChange={handlePdf} />
+                <label  htmlFor="icon-button-file">
+                  <IconButton  color="primary" aria-label="upload picture" component="span">
+                    <PictureAsPdfIcon />
                   </IconButton>
                 </label>
   

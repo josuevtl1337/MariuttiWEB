@@ -71,8 +71,6 @@ const Productos = (props) => {
     
     if(sub_rubros){
         const categorias = Object.values(sub_rubros);
-        console.log(categorias)
-        console.log(sub_rubros)
         categorias.forEach(elemento => {
             if (elemento.rubro == "r1") {
                 maquinas.push([elemento.id, elemento.nombre])
