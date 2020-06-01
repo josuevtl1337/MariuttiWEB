@@ -113,7 +113,7 @@ class Admin3 extends Component {
   handleUploadProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f,oferta,pdf) => (e) =>{
     const file = f;
     const filePdf = pdf;
-    
+
     const storageRef = firebase.storage().ref(`imagenes/${file.name}`);
     //pusheo mi archivo file dentro de mi BD
     const task = storageRef.put(file);
