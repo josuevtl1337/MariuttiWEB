@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux'
 import CatalogoProductos from "./CatalogoProductos"
 import ProductosCard from "./ProductoCard"
 import ProdComp from "./ProdComp";
+import SearchBar from "./SearchBar"
 
 import HeroImageSmall from "../../layout/HeroImageSmall"
 import "./catalogoProductos.css"
@@ -159,7 +160,8 @@ const Productos = (props) => {
                     <Grid item xs={12} md={3}>       
                         {/* <h4>Categorías</h4> */}
                         <h4>Categorías</h4>
-                        <Divider style={{marginBottom: 28}}/>
+                        <Divider style={{marginBottom: 24}}/>
+                        <SearchBar/>
                         <Drawer titulo="Obras y Construcción" handlerRuta={handleClickRubro} handler={handleClick} categorias={construccion}/>
                         <Drawer titulo="Máquinas y Herramientas" handlerRuta={handleClickRubro} handler={handleClick} categorias={maquinas}/>
                         <Drawer titulo="Ferretería Industrial" handlerRuta={handleClickRubro} handler={handleClick} categorias={ferreteria}/>

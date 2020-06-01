@@ -54,15 +54,25 @@ const ProdComp = (props) =>{
                     </div>
                     <div className="right">
                         <h3 className="singleprod-title">{props.nombre}</h3>
+                        <h4 className="compartir">Cod: 3462634</h4>
+                        {/* <div className="share">
+                            <h4 className="compartir">Compartir:</h4>
+                            <div className="shareicons">
+                                <FacebookIcon className="share-icon"/>
+                                <TwitterIcon className="share-icon"/>
+                                <PinterestIcon className="share-icon"/>
+                            </div>
+                        </div> */}
                         <div className="divline right" style={{marginLeft: 0, marginRight: 0, width: '100%'}}></div>
                         <h4 className="precio">$3.500,00</h4>
+                        <h4 className="precio_anterior">$4.350,00</h4>
                         <div className="buttonscontainer">
                             <button className="aboutbtn prodstock">
                                 Consultar Stock
                             </button>
                             <Tooltip arrow title="Descargar Ficha Técnica" placement="right">
                                 <button className="aboutbtn fichatecnica">
-                                    <i className="material-icons ficha">play_for_work</i>
+                                    <i className="material-icons ficha">description</i>
                                 </button>
                             </Tooltip>
                             
@@ -80,14 +90,7 @@ const ProdComp = (props) =>{
 
                     <div className="divline descr"></div>
 
-                    <div className="share">
-                        <h4 className="compartir">Compartir:</h4>
-                        <div className="shareicons">
-                            <FacebookIcon className="share-icon"/>
-                            <TwitterIcon className="share-icon"/>
-                            <PinterestIcon className="share-icon"/>
-                        </div>
-                    </div>
+                    
 
                 </div>
             </div>   

@@ -40,7 +40,7 @@ const Contact = (props)=>{
                 <p className="redtxt fb">Encontranos en Facebook</p>
               </a>
 
-              <a href="https://m.me/MARIUTTIFERRETERIAINDUSTRIAL" className="red" target="_blank">
+              <a href="https://m.me/ferret.mariutti" className="red" target="_blank">
                 <img className="redimg" src="https://image.flaticon.com/icons/svg/733/733548.svg" alt="" srcset=""/>
                 <p className="redtxt msn">Escribinos en Messenger</p>
               </a>

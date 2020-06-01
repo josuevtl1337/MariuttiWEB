@@ -103,7 +103,16 @@
     color: rgb(231, 139, 0);
     margin: 0;
     margin-top: 8px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
+}
+
+.precio_anterior{
+    text-decoration: line-through;
+    font-family: 'oswald';
+    font-weight: 300;
+    font-size: 16px;
+    color: grey;
+    margin: 0;
 }
 
 .desc{
@@ -177,10 +186,11 @@
 .share{
     align-self: flex-end;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 220px;
-    margin-top: -16px;
+    justify-content: end;
+    align-items: flex-end;
+    /* width: 220px; */
+    width: 100%;
+    /* margin-top: -16px; */
 }
 
 .compartir{
@@ -190,9 +200,10 @@
 
 .shareicons{
     display: flex;
-    justify-content: space-around;
+    justify-content: end;
     align-items: center;
-    width: 130px;
+    width: 100%;
+    margin-left: 350px;
 }
 
 .MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.MuiPaper-elevation4{
