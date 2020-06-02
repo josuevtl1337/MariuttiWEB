@@ -38,7 +38,20 @@ const useStyles = makeStyles(theme => ({
 
 const useStylesSelect = makeStyles(theme => ({
   formControl: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    width: '85%',
+    height: 550,
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'space-around'
+  },
+  color:{
+    backgroundColor: '#18AF31',
+    color: '#ffffff',
+    width: 100,
+    '&:hover': {
+      backgroundColor: '#87DF87'
+    }
   }
 }));
 
@@ -149,8 +162,10 @@ export default function SimpleModal(props) {
           open={open}
           onClose={handleClose}
         >
-          <Container className={classes.paper}>
-          <div >
+          
+          <div className="addprodform">
+            <h3 className="modaltitle">Editar Producto</h3>
+
                 {/* Sub-Rubro */}
                 <FormControl className={classesSelect.formControl}>
                   <InputLabel htmlFor="uncontrolled-native">Sub Rubros</InputLabel>
@@ -171,7 +186,7 @@ export default function SimpleModal(props) {
                 {/* Subtitulo */}
                 <TextField id="standard-basic" label="Subtitulo" defaultValue={props.datosProductos.data.subtitulo} onChange={onChangeSubtitulo}/>
                 {/* Descripcion */}
-                <TextField id="standard-basic" label="Descripción" multiline rows="5" defaultValue={props.datosProductos.data.descripcion} onChange={onChangeDescripcion}/>
+                <TextField id="standard-basic" label="Descripción" multiline rows="8" defaultValue={props.datosProductos.data.descripcion} onChange={onChangeDescripcion}/>
                 {/* Enlace */}
                 <TextField id="standard-basic" label="Enlace Youtbe" defaultValue={props.datosProductos.data.enlace} onChange={onChangeEnlace}/>
                 <FormControlLabel
@@ -192,12 +207,11 @@ export default function SimpleModal(props) {
   
     
                 {/* Boton de enviar */}
-                <Button variant="contained" color="primary" onClick={handleOnClick}>
-                  Enviar
+                <Button variant="contained" className={classesSelect.color} onClick={handleOnClick}>
+                  Guardar
                 </Button>
                 </FormControl>
-                </div>
-         </Container>     
+                </div>  
         </Modal>
       </React.Fragment>
     );

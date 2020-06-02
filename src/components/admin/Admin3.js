@@ -10,6 +10,7 @@ import 'firebase/auth'
 //Material UI
 import MaterialTable from 'material-table'
 import Grid from '@material-ui/core/Grid';
+import Tooltip from '@material-ui/core/Tooltip';
 
 //Progess
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -274,8 +275,12 @@ class Admin3 extends Component {
         displayError: err.message
       })
     })
-
   }
+
+  refreshpage = () => {
+    window.location.reload()
+  }
+
   render(){ 
         if(this.state.loading){
           return (
@@ -296,8 +301,11 @@ class Admin3 extends Component {
             }, {});
             console.log(obj);
             return(
-              <Grid container spacing={2}>  
-              
+              <div className="bg">
+                <div className="refreshbtn" onClick={this.refreshpage}>
+                  <span className="material-icons">loop</span>
+                </div>
+                <Grid container spacing={2}>  
                 <Grid container justify="center" item xs={12}>
                   <Nav parentCallback={this.handleClick} close={this.handlerSignOut} />  
                   <AddSubRubro handleUpload={this.handleUpload}/>
@@ -369,6 +377,8 @@ class Admin3 extends Component {
                   />   
                 </Grid>      
               </Grid>
+              </div>
+              
             );
           }else if(this.state.display=="Producto"){
             console.log(this.state.Sub_Rubro);
@@ -379,7 +389,11 @@ class Admin3 extends Component {
             }, {});
             console.log(obj);
             return(
-              <Grid container spacing={2}>  
+              <div className="bg">
+                <div className="refreshbtn" onClick={this.refreshpage}>
+                  <span className="material-icons">loop</span>
+                </div>
+                <Grid container spacing={2}>  
               <Grid container justify="center" item xs={12}>
               <Nav parentCallback={this.handleClick} close={this.handlerSignOut}/>   
                 <AddProducto sub_rubros={this.state.Sub_Rubro} handleUploadProducto={this.handleUploadProducto}/>
@@ -434,7 +448,7 @@ class Admin3 extends Component {
                         {
                           icon:'add',
                           tooltip: 'Save User',
-                          onClick: (event, rowData) => alert("You saved " + rowData.name)
+                          onClick: (event, rowData) => alert("Guardaste " + rowData.name)
                         }
                       ]}
                       options={{
@@ -501,10 +515,16 @@ class Admin3 extends Component {
               />   
               </Grid>      
               </Grid>
+              </div>
+              
             );
           }else if(this.state.display=="Noticias"){
             return(
-              <Grid container spacing={2}>  
+              <div className="bg">
+                <div className="refreshbtn" onClick={this.refreshpage}>
+                  <span className="material-icons">loop</span>
+                </div>
+                <Grid container spacing={2}>  
               <Grid container justify="center" item xs={12}>
                 
                 <Nav parentCallback={this.handleClick} close={this.handlerSignOut}/>   
@@ -523,7 +543,7 @@ class Admin3 extends Component {
                           tooltip: 'Borrar Producto',
                           onClick: (event, rowData) => 
                           {
-                            alert("You want to delete " + rowData.nombre)
+                            alert("Estás a punto de eliminar " + rowData.nombre)
                             new Promise((resolve, reject) => {
                               setTimeout(() => {
                                 {     
@@ -603,6 +623,8 @@ class Admin3 extends Component {
               />   
               </Grid>      
               </Grid>
+              </div>
+              
             );
           }
         }

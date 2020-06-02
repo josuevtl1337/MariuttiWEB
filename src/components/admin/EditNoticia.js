@@ -21,7 +21,7 @@ import FormControl from '@material-ui/core/FormControl';
 const useStyles = makeStyles(theme => ({
   paper: {
     backgroundColor: theme.palette.background.paper,
-    width:'50%',
+    width:'100%',
     border: '2px solid #000',
     display:'flex',
     flexDirection:'column',
@@ -33,29 +33,43 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const useStylesSelect = makeStyles(theme => ({
+  formControl: {
+    margin: theme.spacing(1),
+    width: '85%',
+    height: 550,
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'space-around'
+  },
+  color:{
+    backgroundColor: '#18AF31',
+    color: '#ffffff',
+    width: 100,
+    '&:hover': {
+      backgroundColor: '#87DF87'
+    }
+  }
+}));
 
 export default function SimpleModal(props) {
   const [open, setOpen] = React.useState(false);
-
   const handleOpen = () => {
     setOpen(true);
     //Seteo los props en mi estado local
     setNombre(props.datosNoticia.data.nombre); 
     setDescripcion(props.datosNoticia.data.descripcion); 
   };
-  const useStylesSelect = makeStyles(theme => ({
-    formControl: {
-      margin: theme.spacing(1)
-    }
-  }));
 
   const handleClose = () => {
     setOpen(false);
   };
   const classes = useStyles();
+  const classesSelect = useStylesSelect();
+
   const [nombre, setNombre] = React.useState('');
   const [descripcion, setDescripcion] = React.useState('');
-  const classesSelect = useStylesSelect();
+ 
 
 
 
@@ -85,20 +99,18 @@ export default function SimpleModal(props) {
           open={open}
           onClose={handleClose}
         >
-          <Container className={classes.paper}>
-          <div >   
+          <div className="addprodform">   
           <FormControl className={classesSelect.formControl}>           
                 {/* Nombre Producto */}
                 <TextField id="standard-basic" label="Nombre Producto" defaultValue={props.datosNoticia.data.nombre} onChange={onChangeNombre}/>
                 {/* Descripcion */}
-                <TextField id="standard-basic" label="Descripción" multiline rows="5" defaultValue={props.datosNoticia.data.descripcion} onChange={onChangeDescripcion}/>          
+                <TextField id="standard-basic" label="Descripción" multiline rows="18" defaultValue={props.datosNoticia.data.descripcion} onChange={onChangeDescripcion}/>          
                 {/* Boton de enviar */}
-                <Button variant="contained" color="primary" onClick={handleOnClick}>
-                  Enviar
+                <Button variant="contained" className={classesSelect.color} onClick={handleOnClick}>
+                  Guardar
                 </Button>
                 </FormControl>       
                 </div>
-         </Container>     
         </Modal>
       </React.Fragment>
     );

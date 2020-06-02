@@ -118,7 +118,7 @@ const NavBarStateLess = (props) => {
                     <div className="contact-info-content">
                         <div className="contact-divider"></div>
                         <MailIcon style={{color: 'white', fontSize: 18, marginRight: '5px'}}/>
-                        <p style={{color: 'white', fontSize: 12}}>info@mariutti.com.ar</p>
+                        <p style={{color: 'white', fontSize: 12}}>ventas@mariutti.com.ar</p>
                         <div className="contact-divider"></div>
                         <PhoneIcon style={{color: 'white', fontSize: 18, marginRight: '5px'}}/>
                         <p style={{color: 'white', fontSize: 12}}>+54 342 453-5318</p>
@@ -179,11 +179,20 @@ const NavBarStateLess = (props) => {
                     </Hidden>
 
                     <Hidden lgUp>
+                        <div className="contact-info-content responsive">
+                            {/* <MailIcon style={{color: 'black', fontSize: 16, marginRight: '5px'}}/> */}
+                            <p style={{color: 'black', fontSize: 10}}>ventas@mariutti.com.ar</p>
+                            <div className="contact-divider responsive"></div>
+                            {/* <PhoneIcon style={{color: 'black', fontSize: 16, marginRight: '5px'}}/> */}
+                            <p style={{color: 'black', fontSize: 10}}>+54 342 453-5318</p>
+                        </div>
                         <div className="phonebtns">
                             <SearchTrigger click={props.searchClickHandler}/>
                             {/* <SearchIcon className={searchiconclasses} style={{color: '#636363', fontSize: 20}} onClick={showSearchbar}/> */}
                             <SidenavTrigger click={props.sidenavClickHandler}/>
+                            
                         </div>
+                        
                         
                     </Hidden>
                     
