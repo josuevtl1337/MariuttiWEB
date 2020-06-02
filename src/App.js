@@ -78,6 +78,7 @@ class App extends Component {
     let sidenav;
     let searchbar;
     let footer;
+    let messenger;
     let maquinas = [];
     let cfg;
 
@@ -104,11 +105,15 @@ class App extends Component {
     
 
     if (window.location.href.includes('login')) {
+      messenger = null;
       footer = null
       navbar = null;
+      FB.Event.subscribe('customerchat.hide', callback());
+      FB.CustomerChat.hide();
     } else {
       navbar = <Navbar searchClickHandler={this.searchClickHandler} sidenavClickHandler={this.sidenavTriggerClickHandler} buscando={this.buscandoResultado} dropdown={this.dropdownResultado}/>
       footer = <Footer/>
+      messenger = <MessengerCustomerChat pageId="314180308659595" appId="656192641884970"/>
     }
 
     if (this.state.searchOpen) {
@@ -120,10 +125,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-        <MessengerCustomerChat
-          pageId="314180308659595"
-          appId="656192641884970"
-        />
+        {messenger}
         </div>
         {cfg}
         {navbar}
