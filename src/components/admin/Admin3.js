@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import "./admin.css"
+
 //Firebase
 import "firebase/firebase-storage";
 import firebase from "firebase/app"
@@ -13,7 +14,7 @@ import Grid from '@material-ui/core/Grid';
 //Progess
 import CircularProgress from '@material-ui/core/CircularProgress';
 //ListaRubros
-import Catalogo from './ListaRubros'
+import Nav from './ListaRubros'
 import Login from "./Login"
 
 //Botones "ADD"
@@ -296,8 +297,9 @@ class Admin3 extends Component {
             console.log(obj);
             return(
               <Grid container spacing={2}>  
+              
                 <Grid container justify="center" item xs={12}>
-                  <Catalogo parentCallback={this.handleClick} close={this.handlerSignOut} />  
+                  <Nav parentCallback={this.handleClick} close={this.handlerSignOut} />  
                   <AddSubRubro handleUpload={this.handleUpload}/>
                 </Grid>
                 <Grid  container justify="center" item xs={12} >
@@ -379,7 +381,7 @@ class Admin3 extends Component {
             return(
               <Grid container spacing={2}>  
               <Grid container justify="center" item xs={12}>
-              <Catalogo parentCallback={this.handleClick} close={this.handlerSignOut}/>   
+              <Nav parentCallback={this.handleClick} close={this.handlerSignOut}/>   
                 <AddProducto sub_rubros={this.state.Sub_Rubro} handleUploadProducto={this.handleUploadProducto}/>
               </Grid>
               <Grid container justify="center" item xs={12} >
@@ -504,7 +506,8 @@ class Admin3 extends Component {
             return(
               <Grid container spacing={2}>  
               <Grid container justify="center" item xs={12}>
-              <Catalogo parentCallback={this.handleClick} close={this.handlerSignOut}/>   
+                
+                <Nav parentCallback={this.handleClick} close={this.handlerSignOut}/>   
                 <AddNoticia handleUploadNoticia={this.handleUploadNoticia}/>
               </Grid>
               <Grid container justify="center" item xs={12} >
@@ -569,9 +572,8 @@ class Admin3 extends Component {
                         columns={[
                           { title: 'Titulo', field: 'nombre' },
                           { title: 'Descripcion', field: 'descripcion',
-                            cellStyle:{minWidth:500},
-                            headerStlye:{minWidth:500},
-                            hidden:true
+                            cellStyle:{maxWidth:500},
+                            headerStlye:{minWidth:500}
                           },                    
                         ]}
                         
@@ -603,7 +605,7 @@ class Admin3 extends Component {
               </Grid>
             );
           }
-        }    
+        }
   }
 }
 const mapStateToProps = (state) =>{

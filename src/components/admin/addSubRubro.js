@@ -30,7 +30,6 @@ const useStyles = makeStyles(theme => ({
   paper: {
     backgroundColor: theme.palette.background.paper,
     width:'50%',
-    border: '2px solid #000',
     display:'flex',
     flexDirection:'column',
     alignItems:'center',
@@ -41,7 +40,19 @@ const useStyles = makeStyles(theme => ({
 const useStylesSelect = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    width: '85%',
+    height: 550,
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'space-around'
+  },
+  color:{
+    backgroundColor: '#274582',
+    color: '#ffffff',
+    width: 100,
+    '&:hover': {
+      backgroundColor: '#FDB913'
+    }
   }
 }));
 
@@ -78,9 +89,14 @@ export default function SimpleModal(props) {
   }
   return (
     <div>
-      <Fab size="small" color="primary" aria-label="add" type="button" onClick={handleOpen}>
-      <AddIcon />
-      </Fab>
+      <div className="addbtn" onClick={handleOpen}>
+        <span>
+        Agregar Subrubro 
+        </span>
+        <i className="material-icons">
+          add
+        </i>
+      </div>
 
       <Modal
         aria-labelledby="simple-modal-title"
@@ -88,46 +104,38 @@ export default function SimpleModal(props) {
         open={open}
         onClose={handleClose}
       >
-        <Container className={classes.paper}>
-        <div>
-        <FormControl className={classesSelect.formControl}>
+        <div className="addprodform subr">
 
-        {/* Rubro   */}
-        <InputLabel id="rubro">Rubro</InputLabel>
-        <Select
-          labelId="rubroId"
-          id="sss"
-          value={rubro}
-          onChange={handleChangeRub}
-        >
-          <MenuItem value={"r1"}>MAQUINAS Y HERRAMIENTAS</MenuItem>
-          <MenuItem value={"r2"}>OBRA Y CONSTRUCCIÓN</MenuItem>
-          <MenuItem value={"r3"}>FERRETERIA INDUSTRIAL</MenuItem>
-    
-        </Select>
-        </FormControl>
-        <br />
-        <br />
-        <br />
-      
-        <br />
-        <br />
-        <br />
-        {/* Text Input */}
-        <TextField id="standard-basic" label="Nombre Sub_Rubro" onChange={onChangeInput}/>
-        <br />
-        <br />
-        <br />
-        {/* Boton de enviar */}
-        <Button variant="contained" color="primary" onClick={handleOnClick}>
-          Enviar
-        </Button>
-        <br />
-        <br />
-        <br />
-        <label>{ruta}</label>
+          <h3 className="modaltitle">Nuevo Subrubro</h3>
+
+
+          <FormControl className={classesSelect.formControl}>
+
+            {/* Rubro   */}
+            <InputLabel id="rubro">Rubro</InputLabel>
+            <Select
+              labelId="rubroId"
+              id="sss"
+              value={rubro}
+              onChange={handleChangeRub}
+            >
+              <MenuItem value={"r1"}>MAQUINAS Y HERRAMIENTAS</MenuItem>
+              <MenuItem value={"r2"}>OBRA Y CONSTRUCCIÓN</MenuItem>
+              <MenuItem value={"r3"}>FERRETERIA INDUSTRIAL</MenuItem>
+        
+            </Select>
+        
+
+            {/* Text Input */}
+            <TextField id="standard-basic" label="Nombre Subrubro" onChange={onChangeInput}/>
+
+            {/* Boton de enviar */}
+            <Button variant="contained" className={classesSelect.color} style={{marginTop: 32}} onClick={handleOnClick}>
+              Enviar
+            </Button>
+            <label>{ruta}</label>
+          </FormControl>
         </div>
-        </Container>
 
       </Modal>
     </div>

@@ -8,21 +8,19 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
-
 const useStyles = makeStyles(theme => ({
   paper: {
     backgroundColor: theme.palette.background.paper,
     width:'50%',
-    border: '2px solid #000',
     display:'flex',
     flexDirection:'column',
     alignItems:'center',
@@ -35,7 +33,20 @@ const useStyles = makeStyles(theme => ({
 
 const useStylesSelect = makeStyles(theme => ({
   formControl: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    width: '85%',
+    height: 550,
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'space-around'
+  },
+  color:{
+    backgroundColor: '#274582',
+    color: '#ffffff',
+    width: 100,
+    '&:hover': {
+      backgroundColor: '#FDB913'
+    }
   }
 }));
 
@@ -57,10 +68,7 @@ export default function SimpleModal(props) {
   const [subtitulo , setSubtitulo] = React.useState('');
   const [descripcion , setDescripcion] = React.useState('');
   const [enlace , setEnlace] = React.useState('');
-  //Imagen
   const [file , setFile] = React.useState('');
-  //PDF
-  const [pdf , setPdf] = React.useState('');
   const [oferta , setOferta] = React.useState(false);
 
   const handleChangeSub = event => {
@@ -87,10 +95,6 @@ export default function SimpleModal(props) {
   const handleFile = e =>{
     setFile(e.target.files[0]);
   }
-  //PDF Handler
-  const handlePdf = e =>{
-    setPdf(e.target.files[0]);
-  }
   const onClickOfertaHandler = e => {
     if (oferta == false){
       setOferta(true);  
@@ -106,9 +110,9 @@ export default function SimpleModal(props) {
     // console.log("Enlace:",enlace);
     // console.log("Imagen:",file);
     // // console.log(subRubro);
-    props.handleUploadProducto(nombre,subtitulo,descripcion,enlace,subRubro,file,oferta,pdf)(e);
+    props.handleUploadProducto(nombre,subtitulo,descripcion,enlace,subRubro,file,oferta)(e);
     // console.log(oferta)
-    console.log(nombre,subtitulo,descripcion,enlace,subRubro,file,oferta,pdf);
+    console.log(nombre,subtitulo,descripcion,enlace,subRubro,file,oferta);
     setOpen(false);
   }
 
@@ -120,72 +124,71 @@ export default function SimpleModal(props) {
 
   return (
     <React.Fragment>
-      <Fab size="small" color="primary" aria-label="add" type="button" onClick={handleOpen}>
-      <AddIcon />
-      </Fab>
-        <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={open}
-          onClose={handleClose}
-        >
-          <Container className={classes.paper}>
-          <div >
-                {/* Sub-Rubro */}
-                <FormControl className={classesSelect.formControl}>
+      <div className="addbtn" onClick={handleOpen}>
+        <span>
+        Agregar Producto 
+        </span>
+        <i className="material-icons">
+          add
+        </i>
+      </div>
+      <Modal
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        open={open}
+        onClose={handleClose}
+        style={{overflow: 'auto'}}
+      >
+        <div className="addprodform">
+          <h3 className="modaltitle">Nuevo Producto</h3>
 
-                  <InputLabel id="subRubros">Sub-Rubros</InputLabel>
+          {/* Sub-Rubro */}
+              
+          <FormControl className={classesSelect.formControl}>
 
-                  <Select
-                    labelId="subRubroId"
-                    id="sub_rubro"
-                    value={subRubro}
-                    name={subNombre}
-                    onChange={handleChangeSub}
-                  >           
-                  {retornando}    
-                </Select>                                   
-                {/* Nombre Producto */}
-                <TextField id="standard-basic" label="Nombre Producto" onChange={onChangeNombre}/>
-                {/* Subtitulo */}
-                <TextField id="standard-basic" label="Subtitulo" onChange={onChangeSubtitulo}/>
-                {/* Descripcion */}
-                <TextField id="standard-basic" label="Descripción" multiline rows="5" onChange={onChangeDescripcion}/>
-                {/* Enlace */}
-                <TextField id="standard-basic" label="Enlace Youtbe" onChange={onChangeEnlace}/>
-                <FormControlLabel
-                  checked={oferta}
-                  control={<Switch color="primary" />}
-                  label="Oferta"
-                  labelPlacement="end"
-                  onClick={onClickOfertaHandler}
-                />
+            <InputLabel id="subRubros">Sub-Rubros</InputLabel>
 
-                {/* {Imagen} */}
-                <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={handleFile} />
-                <label  htmlFor="icon-button-file">
-                  <IconButton  color="primary" aria-label="upload picture" component="span">
-                    <PhotoCamera />
-                  </IconButton>
-                </label>
+            <Select
+              labelId="subRubroId"
+              id="sub_rubro"
+              value={subRubro}
+              name={subNombre}
+              onChange={handleChangeSub}
+            >           
+              {retornando}    
+            </Select>                                   
+            {/* Nombre Producto */}
+            <TextField id="standard-basic" label="Nombre Producto" onChange={onChangeNombre}/>
+            {/* Subtitulo */}
+            <TextField id="standard-basic" label="Subtitulo" onChange={onChangeSubtitulo}/>
+            {/* Descripcion */}
+            <TextField id="standard-basic" label="Descripción" multiline rows="5" onChange={onChangeDescripcion}/>
+            {/* Enlace */}
+            <TextField id="standard-basic" label="Enlace Youtbe" onChange={onChangeEnlace}/>
+            <FormControlLabel
+              checked={oferta}
+              control={<Switch color="primary" />}
+              label="Oferta"
+              labelPlacement="end"
+              onClick={onClickOfertaHandler}
+            />
+
+            {/* {Imagen} */}
+            <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={handleFile} />
+            <label className="filebtn" htmlFor="icon-button-file">
+              <IconButton color="primary" aria-label="upload picture" component="span">
+                <PhotoCamera />
+              </IconButton>
+            </label>
+
   
-                {/* PDF */}
-                <input className={classes.input} id="icon-button-file" type="file" accept="application/pdf" onChange={handlePdf} />
-                <label  htmlFor="icon-button-file">
-                  <IconButton  color="primary" aria-label="upload picture" component="span">
-                    <PictureAsPdfIcon />
-                  </IconButton>
-                </label>
-  
-    
-                {/* Boton de enviar */}
-                <Button variant="contained" color="primary" onClick={handleOnClick}>
-                  Enviar
-                </Button>
-                </FormControl>
-                </div>
-         </Container>     
-        </Modal>
-      </React.Fragment>
+            {/* Boton de enviar */}
+            <Button variant="contained" className={classesSelect.color} onClick={handleOnClick} style={{marginTop: 24}}>
+              Enviar
+            </Button>
+          </FormControl>
+        </div>
+      </Modal>
+    </React.Fragment>
     );
 }

@@ -1,13 +1,7 @@
 import React , { Component } from 'react';
-import TreeView from '@material-ui/lab/TreeView';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import TreeItem from '@material-ui/lab/TreeItem';
+import SimpleLogo from '../../visuals/logoplano-small.png'
 import  "./ListaRubros.css"
 import Loading from "./Loading"
-import Catalogo from './ListaRubros'
-import CancelIcon from '@material-ui/icons/Cancel';
-import CloseSharpIcon from '@material-ui/icons/CloseSharp';
 
 class ListaRubros extends Component {
 state={
@@ -45,37 +39,28 @@ state={
           color:'grey'
         };
         return (
-          // <TreeView
-          // style={classTree}
-          // defaultExpandIcon={<ChevronRightIcon />}
-          // defaultCollapseIcon={<ExpandMoreIcon />}
-          // >
-          //     <TreeItem onClick={()=>{handleOnClick("Rubro")}} nodeId="1" label="RUBRO">
-          //     </TreeItem>
-          //     <TreeItem onClick={()=>{handleOnClick("Sub_Rubro")}} nodeId="2" label="SUB RUBRO">
-          //     </TreeItem>
-          //     <TreeItem onClick={()=>{handleOnClick("Producto")}} nodeId="3" label="PRODUCTO">
-          //     </TreeItem>
-          //     <TreeItem onClick={()=>{handleOnClick("Noticias")}} nodeId="4" label="NOTICIAS">
-          //     </TreeItem>
-          // </TreeView>    
-          <div className="listarubroswrap">
-            <div onClick={()=>{handleOnClick("Sub_Rubro")}}>
-              Subrubros
+          <div className="adminnavwrap">
+            <span className="cerrar" onClick={this.props.close}>cerrar sesión</span>
+
+            <div className="listarubroswrap">
+            
+            <img className="simplelogo" src={SimpleLogo}/>
+            
+              <div className="navflex">
+                <div onClick={()=>{handleOnClick("Sub_Rubro")}}>
+                  Subrubros
+                </div>
+                <div onClick={()=>{handleOnClick("Producto")}}>
+                  Productos
+                </div>
+                <div onClick={()=>{handleOnClick("Noticias")}}>
+                  Noticias
+                </div>
+              </div>
+                  
             </div>
-            <div onClick={()=>{handleOnClick("Producto")}}>
-              Productos
-            </div>
-            <div onClick={()=>{handleOnClick("Noticias")}}>
-              Noticias
-            </div>
-            {/* <div>
-            <CloseSharpIcon color="error" fontSize="large" onClick={this.props.close}/>
-            </div> */}
-            <div style={{color:"red"}} onClick={this.props.close}>
-              Cerrar Sesion
-            </div>        
           </div>
+          
         );
       }
   }
