@@ -106,7 +106,7 @@ export default function SimpleModal(props) {
     // console.log("Enlace:",enlace);
     // console.log("Imagen:",file);
     // // console.log(subRubro);
-    props.handleUploadProducto(nombre,subtitulo,descripcion,enlace,subRubro,file,oferta,pdf)(e);
+    props.handleUploadProducto(nombre,subtitulo,descripcion,enlace,subRubro,oferta,file,pdf)(e);
     // console.log(oferta)
     console.log(nombre,subtitulo,descripcion,enlace,subRubro,file,oferta,pdf);
     setOpen(false);
@@ -170,8 +170,8 @@ export default function SimpleModal(props) {
                 </label>
   
                 {/* PDF */}
-                <input className={classes.input} id="icon-button-file" type="file" accept="application/pdf" onChange={handlePdf} />
-                <label  htmlFor="icon-button-file">
+                <input className={classes.input} id="icon-button-pdf" type="file" accept="application/pdf" onChange={handlePdf} />
+                <label  htmlFor="icon-button-pdf">
                   <IconButton  color="primary" aria-label="upload picture" component="span">
                     <PictureAsPdfIcon />
                   </IconButton>

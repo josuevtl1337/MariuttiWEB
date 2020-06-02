@@ -43,7 +43,8 @@ class Admin3 extends Component {
     data:[],
     Enlace:{},
     display:"Producto",
-    displayError:""
+    displayError:"",
+    idToSet:""
   };
   componentDidMount(){
     const db = firebase.database();
@@ -109,55 +110,138 @@ class Admin3 extends Component {
       "id":postId
     }).then(()=>window.location.reload()) 
   }
-  //Subiendo PRODUCTOS
-  handleUploadProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f,oferta,pdf) => (e) =>{
+
+  ///
+  //Subiendo archivos al Storage
+  handleUploadProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,oferta,f,pdf) => async (e) => {
+    var timestamp = new Date().getTime()
     const file = f;
     const filePdf = pdf;
-
-    const storageRef = firebase.storage().ref(`imagenes/${file.name}`);
-    //pusheo mi archivo file dentro de mi BD
-    const task = storageRef.put(file);
-    task.on(
-      //Lo que hacmeos mientras sube
-      "state_changed",
-      snapshot => {
-        // this.setState({
-        //   loading: true
-        // });
-      },
-      //Lo que hgacmeos con los errores
-      error => {
-        console.log(error.message);
-      },
-      //Lo que hacmeos ni bieen subio la foto
-      () => {
-        const record = {
-          nombre: nombre,
-          subtitulo:subtitulo,
-          descripcion:descripcion,
-          enlace:enlace,
-          sub_rubro: sub_rubro,
-          img: task.snapshot.metadata.fullPath,
-          off:oferta,
-          createdAt: firebase.database.ServerValue.TIMESTAMP
-        };
-        
-        const db = firebase.database();
-        const dbRef = db.ref("Producto");
-        const newPicture = dbRef.push();
-        newPicture.set(record);
-        const postId = newPicture.key;
-        console.log(postId);
-        newPicture.update({
-          "id":postId
-        }).then(()=>{
-          console.log(postId.id)
-          window.location.reload();      
-          this.handleClick("Producto");
-        }) 
-      }   
-    );
+    if(file != ""){
+      await this.uploadImageAsPromise(file,nombre,subtitulo,descripcion,enlace,sub_rubro,oferta,timestamp);
+    }
+    if(filePdf != ""){
+      await this.uploadImageAsPromise(filePdf,nombre,subtitulo,descripcion,enlace,sub_rubro,oferta,timestamp);
+    }
   }
+
+  //Handle waiting to upload each file using promise
+  uploadImageAsPromise = (imageFile,nombre,subtitulo,descripcion,enlace,sub_rubro,oferta,timestamp) => {
+    // return new Promise (function  (resolve, reject) {
+        const storageRef = firebase.storage().ref(`imagenes/${imageFile.name+timestamp}`);
+        var task = storageRef.put(imageFile);
+        //Update progress bar
+        task.on('state_changed', snapshot =>{
+          //Mientras carga
+          var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 
+          100;
+          console.log(percentage);
+        },//Lo que hgacmeos con los errores
+          error => {
+            console.log(error.message);
+            // reject(error.message);
+        },
+        () => {
+
+          // var downloadURL = task.snapshot.downloadURL;
+
+          const db = firebase.database();
+          const dbRef = db.ref("Producto");
+          const newPicture = dbRef.push();
+
+          if(task.snapshot.metadata.contentType!="application/pdf"){
+            //Si es una imagen
+            const record = {
+              nombre: nombre,
+              subtitulo:subtitulo,
+              descripcion:descripcion,
+              enlace:enlace,
+              sub_rubro: sub_rubro,
+              img: task.snapshot.metadata.fullPath,
+              off:oferta,
+              createdAt: firebase.database.ServerValue.TIMESTAMP
+            };
+            newPicture.set(record);
+            const postId = newPicture.key;
+            this.setState({
+              idToSet : postId
+            });
+            newPicture.update({
+              "id":postId
+            });
+          }else{
+            var id = this.state.idToSet;
+            const productoRef = dbRef.child(id);
+            productoRef.update({
+              pdf: task.snapshot.metadata.fullPath
+            })
+            // newPicture.update({
+            //   pdf: task.snapshot.metadata.fullPath
+            // }); 
+          }
+          // resolve(downloadURL);
+        });
+    // });
+  }
+  
+  ///
+  //Subiendo PRODUCTOS
+  // handleUploadProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f,oferta,pdf) => (e) =>{
+  //   const file = f;
+  //   const filePdf = pdf;
+  //   if(file != ""){
+  //     uploadingDocument(file);
+  //   }
+  //   if(filePdf != ""){
+  //     uploadingDocument(filePdf);
+  //   }
+
+  //   var timestamp = Math.floor(Date.now() / 1000)
+  //   console.log(files);
+  //   // console.log(Math.floor(Date.now() / 1000))
+
+  //   // console.log(filePdf);
+  //   const storageRef = firebase.storage().ref(`imagenes/${nombre+"_"+timestamp}`);
+  //   //pusheo mi archivo file dentro de mi BD
+  //   const task = storageRef.put(files);
+  //   task.on(
+  //     //Lo que hacmeos mientras sube
+  //     "state_changed",
+  //     snapshot => {
+  //     },
+  //     //Lo que hgacmeos con los errores
+  //     error => {
+  //       console.log(error.message);
+  //     },
+  //     //Lo que hacmeos ni bieen subio la foto
+  //     () => {        
+  //       const record = {
+  //         nombre: nombre,
+  //         subtitulo:subtitulo,
+  //         descripcion:descripcion,
+  //         enlace:enlace,
+  //         sub_rubro: sub_rubro,
+  //         img: task.snapshot.metadata.fullPath,
+  //         off:oferta,
+  //         createdAt: firebase.database.ServerValue.TIMESTAMP
+  //       };
+        
+  //       const db = firebase.database();
+  //       const dbRef = db.ref("Producto");
+  //       const newPicture = dbRef.push();
+  //       newPicture.set(record);
+  //       const postId = newPicture.key;
+  //       console.log(postId);
+  //       newPicture.update({
+  //         "id":postId
+  //       }).then(()=>{
+  //         console.log(postId.id)
+  //         window.location.reload();      
+  //         this.handleClick("Producto");
+  //       }) 
+  //     }   
+  //   );
+  // }
   //Subiendo NOTICIAS
   handleUploadNoticia = (nombre,descripcion,f) =>{
     const file = f;
@@ -273,8 +357,8 @@ class Admin3 extends Component {
         displayError: err.message
       })
     })
-
   }
+
   render(){ 
         if(this.state.loading){
           return (

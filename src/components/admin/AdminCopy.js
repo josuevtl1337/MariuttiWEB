@@ -641,3 +641,49 @@ const mapStateToProps = (state) =>{
   }
 }
 export default connect(mapStateToProps)(Admin3);
+
+
+
+
+{
+  const storageRef = firebase.storage().ref(`imagenes/${file.name}`);
+    //pusheo mi archivo file dentro de mi BD
+    const task = storageRef.put(file);
+    task.on(
+      //Lo que hacmeos mientras sube
+      "state_changed",
+      snapshot => {
+      },
+      //Lo que hgacmeos con los errores
+      error => {
+        console.log(error.message);
+      },
+      //Lo que hacmeos ni bieen subio la foto
+      () => {
+        const record = {
+          nombre: nombre,
+          subtitulo:subtitulo,
+          descripcion:descripcion,
+          enlace:enlace,
+          sub_rubro: sub_rubro,
+          img: task.snapshot.metadata.fullPath,
+          off:oferta,
+          createdAt: firebase.database.ServerValue.TIMESTAMP
+        };
+        
+        const db = firebase.database();
+        const dbRef = db.ref("Producto");
+        const newPicture = dbRef.push();
+        newPicture.set(record);
+        const postId = newPicture.key;
+        console.log(postId);
+        newPicture.update({
+          "id":postId
+        }).then(()=>{
+          console.log(postId.id)
+          window.location.reload();      
+          this.handleClick("Producto");
+        }) 
+      }   
+    );
+}
