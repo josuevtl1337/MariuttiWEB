@@ -167,7 +167,7 @@ export default function SimpleModal(props) {
             {/* Subtitulo */}
             <TextField id="standard-basic" label="Subtitulo" onChange={onChangeSubtitulo}/>
             {/* Descripcion */}
-            <TextField id="standard-basic" label="Descripción" multiline rows="5" onChange={onChangeDescripcion}/>
+            <TextField id="standard-basic" label="Descripción" multiline rows="10" onChange={onChangeDescripcion}/>
             {/* Enlace */}
             <TextField id="standard-basic" label="Enlace Youtbe" onChange={onChangeEnlace}/>
             <FormControlLabel

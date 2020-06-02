@@ -10,6 +10,7 @@ import 'firebase/auth'
 //Material UI
 import MaterialTable from 'material-table'
 import Grid from '@material-ui/core/Grid';
+import Tooltip from '@material-ui/core/Tooltip';
 
 //Progess
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -289,17 +290,21 @@ class Admin3 extends Component {
   }  
   //EDITANDO PRODUCTOS
   handleEditProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,off,f,id) =>{
-        const db = firebase.database();
-        const dbRef = db.ref("Producto");
-        const productoRef = dbRef.child(id)
-        productoRef.update({
-          "nombre": nombre,
-          "subtitulo":subtitulo,
-          "descripcion":descripcion,
-          "enlace":enlace,
-          "off":off,
-          "sub_rubro": sub_rubro
-        }).then(()=>window.location.reload());
+        if(id!=undefined){
+          const db = firebase.database();
+          const dbRef = db.ref("Producto");
+          const productoRef = dbRef.child(id)
+          productoRef.update({
+            "nombre": nombre,
+            "subtitulo":subtitulo,
+            "descripcion":descripcion,
+            "enlace":enlace,
+            "off":off,
+            "sub_rubro": sub_rubro
+          }).then(()=>window.location.reload());
+        }else{
+          alert("Ah ocurrido algo inesperado, por favor recargue la página")
+        }  
         // newPicture.update(record).then(()=>{
         //   // console.log(postId.id)
         //   // this.setState({
@@ -360,6 +365,10 @@ class Admin3 extends Component {
     })
   }
 
+  refreshpage = () => {
+    window.location.reload()
+  }
+
   render(){ 
         if(this.state.loading){
           return (
@@ -380,8 +389,11 @@ class Admin3 extends Component {
             }, {});
             console.log(obj);
             return(
-              <Grid container spacing={2}>  
-              
+              <div className="bg">
+                <div className="refreshbtn" onClick={this.refreshpage}>
+                  <span className="material-icons">loop</span>
+                </div>
+                <Grid container spacing={2}>  
                 <Grid container justify="center" item xs={12}>
                   <Nav parentCallback={this.handleClick} close={this.handlerSignOut} />  
                   <AddSubRubro handleUpload={this.handleUpload}/>
@@ -394,18 +406,22 @@ class Admin3 extends Component {
                               tooltip: 'Borrar Producto',
                               onClick: (event, rowData) => 
                               {
-                                alert("You want to delete " + rowData.nombre)
+                                var result = window.confirm("Quieres borrar > " + rowData.nombre);
                                 new Promise((resolve, reject) => {
-                                  setTimeout(() => {
-                                    {                             
-                                      const db = firebase.database();
-                                      const dbRef = db.ref("Sub_Rubro");
-                                      const refSB = dbRef.child(rowData.id) 
-                                      refSB.remove(); 
-                                      window.location.reload();                                
-                                    }
-                                    resolve()
-                                  }, 1000)
+                                  if(result == true){
+                                    setTimeout(() => {
+                                      {                             
+                                        const db = firebase.database();
+                                        const dbRef = db.ref("Sub_Rubro");
+                                        const refSB = dbRef.child(rowData.id) 
+                                        refSB.remove(); 
+                                        window.location.reload();                                
+                                      }
+                                      resolve()
+                                    }, 1000) 
+                                  }else{
+                                    reject()
+                                  }              
                                 })
                               }
                             }
@@ -453,6 +469,8 @@ class Admin3 extends Component {
                   />   
                 </Grid>      
               </Grid>
+              </div>
+              
             );
           }else if(this.state.display=="Producto"){
             console.log(this.state.Sub_Rubro);
@@ -463,7 +481,11 @@ class Admin3 extends Component {
             }, {});
             console.log(obj);
             return(
-              <Grid container spacing={2}>  
+              <div className="bg">
+                <div className="refreshbtn" onClick={this.refreshpage}>
+                  <span className="material-icons">loop</span>
+                </div>
+                <Grid container spacing={2}>  
               <Grid container justify="center" item xs={12}>
               <Nav parentCallback={this.handleClick} close={this.handlerSignOut}/>   
                 <AddProducto sub_rubros={this.state.Sub_Rubro} handleUploadProducto={this.handleUploadProducto}/>
@@ -480,45 +502,54 @@ class Admin3 extends Component {
                           icon: 'delete',
                           tooltip: 'Borrar Producto',
                           onClick: (event, rowData) => 
-                          {
-                            alert("You want to delete " + rowData.nombre)
+                          {                           
+                            var result = window.confirm("Quieres borrar > " + rowData.nombre);
                             new Promise((resolve, reject) => {
-                              setTimeout(() => {
-                                {     
-                                  console.log(rowData);                        
-                                  const db = firebase.database();
-                                  const dbRef = db.ref("Producto");
-                                  const refSB = dbRef.child(rowData.id); 
-                                  refSB.remove();   
-                                  // Delete the file
-                                  if(rowData.img){
-                                  // Create a reference to the file to delete
-                                  var storage = firebase.storage();
-                                  var storageRef = storage.ref();
-                                  var desertRef = storageRef.child(rowData.img);
-                                  desertRef.delete().then(function() {
-                                      // File deleted successfully
-                                      alert("File deleted successfully");
+                              if(rowData.id != undefined && result == true){
+                                setTimeout(() => {
+                                  {     
+                                    console.log(rowData);                        
+                                    const db = firebase.database();
+                                    const dbRef = db.ref("Producto");
+                                    const refSB = dbRef.child(rowData.id); 
+                                    refSB.remove();   
+                                    // Delete the file
+                                    if(rowData.img){
+                                    // Create a reference to the file to delete
+                                    var storage = firebase.storage();
+                                    var storageRef = storage.ref();
+                                    var desertRef = storageRef.child(rowData.img);
+                                    desertRef.delete().then(function() {
+                                        // File deleted successfully
+                                        alert("Producto eliminado correctamente !");
+                                        window.location.reload();
+                                      }).catch(function(error) {
+                                        alert("OH NO, an error occurred!", error);
+                                        window.location.reload();
+                                        // Uh-oh, an error occurred!
+                                      });      
+                                    }else{
                                       window.location.reload();
-                                    }).catch(function(error) {
-                                      alert("OH NO!", error);
-                                      window.location.reload();
-                                      // Uh-oh, an error occurred!
-                                    });      
-                                  }else{
-                                    window.location.reload();
+                                    }
+                                                            
                                   }
-                                                          
-                                }
-                                resolve()
-                              }, 1000)
+                                  resolve()
+                                }, 1000)
+                              }else if(result == false){
+                                reject();
+                              }
+                              else{
+                                reject();
+                                alert("Error al borrar producto, por favor recargue la página");
+                              }
+                             
                             })
                           }
                         },
                         {
                           icon:'add',
                           tooltip: 'Save User',
-                          onClick: (event, rowData) => alert("You saved " + rowData.name)
+                          onClick: (event, rowData) => alert("Guardaste " + rowData.name)
                         }
                       ]}
                       options={{
@@ -585,10 +616,16 @@ class Admin3 extends Component {
               />   
               </Grid>      
               </Grid>
+              </div>
+              
             );
           }else if(this.state.display=="Noticias"){
             return(
-              <Grid container spacing={2}>  
+              <div className="bg">
+                <div className="refreshbtn" onClick={this.refreshpage}>
+                  <span className="material-icons">loop</span>
+                </div>
+                <Grid container spacing={2}>  
               <Grid container justify="center" item xs={12}>
                 
                 <Nav parentCallback={this.handleClick} close={this.handlerSignOut}/>   
@@ -607,37 +644,42 @@ class Admin3 extends Component {
                           tooltip: 'Borrar Producto',
                           onClick: (event, rowData) => 
                           {
-                            alert("You want to delete " + rowData.nombre)
+                            var result = window.confirm("Quieres borrar > " + rowData.nombre);
                             new Promise((resolve, reject) => {
-                              setTimeout(() => {
-                                {     
-                                  console.log(rowData);                        
-                                  const db = firebase.database();
-                                  const dbRef = db.ref("Noticia");
-                                  const refSB = dbRef.child(rowData.id); 
-                                  refSB.remove();   
-                                  // Delete the file
-                                  if(rowData.img){
-                                  // Create a reference to the file to delete
-                                  var storage = firebase.storage();
-                                  var storageRef = storage.ref();
-                                  var desertRef = storageRef.child(rowData.img);
-                                  desertRef.delete().then(function() {
-                                      // File deleted successfully
-                                      alert("File deleted successfully");
+                              if(result == true){
+                                setTimeout(() => {
+                                  {     
+                                    console.log(rowData);                        
+                                    const db = firebase.database();
+                                    const dbRef = db.ref("Noticia");
+                                    const refSB = dbRef.child(rowData.id); 
+                                    refSB.remove();   
+                                    // Delete the file
+                                    if(rowData.img){
+                                    // Create a reference to the file to delete
+                                    var storage = firebase.storage();
+                                    var storageRef = storage.ref();
+                                    var desertRef = storageRef.child(rowData.img);
+                                    desertRef.delete().then(function() {
+                                        // File deleted successfully
+                                        alert("File deleted successfully");
+                                        window.location.reload();
+                                      }).catch(function(error) {
+                                        alert("OH NO!", error);
+                                        window.location.reload();
+                                        // Uh-oh, an error occurred!
+                                      });      
+                                    }else{
                                       window.location.reload();
-                                    }).catch(function(error) {
-                                      alert("OH NO!", error);
-                                      window.location.reload();
-                                      // Uh-oh, an error occurred!
-                                    });      
-                                  }else{
-                                    window.location.reload();
+                                    }
+                                                            
                                   }
-                                                          
-                                }
-                                resolve()
-                              }, 1000)
+                                  resolve()
+                                }, 1000)
+                              }else{
+                                reject()
+                              }
+
                             })
                           }
                         },
@@ -687,6 +729,8 @@ class Admin3 extends Component {
               />   
               </Grid>      
               </Grid>
+              </div>
+              
             );
           }
         }

@@ -36,21 +36,21 @@ const Login = (props) => {
         props.handleSubmitDragon(email,password);
     }
       return(
-        <Container>
-            
-            <div className="login">
-                <form className="loginform">
-                    <div className="loginlogo">
-                        <img className="simplelogo" src={SimpleLogo}/>
-                    </div>
-                    <h4 className="logintitle">Credenciales para la sección de administrador</h4>
-                    <h4 style={{color: "red"}} className="center">{props.error}</h4>
-                    <TextField required id="standard-required" label="Email"  onChange={handleOnchangeEmail} defaultValue="" />
-                    <TextField required id="standard-required" type="password" label="Password" onChange={handleOnchangePW} defaultValue="" />   
-                    <Button variant="contained" className={classesSelect.color} onClick={handleSubmit}>Enviar</Button>
-                </form>         
-            </div>
-        </Container>   
+        <div className="bglogin">
+          <div className="login">
+            <form className="loginform">
+                <div className="loginlogo">
+                  <img className="simplelogo" src={SimpleLogo}/>
+                </div>
+                <h4 className="logintitle">Credenciales para la sección de administrador</h4>
+                <h4 style={{color: "red"}} className="center">{props.error}</h4>
+                <TextField required id="standard-required" label="Email"  onChange={handleOnchangeEmail} defaultValue="" />
+                <TextField required id="standard-required" type="password" label="Password" onChange={handleOnchangePW} defaultValue="" />   
+                <Button variant="contained" className={classesSelect.color} onClick={handleSubmit}>Enviar</Button>
+            </form>         
+          </div>
+        </div>
+         
         ) 
 }
 export default Login;
