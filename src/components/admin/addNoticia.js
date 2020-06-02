@@ -31,7 +31,20 @@ const useStyles = makeStyles(theme => ({
 
 const useStylesSelect = makeStyles(theme => ({
   formControl: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    width: '85%',
+    height: 550,
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'space-around'
+  },
+  color:{
+    backgroundColor: '#274582',
+    color: '#ffffff',
+    width: 100,
+    '&:hover': {
+      backgroundColor: '#FDB913'
+    }
   }
 }));
 
@@ -68,37 +81,42 @@ export default function SimpleModal(props) {
 
   return (
     <React.Fragment>
-      <Fab size="small" color="primary" aria-label="add" type="button" onClick={handleOpen}>
-      <AddIcon />
-      </Fab>
+      <div className="addbtn" onClick={handleOpen}>
+        <span>
+        Agregar Noticia 
+        </span>
+        <i className="material-icons">
+          add
+        </i>
+      </div>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           open={open}
           onClose={handleClose}
         >
-          <Container className={classes.paper}>
-          <div>
+          <div className="addprodform">
+          <h3 className="modaltitle">Nueva Noticia</h3>
+
                 {/* Sub-Rubro */}
                 <FormControl className={classesSelect.formControl}>      
                 {/* Nombre Noticia */}
                 <TextField id="standard-basic" label="Titulo Noticia" onChange={onChangeTitulo}/>
                 {/* Descripcion */}
-                <TextField id="standard-basic"  multiline rows="5" label="Descripción" onChange={onChangeDescripcion}/>
+                <TextField id="standard-basic"  multiline rows="18" label="Descripción" onChange={onChangeDescripcion}/>
                 {/* {Imagen} */}
                 <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={handleFile} />
-                <label  htmlFor="icon-button-file">
+                <label className="filebtn" htmlFor="icon-button-file">
                   <IconButton  color="primary" aria-label="upload picture" component="span">
                     <PhotoCamera />
                   </IconButton>
                 </label>
                 {/* Boton de enviar */}
-                <Button variant="contained" color="primary" onClick={handleOnClick}>
+                <Button variant="contained" className={classesSelect.color} onClick={handleOnClick}>
                   Enviar
                 </Button>
                 </FormControl>
-                </div>
-         </Container>     
+                </div>  
         </Modal>
       </React.Fragment>
     );
