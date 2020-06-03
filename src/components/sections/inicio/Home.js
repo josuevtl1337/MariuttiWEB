@@ -79,7 +79,7 @@ const Home = (props) => {
     //Cambiando el history Para los Productos
     const handlerOnClickProducto = (id) =>{
         // e.preventDefault();
-        props.history.push("/producto?" + id);
+        // props.history.push("/producto?" + id);
     }
     //Cambiando el history Para las Noticias
     const handlerOnClickNoticia = (id) =>{

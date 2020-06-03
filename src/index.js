@@ -20,6 +20,8 @@ firebase.initializeApp({
     appId: "1:866031224697:web:020b137bf33425db4d51a8",
     measurementId: "G-EWP5WP724D"
 });
+
+
 // react-redux-firebase config
 const rrfConfig = {
     // rubros: 'Rubro'

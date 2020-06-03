@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+//CSS
 import "./admin.css"
 
 //Firebase
@@ -26,10 +27,12 @@ import EditProducto from "./EditProducto";
 import EditNoticia from "./EditNoticia";
 import Loading from "./Loading";
 import ModalPic from "./ModalPic"
+import ModalPdf from "./ModalPdf"
 //Redux
 import { connect } from "react-redux";
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 
 class Admin3 extends Component { 
   state = {
@@ -45,7 +48,8 @@ class Admin3 extends Component {
     data:[],
     Enlace:{},
     display:"Producto",
-    displayError:""
+    displayError:"",
+    idToSet:""
   };
   componentDidMount(){
     const db = firebase.database();
@@ -111,55 +115,138 @@ class Admin3 extends Component {
       "id":postId
     }).then(()=>window.location.reload()) 
   }
-  //Subiendo PRODUCTOS
-  handleUploadProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f,oferta,pdf) => (e) =>{
+
+  ///
+  //Subiendo archivos al Storage
+  handleUploadProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,oferta,f,pdf) => async (e) => {
+    var timestamp = new Date().getTime()
     const file = f;
     const filePdf = pdf;
-
-    const storageRef = firebase.storage().ref(`imagenes/${file.name}`);
-    //pusheo mi archivo file dentro de mi BD
-    const task = storageRef.put(file);
-    task.on(
-      //Lo que hacmeos mientras sube
-      "state_changed",
-      snapshot => {
-        // this.setState({
-        //   loading: true
-        // });
-      },
-      //Lo que hgacmeos con los errores
-      error => {
-        console.log(error.message);
-      },
-      //Lo que hacmeos ni bieen subio la foto
-      () => {
-        const record = {
-          nombre: nombre,
-          subtitulo:subtitulo,
-          descripcion:descripcion,
-          enlace:enlace,
-          sub_rubro: sub_rubro,
-          img: task.snapshot.metadata.fullPath,
-          off:oferta,
-          createdAt: firebase.database.ServerValue.TIMESTAMP
-        };
-        
-        const db = firebase.database();
-        const dbRef = db.ref("Producto");
-        const newPicture = dbRef.push();
-        newPicture.set(record);
-        const postId = newPicture.key;
-        console.log(postId);
-        newPicture.update({
-          "id":postId
-        }).then(()=>{
-          console.log(postId.id)
-          window.location.reload();      
-          this.handleClick("Producto");
-        }) 
-      }   
-    );
+    if(file != ""){
+      await this.uploadImageAsPromise(file,nombre,subtitulo,descripcion,enlace,sub_rubro,oferta,timestamp);
+    }
+    if(filePdf != ""){
+      await this.uploadImageAsPromise(filePdf,nombre,subtitulo,descripcion,enlace,sub_rubro,oferta,timestamp);
+    }
   }
+
+  //Handle waiting to upload each file using promise
+  uploadImageAsPromise = (imageFile,nombre,subtitulo,descripcion,enlace,sub_rubro,oferta,timestamp) => {
+    // return new Promise (function  (resolve, reject) {
+        const storageRef = firebase.storage().ref(`imagenes/${imageFile.name+timestamp}`);
+        var task = storageRef.put(imageFile);
+        //Update progress bar
+        task.on('state_changed', snapshot =>{
+          //Mientras carga
+          var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 
+          100;
+          console.log(percentage);
+        },//Lo que hgacmeos con los errores
+          error => {
+            console.log(error.message);
+            // reject(error.message);
+        },
+        () => {
+
+          // var downloadURL = task.snapshot.downloadURL;
+
+          const db = firebase.database();
+          const dbRef = db.ref("Producto");
+          const newPicture = dbRef.push();
+
+          if(task.snapshot.metadata.contentType!="application/pdf"){
+            //Si es una imagen
+            const record = {
+              nombre: nombre,
+              subtitulo:subtitulo,
+              descripcion:descripcion,
+              enlace:enlace,
+              sub_rubro: sub_rubro,
+              img: task.snapshot.metadata.fullPath,
+              off:oferta,
+              createdAt: firebase.database.ServerValue.TIMESTAMP
+            };
+            newPicture.set(record);
+            const postId = newPicture.key;
+            this.setState({
+              idToSet : postId
+            });
+            newPicture.update({
+              "id":postId
+            });
+          }else{
+            var id = this.state.idToSet;
+            const productoRef = dbRef.child(id);
+            productoRef.update({
+              pdf: task.snapshot.metadata.fullPath
+            })
+            // newPicture.update({
+            //   pdf: task.snapshot.metadata.fullPath
+            // }); 
+          }
+          // resolve(downloadURL);
+        });
+    // });
+  }
+  
+  ///
+  //Subiendo PRODUCTOS
+  // handleUploadProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f,oferta,pdf) => (e) =>{
+  //   const file = f;
+  //   const filePdf = pdf;
+  //   if(file != ""){
+  //     uploadingDocument(file);
+  //   }
+  //   if(filePdf != ""){
+  //     uploadingDocument(filePdf);
+  //   }
+
+  //   var timestamp = Math.floor(Date.now() / 1000)
+  //   console.log(files);
+  //   // console.log(Math.floor(Date.now() / 1000))
+
+  //   // console.log(filePdf);
+  //   const storageRef = firebase.storage().ref(`imagenes/${nombre+"_"+timestamp}`);
+  //   //pusheo mi archivo file dentro de mi BD
+  //   const task = storageRef.put(files);
+  //   task.on(
+  //     //Lo que hacmeos mientras sube
+  //     "state_changed",
+  //     snapshot => {
+  //     },
+  //     //Lo que hgacmeos con los errores
+  //     error => {
+  //       console.log(error.message);
+  //     },
+  //     //Lo que hacmeos ni bieen subio la foto
+  //     () => {        
+  //       const record = {
+  //         nombre: nombre,
+  //         subtitulo:subtitulo,
+  //         descripcion:descripcion,
+  //         enlace:enlace,
+  //         sub_rubro: sub_rubro,
+  //         img: task.snapshot.metadata.fullPath,
+  //         off:oferta,
+  //         createdAt: firebase.database.ServerValue.TIMESTAMP
+  //       };
+        
+  //       const db = firebase.database();
+  //       const dbRef = db.ref("Producto");
+  //       const newPicture = dbRef.push();
+  //       newPicture.set(record);
+  //       const postId = newPicture.key;
+  //       console.log(postId);
+  //       newPicture.update({
+  //         "id":postId
+  //       }).then(()=>{
+  //         console.log(postId.id)
+  //         window.location.reload();      
+  //         this.handleClick("Producto");
+  //       }) 
+  //     }   
+  //   );
+  // }
   //Subiendo NOTICIAS
   handleUploadNoticia = (nombre,descripcion,f) =>{
     const file = f;
@@ -206,17 +293,21 @@ class Admin3 extends Component {
   }  
   //EDITANDO PRODUCTOS
   handleEditProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,off,f,id) =>{
-        const db = firebase.database();
-        const dbRef = db.ref("Producto");
-        const productoRef = dbRef.child(id)
-        productoRef.update({
-          "nombre": nombre,
-          "subtitulo":subtitulo,
-          "descripcion":descripcion,
-          "enlace":enlace,
-          "off":off,
-          "sub_rubro": sub_rubro
-        }).then(()=>window.location.reload());
+        if(id!=undefined){
+          const db = firebase.database();
+          const dbRef = db.ref("Producto");
+          const productoRef = dbRef.child(id)
+          productoRef.update({
+            "nombre": nombre,
+            "subtitulo":subtitulo,
+            "descripcion":descripcion,
+            "enlace":enlace,
+            "off":off,
+            "sub_rubro": sub_rubro
+          }).then(()=>window.location.reload());
+        }else{
+          alert("Ah ocurrido algo inesperado, por favor recargue la página")
+        }  
         // newPicture.update(record).then(()=>{
         //   // console.log(postId.id)
         //   // this.setState({
@@ -318,18 +409,22 @@ class Admin3 extends Component {
                               tooltip: 'Borrar Producto',
                               onClick: (event, rowData) => 
                               {
-                                alert("You want to delete " + rowData.nombre)
+                                var result = window.confirm("Quieres borrar > " + rowData.nombre);
                                 new Promise((resolve, reject) => {
-                                  setTimeout(() => {
-                                    {                             
-                                      const db = firebase.database();
-                                      const dbRef = db.ref("Sub_Rubro");
-                                      const refSB = dbRef.child(rowData.id) 
-                                      refSB.remove(); 
-                                      window.location.reload();                                
-                                    }
-                                    resolve()
-                                  }, 1000)
+                                  if(result == true){
+                                    setTimeout(() => {
+                                      {                             
+                                        const db = firebase.database();
+                                        const dbRef = db.ref("Sub_Rubro");
+                                        const refSB = dbRef.child(rowData.id) 
+                                        refSB.remove(); 
+                                        window.location.reload();                                
+                                      }
+                                      resolve()
+                                    }, 1000) 
+                                  }else{
+                                    reject()
+                                  }              
                                 })
                               }
                             }
@@ -338,7 +433,8 @@ class Admin3 extends Component {
                             search: true,
                             sorting: false,
                             columnsButton:true,
-                            paging:false,    
+                            paging:true,    
+                            pageSize:10,      
                             filtering:true     
                             }}
                             columns={[
@@ -346,7 +442,7 @@ class Admin3 extends Component {
                             },
                             { title: 'Nombre', field: 'nombre' , filtering:false
                             },
-                            { title: 'Rubro', field: 'rubro', lookup:obj
+                            { title: 'Rubro', field: 'rubro', lookup:obj 
                             },
                             ]}
                             data={this.state.Sub_Rubro}
@@ -373,7 +469,7 @@ class Admin3 extends Component {
                                   }, 1000)
                                 }),
                             }}
-                            title="SUB_RUBROS"
+                            title="Editor de Sub Rubros"
                   />   
                 </Grid>      
               </Grid>
@@ -410,38 +506,47 @@ class Admin3 extends Component {
                           icon: 'delete',
                           tooltip: 'Borrar Producto',
                           onClick: (event, rowData) => 
-                          {
-                            alert("You want to delete " + rowData.nombre)
+                          {                           
+                            var result = window.confirm("Quieres borrar > " + rowData.nombre);
                             new Promise((resolve, reject) => {
-                              setTimeout(() => {
-                                {     
-                                  console.log(rowData);                        
-                                  const db = firebase.database();
-                                  const dbRef = db.ref("Producto");
-                                  const refSB = dbRef.child(rowData.id); 
-                                  refSB.remove();   
-                                  // Delete the file
-                                  if(rowData.img){
-                                  // Create a reference to the file to delete
-                                  var storage = firebase.storage();
-                                  var storageRef = storage.ref();
-                                  var desertRef = storageRef.child(rowData.img);
-                                  desertRef.delete().then(function() {
-                                      // File deleted successfully
-                                      alert("File deleted successfully");
+                              if(rowData.id != undefined && result == true){
+                                setTimeout(() => {
+                                  {     
+                                    console.log(rowData);                        
+                                    const db = firebase.database();
+                                    const dbRef = db.ref("Producto");
+                                    const refSB = dbRef.child(rowData.id); 
+                                    refSB.remove();   
+                                    // Delete the file
+                                    if(rowData.img){
+                                    // Create a reference to the file to delete
+                                    var storage = firebase.storage();
+                                    var storageRef = storage.ref();
+                                    var desertRef = storageRef.child(rowData.img);
+                                    desertRef.delete().then(function() {
+                                        // File deleted successfully
+                                        alert("Producto eliminado correctamente !");
+                                        window.location.reload();
+                                      }).catch(function(error) {
+                                        alert("OH NO, an error occurred!", error);
+                                        window.location.reload();
+                                        // Uh-oh, an error occurred!
+                                      });      
+                                    }else{
                                       window.location.reload();
-                                    }).catch(function(error) {
-                                      alert("OH NO!", error);
-                                      window.location.reload();
-                                      // Uh-oh, an error occurred!
-                                    });      
-                                  }else{
-                                    window.location.reload();
+                                    }
+                                                            
                                   }
-                                                          
-                                }
-                                resolve()
-                              }, 1000)
+                                  resolve()
+                                }, 1000)
+                              }else if(result == false){
+                                reject();
+                              }
+                              else{
+                                reject();
+                                alert("Error al borrar producto, por favor recargue la página");
+                              }
+                             
                             })
                           }
                         },
@@ -449,6 +554,34 @@ class Admin3 extends Component {
                           icon:'add',
                           tooltip: 'Save User',
                           onClick: (event, rowData) => alert("Guardaste " + rowData.name)
+                        },
+                        {
+                          icon:'edit',
+                          tooltip: 'Save User',
+                          onClick: (event, rowData) => {
+                            new Promise((resolve, reject) => {
+                              console.log(rowData)                          
+                              let pdf = rowData.pdf;
+                              if (pdf) {
+                                var pathImagen = firebase
+                                  .storage()
+                                  .ref(pdf)
+                                  .getDownloadURL()
+                                  .then(urlparam => {
+                                    window.open(urlparam);
+                                    resolve()
+                                  })
+                                  .catch(error => {
+                                    alert("Parece que este producto no tiene un archivo PDF")
+                                    console.log(error.message);
+                                    reject()
+                                  });
+                              }else{
+                                alert("Parece que este producto no tiene un archivo PDF")
+                                reject()
+                              }
+                            })
+                          }
                         }
                       ]}
                       options={{
@@ -456,7 +589,8 @@ class Admin3 extends Component {
                         search: true,
                         sorting: false,
                         columnsButton:true,
-                        paging:false,         
+                        paging:true,    
+                        pageSize:10     
                         }}
                         columns={[
                           { title: 'Titulo', field: 'nombre', filtering:false },
@@ -508,10 +642,17 @@ class Admin3 extends Component {
                               return(
                                 <ModalPic file={props.data}/>
                               )
-                            }    
+                            }  
+                            if(props.action.icon === 'edit'){
+                              return(
+                                <IconButton>
+                                <PictureAsPdfIcon onClick={(event) => props.action.onClick(event, props.data)}/>
+                                </IconButton>
+                              )
+                            }  
                           }                   
                         }}
-                        title="PRODUCTOS"
+                        title="Editor de Productos"
               />   
               </Grid>      
               </Grid>
@@ -543,37 +684,42 @@ class Admin3 extends Component {
                           tooltip: 'Borrar Producto',
                           onClick: (event, rowData) => 
                           {
-                            alert("Estás a punto de eliminar " + rowData.nombre)
+                            var result = window.confirm("Quieres borrar > " + rowData.nombre);
                             new Promise((resolve, reject) => {
-                              setTimeout(() => {
-                                {     
-                                  console.log(rowData);                        
-                                  const db = firebase.database();
-                                  const dbRef = db.ref("Noticia");
-                                  const refSB = dbRef.child(rowData.id); 
-                                  refSB.remove();   
-                                  // Delete the file
-                                  if(rowData.img){
-                                  // Create a reference to the file to delete
-                                  var storage = firebase.storage();
-                                  var storageRef = storage.ref();
-                                  var desertRef = storageRef.child(rowData.img);
-                                  desertRef.delete().then(function() {
-                                      // File deleted successfully
-                                      alert("File deleted successfully");
+                              if(result == true){
+                                setTimeout(() => {
+                                  {     
+                                    console.log(rowData);                        
+                                    const db = firebase.database();
+                                    const dbRef = db.ref("Noticia");
+                                    const refSB = dbRef.child(rowData.id); 
+                                    refSB.remove();   
+                                    // Delete the file
+                                    if(rowData.img){
+                                    // Create a reference to the file to delete
+                                    var storage = firebase.storage();
+                                    var storageRef = storage.ref();
+                                    var desertRef = storageRef.child(rowData.img);
+                                    desertRef.delete().then(function() {
+                                        // File deleted successfully
+                                        alert("File deleted successfully");
+                                        window.location.reload();
+                                      }).catch(function(error) {
+                                        alert("OH NO!", error);
+                                        window.location.reload();
+                                        // Uh-oh, an error occurred!
+                                      });      
+                                    }else{
                                       window.location.reload();
-                                    }).catch(function(error) {
-                                      alert("OH NO!", error);
-                                      window.location.reload();
-                                      // Uh-oh, an error occurred!
-                                    });      
-                                  }else{
-                                    window.location.reload();
+                                    }
+                                                            
                                   }
-                                                          
-                                }
-                                resolve()
-                              }, 1000)
+                                  resolve()
+                                }, 1000)
+                              }else{
+                                reject()
+                              }
+
                             })
                           }
                         },
@@ -586,8 +732,9 @@ class Admin3 extends Component {
                       options={{
                         search: true,
                         sorting: false,
-                        columnsButton:true,
-                        paging:false,         
+                        columnsButton:true, 
+                        paging:true,    
+                        pageSize:10         
                         }}
                         columns={[
                           { title: 'Titulo', field: 'nombre' },
@@ -619,7 +766,7 @@ class Admin3 extends Component {
                             }                                                       
                           }                   
                         }}                       
-                        title="NOTICIAS"
+                        title="Editor de Noticias"
               />   
               </Grid>      
               </Grid>

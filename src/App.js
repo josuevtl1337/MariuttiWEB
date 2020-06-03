@@ -9,7 +9,7 @@ import Home from "./components/sections/inicio/Home";
 import About from "./components/sections/nosotros/About";
 import Productos from "./components/sections/productos/Productos";
 import SearchResult from "./components/sections/productos/SearchResult";
-import ProductoComponent from "./components/sections/productos/ProductoComponent";
+import ProdComp from "./components/sections/productos/ProdComp";
 import Contact from "./components/sections/contacto/Contact";
 import Noticias from "./components/sections/noticias/Noticias";
 import Entrada from "./components/sections/noticias/Entrada";
@@ -76,6 +76,7 @@ class App extends Component {
     let sidenav;
     let searchbar;
     let footer;
+    let messenger;
     let maquinas = [];
     let cfg;
 
@@ -102,9 +103,12 @@ class App extends Component {
     
 
     if (window.location.href.includes('login')) {
-      footer = null
+      // FB.CustomerChat.hide();
+      messenger = null;
+      footer = null;
       navbar = null;
     } else {
+      messenger = <MessengerCustomerChat pageId="314180308659595" appId="656192641884970"  language = 'es_LA' /> 
       navbar = <Navbar searchClickHandler={this.searchClickHandler} sidenavClickHandler={this.sidenavTriggerClickHandler} buscando={this.buscandoResultado} dropdown={this.dropdownResultado}/>
       footer = <Footer/>
     }
@@ -118,10 +122,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-        <MessengerCustomerChat
-          pageId="314180308659595"
-          appId="656192641884970"
-        />
+        {messenger}
         </div>
         {cfg}
         {navbar}
@@ -131,9 +132,10 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/nosotros" component={About} />
-          <Route path="/producto" component={ProductoComponent} />
+          {/* <Route path="/producto" component={ProductoComponent} /> */}
           <Route path="/contacto" component={Contact} />
           <Route path="/noticias" component={Noticias} />
+          <Route path="/producto" component={ProdComp} />
           <Route path="/entrada" component={Entrada} />
           <Route path="/login" component={Login} />
         </Switch>

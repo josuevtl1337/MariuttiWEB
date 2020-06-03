@@ -161,6 +161,7 @@ export default function SimpleModal(props) {
           aria-describedby="simple-modal-description"
           open={open}
           onClose={handleClose}
+          style={{overflow: 'auto'}}
         >
           
           <div className="addprodform">
@@ -198,12 +199,12 @@ export default function SimpleModal(props) {
                 />
 
                 {/* {Imagen} */}
-                <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={handleFile} />
+                {/* <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={handleFile} />
                 <label  htmlFor="icon-button-file">
                   <IconButton  color="primary" aria-label="upload picture" component="span">
                     <PhotoCamera />
                   </IconButton>
-                </label>
+                </label> */}
   
     
                 {/* Boton de enviar */}

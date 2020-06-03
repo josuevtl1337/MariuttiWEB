@@ -35,10 +35,14 @@
 
 
     <!-- Load Facebook SDK for JavaScript -->
-    <div id="fb-root"></div>
+    <!-- <div id="fb-root"></div>
+    <script async defer src="https://connect.facebook.net/es_LA/sdk.js%22%3E"></script>
+   
+    <script async defer  src="https://connect.facebook.net/en_US/sdk/debug.js"></script>
     <script>
-      window.fbAsyncInit = function() {
+        window.fbAsyncInit = function() {
         FB.init({
+          appId            : "656192641884970",
           xfbml            : true,
           version          : 'v6.0'
         });
@@ -48,23 +52,25 @@
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+      js.src = 'https://connect.facebook.net/es_LA/sdk/xfbml.customerchat.js';
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-    </script>
+      
+    if (window.location.href.includes('login')) {
+      FB.CustomerChat.show(false);
+      FB.CustomerChat.hide();
+    }
+    </script> -->
 
     <!-- Your customer chat code -->
-    <div class="fb-customerchat"
+    <!-- <div class="fb-customerchat"
       attribution=setup_tool
       page_id="314180308659595"
       theme_color="#0084ff"
       logged_in_greeting="¡Hola! ¿Cómo podemos ayudarte?"
       logged_out_greeting="¡Hola! ¿Cómo podemos ayudarte?">
-    </div>
+    </div> -->
 
-
-
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
       This HTML file is a template.
