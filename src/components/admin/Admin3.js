@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+//CSS
 import "./admin.css"
 
 //Firebase
@@ -26,10 +27,12 @@ import EditProducto from "./EditProducto";
 import EditNoticia from "./EditNoticia";
 import Loading from "./Loading";
 import ModalPic from "./ModalPic"
+import ModalPdf from "./ModalPdf"
 //Redux
 import { connect } from "react-redux";
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 
 class Admin3 extends Component { 
   state = {
@@ -430,7 +433,8 @@ class Admin3 extends Component {
                             search: true,
                             sorting: false,
                             columnsButton:true,
-                            paging:false,    
+                            paging:true,    
+                            pageSize:10,      
                             filtering:true     
                             }}
                             columns={[
@@ -465,7 +469,7 @@ class Admin3 extends Component {
                                   }, 1000)
                                 }),
                             }}
-                            title="SUB_RUBROS"
+                            title="Editor de Sub Rubros"
                   />   
                 </Grid>      
               </Grid>
@@ -550,6 +554,34 @@ class Admin3 extends Component {
                           icon:'add',
                           tooltip: 'Save User',
                           onClick: (event, rowData) => alert("Guardaste " + rowData.name)
+                        },
+                        {
+                          icon:'edit',
+                          tooltip: 'Save User',
+                          onClick: (event, rowData) => {
+                            new Promise((resolve, reject) => {
+                              console.log(rowData)                          
+                              let pdf = rowData.pdf;
+                              if (pdf) {
+                                var pathImagen = firebase
+                                  .storage()
+                                  .ref(pdf)
+                                  .getDownloadURL()
+                                  .then(urlparam => {
+                                    window.open(urlparam);
+                                    resolve()
+                                  })
+                                  .catch(error => {
+                                    alert("Parece que este producto no tiene un archivo PDF")
+                                    console.log(error.message);
+                                    reject()
+                                  });
+                              }else{
+                                alert("Parece que este producto no tiene un archivo PDF")
+                                reject()
+                              }
+                            })
+                          }
                         }
                       ]}
                       options={{
@@ -557,7 +589,8 @@ class Admin3 extends Component {
                         search: true,
                         sorting: false,
                         columnsButton:true,
-                        paging:false,         
+                        paging:true,    
+                        pageSize:10     
                         }}
                         columns={[
                           { title: 'Titulo', field: 'nombre', filtering:false },
@@ -609,10 +642,17 @@ class Admin3 extends Component {
                               return(
                                 <ModalPic file={props.data}/>
                               )
-                            }    
+                            }  
+                            if(props.action.icon === 'edit'){
+                              return(
+                                <IconButton>
+                                <PictureAsPdfIcon onClick={(event) => props.action.onClick(event, props.data)}/>
+                                </IconButton>
+                              )
+                            }  
                           }                   
                         }}
-                        title="PRODUCTOS"
+                        title="Editor de Productos"
               />   
               </Grid>      
               </Grid>
@@ -692,8 +732,9 @@ class Admin3 extends Component {
                       options={{
                         search: true,
                         sorting: false,
-                        columnsButton:true,
-                        paging:false,         
+                        columnsButton:true, 
+                        paging:true,    
+                        pageSize:10         
                         }}
                         columns={[
                           { title: 'Titulo', field: 'nombre' },
@@ -725,7 +766,7 @@ class Admin3 extends Component {
                             }                                                       
                           }                   
                         }}                       
-                        title="NOTICIAS"
+                        title="Editor de Noticias"
               />   
               </Grid>      
               </Grid>

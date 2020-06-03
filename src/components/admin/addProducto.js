@@ -11,6 +11,9 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Input from '@material-ui/core/Input';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FilledInput from '@material-ui/core/FilledInput';
 
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import IconButton from '@material-ui/core/IconButton';
@@ -31,7 +34,6 @@ const useStyles = makeStyles(theme => ({
     display: 'none',
   },
 }));
-
 const useStylesSelect = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
@@ -63,6 +65,7 @@ export default function SimpleModal(props) {
     setOpen(false);
   };
   const classesSelect = useStylesSelect();
+
   const [subRubro , setSub] = React.useState('');
   const [subNombre , setSubNombre] = React.useState('');
   const [nombre , setNombre] = React.useState('');
@@ -70,8 +73,12 @@ export default function SimpleModal(props) {
   const [descripcion , setDescripcion] = React.useState('');
   const [enlace , setEnlace] = React.useState('');
   const [file , setFile] = React.useState('');
+  const [nameFile , setNameFile] = React.useState('');
   const [pdf , setPdf] = React.useState('');
+  const [namePdf , setNamePdf] = React.useState('');
   const [oferta , setOferta] = React.useState(false);
+  const [precio , setPrecio] = React.useState('');
+  const [precioAntiguo , setPrecioAntiguo] = React.useState('');
 
   const handleChangeSub = event => {
     // setSubNombre(event.target.name);
@@ -95,9 +102,11 @@ export default function SimpleModal(props) {
     setEnlace(e.target.value);
   }
   const handleFile = e =>{
+    setNameFile(e.target.files[0].name+" ✓");
     setFile(e.target.files[0]);
   }
   const handlePdf = e =>{
+    setNamePdf(e.target.files[0].name+" ✓");
     setPdf(e.target.files[0]);
   }
   const onClickOfertaHandler = e => {
@@ -151,10 +160,8 @@ export default function SimpleModal(props) {
               
           <FormControl className={classesSelect.formControl}>
 
-            <InputLabel id="subRubros">Sub-Rubros</InputLabel>
-
+            <InputLabel id="sbLabel" ></InputLabel>
             <Select
-              labelId="subRubroId"
               id="sub_rubro"
               value={subRubro}
               name={subNombre}
@@ -164,6 +171,25 @@ export default function SimpleModal(props) {
             </Select>                                   
             {/* Nombre Producto */}
             <TextField id="standard-basic" label="Nombre Producto" onChange={onChangeNombre}/>
+
+            {/* Precio */}
+            {/* <InputLabel id="aa" htmlFor="standard-adornment-amount">Precio</InputLabel> */}
+            <Input
+              id="standard-adornment-amount"
+              value={precio}
+              onChange={onChangeEnlace}
+              startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            />   
+
+            {/* Precio Antiguo */}
+            {/* <InputLabel  id="bb" htmlFor="standard-adornment-amount">Precio Anterior</InputLabel>
+            <Input
+              id="standard-adornment-amount2"
+              value={precioAntiguo}
+              onChange={onChangeNombre}
+              startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            />  */}
+
             {/* Subtitulo */}
             <TextField id="standard-basic" label="Subtitulo" onChange={onChangeSubtitulo}/>
             {/* Descripcion */}
@@ -183,6 +209,7 @@ export default function SimpleModal(props) {
                   <IconButton  color="primary" aria-label="upload picture" component="span">
                     <PhotoCamera />
                   </IconButton>
+                  <h4>{nameFile}</h4>
                 </label>
   
                 {/* PDF */}
@@ -191,6 +218,7 @@ export default function SimpleModal(props) {
                   <IconButton  color="primary" aria-label="upload picture" component="span">
                     <PictureAsPdfIcon />
                   </IconButton>
+                  <h4>{namePdf}</h4>
                 </label>
   
             {/* Boton de enviar */}

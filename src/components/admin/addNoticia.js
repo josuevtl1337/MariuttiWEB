@@ -61,6 +61,7 @@ export default function SimpleModal(props) {
   const classesSelect = useStylesSelect();
   const [nombre , setNombre] = React.useState('');
   const [descripcion , setDescripcion] = React.useState('');
+  const [nameFile , setNameFile] = React.useState('');
   const [file , setFile] = React.useState('');
 
   const onChangeTitulo = e => {
@@ -70,6 +71,7 @@ export default function SimpleModal(props) {
     setDescripcion(e.target.value);
   }
   const handleFile = e =>{
+    setNameFile(e.target.files[0].name+" ✓");
     setFile(e.target.files[0]);
   }
 
@@ -110,6 +112,7 @@ export default function SimpleModal(props) {
                   <IconButton  color="primary" aria-label="upload picture" component="span">
                     <PhotoCamera />
                   </IconButton>
+                <h4>{nameFile}</h4>
                 </label>
                 {/* Boton de enviar */}
                 <Button variant="contained" className={classesSelect.color} onClick={handleOnClick}>
