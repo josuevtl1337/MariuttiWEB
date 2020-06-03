@@ -8,13 +8,16 @@
     overflow: hidden;
     transform: translateY(-100px);
     z-index: 100;
-}  
+    background: white;
+}
 
 .heroimg{
-    display: block;
+    /* display: block;
     position: absolute;
     width: 100%;
-    filter: brightness(0.5);
+    filter: brightness(0.5); */
+    /* animation: zoomHero 6s linear; */
+    /* animation: cf4FadeInOut 6s linear; */
 }
 
 .heroimgcelu{
@@ -48,8 +51,17 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: absolute;
 
+    animation: textAnimation 24s ease-in infinite 0s; 
+}
 
+#hero_proyectos {
+    animation-delay: 8s;
+}
+
+#hero_const {
+    animation-delay: 16s;
 }
 
 .herotitle{
@@ -66,8 +78,9 @@
 
 .herotext{
     font-family: 'Roboto';
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 300;
+    margin-top: 32px;
 }
 
 .herobtn{
@@ -85,6 +98,7 @@
     font-size: 16px;
     width: 230px;
     height: 50px;
+    margin-top: 324px;
 }
 
 .herobtn:hover{
@@ -212,3 +226,91 @@
         opacity: 1; 
     }
   }
+
+.slideshow {
+    list-style-type: none;
+}
+/** SLIDESHOW **/
+.slideshow,
+.slideshow:after { 
+    top: -16px; /*Not sure why I needed this fix*/
+        position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    z-index: 0; 
+}
+
+.slideshow li span { 
+        position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    color: transparent;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    opacity: 0;
+    z-index: 0;
+    animation: imageAnimation 24s ease-in infinite 0s; 
+}
+
+.slideshow li:nth-child(1) span { 
+    background-image: url("https://www.estudiohelsinki.com/clientes/mariutti/img-web/Depositphotos_10853155_xl-2015.jpg"); 
+    background-image: url("https://miro.medium.com/max/9856/1*gAG21NFA76ZlCbtK6SayVQ.jpeg"); 
+    animation-delay: 0s; 
+}
+.slideshow li:nth-child(2) span { 
+    background-image: url("https://www.estudiohelsinki.com/clientes/mariutti/img-web/Depositphotos_142453059_xl-2015.jpg");
+    animation-delay: 8s; 
+}
+.slideshow li:nth-child(3) span { 
+    background-image: url("https://www.estudiohelsinki.com/clientes/mariutti/img-web/Depositphotos_32856489_xl-2015.jpg");
+    animation-delay: 16s; 
+}
+  
+  
+@keyframes imageAnimation { 
+    0% {
+    opacity:1;
+    }
+    19% {
+    opacity:1;
+    }
+    28% {
+    opacity:0;
+    transform: scale(1.1);
+    }
+    80% {
+    opacity:0;
+    transform: scale(1);
+    }
+    90% {
+    opacity:1;
+    }
+    100% {
+    opacity:1;
+    }
+}
+
+@keyframes textAnimation { 
+    0% {
+    opacity:1;
+    }
+    19% {
+    opacity:1;
+    }
+    28% {
+    opacity:0;
+    }
+    80% {
+    opacity:0;
+    }
+    90% {
+    opacity:1;
+    }
+    100% {
+    opacity:1;
+    }
+}

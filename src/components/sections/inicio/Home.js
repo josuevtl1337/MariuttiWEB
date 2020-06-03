@@ -7,7 +7,7 @@ import HomeCard from './HomeCard.js'
 import HomeCardCelu from './HomeCardCelu'
 import EntradaMini from './EntradaMini'
 import EntradaCelu from './EntradaCelu'
-import HeroImage from '../../layout/HeroImage'
+import HeroCarousel from '../../layout/HeroCarousel'
 import ProductCarousel from '../../layout/ProductCarousel'
 import ProductCarouselGrande from '../../layout/ProductCarouselGrande'
 import Container from '@material-ui/core/Container'
@@ -104,13 +104,19 @@ const Home = (props) => {
 
     return (
         <div className="container">
-            <HeroImage 
+
+
+            <HeroCarousel
+                handlerOnClickCatalogo={handlerOnClickCatalogo}
+            />
+            
+            {/* <HeroImage 
                 handlerOnClickCatalogo={handlerOnClickCatalogo}
                 title="al servicio de la construcción"
                 // text="Más de 50 años brindando soluciones para el hogar, la construcción y la industria"
                 // text="La ferretería industrial más completa de la región"
                 image="https://miro.medium.com/max/9856/1*gAG21NFA76ZlCbtK6SayVQ.jpeg"
-            />
+            /> */}
 
             <img src={BlueTriangle} className="bluetriangle"/>
 
@@ -226,9 +232,9 @@ const Home = (props) => {
                                     date={item.createdAt}
                                     text={item.descripcion}
                                     key={i}
-                                />                                                                  
-                            );                                                       
-                        })} 
+                                />
+                            );
+                        })}
                     </div>
 
                 </Container>

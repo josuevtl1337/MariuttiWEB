@@ -49,6 +49,25 @@ export default function Entrada(props) {
         // setProductoState(true);
         // console.log(productoState);
     }
+
+    const fechaParseada = (dia, mes, año) => {
+        var months = ['de Enero,','de Febrero,','de Marzo,','de Abril,','de Mayo,','de Junio,','de Julio,','de Agosto,','de Septiembre,','de Octubre,','de Noviembre,','de Diciembre,'];
+
+        // var date = new Date(item.createdAt);
+    
+        // var day = date.getDate();
+        // var month = months[date.getMonth()];
+        // var year = date.getFullYear();
+
+        var day = dia;
+        var month = months[mes];
+        var year = año;
+
+    
+        return day + ' ' + month + ' ' + year + ' ';
+    }
+    
+
     return(
         <React.Fragment>
             <div className="noticiasbanner">
@@ -71,15 +90,9 @@ export default function Entrada(props) {
                         .catch(error => {
                             console.log(error.message);
                         });
-                        var months = ['de Enero','de Febrero','de Marzo,','de Abril,','de Mayo,','de Junio,','de Julio,','de Agosto,','de Septiembre,','de Octubre,','de Noviembre,','de Diciembre,'];
-
                         var date = new Date(item.createdAt);
-                    
-                        var day = date.getDate();
-                        var month = months[date.getMonth()];
-                        var year = date.getFullYear();
-                    
-                        var fechaParseada = day + ' ' + month + ' ' + year + ' ';
+
+                        
                     }
                     return(
                         <React.Fragment>
@@ -87,17 +100,18 @@ export default function Entrada(props) {
                                 <Grid item xs={12} md={9}>
                                 <img className="entrada-img" src={url}/>
                                 <div className="entrada-contentwrap">
-                                    <p className="entrada-cardtitle">
+                                    <p className="entrada-title">
                                         {item.nombre}
                                     </p>
-                                    <p className="entrada-date">
-                                        {fechaParseada}
+                                    <p className="entrada-date" style={{marginTop: 16}}>
+                                        {fechaParseada(date.getDate(), date.getMonth(), date.getFullYear())}
                                     </p>
+                                    <div className="divline descr" style={{marginBottom: 8}}></div>
                                     <p className="entrada-text">
                                        {item.descripcion} 
                                     </p>
                                 </div>
-                                <div className="share-wrap">
+                                <div className="share-wrap" style={{marginBottom: 32}}>
                                     <h4 style={{fontSize: 14, marginLeft: 25, marginRight: 25}}>Compartir</h4>
                                     <FacebookIcon className="share-icon"/>
                                     <TwitterIcon className="share-icon"/>
@@ -109,13 +123,15 @@ export default function Entrada(props) {
                                         <h4 className="postsrecientes">Noticias Recientes</h4>
                                         <Divider style={{}}/>
                                         <div className="entradasrecienteswrap">
-                                            {onlythree.map((item, i) => {                             
+                                            {onlythree.map((item, i) => {    
+                                                var daterec = new Date(item.createdAt);
+                                                
                                                 return (
                                                     <div onClick={()=>handlerOnClickRecientes(item.id)}>
                                                     <EntradaReciente                                      
                                                         img={item.img}
                                                         title={item.nombre}
-                                                        date={fechaParseada}
+                                                        date={fechaParseada(daterec.getDate(), daterec.getMonth(), daterec.getFullYear())}
                                                         key={i}
                                                     />    
                                                     </div>                                                                                                             

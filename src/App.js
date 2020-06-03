@@ -17,8 +17,6 @@ import Entrada from "./components/sections/noticias/Entrada";
 import Login from "./components/admin/Admin3";
 import Cfg from "./components/config/fbConfig";
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
-//    --------------AQUI ESTA COMENTADO TODO LO DE MESSENGER !!!!!! --------------
-//    -------TAMBIEN ESTA COMENTADO EL MAPA !!!--------
 // import fbConfig from "./components/config/fbConfig"
 // import firebase from "firebase/app";
 import { withRouter } from 'react-router';

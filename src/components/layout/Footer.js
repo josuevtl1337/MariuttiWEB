@@ -4,16 +4,11 @@ import './Footer.css'
 const Footer = () => {
     return(
         <React.Fragment>
-                {/* <div>Icons made by <a href="https://www.flaticon.com/authors/eucalyp" title="Eucalyp">Eucalyp</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-                <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}
-                <div className="footer">
-                    <h4>© 2020. MARIUTTI HNOS. S.R.L.</h4>
+               <div className="footer">
+                    <h4 className="footertitle">© 2020. MARIUTTI HNOS. S.R.L.</h4>
                     <hr/>
                     <div className="footerabajo">
-                        <h5 className="footertext">info@mariutti.com.ar <br/>
-                        +54 (0) 342 453-5318 <br/>
-                        FRANCIA 2399 esq. 1º JUNTA <br/> 
-                        (3000) Santa Fe, Argentina</h5>
+
                         <div className="footredes">
                             <a href="https://www.facebook.com/MARIUTTIFERRETERIAINDUSTRIAL/" className="red" target="_blank">
                                 <img className="redimg fb footicon" src="https://image.flaticon.com/icons/svg/1384/1384005.svg"/>
@@ -25,6 +20,12 @@ const Footer = () => {
                                 <img className="redimg footicon" src="https://image.flaticon.com/icons/svg/455/455705.svg" alt="" srcset=""/>
                             </a>
                         </div>
+
+                        <h5 className="footertext">info@mariutti.com.ar <br/>
+                        +54 (0) 342 453-5318 <br/>
+                        FRANCIA 2399 esq. 1º JUNTA <br/> 
+                        (3000) Santa Fe, Argentina</h5>
+                        
                     </div>
                     
                 </div>
