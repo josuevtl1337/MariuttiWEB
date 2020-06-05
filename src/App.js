@@ -10,6 +10,7 @@ import About from "./components/sections/nosotros/About";
 import Productos from "./components/sections/productos/Productos";
 import SearchResult from "./components/sections/productos/SearchResult";
 import ProdComp from "./components/sections/productos/ProdComp";
+import ProductoComponent from "./components/sections/productos/ProductoComponent";
 import Contact from "./components/sections/contacto/Contact";
 import Noticias from "./components/sections/noticias/Noticias";
 import Entrada from "./components/sections/noticias/Entrada";
@@ -32,7 +33,9 @@ class App extends Component {
     maquinas:[],
     dropdown:"",
     dropdownName:"",
-    trigger:""
+    trigger:"",
+    categoriaActual:"",
+    categoriaActualNombre:""
   };
 
   sidenavTriggerClickHandler = () => {
@@ -69,7 +72,13 @@ class App extends Component {
   cleanUpDropdown = () =>{
       this.setState({dropdown:''})
   }
-
+  categoriaActualHandler =(param,param2)=>{
+    //Esta funcion es para comunicar el productos.js y el productocomponent.js
+    this.setState({categoriaActual:param, categoriaActualNombre:param2})
+  }
+  categoriaActualCleanUp = () =>{
+    this.setState({categoriaActual:'',categoriaActualNombre:''})
+  }
 
 
   render(){
@@ -134,16 +143,20 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/nosotros" component={About} />
-          {/* <Route path="/producto" component={ProductoComponent} /> */}
+          {/* <Route path="/producto" component={ProductoComponent} />  */}
           <Route path="/contacto" component={Contact} />
           <Route path="/noticias" component={Noticias} />
-          <Route path="/producto" component={ProdComp} />
           <Route path="/entrada" component={Entrada} />
           <Route path="/login" component={Login} />
         </Switch>
+        {/* <Route path="/productos" component={ProdComp} /> */}
+        <Route
+            path='/producto'
+            render={(props) => <ProductoComponent {...props} categoriaActualHandler={this.categoriaActualHandler} cleanUp={this.cleanUpDropdown}/>}
+        />
         <Route
             path='/productos'
-            render={(props) => <Productos {...props} dropdownResult={this.state.dropdown} dropdownResultName={this.state.dropdownName} trigger={this.state.trigger} cleanUp={this.cleanUpDropdown}/>}
+            render={(props) => <Productos {...props} categoriaSet={this.state.categoriaActual} categoriaNombre={this.state.categoriaActualNombre} categoriaActualCleanUp={this.categoriaActualCleanUp} dropdownResult={this.state.dropdown} dropdownResultName={this.state.dropdownName} trigger={this.state.trigger} cleanUp={this.cleanUpDropdown}/>}
         />
         <Route
             path='/busqueda'

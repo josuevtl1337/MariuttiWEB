@@ -9,7 +9,7 @@ import firebase from "firebase/app"
 
 const ProdComp = (props) =>{
     useEffect(() => {
-        window.scrollTo(0, 0);
+        window.scrollTo(0, 0)
         }, [])
 
         const [url, setUrl] = React.useState('');
@@ -31,7 +31,7 @@ const ProdComp = (props) =>{
     const ifvidexists = (string) => {
         if(string){
             return(
-                <div className="videowrapper" >
+                <div className="videowrapper">
                     <iframe 
                         className="ytvideo"
                         src={string} 

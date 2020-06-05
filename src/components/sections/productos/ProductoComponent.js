@@ -37,20 +37,15 @@ const ProductoComponent = (props) =>{
         { path: 'Producto' }
     ])
 
-    const [categoriaActual, setCategoriaActual] = useState("-M163WoG-kWq-0jDt1CJ");
+    const [categoriaActual, setCategoriaActual] = useState("");
 
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
         window.scrollTo(0, 0)
-        //si el resultado del dropdown es distinto a vacio lo seteo
-        if(props.dropdownResult!=''){
-            setCategoriaActual(props.dropdownResult);    
-            setCategoriaActualName(props.dropdownResultName);  
-        }
     });
 
-    const [categoriaActualName, setCategoriaActualName] = useState("Aislantes");
-    const [productoState, setProductoState] = useState(false);
+    const [categoriaActualName, setCategoriaActualName] = useState("");
+    const [categoriaRuta, setCategoriaRuta] = useState("");
 
     const rubros = useSelector(state => state.firebase.data.Rubro)
     const sub_rubros = useSelector(state => state.firebase.data.Sub_Rubro)
@@ -80,14 +75,20 @@ const ProductoComponent = (props) =>{
         // props.trayendoCategorias(categorias);
     }
 
-    const handleClick = (e,categoriaNombre) =>{
-        props.cleanUp();
-        setCategoriaActual(e);
-        setCategoriaActualName(categoriaNombre);
-        console.log(categoriaActual)
+    const handleClickRubro = (e) => {
+        console.log(e);
+        setCategoriaRuta(e + " / ");
     }
 
-
+    const handleClick = (e,categoriaNombre,categoriaName) =>{
+        props.cleanUp();
+        setCategoriaActual(e);
+        var rutaEspecifica = categoriaName+" / "+categoriaNombre
+        props.categoriaActualHandler(e,rutaEspecifica);
+        props.history.push("/productos");
+        // setCategoriaActualName(categoriaNombre);
+        // console.log(categoriaActual);
+    }
 
     var productosArray = [];
     const [url, setUrl] = React.useState('');
@@ -120,8 +121,8 @@ const ProductoComponent = (props) =>{
                     <iframe 
                         className="ytvideo"
                         src={string} 
-                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" 
-                        allowfullscreen
+                        frameBorder="0" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" 
+                        allowFullScreen="true"
                     />  
                 </div>
             )
@@ -142,90 +143,89 @@ const ProductoComponent = (props) =>{
                     <Grid item xs={12} md={3}>       
                         <h4>Categorías</h4>
                         <Divider style={{marginBottom: 28}}/>
-                        <Drawer titulo="Construcción" handler={handleClick} categorias={construccion}/>
-                        <Drawer titulo="Máquinas y Herramientas" handler={handleClick} categorias={maquinas}/>
-                        <Drawer titulo="Ferretería Industrial" handler={handleClick} categorias={ferreteria}/>
+                        <Drawer titulo="Construcción" handlerRuta={handleClickRubro} handler={handleClick} categorias={construccion}/>
+                        <Drawer titulo="Máquinas y Herramientas" handlerRuta={handleClickRubro} handler={handleClick} categorias={maquinas}/>
+                        <Drawer titulo="Ferretería Industrial" handlerRuta={handleClickRubro} handler={handleClick} categorias={ferreteria}/>
                     </Grid>
                     <Grid item xs={12} md={9}>
                         <div className="singleprod-wrap" style={{zIndex: 100}}>
                             <h4>Rubro / Subrubro / Producto</h4>
                             <Divider style={{marginBottom: 28}}/>
                             {productosArray.map((item, i) => {  
-                            let fecha = new Date(item.createdAt);                               
-                            if(search == item.id){
-                                let imagen = item.img;
-                                if (imagen) {
-                                    var pathImagen = firebase
-                                    .storage()
-                                    .ref(imagen)
-                                    .getDownloadURL()
-                                    .then(url => {
-                                        setUrl(url);
-                                    })
-                                    .catch(error => {
-                                        console.log(error.message);
-                                    });
-                                }
-                                return (  
-                                    <React.Fragment>
-                                        <div className="product-block">
-                                            <div className="prodtop">
-                                                
-                                                <div className="left">
-                                                    <img className="singleprod-img" src={url} />
-                                                </div>
-                                                <div className="right">
-                                                    <h3 className="singleprod-title">{item.nombre}</h3>
-                                                    <div className="divline right" style={{marginLeft: 0, marginRight: 0, width: '100%'}}></div>
-                                                    <h4 className="precio">$3.500,00</h4>
-                                                    <div className="buttonscontainer">
-                                                        <button className="aboutbtn prodstock">
-                                                            Consultar Stock
-                                                        </button>
-                                                        <Tooltip arrow title="Descargar Ficha Técnica" placement="right">
-                                                            <button className="aboutbtn fichatecnica">
-                                                                <i className="material-icons ficha">play_for_work</i>
-                                                            </button>
-                                                        </Tooltip>
-                                                        
+                                let fecha = new Date(item.createdAt);                               
+                                if(search == item.id){
+                                    let imagen = item.img;
+                                    if (imagen) {
+                                        var pathImagen = firebase
+                                        .storage()
+                                        .ref(imagen)
+                                        .getDownloadURL()
+                                        .then(url => {
+                                            setUrl(url);
+                                        })
+                                        .catch(error => {
+                                            console.log(error.message);
+                                        });
+                                    }
+                                    return (  
+                                        <React.Fragment>
+                                            <div className="product-block">
+                                                <div className="prodtop">
+                                                    
+                                                    <div className="left">
+                                                        <img className="singleprod-img" src={url} />
                                                     </div>
-                                                </div>
-                                                
-                                            </div>
-                                            <div className="desc">
-                                                <div className="divline descr"></div>
-                                                <p className="singleprod-sub">{item.subtitulo}</p>
-
-
-                                                <p className="singleprod-desc">{item.descripcion}</p>
-
-                                                {ifvidexists(item.enlace)}
-
-                                                {/* <div className="share">
-                                                    <h4 className="compartir">Compartir:</h4>
-                                                    <div className="shareicons">
-                                                        <FacebookIcon className="share-icon"/>
-                                                        <TwitterIcon className="share-icon"/>
-                                                        <PinterestIcon className="share-icon"/>
+                                                    <div className="right">
+                                                        <h3 className="singleprod-title">{item.nombre}</h3>
+                                                        <div className="divline right" style={{marginLeft: 0, marginRight: 0, width: '100%'}}></div>
+                                                        <h4 className="precio">$3.500,00</h4>
+                                                        <div className="buttonscontainer">
+                                                            <button className="aboutbtn prodstock">
+                                                                Consultar Stock
+                                                            </button>
+                                                            <Tooltip arrow title="Descargar Ficha Técnica" placement="right">
+                                                                <button className="aboutbtn fichatecnica">
+                                                                    <i className="material-icons ficha">play_for_work</i>
+                                                                </button>
+                                                            </Tooltip>
+                                                            
+                                                        </div>
                                                     </div>
                                                     
                                                 </div>
-                                                <div className="divline share"></div> */}
+                                                <div className="desc">
+                                                    <div className="divline descr"></div>
+                                                    <p className="singleprod-sub">{item.subtitulo}</p>
 
-                                                <div className="divline descr"></div>
 
-                                            </div>
-                                        </div>   
-                                        
-                                    </React.Fragment>    
-                                                                                                                    
-                                        );
-                                    }                               
-                                })}     
+                                                    <p className="singleprod-desc">{item.descripcion}</p>
+
+                                                    {ifvidexists(item.enlace)}
+
+                                                    {/* <div className="share">
+                                                        <h4 className="compartir">Compartir:</h4>
+                                                        <div className="shareicons">
+                                                            <FacebookIcon className="share-icon"/>
+                                                            <TwitterIcon className="share-icon"/>
+                                                            <PinterestIcon className="share-icon"/>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div className="divline share"></div> */}
+
+                                                    <div className="divline descr"></div>
+
+                                                </div>
+                                            </div>   
+                                            
+                                        </React.Fragment>    
+                                                                                                                        
+                                            );
+                                }                               
+                            })}     
                         </div> 
                     </Grid>
                 </Grid>
-
                 <h3 className="homediv-title prodrel">
                     Productos Relacionados
                 </h3>
