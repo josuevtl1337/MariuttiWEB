@@ -69,6 +69,7 @@ const NavBarStateLess = (props) => {
         setBusqueda(e.target.value);
     };
     const onChangeDropDown = (param,param2,param3) => {
+        dropTrigger()
         //cambio la categoria segun el click 
         props.history.push("/productos");
         // setDropdown(param);
@@ -95,10 +96,10 @@ const NavBarStateLess = (props) => {
 
     if (drop == false) {
         dropclasses = "proddrop"
-        dropbtnclasses = "prodtab dropbtn"
+        dropbtnclasses = "material-icons arrow"
     } else {
         dropclasses = "proddrop dropped"
-        dropbtnclasses = "prodtab dropbtn active"
+        dropbtnclasses = "material-icons arrow active"
     }
 
     const dropTrigger = () => {
@@ -129,6 +130,7 @@ const NavBarStateLess = (props) => {
         );
     }
 
+
     return (
         <React.Fragment>
             <div className="backnav">
@@ -156,7 +158,7 @@ const NavBarStateLess = (props) => {
                                 <Tab isActive={window.location.href.includes('nosotros')} titulo="Quiénes Somos"/>
                             </Link>
                             <div className="prodtab">
-                                <Tab isActive={window.location.href.includes('producto') || window.location.href.includes('Producto')} titulo="Productos" click={dropTrigger}/>
+                                <Tab isActive={window.location.href.includes('producto') || window.location.href.includes('Producto')} titulo={<span className="productotab">Productos <i className={dropbtnclasses}>arrow_drop_down</i></span>} click={dropTrigger}/>
                                 {/* <div className={dropbtnclasses} onClick={dropTrigger}>
                                     <i className="material-icons arrow">arrow_drop_down</i>
                                 </div> */}

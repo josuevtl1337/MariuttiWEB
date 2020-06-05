@@ -89,6 +89,10 @@ a{
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.15s;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tab:hover{
@@ -230,12 +234,27 @@ a{
   align-items: end;
 }
 
+.productotab{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 .dropbtn{
   cursor: pointer;
   color: #636363;
   justify-content: center;
   align-items: center;
   align-self: center;
+}
+
+.arrow{
+  transition: all 0.3s
+}
+
+.arrow.active{
+  transform: rotate(180deg);
 }
 
 .proddrop{
