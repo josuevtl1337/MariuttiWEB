@@ -30,22 +30,37 @@ const Productos = (props) => {
     ])
 
     // const [categoriaActual, setCategoriaActual] = useState("-M163WoG-kWq-0jDt1CJ");
-    const [categoriaActual, setCategoriaActual] = useState("");
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
+        // console.log(props.categoriaSet);
+        console.log(props.location.search.substr(1));
+        console.log(props.categoriaSet);
         window.scrollTo(0, 0)
         //si el resultado del dropdown es distinto a vacio lo seteo
-        if(props.dropdownResult!=''){
-            setCategoriaActual(props.dropdownResult); 
+
+        //!!!!!!!!!!!!!!!!!!!DROPDOWN COMENTADO!!!!!!!!!!!!!!!!!!!!
+        // if(props.dropdownResult!=''){
+        //     setCategoriaActual(props.dropdownResult); 
+        //     setCategoriaRuta("");   
+        //     setCategoriaActualName(props.dropdownResultName);  
+        // }
+        if(props.categoriaSet!=""){
+            console.log(props.categoriaSet);
+            setCategoriaActual(props.categoriaSet);
+            setCategoriaActualName(props.categoriaNombre);
             setCategoriaRuta("");   
-            setCategoriaActualName(props.dropdownResultName);  
+            // setCategoriaActualName(props.dropdownResultName);  
         }
+        // else{
+        //     setCategoriaActual(""); 
+        // }
+        // setCategoriaActual(props.location.search.substr(1));
+
         // if(props.trigger==false){
         //     setProductTrigger(true);
         // }
     });
-
-    const [categoriaRuta, setCategoriaRuta] = useState("");
+    //Const
     const [id, setId] = useState("");
     const [nombre, setNombre] = useState("");
     const [descripcion, setDescripcion] = useState("");
@@ -53,6 +68,8 @@ const Productos = (props) => {
     const [subtitulo, setSubtitulo] = useState("");
     const [video, setVideo] = useState("");
     const [categoriaActualName, setCategoriaActualName] = useState("Productos Destacados");
+    const [categoriaActual, setCategoriaActual] = useState("");
+    const [categoriaRuta, setCategoriaRuta] = useState("");
     const [productoState, setProductoState] = useState(false);
     const [productTrigger, setProductTrigger] = useState(false);
 
@@ -107,6 +124,7 @@ const Productos = (props) => {
     }
 
     const handleClick = (e,categoriaNombre) => {
+        props.categoriaActualCleanUp();
         console.log(e,categoriaNombre);
         props.cleanUp();
         setCategoriaActual(e);
@@ -125,33 +143,39 @@ const Productos = (props) => {
     //     setProductoState(true);
     //     console.log(productoState);
     // }
-    const handlerURL = (id) =>{
+    const handlerURL = (id) => (e) =>{
         if(productTrigger==true){
-            props.history.push("/productos");
+            console.log(props.history);
+            e.preventDefault()
+            props.history.push("/productos/"+ id);
+        
         }else{
-            props.history.push("/producto"+"/" + id);
+            console.log(props.history);
+            e.preventDefault()
+            props.history.push("/productos");
         }
     }
     const handlerProductTrigger = (id,nomb,descripcion,img,subt,vid) =>{
-        if(productTrigger==true){
-            setProductTrigger(false);
-        }else{
-            setProductTrigger(true);
-        }
+        // props.history.push("/productos?" + id);
+        // if(productTrigger==true){           
+        //     setProductTrigger(false);
+        // }else{
+        //     props.history.push("/productos?");
+        //     setProductTrigger(true);
+        // }
 
-        setId(id);
-        setNombre(nomb);
-        setSubtitulo(subt);
-        setDescripcion(descripcion);
-        setImg(img);
-        setVideo(vid);
-        handlerURL(id);
+        // setId(id);
+        // setNombre(nomb);
+        // setSubtitulo(subt);
+        // setDescripcion(descripcion);
+        // setImg(img);
+        // setVideo(vid);
+        // handlerURL(id);
         // props.history.push(categoriaRuta+categoriaActualName+"/"+id)
 
         // <---LEER: Esto de abajo agrega el id de producto a la url, pero luego no funciona clickear una categoria de la izquierda.
         // e.preventDefault();
-        // props.history.push("/producto?" + id);
-        console.log(nombre);
+        props.history.push("/producto?" + id);
     }
 
     return (
@@ -176,14 +200,11 @@ const Productos = (props) => {
                         <Drawer titulo="Ferretería Industrial" handlerRuta={handleClickRubro} handler={handleClick} categorias={ferreteria}/>
                     </Grid>
                     <Grid item xs={12} md={9}>
-                        <h4>{categoriaRuta}{categoriaActualName}{productTrigger ? " /" : ""}</h4>
+                        <h4>{categoriaRuta}{categoriaActualName}</h4>
                         {/* <h4>{nombre}{subtitulo}{video}</h4> */}
                         <Divider/>
-                        {productTrigger ? <ProdComp catergoria={categoriaRuta} id={id} subrubro={categoriaActualName} nombre={nombre} descripcion={descripcion} img={imagen} subtitulo={subtitulo} enlace={video}/> 
-                        : <CatalogoProductos categoriaActual={categoriaActual} productTrigger={handlerProductTrigger}/>
-                        }
-                        
-
+                        {/* {productTrigger ? <ProdComp nombre={nombre} descripcion={descripcion} img={imagen} subtitulo={subtitulo} enlace={video}/>  */}
+                        <CatalogoProductos categoriaActual={categoriaActual} productTrigger={handlerProductTrigger}/>
                         {/* 
                         <div className="contenedor-catalogo">
                             

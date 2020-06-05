@@ -44,8 +44,8 @@ export default function NestedList(props) {
   //   // props.handlerRuta(e)
   // };
   const handleClickDragon = (e,e2) => {
-    props.handler(e,e2);
     props.handlerRuta(props.titulo);
+    props.handler(e,e2,props.titulo);
     setOpen(!open)
   };
 
