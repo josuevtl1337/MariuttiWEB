@@ -9,14 +9,14 @@ import "firebase/database";
 import 'firebase/auth'
 
 //Material UI
-import MaterialTable from 'material-table'
+import MaterialTable, { MTableToolbar } from 'material-table'
 import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
 
 //Progess
 import CircularProgress from '@material-ui/core/CircularProgress';
 //ListaRubros
-import Nav from './ListaRubros'
+import Nav from './AdminNav'
 import Login from "./Login"
 
 //Botones "ADD"
@@ -393,13 +393,9 @@ class Admin3 extends Component {
             console.log(obj);
             return(
               <div className="bg">
-                <div className="refreshbtn" onClick={this.refreshpage}>
-                  <span className="material-icons">loop</span>
-                </div>
-                <Grid container spacing={2}>  
+                <Grid container spacing={2}>
                 <Grid container justify="center" item xs={12}>
-                  <Nav parentCallback={this.handleClick} close={this.handlerSignOut} />  
-                  <AddSubRubro handleUpload={this.handleUpload}/>
+                  <Nav parentCallback={this.handleClick} close={this.handlerSignOut} />
                 </Grid>
                 <Grid  container justify="center" item xs={12} >
                   <MaterialTable
@@ -437,7 +433,7 @@ class Admin3 extends Component {
                             pageSize:10,      
                             filtering:true     
                             }}
-                            columns={[
+                          columns={[
                             { title: 'Id', field: 'id',  editable: 'never', filtering:false
                             },
                             { title: 'Nombre', field: 'nombre' , filtering:false
@@ -445,8 +441,8 @@ class Admin3 extends Component {
                             { title: 'Rubro', field: 'rubro', lookup:obj 
                             },
                             ]}
-                            data={this.state.Sub_Rubro}
-                            editable={{
+                          data={this.state.Sub_Rubro}
+                          editable={{
                               onRowUpdate: (newData, oldData) =>
                                 new Promise((resolve, reject) => {
                                   setTimeout(() => {
@@ -469,7 +465,35 @@ class Admin3 extends Component {
                                   }, 1000)
                                 }),
                             }}
-                            title="Editor de Sub Rubros"
+                          title="Editor de Sub Rubros"
+                          components={{
+                            Toolbar: props => (
+
+                              <React.Fragment>
+                                <div style={{padding: '0px 10px', backgroundColor: '#E2E2E2'}}>
+                                  <MTableToolbar {...props} />
+                                </div>
+                                <div 
+                                  style={{
+                                    backgroundColor: '#F8D15C',
+                                    display: 'flex',
+                                  }}
+                                >
+                                  <AddSubRubro handleUpload={this.handleUpload}/>
+
+
+                                  <div style={{background: 'white', height: '100%', width: '1px'}} />
+
+                                  <div style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={this.refreshpage}>
+                                    <i className="material-icons" style={{marginRight: 2}} >refresh</i>
+                                    <p style={{margin: 0, fontFamily: 'roboto', fontSize: 14}} >Actualizar</p>
+                                  </div>
+                                </div>
+
+                              </React.Fragment>
+
+                            )
+                          }}
                   />   
                 </Grid>      
               </Grid>
@@ -486,13 +510,10 @@ class Admin3 extends Component {
             console.log(obj);
             return(
               <div className="bg">
-                <div className="refreshbtn" onClick={this.refreshpage}>
-                  <span className="material-icons">loop</span>
-                </div>
+                
                 <Grid container spacing={2}>  
               <Grid container justify="center" item xs={12}>
               <Nav parentCallback={this.handleClick} close={this.handlerSignOut}/>   
-                <AddProducto sub_rubros={this.state.Sub_Rubro} handleUploadProducto={this.handleUploadProducto}/>
               </Grid>
               <Grid container justify="center" item xs={12} >
               <MaterialTable
@@ -650,9 +671,37 @@ class Admin3 extends Component {
                                 </IconButton>
                               )
                             }  
-                          }                   
+                          },   
+
+                          Toolbar: props => (
+
+                            <React.Fragment>
+                              <div style={{padding: '0px 10px', backgroundColor: '#E2E2E2'}}>
+                                <MTableToolbar {...props} />
+                              </div>
+                              <div 
+                                style={{
+                                  backgroundColor: '#F8D15C',
+                                  display: 'flex',
+                                }}
+                              >
+
+                                <AddProducto sub_rubros={this.state.Sub_Rubro} handleUploadProducto={this.handleUploadProducto}/>
+
+                                <div style={{background: 'white', height: '100%', width: '1px'}} />
+
+                                <div style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={this.refreshpage}>
+                                  <i className="material-icons" style={{marginRight: 2}} >refresh</i>
+                                  <p style={{margin: 0, fontFamily: 'roboto', fontSize: 14}} >Actualizar</p>
+                                </div>
+                              </div>
+
+                            </React.Fragment>
+
+                          )              
                         }}
                         title="Editor de Productos"
+                        
               />   
               </Grid>      
               </Grid>
@@ -662,14 +711,11 @@ class Admin3 extends Component {
           }else if(this.state.display=="Noticias"){
             return(
               <div className="bg">
-                <div className="refreshbtn" onClick={this.refreshpage}>
-                  <span className="material-icons">loop</span>
-                </div>
+                
                 <Grid container spacing={2}>  
               <Grid container justify="center" item xs={12}>
                 
                 <Nav parentCallback={this.handleClick} close={this.handlerSignOut}/>   
-                <AddNoticia handleUploadNoticia={this.handleUploadNoticia}/>
               </Grid>
               <Grid container justify="center" item xs={12} >
               <MaterialTable
@@ -764,7 +810,34 @@ class Admin3 extends Component {
                                 <ModalPic file={props.data}/>
                               )
                             }                                                       
-                          }                   
+                          },
+                          Toolbar: props => (
+
+                            <React.Fragment>
+                              <div style={{padding: '0px 10px', backgroundColor: '#E2E2E2'}}>
+                                <MTableToolbar {...props} />
+                              </div>
+                              <div 
+                                style={{
+                                  backgroundColor: '#F8D15C',
+                                  display: 'flex',
+                                }}
+                              >
+
+                                <AddNoticia handleUploadNoticia={this.handleUploadNoticia}/>
+
+
+                                <div style={{background: 'white', height: '100%', width: '1px'}} />
+
+                                <div style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={this.refreshpage}>
+                                  <i className="material-icons" style={{marginRight: 2}} >refresh</i>
+                                  <p style={{margin: 0, fontFamily: 'roboto', fontSize: 14}} >Actualizar</p>
+                                </div>
+                              </div>
+
+                            </React.Fragment>
+
+                          )             
                         }}                       
                         title="Editor de Noticias"
               />   

@@ -188,3 +188,10 @@
         display: none;
     }
 }
+
+@media only screen and (max-height: 700px) {
+    .bluetriangle{ 
+        display: none;
+    }
+} 
+

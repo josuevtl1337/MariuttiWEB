@@ -225,11 +225,17 @@ a{
 }
 
 .prodtab{
-  height: 69px;
   width: auto;
   display: flex;
   align-items: end;
-  align-self: flex-end;
+}
+
+.dropbtn{
+  cursor: pointer;
+  color: #636363;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
 }
 
 .proddrop{
@@ -247,6 +253,13 @@ a{
   display: none;
   animation: fadeIn 0.3s;
   overflow: visible;
+}
+
+.proddrop.dropped{
+  display: flex;
+  justify-content: start;
+  align-content: center;
+  height: 320px;
 }
 
 /* HOVER DROPDOWN */

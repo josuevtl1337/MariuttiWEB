@@ -15,7 +15,7 @@ const HeroCarousel = (props) => {
                 
                 {/* <img src="http://www.mariutti.com.ar/images/pasantes/pasante3.jpg" className="heroimg" style={{width:'100%', height:'auto'}}/>    
                 <img src="https://miro.medium.com/max/9856/1*gAG21NFA76ZlCbtK6SayVQ.jpeg" className="heroimgcelu"/> */}
-                <div background="https://miro.medium.com/max/9856/1*gAG21NFA76ZlCbtK6SayVQ.jpeg" className="heroimgcelu"/>
+                {/* <div background="https://miro.medium.com/max/9856/1*gAG21NFA76ZlCbtK6SayVQ.jpeg" className="heroimgcelu"/> */}
                 
                 <div className="textwrap">
                     <div className="textbox" id="hero_const">

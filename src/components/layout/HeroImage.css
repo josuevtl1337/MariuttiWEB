@@ -4,7 +4,8 @@
 
 .heroimagewrap{
     width: 100%;
-    height: calc(100vh + 80px);
+    /* height: calc(100vh + 80px); */
+    height: 100vh;
     overflow: hidden;
     transform: translateY(-100px);
     z-index: 100;
@@ -57,11 +58,16 @@
 }
 
 #hero_proyectos {
-    animation-delay: 8s;
+    opacity: 0;
+    transition: opacity 0.2s;
+    animation: textAnimation 24s ease-in infinite 8s; 
 }
 
 #hero_const {
-    animation-delay: 16s;
+    opacity: 0;
+    transition: opacity 0.2s;
+
+    animation: textAnimation 24s ease-in infinite 16s;
 }
 
 .herotitle{
@@ -211,7 +217,7 @@
     }
 
     .herobtn{
-        margin-top: 0px;
+        margin-top: 24px;
     }
 }
 
@@ -254,43 +260,56 @@
     opacity: 0;
     z-index: 0;
     animation: imageAnimation 24s ease-in infinite 0s; 
+    filter: brightness(0.5); 
+
 }
 
 .slideshow li:nth-child(1) span { 
     background-image: url("https://www.estudiohelsinki.com/clientes/mariutti/img-web/Depositphotos_10853155_xl-2015.jpg"); 
     background-image: url("https://miro.medium.com/max/9856/1*gAG21NFA76ZlCbtK6SayVQ.jpeg"); 
     animation-delay: 0s; 
+    transition: opacity 0.2s;
+
 }
 .slideshow li:nth-child(2) span { 
     background-image: url("https://www.estudiohelsinki.com/clientes/mariutti/img-web/Depositphotos_142453059_xl-2015.jpg");
     animation-delay: 8s; 
+    transition: opacity 0.2s;
+
 }
 .slideshow li:nth-child(3) span { 
     background-image: url("https://www.estudiohelsinki.com/clientes/mariutti/img-web/Depositphotos_32856489_xl-2015.jpg");
     animation-delay: 16s; 
+    transition: opacity 0.2s;
+
 }
   
   
 @keyframes imageAnimation { 
     0% {
     opacity:1;
+    transform: scale(1.1);
     }
     19% {
     opacity:1;
     }
     28% {
     opacity:0;
-    transform: scale(1.1);
+    transform: scale(1.2);
     }
     80% {
     opacity:0;
-    transform: scale(1);
+    transform: scale(1.1);
     }
     90% {
     opacity:1;
+    transform: scale(1.1);
+
     }
     100% {
     opacity:1;
+    transform: scale(1.1);
+
     }
 }
 
@@ -298,13 +317,13 @@
     0% {
     opacity:1;
     }
-    19% {
+    18% {
     opacity:1;
     }
-    28% {
+    22% {
     opacity:0;
     }
-    80% {
+    85% {
     opacity:0;
     }
     90% {

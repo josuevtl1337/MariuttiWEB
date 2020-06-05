@@ -89,13 +89,18 @@ export default function SimpleModal(props) {
   }
   return (
     <div>
-      <div className="addbtn" onClick={handleOpen}>
+      {/* <div className="addbtn" onClick={handleOpen}>
         <span>
         Agregar Subrubro 
         </span>
         <i className="material-icons">
           add
         </i>
+      </div> */}
+
+      <div style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={handleOpen}>
+        <i className="material-icons" style={{marginRight: 4}} >add_circle_outline</i>
+        <p style={{margin: 0, fontFamily: 'roboto', fontSize: 14}} >Agregar Producto</p>
       </div>
 
       <Modal
@@ -103,6 +108,7 @@ export default function SimpleModal(props) {
         aria-describedby="simple-modal-description"
         open={open}
         onClose={handleClose}
+        style={{overflow: 'auto'}}
       >
         <div className="addprodform subr">
 

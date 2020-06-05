@@ -2,6 +2,9 @@ import React , { Component } from 'react';
 import SimpleLogo from '../../visuals/logoplano-small.png'
 import  "./ListaRubros.css"
 import Loading from "./Loading"
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 class ListaRubros extends Component {
 state={
@@ -57,6 +60,14 @@ state={
                   Noticias
                 </div>
               </div>
+              
+                {/* <Tabs indicatorColor="primary">
+                  <Tab label="SubRubros" onClick={()=>{handleOnClick("Sub_Rubro")}}/>
+                  <Tab label="Productos" />
+                  <Tab label="Noticias" />
+                </Tabs> */}
+
+
                   
             </div>
           </div>

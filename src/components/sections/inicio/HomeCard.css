@@ -103,6 +103,13 @@
     }
 }
 
+@media only screen and (max-height: 700px) {
+    .cardscelu-container{
+        margin-top: 64px;
+    }
+}
+
+
 @keyframes hover {
     0% {transform: translateY(0px)}
     50% {transform: translateY(-8px)}

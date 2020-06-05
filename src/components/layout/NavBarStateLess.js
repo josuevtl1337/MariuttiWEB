@@ -30,6 +30,7 @@ const NavBarStateLess = (props) => {
     const [scroll, setScroll] = React.useState(false);
     const [dropdown, setDropdown] = React.useState("");
     const [search, setSearch] = React.useState(false);
+    const [drop, setDrop] = React.useState(false);
     const maquinas = [];
     const construccion = [];
     const ferreteria = [];
@@ -79,6 +80,8 @@ const NavBarStateLess = (props) => {
     let tabwrapclasses
     let searchiconclasses
     let searchwrapclasses
+    let dropclasses
+    let dropbtnclasses
 
     if (search == true) {
         tabwrapclasses = "tabs-wrapper hide";
@@ -88,7 +91,22 @@ const NavBarStateLess = (props) => {
         tabwrapclasses = "tabs-wrapper";
         searchiconclasses = "searchicon";
         searchwrapclasses = "searchwrap hide"
+    }
 
+    if (drop == false) {
+        dropclasses = "proddrop"
+        dropbtnclasses = "prodtab dropbtn"
+    } else {
+        dropclasses = "proddrop dropped"
+        dropbtnclasses = "prodtab dropbtn active"
+    }
+
+    const dropTrigger = () => {
+        if (drop == false){
+            setDrop(true);
+        } else {
+            setDrop(false)
+        }
     }
   
     // Build an array of items
@@ -138,12 +156,13 @@ const NavBarStateLess = (props) => {
                                 <Tab isActive={window.location.href.includes('nosotros')} titulo="Quiénes Somos"/>
                             </Link>
                             <div className="prodtab">
-                                <Link to="/productos">
-                                    <Tab isActive={window.location.href.includes('producto') || window.location.href.includes('Producto')} titulo="Productos"/>
-                                </Link>
+                                <Tab isActive={window.location.href.includes('producto') || window.location.href.includes('Producto')} titulo="Productos" click={dropTrigger}/>
+                                {/* <div className={dropbtnclasses} onClick={dropTrigger}>
+                                    <i className="material-icons arrow">arrow_drop_down</i>
+                                </div> */}
 
                                 {/* Dropdown Productos */} 
-                                <div className="proddrop">
+                                <div className={dropclasses}>
                                     <ul className="drop-categorias-list">
                                         <p className="drop-rubro">Máquinas y Herramientas</p>
                                         {array}
@@ -163,7 +182,7 @@ const NavBarStateLess = (props) => {
                             </Link>
                         </div>
                         {/* SearchBar */}
-                        <form   className=""
+                        {/* <form   className=""
                                 name="Form"
                                 onSubmit={handleOnSubmitDragon}>
                         <div className={searchwrapclasses}>
@@ -174,7 +193,7 @@ const NavBarStateLess = (props) => {
                             <CloseIcon className="closeicon" style={{color: '#636363', fontSize: 20}} onClick={closeDragon}/>
                         </div>
                         </form>                            
-                        <SearchIcon className={searchiconclasses} style={{color: '#636363', fontSize: 20}} onClick={showSearchbar}/>
+                        <SearchIcon className={searchiconclasses} style={{color: '#636363', fontSize: 20}} onClick={showSearchbar}/> */}
                         
                     </Hidden>
 

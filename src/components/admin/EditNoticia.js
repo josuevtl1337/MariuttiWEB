@@ -98,6 +98,8 @@ export default function SimpleModal(props) {
           aria-describedby="simple-modal-description"
           open={open}
           onClose={handleClose}
+          style={{overflow: 'auto'}}
+
         >
           <div className="addprodform">   
           <FormControl className={classesSelect.formControl}>           

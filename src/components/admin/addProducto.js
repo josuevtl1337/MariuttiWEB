@@ -11,6 +11,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FilledInput from '@material-ui/core/FilledInput';
@@ -38,7 +39,8 @@ const useStylesSelect = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
     width: '85%',
-    height: 550,
+    // height: 600,
+    height: 'max-content',
     display:'flex',
     flexDirection:'column',
     justifyContent:'space-around'
@@ -50,6 +52,20 @@ const useStylesSelect = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: '#FDB913'
     }
+  },
+  flexHorizontal: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: 'max-content'
+  },
+  dosInput: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   }
 }));
 
@@ -102,11 +118,12 @@ export default function SimpleModal(props) {
     setEnlace(e.target.value);
   }
   const handleFile = e =>{
-    setNameFile(e.target.files[0].name+" ✓");
+    setNameFile(<h4>{e.target.files[0].name} <span style={{color: 'green'}}>✓</span></h4>);
     setFile(e.target.files[0]);
   }
   const handlePdf = e =>{
-    setNamePdf(e.target.files[0].name+" ✓");
+    // setNamePdf(e.target.files[0].name + );
+    setNamePdf(<h4>{e.target.files[0].name} <span style={{color: 'green'}}>✓</span></h4>);
     setPdf(e.target.files[0]);
   }
   const onClickOfertaHandler = e => {
@@ -137,15 +154,13 @@ export default function SimpleModal(props) {
   );
 
   return (
-    <React.Fragment>
-      <div className="addbtn" onClick={handleOpen}>
-        <span>
-        Agregar Producto 
-        </span>
-        <i className="material-icons">
-          add
-        </i>
+    <div>
+      
+      <div style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={handleOpen}>
+        <i className="material-icons" style={{marginRight: 4}} >add_circle_outline</i>
+        <p style={{margin: 0, fontFamily: 'roboto', fontSize: 14}} >Agregar Producto</p>
       </div>
+
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
@@ -166,29 +181,59 @@ export default function SimpleModal(props) {
               value={subRubro}
               name={subNombre}
               onChange={handleChangeSub}
+              label="Subrubro"
             >           
               {retornando}    
-            </Select>                                   
+            </Select>
+            <div className={classesSelect.dosInput}>
+
             {/* Nombre Producto */}
-            <TextField id="standard-basic" label="Nombre Producto" onChange={onChangeNombre}/>
+              <TextField id="nombre" label="Nombre Producto" onChange={onChangeNombre} style={{width: '48%'}}/>
 
-            {/* Precio */}
-            {/* <InputLabel id="aa" htmlFor="standard-adornment-amount">Precio</InputLabel> */}
-            <Input
-              id="standard-adornment-amount"
-              value={precio}
-              onChange={onChangeEnlace}
-              startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            />   
+            {/* Código Producto, falta onChange */}
+              <TextField id="cod" label="Código" style={{width: '48%'}}/>
 
-            {/* Precio Antiguo */}
-            {/* <InputLabel  id="bb" htmlFor="standard-adornment-amount">Precio Anterior</InputLabel>
-            <Input
-              id="standard-adornment-amount2"
-              value={precioAntiguo}
-              onChange={onChangeNombre}
-              startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            />  */}
+            </div>
+
+
+            {/* Los dos Precios */}
+            <div className={classesSelect.dosInput}>
+
+              {/* Precio actual */}
+              <Grid container spacing={1} alignItems="flex-end">
+                <Grid item style={{padding: 8}}>
+                  <p style={{margin: 0, color: 'green'}}>$</p>
+                </Grid>
+                <Grid item>
+                  <TextField
+                    startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                    id="input-with-icon-grid" 
+                    label="Precio Actual" 
+                    value={precio}
+                    onChange={onChangeEnlace}
+                    style={{width: '100%'}}
+                    />
+                </Grid>
+              </Grid>
+
+              {/* precio viejo */}
+              <Grid container spacing={1} alignItems="flex-end">
+                <Grid item style={{padding: 8}}>
+                  <p style={{margin: 0, color: 'red'}}>$</p>
+                </Grid>
+                <Grid item>
+                  <TextField
+                    id="input-with-icon-grid" 
+                    label="Precio Antiguo" 
+                    value={precioAntiguo}
+                    onChange={onChangeNombre}
+                    style={{width: '100%'}}
+                    />
+                </Grid>
+              </Grid>
+
+             
+            </div>
 
             {/* Subtitulo */}
             <TextField id="standard-basic" label="Subtitulo" onChange={onChangeSubtitulo}/>
@@ -204,23 +249,39 @@ export default function SimpleModal(props) {
               onClick={onClickOfertaHandler}
             />
                 {/* {Imagen} */}
-                <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={handleFile} />
-                <label  htmlFor="icon-button-file">
-                  <IconButton  color="primary" aria-label="upload picture" component="span">
-                    <PhotoCamera />
-                  </IconButton>
-                  <h4>{nameFile}</h4>
-                </label>
+                <div className={classesSelect.flexHorizontal}>
+
+                  <div>
+                    <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={handleFile} />
+                      <label  htmlFor="icon-button-file">
+                      <IconButton  color="primary" aria-label="upload picture" component="span">
+                        <PhotoCamera />
+                      </IconButton>
+                    </label>
+                  </div>
+
+                  {nameFile}
+
+                </div>
   
                 {/* PDF */}
-                <input className={classes.input} id="icon-button-pdf" type="file" accept="application/pdf" onChange={handlePdf} />
-                <label  htmlFor="icon-button-pdf">
-                  <IconButton  color="primary" aria-label="upload picture" component="span">
-                    <PictureAsPdfIcon />
-                  </IconButton>
-                  <h4>{namePdf}</h4>
-                </label>
-  
+                <div className={classesSelect.flexHorizontal}>
+
+                  <div>
+
+                    <input className={classes.input} id="icon-button-pdf" type="file" accept="application/pdf" onChange={handlePdf} />
+                    <label  htmlFor="icon-button-pdf">
+                      <IconButton  color="primary" aria-label="upload picture" component="span">
+                        <PictureAsPdfIcon />
+                      </IconButton>
+                    </label>
+
+                  </div>
+
+                  {namePdf}
+
+                </div>
+                
             {/* Boton de enviar */}
             <Button variant="contained" className={classesSelect.color} onClick={handleOnClick} style={{marginTop: 24}}>
               Enviar
@@ -228,6 +289,6 @@ export default function SimpleModal(props) {
           </FormControl>
         </div>
       </Modal>
-    </React.Fragment>
+    </div>
     );
 }

@@ -13,11 +13,11 @@ class Tab extends React.Component {
     render(){
         if (this.props.isActive === true) {
             return(
-                <div className="tab active">{this.props.titulo}</div>
+                <div className="tab active" onClick={this.props.click}>{this.props.titulo}</div>
             )
         } else {
             return(
-                <div className="tab">{this.props.titulo}</div>
+                <div className="tab" onClick={this.props.click}>{this.props.titulo}</div>
             )
         }
     }

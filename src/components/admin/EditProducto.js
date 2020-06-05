@@ -12,7 +12,9 @@ import Grid from '@material-ui/core/Grid';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
+import InputAdornment from '@material-ui/core/InputAdornment';
 //Iconos
+import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
@@ -52,6 +54,20 @@ const useStylesSelect = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: '#87DF87'
     }
+  },
+  flexHorizontal: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: 'max-content'
+  },
+  dosInput: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   }
 }));
 
@@ -181,9 +197,50 @@ export default function SimpleModal(props) {
                     }}
                   >
                   {retornando2}
-                  </NativeSelect>                          
+                  </NativeSelect>        
+              
+            <div className={classesSelect.dosInput}>
                 {/* Nombre Producto */}
                 <TextField id="standard-basic" label="Nombre Producto" defaultValue={props.datosProductos.data.nombre} onChange={onChangeNombre}/>
+                {/* Código Producto, falta defaultValue */}
+                <TextField id="cod" label="Código" style={{width: '48%'}}/>
+
+            </div>
+
+            {/* Los dos Precios */}
+            <div className={classesSelect.dosInput}>
+              {/* Precio actual  FALTA valor y valor por defecto*/}
+              <Grid container spacing={1} alignItems="flex-end">
+                <Grid item style={{padding: 8}}>
+                  <p style={{margin: 0, color: 'green'}}>$</p>
+                </Grid>
+                <Grid item>
+                  <TextField
+                    startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                    id="input-with-icon-grid" 
+                    label="Precio Actual" 
+                    onChange={onChangeEnlace}
+                    style={{width: '100%'}}
+                    />
+                </Grid>
+              </Grid>
+
+              {/* precio viejo FALTA valor y valor default*/}
+              <Grid container spacing={1} alignItems="flex-end">
+                <Grid item style={{padding: 8}}>
+                  <p style={{margin: 0, color: 'red'}}>$</p>
+                </Grid>
+                <Grid item>
+                  <TextField
+                    id="input-with-icon-grid" 
+                    label="Precio Antiguo"
+                    onChange={onChangeNombre}
+                    style={{width: '100%'}}
+                    />
+                </Grid>
+              </Grid>
+            </div>
+
                 {/* Subtitulo */}
                 <TextField id="standard-basic" label="Subtitulo" defaultValue={props.datosProductos.data.subtitulo} onChange={onChangeSubtitulo}/>
                 {/* Descripcion */}
@@ -197,6 +254,44 @@ export default function SimpleModal(props) {
                   labelPlacement="end"
                   onClick={onClickOfertaHandler}
                 />
+
+                {/* {Imagen} */}
+                <div className={classesSelect.flexHorizontal}>
+
+                  <div>
+                    <input accept="image/*" className={classes.input} id="icon-button-file" type="file" 
+                    // onChange={handleFile} 
+                    />
+                      <label  htmlFor="icon-button-file">
+                      <IconButton  color="primary" aria-label="upload picture" component="span">
+                        <PhotoCamera />
+                      </IconButton>
+                    </label>
+                  </div>
+
+                  {/* {nameFile} */}
+
+                </div>
+  
+                {/* PDF */}
+                <div className={classesSelect.flexHorizontal}>
+
+                  <div>
+
+                    <input className={classes.input} id="icon-button-pdf" type="file" accept="application/pdf" 
+                    // onChange={handlePdf} 
+                    />
+                    <label  htmlFor="icon-button-pdf">
+                      <IconButton  color="primary" aria-label="upload picture" component="span">
+                        <PictureAsPdfIcon />
+                      </IconButton>
+                    </label>
+
+                  </div>
+
+                  {/* {namePdf} */}
+
+                </div>
 
                 {/* {Imagen} */}
                 {/* <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={handleFile} />
