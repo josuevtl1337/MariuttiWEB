@@ -92,6 +92,7 @@ const ProductoComponent = (props) =>{
 
     var productosArray = [];
     const [url, setUrl] = React.useState('');
+    const [pdf, setPdf] = React.useState('');
     const [enlace, setEnlace] = React.useState("https://storage.googleapis.com/support-forums-api/attachment/thread-6219249-11716624739372349952.png");
     const classes = useStyles();
     //Hago la referencia para traer mis objetos Rubros, y Sub_Rubros
@@ -101,7 +102,7 @@ const ProductoComponent = (props) =>{
     useEffect(() => {
         window.scrollTo(0, 0)
       }, [])
-    const productos = useSelector(state => state.firebase.data.Producto)
+    const productos = useSelector(state => state.firebase.data.Producto);
     // Show message while Rubros y Sub_Rubros are loading
     if (!isLoaded(productos)) {
         return <div>Cargando...</div>
@@ -128,6 +129,9 @@ const ProductoComponent = (props) =>{
             )
         }
     }
+    const handlePdf = () =>{
+        window.open(pdf);
+    }
 
     return (
         <div className="containerprod">
@@ -149,12 +153,12 @@ const ProductoComponent = (props) =>{
                     </Grid>
                     <Grid item xs={12} md={9}>
                         <div className="singleprod-wrap" style={{zIndex: 100}}>
-                            <h4>Rubro / Subrubro / Producto</h4>
+                            <h4>Rubro / Subrubro /</h4>
                             <Divider style={{marginBottom: 28}}/>
                             {productosArray.map((item, i) => {  
                                 let fecha = new Date(item.createdAt);                               
                                 if(search == item.id){
-                                    let imagen = item.img;
+                                    let imagen = item.img;              
                                     if (imagen) {
                                         var pathImagen = firebase
                                         .storage()
@@ -166,7 +170,20 @@ const ProductoComponent = (props) =>{
                                         .catch(error => {
                                             console.log(error.message);
                                         });
-                                    }
+                                        let pdf1 = item.pdf;   
+                                        if (pdf1) {
+                                            var pathImagen = firebase
+                                            .storage()
+                                            .ref(pdf1)
+                                            .getDownloadURL()
+                                            .then(urlparam => {
+                                                setPdf(urlparam);                                              
+                                            })
+                                            .catch(error => {
+                                                console.log(error.message);
+                                            });
+                                        }
+                                    }               
                                     return (  
                                         <React.Fragment>
                                             <div className="product-block">
@@ -177,14 +194,16 @@ const ProductoComponent = (props) =>{
                                                     </div>
                                                     <div className="right">
                                                         <h3 className="singleprod-title">{item.nombre}</h3>
+                                                        <h4 className="compartir">{item.codigo}</h4>
                                                         <div className="divline right" style={{marginLeft: 0, marginRight: 0, width: '100%'}}></div>
-                                                        <h4 className="precio">$3.500,00</h4>
+                                                        <h4 className="precio">${item.precio}</h4>
+                                                        <h4 className="precio_anterior">${item.precioAntiguo}</h4>
                                                         <div className="buttonscontainer">
                                                             <button className="aboutbtn prodstock">
                                                                 Consultar Stock
                                                             </button>
                                                             <Tooltip arrow title="Descargar Ficha Técnica" placement="right">
-                                                                <button className="aboutbtn fichatecnica">
+                                                                <button onClick={handlePdf} className="aboutbtn fichatecnica">
                                                                     <i className="material-icons ficha">play_for_work</i>
                                                                 </button>
                                                             </Tooltip>
@@ -220,7 +239,7 @@ const ProductoComponent = (props) =>{
                                             
                                         </React.Fragment>    
                                                                                                                         
-                                            );
+                                        );
                                 }                               
                             })}     
                         </div> 

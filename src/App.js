@@ -60,23 +60,26 @@ class App extends Component {
   buscandoResultado = (param) =>{
     this.setState({busqueda:param})
   }
-  dropdownResultado = (param, param2, param3, param4) =>{
+  dropdownResultado = (param, param2, param3) =>{
     this.setState({
       dropdown:param, 
-      dropdownName:param3+param2,
-      trigger:param4
+      dropdownName:param3+param2
     })
   }
   cleanUpDropdown = () =>{
       this.setState({dropdown:''})
   }
   categoriaActualHandler =(param,param2)=>{
-    //Esta funcion es para comunicar el productos.js y el productocomponent.js
+    //Esta funcion es para comunicar el productos.js y productocomponent.js
     this.setState({categoriaActual:param, categoriaActualNombre:param2})
   }
   categoriaActualCleanUp = () =>{
     this.setState({categoriaActual:'',categoriaActualNombre:''})
   }
+  // categoriaActualHandler =(param,param2)=>{
+  //   //Esta funcion es para comunicar el productocomponent.js y producto.js haciendo lo mismo que la funcion anterior pero visceversa
+  //   this.setState({categoriaActual:param, categoriaActualNombre:param2})
+  // }
 
 
   render(){
@@ -154,7 +157,7 @@ class App extends Component {
         />
         <Route
             path='/productos'
-            render={(props) => <Productos {...props} categoriaSet={this.state.categoriaActual} categoriaNombre={this.state.categoriaActualNombre} categoriaActualCleanUp={this.categoriaActualCleanUp} dropdownResult={this.state.dropdown} dropdownResultName={this.state.dropdownName} trigger={this.state.trigger} cleanUp={this.cleanUpDropdown}/>}
+            render={(props) => <Productos {...props} categoriaSet={this.state.categoriaActual} categoriaNombre={this.state.categoriaActualNombre} categoriaActualCleanUp={this.categoriaActualCleanUp} dropdownResult={this.state.dropdown} dropdownResultName={this.state.dropdownName} cleanUp={this.cleanUpDropdown}/>}
         />
         <Route
             path='/busqueda'

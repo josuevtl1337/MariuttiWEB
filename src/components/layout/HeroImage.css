@@ -265,20 +265,23 @@
 }
 
 .slideshow li:nth-child(1) span { 
-    background-image: url("https://www.estudiohelsinki.com/clientes/mariutti/img-web/Depositphotos_10853155_xl-2015.jpg"); 
-    background-image: url("https://miro.medium.com/max/9856/1*gAG21NFA76ZlCbtK6SayVQ.jpeg"); 
+    /* background-image: url("https://www.estudiohelsinki.com/clientes/mariutti/img-web/Depositphotos_10853155_xl-2015.jpg");  */
+    /* background-image: url("https://miro.medium.com/max/9856/1*gAG21NFA76ZlCbtK6SayVQ.jpeg");  */
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/mariuttiweb.appspot.com/o/Layout%2FAlServicio.jpeg?alt=media&token=8f07c0a7-9c6b-4115-b9ee-0245dcd925c7");
     animation-delay: 0s; 
     transition: opacity 0.2s;
 
 }
 .slideshow li:nth-child(2) span { 
-    background-image: url("https://www.estudiohelsinki.com/clientes/mariutti/img-web/Depositphotos_142453059_xl-2015.jpg");
+    /* background-image: url("https://www.estudiohelsinki.com/clientes/mariutti/img-web/Depositphotos_142453059_xl-2015.jpg"); */
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/mariuttiweb.appspot.com/o/Layout%2FProyectos-min.jpg?alt=media&token=932cac9e-2fad-4dd3-b52f-ea8651d18078");
     animation-delay: 8s; 
     transition: opacity 0.2s;
 
 }
 .slideshow li:nth-child(3) span { 
-    background-image: url("https://www.estudiohelsinki.com/clientes/mariutti/img-web/Depositphotos_32856489_xl-2015.jpg");
+    /* background-image: url("https://www.estudiohelsinki.com/clientes/mariutti/img-web/Depositphotos_32856489_xl-2015.jpg"); */
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/mariuttiweb.appspot.com/o/Layout%2FConstruccion-min.jpg?alt=media&token=160fe087-2a21-4e61-a9b5-f7183e768036");
     animation-delay: 16s; 
     transition: opacity 0.2s;
 

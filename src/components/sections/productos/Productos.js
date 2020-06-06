@@ -44,7 +44,12 @@ const Productos = (props) => {
         //     setCategoriaRuta("");   
         //     setCategoriaActualName(props.dropdownResultName);  
         // }
-        if(props.categoriaSet!=""){
+        if(props.dropdownResult!=""){
+            setCategoriaActual(props.dropdownResult); 
+            setCategoriaRuta("");   
+            setCategoriaActualName(props.dropdownResultName);  
+        }else 
+            if(props.categoriaSet!=""){
             console.log(props.categoriaSet);
             setCategoriaActual(props.categoriaSet);
             setCategoriaActualName(props.categoriaNombre);
@@ -129,9 +134,9 @@ const Productos = (props) => {
         props.cleanUp();
         setCategoriaActual(e);
         setCategoriaActualName(categoriaNombre);
-        setProductTrigger(false);
-
+        // setProductTrigger(false);
     }
+
     const handleClickRubro = (e) => {
         console.log(e);
         setCategoriaRuta(e + " / ");
@@ -175,7 +180,9 @@ const Productos = (props) => {
 
         // <---LEER: Esto de abajo agrega el id de producto a la url, pero luego no funciona clickear una categoria de la izquierda.
         // e.preventDefault();
-        props.history.push("/producto?" + id);
+        var ruta = categoriaRuta+categoriaActualName
+
+        props.history.push("/producto?"+id);
     }
 
     return (

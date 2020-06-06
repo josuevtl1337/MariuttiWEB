@@ -118,20 +118,20 @@ class Admin3 extends Component {
 
   ///
   //Subiendo archivos al Storage
-  handleUploadProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,oferta,f,pdf) => async (e) => {
+  handleUploadProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,oferta,f,pdf,precio,precioAntiguo,codigo) => async (e) => {
     var timestamp = new Date().getTime()
     const file = f;
     const filePdf = pdf;
     if(file != ""){
-      await this.uploadImageAsPromise(file,nombre,subtitulo,descripcion,enlace,sub_rubro,oferta,timestamp);
+      await this.uploadImageAsPromise(file,nombre,subtitulo,descripcion,enlace,sub_rubro,oferta,timestamp,precio,precioAntiguo,codigo);
     }
     if(filePdf != ""){
-      await this.uploadImageAsPromise(filePdf,nombre,subtitulo,descripcion,enlace,sub_rubro,oferta,timestamp);
+      await this.uploadImageAsPromise(filePdf,nombre,subtitulo,descripcion,enlace,sub_rubro,oferta,timestamp,precio,precioAntiguo,codigo);
     }
   }
 
   //Handle waiting to upload each file using promise
-  uploadImageAsPromise = (imageFile,nombre,subtitulo,descripcion,enlace,sub_rubro,oferta,timestamp) => {
+  uploadImageAsPromise = (imageFile,nombre,subtitulo,descripcion,enlace,sub_rubro,oferta,timestamp,precio,precioAntiguo,codigo) => {
     // return new Promise (function  (resolve, reject) {
         const storageRef = firebase.storage().ref(`imagenes/${imageFile.name+timestamp}`);
         var task = storageRef.put(imageFile);
@@ -159,6 +159,9 @@ class Admin3 extends Component {
             const record = {
               nombre: nombre,
               subtitulo:subtitulo,
+              codigo:codigo,
+              precio:precio,
+              precioAntiguo:precioAntiguo,
               descripcion:descripcion,
               enlace:enlace,
               sub_rubro: sub_rubro,
@@ -292,7 +295,7 @@ class Admin3 extends Component {
     );
   }  
   //EDITANDO PRODUCTOS
-  handleEditProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,off,f,id) =>{
+  handleEditProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,off,f,id,precio,precioAntiguo,codigo) =>{
         if(id!=undefined){
           const db = firebase.database();
           const dbRef = db.ref("Producto");
@@ -300,6 +303,9 @@ class Admin3 extends Component {
           productoRef.update({
             "nombre": nombre,
             "subtitulo":subtitulo,
+            "codigo":codigo,
+            "precio":precio,
+            "precioAntiguo":precioAntiguo,
             "descripcion":descripcion,
             "enlace":enlace,
             "off":off,
