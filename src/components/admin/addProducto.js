@@ -65,7 +65,8 @@ const useStylesSelect = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 12
   }
 }));
 
@@ -187,10 +188,10 @@ export default function SimpleModal(props) {
             </Select>
             <div className={classesSelect.dosInput}>
 
-            {/* Nombre Producto */}
+              {/* Nombre Producto */}
               <TextField id="nombre" label="Nombre Producto" onChange={onChangeNombre} style={{width: '48%'}}/>
 
-            {/* Código Producto, falta onChange */}
+              {/* Código Producto, falta onChange */}
               <TextField id="cod" label="Código" style={{width: '48%'}}/>
 
             </div>
@@ -236,11 +237,11 @@ export default function SimpleModal(props) {
             </div>
 
             {/* Subtitulo */}
-            <TextField id="standard-basic" label="Subtitulo" onChange={onChangeSubtitulo}/>
+            <TextField id="standard-basic" label="Subtitulo" onChange={onChangeSubtitulo} style={{marginTop: 12}}/>
             {/* Descripcion */}
-            <TextField id="standard-basic" label="Descripción" multiline rows="10" onChange={onChangeDescripcion}/>
+            <TextField id="standard-basic" label="Descripción" multiline rows="10" onChange={onChangeDescripcion} style={{marginTop: 12}}/>
             {/* Enlace */}
-            <TextField id="standard-basic" label="Enlace Youtbe" onChange={onChangeEnlace}/>
+            <TextField id="standard-basic" label="Enlace Youtbe" onChange={onChangeEnlace} style={{marginTop: 12, marginBottom: 12}}/>
             <FormControlLabel
               checked={oferta}
               control={<Switch color="primary" />}
@@ -249,7 +250,7 @@ export default function SimpleModal(props) {
               onClick={onClickOfertaHandler}
             />
                 {/* {Imagen} */}
-                <div className={classesSelect.flexHorizontal}>
+                <div className={classesSelect.flexHorizontal} style={{marginTop: 8}}>
 
                   <div>
                     <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={handleFile} />

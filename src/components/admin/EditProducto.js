@@ -42,7 +42,6 @@ const useStylesSelect = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
     width: '85%',
-    height: 550,
     display:'flex',
     flexDirection:'column',
     justifyContent:'space-around'
@@ -67,7 +66,8 @@ const useStylesSelect = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 12
   }
 }));
 
@@ -185,7 +185,6 @@ export default function SimpleModal(props) {
 
                 {/* Sub-Rubro */}
                 <FormControl className={classesSelect.formControl}>
-                  <InputLabel htmlFor="uncontrolled-native">Sub Rubros</InputLabel>
                   <NativeSelect
                     id="sub_rubro"
                     value={subRubro}
@@ -242,21 +241,22 @@ export default function SimpleModal(props) {
             </div>
 
                 {/* Subtitulo */}
-                <TextField id="standard-basic" label="Subtitulo" defaultValue={props.datosProductos.data.subtitulo} onChange={onChangeSubtitulo}/>
+                <TextField id="standard-basic" label="Subtitulo" defaultValue={props.datosProductos.data.subtitulo} onChange={onChangeSubtitulo} style={{marginTop: 12}}/>
                 {/* Descripcion */}
-                <TextField id="standard-basic" label="Descripción" multiline rows="8" defaultValue={props.datosProductos.data.descripcion} onChange={onChangeDescripcion}/>
+                <TextField id="standard-basic" label="Descripción" multiline rows="8" defaultValue={props.datosProductos.data.descripcion} onChange={onChangeDescripcion} style={{marginTop: 12}}/>
                 {/* Enlace */}
-                <TextField id="standard-basic" label="Enlace Youtbe" defaultValue={props.datosProductos.data.enlace} onChange={onChangeEnlace}/>
+                <TextField id="standard-basic" label="Enlace Youtbe" defaultValue={props.datosProductos.data.enlace} onChange={onChangeEnlace} style={{marginTop: 12}}/>
                 <FormControlLabel
                   checked={off}
                   control={<Switch color="primary" />}
                   label="Oferta"
                   labelPlacement="end"
                   onClick={onClickOfertaHandler}
+                  style={{marginTop: 12}}
                 />
 
                 {/* {Imagen} */}
-                <div className={classesSelect.flexHorizontal}>
+                <div className={classesSelect.flexHorizontal} style={{marginTop: 12}}>
 
                   <div>
                     <input accept="image/*" className={classes.input} id="icon-button-file" type="file" 
