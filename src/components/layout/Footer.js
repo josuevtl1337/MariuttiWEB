@@ -19,6 +19,9 @@ const Footer = () => {
                             <a href="tel:+54 342 453-5318" className="red">
                                 <img className="redimg footicon" src="https://image.flaticon.com/icons/svg/455/455705.svg" alt="" srcset=""/>
                             </a>
+                            <a href="https://www.instagram.com/ferreteria_mariutti/" className="red">
+                                <img className="redimg footicon" src="https://image.flaticon.com/icons/svg/2111/2111491.svg" alt="" srcset=""/>
+                            </a>
                         </div>
 
                         <h5 className="footertext">info@mariutti.com.ar <br/>

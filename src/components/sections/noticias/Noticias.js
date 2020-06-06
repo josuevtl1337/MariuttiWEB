@@ -3,7 +3,7 @@ import Container from '@material-ui/core/Container';
 import './Noticias.css'
 import EntradaCard from './EntradaCard'
 import EntradaMini from '../inicio/EntradaMini'
-import EntradaCelu from '../inicio/EntradaCelu'
+import EntradaLista from './EntradaLista'
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 
@@ -58,19 +58,19 @@ const Noticias = (props) => {
                     })}                 
                 </div>
 
-                <div className="noticias-celu">
-                    <h4 className="contactitle news">Noticias Anteriores</h4>
+                <div className="noticias-celu" style={{background: '#f4f4f4'}}>
+                    <h4 className="contactitle news" style={{color: '#424242'}}>Noticias Anteriores</h4>
 
                     {restonoticias.map((item, i) => {                             
                         return (
-                            <EntradaCelu 
+                            <EntradaLista
                                 handlerOnClickNoticia={()=>{handlerOnClickNoticia(item.id)}}                                       
                                 img={item.img}
                                 title={item.nombre}
                                 date={item.createdAt}
                                 text={item.descripcion}
                                 key={i}
-                            />                                                                  
+                            />                                                   
                         );                                                       
                     })} 
                 </div>

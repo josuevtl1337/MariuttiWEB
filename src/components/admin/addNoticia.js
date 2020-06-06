@@ -113,7 +113,7 @@ export default function SimpleModal(props) {
                 <h4>{nameFile}</h4>
                 </label>
                 {/* Boton de enviar */}
-                <Button variant="contained" className={classesSelect.color} onClick={handleOnClick}>
+                <Button variant="contained" className={classesSelect.color} onClick={handleOnClick} style={{marginTop: 12}}>
                   Enviar
                 </Button>
                 </FormControl>
