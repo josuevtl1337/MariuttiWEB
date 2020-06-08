@@ -226,7 +226,7 @@ const NavBarStateLess = (props) => {
                             <p style={{color: 'black', fontSize: 10}}>+54 342 453-5318</p>
                         </div>
                         <div className="phonebtns">
-                            <SearchTrigger click={props.searchClickHandler}/>
+                            {/* <SearchTrigger click={props.searchClickHandler}/> */}
                             {/* <SearchIcon className={searchiconclasses} style={{color: '#636363', fontSize: 20}} onClick={showSearchbar}/> */}
                             <SidenavTrigger click={props.sidenavClickHandler}/>
                             
