@@ -351,7 +351,9 @@ a{
   justify-self: end;
   display: flex;
   align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
+  justify-content: flex-end;
   width: 70px;
 }
 
