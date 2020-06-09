@@ -74,8 +74,8 @@ const NavBarStateLess = (props) => {
         props.history.push("/productos");
         // setDropdown(param);
         //este trigger es para cambiar entre productocard y el catalogo
-        let trigger = false;
-        props.dropdown(param,param2,param3,trigger);
+        // let trigger = false;
+        props.dropdown(param,param2,param3);
         console.log(param3)
     };
     let tabwrapclasses
@@ -103,10 +103,12 @@ const NavBarStateLess = (props) => {
     }
 
     const dropTrigger = () => {
-        if (drop == false){
-            setDrop(true);
-        } else {
-            setDrop(false)
+        if(!window.location.href.includes('producto')){
+            if (drop == false){
+                setDrop(true);
+            } else {
+                setDrop(false)
+            }
         }
     }
   

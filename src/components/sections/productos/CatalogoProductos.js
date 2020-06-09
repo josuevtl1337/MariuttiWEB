@@ -67,7 +67,7 @@ return(
     {            
         //Productos destacados                           
         onlyProductos.map((item, i) =>{
-            if(props.categoriaActual == ""){
+            if(props.categoriaActual == "" && props.busquedaResult==""){
                 return(                                 
                     <div onClick={()=>handlerOnClickProducto(item.id,item.nombre,item.descripcion,item.img,item.subtitulo,item.enlace)}>
                     <ProductosCard                                      
@@ -79,6 +79,22 @@ return(
                 </div>    
                 )
             }                                     
+        })
+    }
+    {   //Productos Busqueda                          
+        re.map((item, i) =>{
+            if(props.busquedaResult!= "" && item.nombre.toUpperCase().includes(props.busquedaResult.toUpperCase())){
+                return(                                 
+                    <div onClick={()=>handlerOnClickProducto(item.id,item.nombre,item.descripcion,item.img,item.subtitulo,item.enlace)}>
+                    <ProductosCard                                      
+                        img={item.img}
+                        titulo={item.nombre}
+                        subtitulo={item.descripcion}
+                        key={i}
+                    />   
+                </div>    
+                )
+            }
         })
     }
     </div>

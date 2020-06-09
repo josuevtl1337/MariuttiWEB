@@ -86,6 +86,9 @@ export default function SimpleModal(props) {
   const [subRubro , setSub] = React.useState('');
   const [subNombre , setSubNombre] = React.useState('');
   const [nombre , setNombre] = React.useState('');
+  const [codigo , setCodigo] = React.useState('');
+  const [precio , setPrecio] = React.useState('');
+  const [precioAntiguo , setPrecioAntiguo] = React.useState('');
   const [subtitulo , setSubtitulo] = React.useState('');
   const [descripcion , setDescripcion] = React.useState('');
   const [enlace , setEnlace] = React.useState('');
@@ -94,8 +97,7 @@ export default function SimpleModal(props) {
   const [pdf , setPdf] = React.useState('');
   const [namePdf , setNamePdf] = React.useState('');
   const [oferta , setOferta] = React.useState(false);
-  const [precio , setPrecio] = React.useState('');
-  const [precioAntiguo , setPrecioAntiguo] = React.useState('');
+
 
   const handleChangeSub = event => {
     // setSubNombre(event.target.name);
@@ -108,6 +110,15 @@ export default function SimpleModal(props) {
   }
   const onChangeNombre = e => {
     setNombre(e.target.value);
+  }
+  const onChangePrecio = e => {
+    setPrecio(e.target.value);
+  }
+  const onChangePrecioAntiguo = e => {
+    setPrecioAntiguo(e.target.value);
+  }
+  const onChangeCodigo = e => {
+    setCodigo(e.target.value);
   }
   const onChangeSubtitulo = e => {
     setSubtitulo(e.target.value);
@@ -142,9 +153,9 @@ export default function SimpleModal(props) {
     // console.log("Enlace:",enlace);
     // console.log("Imagen:",file);
     // // console.log(subRubro);
-    props.handleUploadProducto(nombre,subtitulo,descripcion,enlace,subRubro,oferta,file,pdf)(e);
+    props.handleUploadProducto(nombre,subtitulo,descripcion,enlace,subRubro,oferta,file,pdf,precio,precioAntiguo,codigo)(e);
     // console.log(oferta)
-    console.log(nombre,subtitulo,descripcion,enlace,subRubro,file,oferta);
+    console.log();
     setOpen(false);
   }
 
@@ -191,15 +202,14 @@ export default function SimpleModal(props) {
               {/* Nombre Producto */}
               <TextField id="nombre" label="Nombre Producto" onChange={onChangeNombre} style={{width: '48%'}}/>
 
-              {/* Código Producto, falta onChange */}
-              <TextField id="cod" label="Código" style={{width: '48%'}}/>
+            {/* Código Producto, falta onChange */}
+              <TextField id="cod" label="Código" onChange={onChangeCodigo} style={{width: '48%'}}/>
 
             </div>
 
 
             {/* Los dos Precios */}
             <div className={classesSelect.dosInput}>
-
               {/* Precio actual */}
               <Grid container spacing={1} alignItems="flex-end">
                 <Grid item style={{padding: 8}}>
@@ -211,7 +221,7 @@ export default function SimpleModal(props) {
                     id="input-with-icon-grid" 
                     label="Precio Actual" 
                     value={precio}
-                    onChange={onChangeEnlace}
+                    onChange={onChangePrecio}
                     style={{width: '100%'}}
                     />
                 </Grid>
@@ -227,7 +237,7 @@ export default function SimpleModal(props) {
                     id="input-with-icon-grid" 
                     label="Precio Antiguo" 
                     value={precioAntiguo}
-                    onChange={onChangeNombre}
+                    onChange={onChangePrecioAntiguo}
                     style={{width: '100%'}}
                     />
                 </Grid>

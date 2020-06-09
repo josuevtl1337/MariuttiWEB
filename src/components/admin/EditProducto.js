@@ -93,6 +93,9 @@ export default function SimpleModal(props) {
   const classesSelect = useStylesSelect();
   const [subRubro, setSub] = React.useState('');
   const [nombre, setNombre] = React.useState('');
+  const [codigo , setCodigo] = React.useState('');
+  const [precio , setPrecio] = React.useState('');
+  const [precioAntiguo , setPrecioAntiguo] = React.useState('');
   const [subtitulo, setSubtitulo] = React.useState('');
   const [descripcion, setDescripcion] = React.useState('');
   const [enlace, setEnlace] = React.useState('');
@@ -106,6 +109,15 @@ export default function SimpleModal(props) {
 
   const onChangeNombre = e => {
     setNombre(e.target.value);
+  }
+  const onChangePrecio = e => {
+    setPrecio(e.target.value);
+  }
+  const onChangePrecioAntiguo = e => {
+    setPrecioAntiguo(e.target.value);
+  }
+  const onChangeCodigo = e => {
+    setCodigo(e.target.value);
   }
   const onChangeSubtitulo = e => {
     setSubtitulo(e.target.value);
@@ -135,7 +147,7 @@ export default function SimpleModal(props) {
     // console.log("Imagen:",file);
     // console.log(subRubro);
     // console.log(props.datosProductos.data);
-    props.handleEditProducto(nombre,subtitulo,descripcion,enlace,subRubro,off,file,props.datosProductos.data.id);
+    props.handleEditProducto(nombre,subtitulo,descripcion,enlace,subRubro,off,file,props.datosProductos.data.id,precio,precioAntiguo,codigo);
     // recorriendoArray();
     setOpen(false);
   }
@@ -202,7 +214,7 @@ export default function SimpleModal(props) {
                 {/* Nombre Producto */}
                 <TextField id="standard-basic" label="Nombre Producto" defaultValue={props.datosProductos.data.nombre} onChange={onChangeNombre}/>
                 {/* Código Producto, falta defaultValue */}
-                <TextField id="cod" label="Código" style={{width: '48%'}}/>
+                <TextField id="cod" label="Código" defaultValue={props.datosProductos.data.codigo} onChange={onChangeCodigo} style={{width: '48%'}}/>
 
             </div>
 
@@ -216,9 +228,10 @@ export default function SimpleModal(props) {
                 <Grid item>
                   <TextField
                     startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                    defaultValue={props.datosProductos.data.precio}
                     id="input-with-icon-grid" 
                     label="Precio Actual" 
-                    onChange={onChangeEnlace}
+                    onChange={onChangePrecio}
                     style={{width: '100%'}}
                     />
                 </Grid>
@@ -233,7 +246,8 @@ export default function SimpleModal(props) {
                   <TextField
                     id="input-with-icon-grid" 
                     label="Precio Antiguo"
-                    onChange={onChangeNombre}
+                    defaultValue={props.datosProductos.data.precioAntiguo}
+                    onChange={onChangePrecioAntiguo}
                     style={{width: '100%'}}
                     />
                 </Grid>
