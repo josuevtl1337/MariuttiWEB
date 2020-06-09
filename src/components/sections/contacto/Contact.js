@@ -34,7 +34,7 @@ const Contact = (props)=>{
               <h4 className="contactitle" id="izq">¿Tenés alguna duda? Consultanos.</h4>
               <TextField required id="standard-required" label="Su Nombre" defaultValue="" />
               <TextField required id="standard-required" label="Correo Electrónico"  defaultValue="" />
-              <TextField required id="standard-required" label="Asunto" multiline rows="4" defaultValue="" />
+              <TextField required id="standard-required" label="Asunto" multiline rows="6" defaultValue={props.mensaje} />
               <button className="aboutbtn contact">Enviar</button>
             </form>
 
@@ -45,6 +45,11 @@ const Contact = (props)=>{
               <a href="https://www.facebook.com/MARIUTTIFERRETERIAINDUSTRIAL/" className="red" target="_blank">
                 <img className="redimg fb" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/768px-Facebook_Logo_%282019%29.png"/>
                 <p className="redtxt fb">Encontranos en Facebook</p>
+              </a>
+              
+              <a href="https://www.instagram.com/ferreteria_mariutti/" className="red" target="_blank">
+                <img className="redimg " src="https://image.flaticon.com/icons/svg/2111/2111463.svg"/>
+                <p className="redtxt ig">Seguinos en Instagram</p>
               </a>
 
               <a href="https://m.me/ferret.mariutti" className="red" target="_blank">

@@ -13,6 +13,9 @@ import MaterialTable, { MTableToolbar } from 'material-table'
 import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
 
+//React Helmet (títulos dinámicos)
+import Helmet from 'react-helmet';
+
 //Progess
 import CircularProgress from '@material-ui/core/CircularProgress';
 //ListaRubros
@@ -399,6 +402,9 @@ class Admin3 extends Component {
             console.log(obj);
             return(
               <div className="bg">
+                <Helmet>
+                  <title>Sub Rubros | Admin - Mariutti Hnos</title>
+                </Helmet>
                 <Grid container spacing={2}>
                 <Grid container justify="center" item xs={12}>
                   <Nav parentCallback={this.handleClick} close={this.handlerSignOut} />
@@ -516,7 +522,9 @@ class Admin3 extends Component {
             console.log(obj);
             return(
               <div className="bg">
-                
+                <Helmet>
+                  <title>Productos | Admin - Mariutti Hnos</title>
+                </Helmet>
                 <Grid container spacing={2}>  
               <Grid container justify="center" item xs={12}>
               <Nav parentCallback={this.handleClick} close={this.handlerSignOut}/>   
@@ -717,7 +725,9 @@ class Admin3 extends Component {
           }else if(this.state.display=="Noticias"){
             return(
               <div className="bg">
-                
+                <Helmet>
+                  <title>Noticias | Admin - Mariutti Hnos</title>
+                </Helmet>
                 <Grid container spacing={2}>  
               <Grid container justify="center" item xs={12}>
                 

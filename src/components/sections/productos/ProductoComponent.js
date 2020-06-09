@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link, NavLink, withRouter, Router } from "react-router-dom";
+
 import Helmet from 'react-helmet';
 
 import HomeDivider from '../inicio/HomeDivider'
@@ -52,6 +54,8 @@ const ProductoComponent = (props) =>{
     var onlyProductos = [];
     const [url, setUrl] = React.useState('');
     const [pdf, setPdf] = React.useState('');
+    const [prodnombre, setProdNombre] = React.useState('');
+    const [codproducto, setCodProducto] = React.useState('');
     const [enlace, setEnlace] = React.useState("https://storage.googleapis.com/support-forums-api/attachment/thread-6219249-11716624739372349952.png");
     const classes = useStyles();
     const productos = useSelector(state => state.firebase.data.Producto);
@@ -167,6 +171,11 @@ const ProductoComponent = (props) =>{
         window.open(pdf);
     }
 
+    const appjstr = () => {
+        props.tomarNombre(prodnombre, codproducto)
+        props.history.push('/contacto')
+    }
+
     return (
         <div className="containerprod">
 
@@ -207,6 +216,7 @@ const ProductoComponent = (props) =>{
                                         .then(url => {
                                             setUrl(url);
                                             setProdNombre(item.nombre);
+                                            setCodProducto(item.codigo);
                                         })
                                         
                                         .catch(error => {
@@ -242,7 +252,7 @@ const ProductoComponent = (props) =>{
                                                         <h4 className="precio">${item.precio}</h4>
                                                         <h4 className="precio_anterior">${item.precioAntiguo}</h4>
                                                         <div className="buttonscontainer">
-                                                            <button className="aboutbtn prodstock">
+                                                            <button className="aboutbtn prodstock" onClick={appjstr}>
                                                                 Consultar Stock
                                                             </button>
                                                             <Tooltip arrow title="Descargar Ficha Técnica" placement="right">

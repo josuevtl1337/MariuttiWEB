@@ -35,7 +35,8 @@ class App extends Component {
     trigger:"",
     categoriaActual:"",
     categoriaActualNombre:"",
-    resultadoBusquedaDesdePC:""
+    resultadoBusquedaDesdePC:"",
+    mensajeStock:""
   };
 
   sidenavTriggerClickHandler = () => {
@@ -88,6 +89,9 @@ class App extends Component {
   //   this.setState({categoriaActual:param, categoriaActualNombre:param2})
   // }
 
+  textoStock = (param, param2) => {
+    this.setState({mensajeStock:"Hola! Quiero consultar stock sobre el producto " + param + ", código " + param2});
+  }
 
   render(){
     let navbar;
@@ -153,7 +157,6 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/nosotros" component={About} />
           {/* <Route path="/producto" component={ProductoComponent} />  */}
-          <Route path="/contacto" component={Contact} />
           <Route path="/noticias" component={Noticias} />
           <Route path="/entrada" component={Entrada} />
           <Route path="/login" component={Login} />
@@ -161,7 +164,7 @@ class App extends Component {
         {/* <Route path="/productos" component={ProdComp} /> */}
         <Route
             path='/producto'
-            render={(props) => <ProductoComponent {...props} categoriaActualHandler={this.categoriaActualHandler} cleanUp={this.cleanUpDropdown} />}
+            render={(props) => <ProductoComponent {...props} categoriaActualHandler={this.categoriaActualHandler} cleanUp={this.cleanUpDropdown} tomarNombre={this.textoStock} />}
         />
         <Route
             path='/productos'
@@ -172,6 +175,11 @@ class App extends Component {
             path='/busqueda'
             render={(props) => <SearchResult {...props} busquedaResult={this.state.busqueda} />}
         />
+        <Route 
+          path="/contacto"
+          render= {(props => <Contact {...props} mensaje={this.state.mensajeStock} />)}
+        />
+
         {footer}
       </BrowserRouter>
     );
