@@ -103,10 +103,12 @@ const NavBarStateLess = (props) => {
     }
 
     const dropTrigger = () => {
-        if (drop == false){
-            setDrop(true);
-        } else {
-            setDrop(false)
+        if(!window.location.href.includes('producto')){
+            if (drop == false){
+                setDrop(true);
+            } else {
+                setDrop(false)
+            }
         }
     }
   

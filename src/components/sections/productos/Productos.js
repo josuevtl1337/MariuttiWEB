@@ -17,6 +17,8 @@ import SearchBar from "./SearchBar"
 import HeroImageSmall from "../../layout/HeroImageSmall"
 import "./catalogoProductos.css"
 import { connect } from 'react-redux'
+import { createHashHistory } from 'history';
+export const history = createHashHistory();
 
 
 
@@ -36,6 +38,15 @@ const Productos = (props) => {
         console.log(props.location.search.substr(1));
         console.log(props.categoriaSet);
         window.scrollTo(0, 0)
+
+        if(window.location.hash.includes('#/result?')){
+            var search = props.history.location.hash.substr(9);
+            setBusqueda(search);
+        }else if(window.location.hash.includes('#/Rubro')){
+            var categoriaResult = props.history.location.hash.substr(8);
+            // set(search); 
+            setCategoriaActual(categoriaResult)
+        }
         //si el resultado del dropdown es distinto a vacio lo seteo
 
         //!!!!!!!!!!!!!!!!!!!DROPDOWN COMENTADO!!!!!!!!!!!!!!!!!!!!
@@ -48,6 +59,7 @@ const Productos = (props) => {
             setCategoriaActual(props.dropdownResult); 
             setCategoriaRuta("");   
             setCategoriaActualName(props.dropdownResultName);  
+            history.push("/Rubro/"+props.dropdownResult);
         }else 
             if(props.categoriaSet!=""){
             console.log(props.categoriaSet);
@@ -56,6 +68,15 @@ const Productos = (props) => {
             setCategoriaRuta("");   
             // setCategoriaActualName(props.dropdownResultName);  
         }
+        //!!!!!!!!!!!!!!!!!!!ACA ESTA COMENTADO EL SEARCHBAR DESDE PRODUCTOCOMPONENT.JS
+        // else   
+        //     if(props.busquedaDesdePC!=""){
+        //         var busquedaDesdePC = props.busquedaDesdePC
+        //         setCategoriaActual(""); 
+        //         setCategoriaActualName("Resultado de la busqueda "+"'"+busquedaDesdePC.toString()+"'"); 
+        //         setBusqueda(busquedaDesdePC)
+        // } 
+        
         // else{
         //     setCategoriaActual(""); 
         // }
@@ -77,16 +98,27 @@ const Productos = (props) => {
     const [categoriaRuta, setCategoriaRuta] = useState("");
     const [productoState, setProductoState] = useState(false);
     const [productTrigger, setProductTrigger] = useState(false);
+    const [busqueda, setBusqueda] = useState("");
 
-    const rubros = useSelector(state => state.firebase.data.Rubro)
-    const sub_rubros = useSelector(state => state.firebase.data.Sub_Rubro)
-    const productos = useSelector(state => state.firebase.data.Producto)
+    const rubros = useSelector(state => state.firebase.data.Rubro);
+    const sub_rubros = useSelector(state => state.firebase.data.Sub_Rubro);
+    const productos = useSelector(state => state.firebase.data.Producto);
     const maquinas = [];
     const construccion = [];
     const ferreteria = [];
     var onlyProductos = [];
     var productosArray = [];
     var re = [];
+    
+    
+    // var search = props.history.location.hash.substr(9);
+    // console.log(props.history.location.hash.substr(9));
+    // var str = props.history.location.hash.toString();
+    // console.log(str) ;
+    // var n = str.indexOf("#/result?");
+    // console.log(n);
+
+
 
     if(rubros){
         const r = Object.values(rubros);
@@ -134,6 +166,8 @@ const Productos = (props) => {
         props.cleanUp();
         setCategoriaActual(e);
         setCategoriaActualName(categoriaNombre);
+        setBusqueda("");
+        history.push("/Rubro/"+e);
         // setProductTrigger(false);
     }
 
@@ -141,13 +175,6 @@ const Productos = (props) => {
         console.log(e);
         setCategoriaRuta(e + " / ");
     }
-    //Cambiando el history
-    // const handlerOnClickProducto = (id) =>{
-    //     // e.preventDefault();
-    //     // props.history.push("/producto?" + id);
-    //     setProductoState(true);
-    //     console.log(productoState);
-    // }
     const handlerURL = (id) => (e) =>{
         if(productTrigger==true){
             console.log(props.history);
@@ -184,6 +211,14 @@ const Productos = (props) => {
 
         props.history.push("/producto?"+id);
     }
+    const buscandoResultado = (param) => {
+        if(param!=""){
+            setCategoriaActual(""); 
+            // props.dropdownResult="";
+            setCategoriaActualName("Resultado de la busqueda "+"'"+param.toString()+"'"); 
+            setBusqueda(param)
+        } 
+    }
 
     return (
         <React.Fragment>
@@ -201,7 +236,7 @@ const Productos = (props) => {
                         {/* <h4>Categorías</h4> */}
                         <h4>Categorías</h4>
                         <Divider style={{marginBottom: 24}}/>
-                        <SearchBar/>
+                        <SearchBar buscando={buscandoResultado}/>
                         <Drawer titulo="Obras y Construcción" handlerRuta={handleClickRubro} handler={handleClick} categorias={construccion}/>
                         <Drawer titulo="Máquinas y Herramientas" handlerRuta={handleClickRubro} handler={handleClick} categorias={maquinas}/>
                         <Drawer titulo="Ferretería Industrial" handlerRuta={handleClickRubro} handler={handleClick} categorias={ferreteria}/>
@@ -211,7 +246,7 @@ const Productos = (props) => {
                         {/* <h4>{nombre}{subtitulo}{video}</h4> */}
                         <Divider/>
                         {/* {productTrigger ? <ProdComp nombre={nombre} descripcion={descripcion} img={imagen} subtitulo={subtitulo} enlace={video}/>  */}
-                        <CatalogoProductos categoriaActual={categoriaActual} productTrigger={handlerProductTrigger}/>
+                        <CatalogoProductos categoriaActual={categoriaActual} busquedaResult={busqueda} productTrigger={handlerProductTrigger}/>
                         {/* 
                         <div className="contenedor-catalogo">
                             

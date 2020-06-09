@@ -22,6 +22,7 @@ import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 // import firebase from "firebase/app";
 import { withRouter } from 'react-router';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
+import SearchBarProduct from "./components/sections/productos/SearchBar";
 
 class App extends Component {
   state = {
@@ -33,7 +34,8 @@ class App extends Component {
     dropdownName:"",
     trigger:"",
     categoriaActual:"",
-    categoriaActualNombre:""
+    categoriaActualNombre:"",
+    resultadoBusquedaDesdePC:""
   };
 
   sidenavTriggerClickHandler = () => {
@@ -73,9 +75,14 @@ class App extends Component {
     //Esta funcion es para comunicar el productos.js y productocomponent.js
     this.setState({categoriaActual:param, categoriaActualNombre:param2})
   }
+  // busquedaResultDesdeProductoComponent =(param)=>{
+  //   //Esta funcion es para comunicar el productos.js y productocomponent.js
+  //   this.setState({resultadoBusquedaDesdePC:param})
+  // }
   categoriaActualCleanUp = () =>{
     this.setState({categoriaActual:'',categoriaActualNombre:''})
   }
+
   // categoriaActualHandler =(param,param2)=>{
   //   //Esta funcion es para comunicar el productocomponent.js y producto.js haciendo lo mismo que la funcion anterior pero visceversa
   //   this.setState({categoriaActual:param, categoriaActualNombre:param2})
@@ -91,6 +98,7 @@ class App extends Component {
     let messenger;
     let maquinas = [];
     let cfg;
+    let searchbarProduct;
 
 
     const trayendoCategorias = (array1) => {
@@ -107,9 +115,7 @@ class App extends Component {
     sidenav = <Sidenav itemClickHandler={this.sidenavTriggerClickHandler} show={this.state.sidenavOpen} cerrando={this.cerrandosidenav}/>
 
     if (this.state.sidenavOpen) {
-      
       backdrop = <Backdrop click={this.backdropClickHandler}/>
-
     }
 
     
@@ -120,7 +126,8 @@ class App extends Component {
       footer = null;
       navbar = null;
     } else {
-      messenger = <MessengerCustomerChat pageId="314180308659595" appId="656192641884970"  language = 'es_LA' /> 
+      searchbarProduct = <SearchBarProduct />
+      messenger = <MessengerCustomerChat pageId="314180308659595" appId="656192641884970" loggedOutGreeting="Hola, cómo podemos ayudarte?" language = 'es_LA' /> 
       navbar = <Navbar searchClickHandler={this.searchClickHandler} sidenavClickHandler={this.sidenavTriggerClickHandler} buscando={this.buscandoResultado} dropdown={this.dropdownResultado}/>
       footer = <Footer/>
     }
@@ -141,6 +148,7 @@ class App extends Component {
         {sidenav}
         {backdrop}
         {searchbar}
+        {/* {searchbarProduct} */}
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/nosotros" component={About} />
@@ -153,11 +161,12 @@ class App extends Component {
         {/* <Route path="/productos" component={ProdComp} /> */}
         <Route
             path='/producto'
-            render={(props) => <ProductoComponent {...props} categoriaActualHandler={this.categoriaActualHandler} cleanUp={this.cleanUpDropdown}/>}
+            render={(props) => <ProductoComponent {...props} categoriaActualHandler={this.categoriaActualHandler} cleanUp={this.cleanUpDropdown} />}
         />
         <Route
             path='/productos'
-            render={(props) => <Productos {...props} categoriaSet={this.state.categoriaActual} categoriaNombre={this.state.categoriaActualNombre} categoriaActualCleanUp={this.categoriaActualCleanUp} dropdownResult={this.state.dropdown} dropdownResultName={this.state.dropdownName} cleanUp={this.cleanUpDropdown}/>}
+            render={(props) => <Productos {...props} categoriaSet={this.state.categoriaActual} categoriaNombre={this.state.categoriaActualNombre} categoriaActualCleanUp={this.categoriaActualCleanUp} dropdownResult={this.state.dropdown} dropdownResultName={this.state.dropdownName} 
+            cleanUp={this.cleanUpDropdown}/>}
         />
         <Route
             path='/busqueda'

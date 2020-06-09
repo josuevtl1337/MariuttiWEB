@@ -17,6 +17,7 @@ import PinterestIcon from '@material-ui/icons/Pinterest';
 //Importar el storage
 import "firebase/firebase-storage";
 import firebase from "firebase/app"
+import SearchBar from "./SearchBar"
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -30,14 +31,11 @@ const useStyles = makeStyles(theme => ({
 
 const ProductoComponent = (props) =>{
 
-
     useFirebaseConnect([
         { path: 'Rubro' },
         { path: 'Sub_Rubro' },
         { path: 'Producto' }
     ])
-
-    const [categoriaActual, setCategoriaActual] = useState("");
 
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
@@ -46,13 +44,48 @@ const ProductoComponent = (props) =>{
 
     const [categoriaActualName, setCategoriaActualName] = useState("");
     const [categoriaRuta, setCategoriaRuta] = useState("");
-
+    const [categoriaActual, setCategoriaActual] = useState("");
+    const [busqueda, setBusqueda] = useState("");
+    var productosArray = [];
+    var onlyProductos = [];
+    const [url, setUrl] = React.useState('');
+    const [pdf, setPdf] = React.useState('');
+    const [enlace, setEnlace] = React.useState("https://storage.googleapis.com/support-forums-api/attachment/thread-6219249-11716624739372349952.png");
+    const classes = useStyles();
+    const productos = useSelector(state => state.firebase.data.Producto);
     const rubros = useSelector(state => state.firebase.data.Rubro)
     const sub_rubros = useSelector(state => state.firebase.data.Sub_Rubro)
     const maquinas = [];
     const construccion = [];
     const ferreteria = [];
     var re = [];
+    //Hago la referencia para traer mis objetos Rubros, y Sub_Rubros
+    useFirebaseConnect([
+        { path: 'Producto' }
+    ])
+
+
+
+    if(isLoaded(productos)){
+        productosArray = Object.values(productos);
+        // Reversed para que los mapee por el ultimo cargado y luego mapeo los ultimos 3 con slice (crotada?)
+
+        productosArray.map((item, i) => { 
+            if(item.off == true){ 
+                onlyProductos.push(
+                    {'id':item.id,
+                    'nombre': item.nombre,
+                    'img':item.img,
+                    'subtitulo':item.subtitulo,
+                    'descripcion':item.descripcion,
+                    'enlace':item.enlace
+                },
+                )
+            }                                                                                                    
+        })
+        console.log(onlyProductos);
+        console.log(re);
+    }
 
     if(rubros){
         const r = Object.values(rubros);
@@ -80,6 +113,17 @@ const ProductoComponent = (props) =>{
         setCategoriaRuta(e + " / ");
     }
 
+    // const buscandoResultado = (param) => {
+    //     if(param!=""){
+    //         props.busquedaResultado(param)
+    //         // "Resultado de la busqueda "+"'"+param.toString()+"'"
+    //         // props.categoriaActualHandler(param,param); 
+    //         // setBusqueda(param)
+    //         props.history.push("/productos");
+    //     }
+        
+    // }
+
     const handleClick = (e,categoriaNombre,categoriaName) =>{
         props.cleanUp();
         setCategoriaActual(e);
@@ -90,19 +134,7 @@ const ProductoComponent = (props) =>{
         // console.log(categoriaActual);
     }
 
-    var productosArray = [];
-    const [url, setUrl] = React.useState('');
-    const [pdf, setPdf] = React.useState('');
-    const [enlace, setEnlace] = React.useState("https://storage.googleapis.com/support-forums-api/attachment/thread-6219249-11716624739372349952.png");
-    const classes = useStyles();
-    //Hago la referencia para traer mis objetos Rubros, y Sub_Rubros
-    useFirebaseConnect([
-        { path: 'Producto' }
-    ])
-    useEffect(() => {
-        window.scrollTo(0, 0)
-      }, [])
-    const productos = useSelector(state => state.firebase.data.Producto);
+
     // Show message while Rubros y Sub_Rubros are loading
     if (!isLoaded(productos)) {
         return <div>Cargando...</div>
@@ -147,6 +179,7 @@ const ProductoComponent = (props) =>{
                     <Grid item xs={12} md={3}>       
                         <h4>Categorías</h4>
                         <Divider style={{marginBottom: 28}}/>
+                        {/* <SearchBar buscando={buscandoResultado}/> */}
                         <Drawer titulo="Construcción" handlerRuta={handleClickRubro} handler={handleClick} categorias={construccion}/>
                         <Drawer titulo="Máquinas y Herramientas" handlerRuta={handleClickRubro} handler={handleClick} categorias={maquinas}/>
                         <Drawer titulo="Ferretería Industrial" handlerRuta={handleClickRubro} handler={handleClick} categorias={ferreteria}/>
@@ -247,6 +280,22 @@ const ProductoComponent = (props) =>{
                 </Grid>
                 <h3 className="homediv-title prodrel">
                     Productos Relacionados
+                    {/* {   //Productos destacados                           
+                        onlyProductos.map((item, i) =>{
+                            if(props.busquedaResult!= "" && item.nombre.toUpperCase().includes(props.busquedaResult.toUpperCase())){
+                                return(                                 
+                                    <div onClick={()=>handlerOnClickProducto(item.id,item.nombre,item.descripcion,item.img,item.subtitulo,item.enlace)}>
+                                    <ProductosCard                                      
+                                        img={item.img}
+                                        titulo={item.nombre}
+                                        subtitulo={item.descripcion}
+                                        key={i}
+                                    />   
+                                </div>    
+                                )
+                            }
+                        })
+                    } */}
                 </h3>
                 <div className="divline prod" style={{marginTop: 0}}></div>              
             </Container>

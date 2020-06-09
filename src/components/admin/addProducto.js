@@ -210,7 +210,6 @@ export default function SimpleModal(props) {
 
             {/* Los dos Precios */}
             <div className={classesSelect.dosInput}>
-
               {/* Precio actual */}
               <Grid container spacing={1} alignItems="flex-end">
                 <Grid item style={{padding: 8}}>
