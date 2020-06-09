@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 import './Home.css'
+import Helmet from 'react-helmet';
+
 import HomeDivider from './HomeDivider.js'
 import HomeCard from './HomeCard.js'
 import HomeCardCelu from './HomeCardCelu'
@@ -24,6 +26,7 @@ import MaquinasIconCelu from '../../../visuals/saw-celu.svg'
 
 import aboutimg from '../../../visuals/about-block-img.png'
 import BlueTriangle from '../../../visuals/bluetriangle.svg'
+
 
 
 const Home = (props) => {
@@ -104,6 +107,10 @@ const Home = (props) => {
 
     return (
         <div className="container">
+
+            <Helmet>
+                <title>Mariutti Hnos | Ferretería, Máquinas y Herramientas</title>
+            </Helmet>
 
 
             <HeroCarousel

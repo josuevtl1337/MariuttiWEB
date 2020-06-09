@@ -82,6 +82,10 @@
     color: rgb(12, 96, 199);
 }
 
+.red:hover .redtxt.ig{
+    color: #ED4B5F;
+}
+
 .red:hover .redtxt.msn{
     color: rgb(24, 116, 196);
 }
@@ -137,6 +141,10 @@
 
     .redtxt.fb{
         color: rgb(12, 96, 199);
+    }
+
+    .redtxt.ig{
+        color: #ED4B5F;
     }
     
     .redtxt.msn{

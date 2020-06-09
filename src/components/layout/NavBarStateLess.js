@@ -1,5 +1,6 @@
 import React, { Component, useState } from "react"
 import { Link, NavLink, withRouter, Router } from "react-router-dom";
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import './Navbar.css';
 import SidenavTrigger from "./SidenavTrigger.js";
 import SearchTrigger from "./SearchTrigger.js";
@@ -111,6 +112,10 @@ const NavBarStateLess = (props) => {
             }
         }
     }
+
+    const closeTrigger = () => {
+        setDrop(false)
+    }
   
     // Build an array of items
     let array = [];
@@ -177,24 +182,24 @@ const NavBarStateLess = (props) => {
                             <Link to="/nosotros">
                                 <Tab isActive={window.location.href.includes('nosotros')} titulo="Quiénes Somos"/>
                             </Link>
-                            <div className="prodtab">
-                                <Tab isActive={window.location.href.includes('producto') || window.location.href.includes('Producto')} titulo={<span className="productotab">Productos <i className={dropbtnclasses}>arrow_drop_down</i></span>} click={dropTrigger}/>
-                                {/* <div className={dropbtnclasses} onClick={dropTrigger}>
-                                    <i className="material-icons arrow">arrow_drop_down</i>
-                                </div> */}
 
-                                {/* Dropdown Productos */} 
-                                <div className={dropclasses}>
-                                    <ul className="drop-categorias-list">
-                                        <p className="drop-rubro">Máquinas y Herramientas</p>
-                                        {array}
-                                        <p className="drop-rubro">Obras y Construcción</p>
-                                        {arrayConstruccion}
-                                        <p className="drop-rubro">Ferretería Industrial</p>
-                                        {arrayFerreteria}
-                                    </ul>                          
+                            <ClickAwayListener onClickAway={closeTrigger}>
+                                <div className="prodtab">
+                                    <Tab isActive={window.location.href.includes('producto') || window.location.href.includes('Producto')} titulo={<span className="productotab">Productos <i className={dropbtnclasses}>arrow_drop_down</i></span>} click={dropTrigger}/>
+                                        {/* Dropdown Productos */} 
+                                        <div className={dropclasses}>
+                                            <ul className="drop-categorias-list">
+                                                <p className="drop-rubro">Máquinas y Herramientas</p>
+                                                {array}
+                                                <p className="drop-rubro">Obras y Construcción</p>
+                                                {arrayConstruccion}
+                                                <p className="drop-rubro">Ferretería Industrial</p>
+                                                {arrayFerreteria}
+                                            </ul>                          
+                                        </div>
                                 </div>
-                            </div>
+                            </ClickAwayListener>
+
                             
                             <Link to="/noticias">
                                 <Tab isActive={window.location.href.includes('noticias')} titulo="Novedades"/>

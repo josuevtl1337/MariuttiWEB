@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Helmet from 'react-helmet';
 import './About.css'
 import FactoryImg from '../../../visuals/factory.png'
 import WorkerImg from '../../../visuals/logistics.png'
@@ -14,6 +15,11 @@ const About = (props) => {
     }
     return (
         <React.Fragment>
+
+            <Helmet>
+                <title>Quiénes Somos | Mariutti Hnos</title>
+            </Helmet>
+
             <div className="quienes-block">
                 <div className="quienes-text">
                     <h2 className="quienes-title">

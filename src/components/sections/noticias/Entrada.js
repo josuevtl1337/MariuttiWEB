@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Helmet from 'react-helmet';
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid';
 import './Entrada.css'
@@ -19,6 +20,7 @@ import firebase from "firebase/app"
 export default function Entrada(props) {
     var noticiasArray = [];
     const [url, setUrl] = React.useState('');
+    const [notinombre, setNotiNombre] = React.useState('');
     var reversed=[];
     var onlythree = [];
     useEffect(() => {
@@ -70,6 +72,12 @@ export default function Entrada(props) {
 
     return(
         <React.Fragment>
+
+            <Helmet>
+                <title>{notinombre} | Mariutti Hnos</title>
+            </Helmet>
+
+
             <div className="noticiasbanner">
                 <h2>Novedades</h2>
             </div>
@@ -86,6 +94,7 @@ export default function Entrada(props) {
                         .getDownloadURL()
                         .then(url => {
                             setUrl(url);
+                            setNotiNombre(item.nombre);
                         })
                         .catch(error => {
                             console.log(error.message);

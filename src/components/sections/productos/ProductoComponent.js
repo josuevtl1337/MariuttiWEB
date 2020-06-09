@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Link, NavLink, withRouter, Router } from "react-router-dom";
+
+import Helmet from 'react-helmet';
+
 import HomeDivider from '../inicio/HomeDivider'
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -50,6 +54,8 @@ const ProductoComponent = (props) =>{
     var onlyProductos = [];
     const [url, setUrl] = React.useState('');
     const [pdf, setPdf] = React.useState('');
+    const [prodnombre, setProdNombre] = React.useState('');
+    const [codproducto, setCodProducto] = React.useState('');
     const [enlace, setEnlace] = React.useState("https://storage.googleapis.com/support-forums-api/attachment/thread-6219249-11716624739372349952.png");
     const classes = useStyles();
     const productos = useSelector(state => state.firebase.data.Producto);
@@ -165,8 +171,17 @@ const ProductoComponent = (props) =>{
         window.open(pdf);
     }
 
+    const appjstr = () => {
+        props.tomarNombre(prodnombre, codproducto)
+        props.history.push('/contacto')
+    }
+
     return (
         <div className="containerprod">
+
+            <Helmet>
+                <title>{prodnombre} | Mariutti Hnos</title>
+            </Helmet>
 
             <div className="noticiasbanner prod">
                 <h2>Productos</h2>
@@ -188,8 +203,9 @@ const ProductoComponent = (props) =>{
                         <div className="singleprod-wrap" style={{zIndex: 100}}>
                             <h4>Rubro / Subrubro /</h4>
                             <Divider style={{marginBottom: 28}}/>
-                            {productosArray.map((item, i) => {  
-                                let fecha = new Date(item.createdAt);                               
+
+                            {productosArray.map((item, i) => {
+
                                 if(search == item.id){
                                     let imagen = item.img;              
                                     if (imagen) {
@@ -199,7 +215,10 @@ const ProductoComponent = (props) =>{
                                         .getDownloadURL()
                                         .then(url => {
                                             setUrl(url);
+                                            setProdNombre(item.nombre);
+                                            setCodProducto(item.codigo);
                                         })
+                                        
                                         .catch(error => {
                                             console.log(error.message);
                                         });
@@ -218,6 +237,7 @@ const ProductoComponent = (props) =>{
                                         }
                                     }               
                                     return (  
+
                                         <React.Fragment>
                                             <div className="product-block">
                                                 <div className="prodtop">
@@ -232,7 +252,7 @@ const ProductoComponent = (props) =>{
                                                         <h4 className="precio">${item.precio}</h4>
                                                         <h4 className="precio_anterior">${item.precioAntiguo}</h4>
                                                         <div className="buttonscontainer">
-                                                            <button className="aboutbtn prodstock">
+                                                            <button className="aboutbtn prodstock" onClick={appjstr}>
                                                                 Consultar Stock
                                                             </button>
                                                             <Tooltip arrow title="Descargar Ficha Técnica" placement="right">
@@ -297,7 +317,8 @@ const ProductoComponent = (props) =>{
                         })
                     } */}
                 </h3>
-                <div className="divline prod" style={{marginTop: 0}}></div>              
+                <div className="divline prod" style={{marginTop: 0}}/>
+                            
             </Container>
 
         </div>
