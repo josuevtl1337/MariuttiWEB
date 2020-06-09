@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Helmet from 'react-helmet';
+
 import TextField from '@material-ui/core/TextField';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -16,6 +18,11 @@ const Contact = (props)=>{
     const mapURL = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${credentials.mapsKey}`;
     return (
       <React.Fragment>
+
+        <Helmet>
+          <title>Contacto | Mariutti Hnos</title>
+        </Helmet>
+
         <div className="noticiasbanner contact">
           <h2>
             Contacto

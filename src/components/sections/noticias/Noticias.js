@@ -1,6 +1,8 @@
 import React from 'react'
 import Container from '@material-ui/core/Container';
 import './Noticias.css'
+import Helmet from 'react-helmet';
+
 import EntradaCard from './EntradaCard'
 import EntradaMini from '../inicio/EntradaMini'
 import EntradaLista from './EntradaLista'
@@ -35,6 +37,10 @@ const Noticias = (props) => {
     return(
 
         <div className="noticiasbody">
+
+            <Helmet>
+                <title>Novedades | Mariutti Hnos</title>
+            </Helmet>
 
             <div className="noticiasbanner">
                 <h2>Novedades</h2>

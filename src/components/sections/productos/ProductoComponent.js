@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Helmet from 'react-helmet';
+
 import HomeDivider from '../inicio/HomeDivider'
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -47,6 +49,7 @@ const ProductoComponent = (props) =>{
     const [categoriaActualName, setCategoriaActualName] = useState("");
     const [categoriaRuta, setCategoriaRuta] = useState("");
 
+    const [prodnombre, setProdNombre] = useState("");
     const rubros = useSelector(state => state.firebase.data.Rubro)
     const sub_rubros = useSelector(state => state.firebase.data.Sub_Rubro)
     const maquinas = [];
@@ -132,6 +135,10 @@ const ProductoComponent = (props) =>{
     return (
         <div className="containerprod">
 
+            <Helmet>
+                <title>{prodnombre} | Mariutti Hnos</title>
+            </Helmet>
+
             <div className="noticiasbanner prod">
                 <h2>Productos</h2>
             </div>
@@ -151,8 +158,9 @@ const ProductoComponent = (props) =>{
                         <div className="singleprod-wrap" style={{zIndex: 100}}>
                             <h4>Rubro / Subrubro / Producto</h4>
                             <Divider style={{marginBottom: 28}}/>
-                            {productosArray.map((item, i) => {  
-                                let fecha = new Date(item.createdAt);                               
+
+                            {productosArray.map((item, i) => {
+
                                 if(search == item.id){
                                     let imagen = item.img;
                                     if (imagen) {
@@ -162,12 +170,16 @@ const ProductoComponent = (props) =>{
                                         .getDownloadURL()
                                         .then(url => {
                                             setUrl(url);
+                                            setProdNombre(item.nombre);
                                         })
+                                        
                                         .catch(error => {
                                             console.log(error.message);
-                                        });
+                                        })
                                     }
+
                                     return (  
+
                                         <React.Fragment>
                                             <div className="product-block">
                                                 <div className="prodtop">
@@ -218,9 +230,10 @@ const ProductoComponent = (props) =>{
                                                 </div>
                                             </div>   
                                             
-                                        </React.Fragment>    
-                                                                                                                        
-                                            );
+                                        </React.Fragment>
+
+                                );
+
                                 }                               
                             })}     
                         </div> 
@@ -229,7 +242,8 @@ const ProductoComponent = (props) =>{
                 <h3 className="homediv-title prodrel">
                     Productos Relacionados
                 </h3>
-                <div className="divline prod" style={{marginTop: 0}}></div>              
+                <div className="divline prod" style={{marginTop: 0}}/>
+                            
             </Container>
 
         </div>

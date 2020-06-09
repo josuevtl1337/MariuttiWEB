@@ -1,5 +1,7 @@
 import React, { Component, useState, useEffect  } from "react"
 import ReactDOM from 'react-dom';
+import Helmet from 'react-helmet';
+
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import firebase from "firebase/app";
@@ -180,6 +182,11 @@ const Productos = (props) => {
 
     return (
         <React.Fragment>
+
+            <Helmet>
+                <title>Productos | Mariutti Hnos</title>
+            </Helmet>
+
             {/* banner */}
             <div className="noticiasbanner prodlist">
                 <h2>
