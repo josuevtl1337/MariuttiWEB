@@ -127,7 +127,7 @@ const ProductoComponent = (props) =>{
     const handleClick = (e,categoriaNombre,categoriaName) =>{
         props.cleanUp();
         setCategoriaActual(e);
-        var rutaEspecifica = categoriaName+" / "+categoriaNombre
+        var rutaEspecifica = categoriaName+" / "+categoriaNombre 
         props.categoriaActualHandler(e,rutaEspecifica);
         props.history.push("/productos");
         // setCategoriaActualName(categoriaNombre);

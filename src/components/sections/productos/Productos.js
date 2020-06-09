@@ -20,8 +20,6 @@ import { connect } from 'react-redux'
 import { createHashHistory } from 'history';
 export const history = createHashHistory();
 
-
-
 const Productos = (props) => {
 
     //Hago la referencia para traer mis objetos Rubros, y Sub_Rubros
@@ -31,61 +29,6 @@ const Productos = (props) => {
         { path: 'Producto' }
     ])
 
-    // const [categoriaActual, setCategoriaActual] = useState("-M163WoG-kWq-0jDt1CJ");
-    // Similar to componentDidMount and componentDidUpdate:
-    useEffect(() => {
-        // console.log(props.categoriaSet);
-        console.log(props.location.search.substr(1));
-        console.log(props.categoriaSet);
-        window.scrollTo(0, 0)
-
-        if(window.location.hash.includes('#/result?')){
-            var search = props.history.location.hash.substr(9);
-            setBusqueda(search);
-        }else if(window.location.hash.includes('#/Rubro')){
-            var categoriaResult = props.history.location.hash.substr(8);
-            // set(search); 
-            setCategoriaActual(categoriaResult)
-        }
-        //si el resultado del dropdown es distinto a vacio lo seteo
-
-        //!!!!!!!!!!!!!!!!!!!DROPDOWN COMENTADO!!!!!!!!!!!!!!!!!!!!
-        // if(props.dropdownResult!=''){
-        //     setCategoriaActual(props.dropdownResult); 
-        //     setCategoriaRuta("");   
-        //     setCategoriaActualName(props.dropdownResultName);  
-        // }
-        if(props.dropdownResult!=""){
-            setCategoriaActual(props.dropdownResult); 
-            setCategoriaRuta("");   
-            setCategoriaActualName(props.dropdownResultName);  
-            history.push("/Rubro/"+props.dropdownResult);
-        }else 
-            if(props.categoriaSet!=""){
-            console.log(props.categoriaSet);
-            setCategoriaActual(props.categoriaSet);
-            setCategoriaActualName(props.categoriaNombre);
-            setCategoriaRuta("");   
-            // setCategoriaActualName(props.dropdownResultName);  
-        }
-        //!!!!!!!!!!!!!!!!!!!ACA ESTA COMENTADO EL SEARCHBAR DESDE PRODUCTOCOMPONENT.JS
-        // else   
-        //     if(props.busquedaDesdePC!=""){
-        //         var busquedaDesdePC = props.busquedaDesdePC
-        //         setCategoriaActual(""); 
-        //         setCategoriaActualName("Resultado de la busqueda "+"'"+busquedaDesdePC.toString()+"'"); 
-        //         setBusqueda(busquedaDesdePC)
-        // } 
-        
-        // else{
-        //     setCategoriaActual(""); 
-        // }
-        // setCategoriaActual(props.location.search.substr(1));
-
-        // if(props.trigger==false){
-        //     setProductTrigger(true);
-        // }
-    });
     //Const
     const [id, setId] = useState("");
     const [nombre, setNombre] = useState("");
@@ -110,7 +53,60 @@ const Productos = (props) => {
     var productosArray = [];
     var re = [];
     
-    
+
+    // const [categoriaActual, setCategoriaActual] = useState("-M163WoG-kWq-0jDt1CJ");
+    // Similar to componentDidMount and componentDidUpdate:
+    useEffect(() => {
+        // categoriaset categorianombre
+        window.scrollTo(0, 0)
+        var vardropdownResult = props.dropdownResult;
+        var varcategoriaSet = props.categoriaSet;
+        if(window.location.hash.includes('#/result?')){
+            var search = props.history.location.hash.substr(9);
+            setBusqueda(search);
+            varcategoriaSet="";
+            vardropdownResult="";
+        }else if(window.location.hash.includes('#/Rubro')){
+            var categoriaResult = props.history.location.hash.substr(8);
+            // set(search); 
+            setCategoriaActual(categoriaResult);
+            setBusqueda("");
+        }
+        //si el resultado del dropdown es distinto a vacio lo seteo
+        if(vardropdownResult!=""){
+            setCategoriaActual(vardropdownResult); 
+            setCategoriaRuta("");   
+            setCategoriaActualName(props.dropdownResultName);  
+            history.push("/Rubro/"+vardropdownResult);
+            setBusqueda("");
+        }else 
+            //Categoria desde ProductoComponent
+            if(varcategoriaSet!=""){
+            // console.log(props.categoriaSet);
+            setCategoriaActual(varcategoriaSet);
+            setCategoriaActualName(props.categoriaNombre);
+            setCategoriaRuta("");   
+            // setCategoriaActualName(props.dropdownResultName);  
+        }
+        //!!!!!!!!!!!!!!!!!!!ACA ESTA COMENTADO EL SEARCHBAR DESDE PRODUCTOCOMPONENT.JS
+        // else   
+        //     if(props.busquedaDesdePC!=""){
+        //         var busquedaDesdePC = props.busquedaDesdePC
+        //         setCategoriaActual(""); 
+        //         setCategoriaActualName("Resultado de la busqueda "+"'"+busquedaDesdePC.toString()+"'"); 
+        //         setBusqueda(busquedaDesdePC)
+        // } 
+        
+        // else{
+        //     setCategoriaActual(""); 
+        // }
+        // setCategoriaActual(props.location.search.substr(1));
+
+        // if(props.trigger==false){
+        //     setProductTrigger(true);
+        // }
+    });
+ 
     // var search = props.history.location.hash.substr(9);
     // console.log(props.history.location.hash.substr(9));
     // var str = props.history.location.hash.toString();
@@ -175,18 +171,6 @@ const Productos = (props) => {
         console.log(e);
         setCategoriaRuta(e + " / ");
     }
-    const handlerURL = (id) => (e) =>{
-        if(productTrigger==true){
-            console.log(props.history);
-            e.preventDefault()
-            props.history.push("/productos/"+ id);
-        
-        }else{
-            console.log(props.history);
-            e.preventDefault()
-            props.history.push("/productos");
-        }
-    }
     const handlerProductTrigger = (id,nomb,descripcion,img,subt,vid) =>{
         // props.history.push("/productos?" + id);
         // if(productTrigger==true){           
@@ -213,10 +197,11 @@ const Productos = (props) => {
     }
     const buscandoResultado = (param) => {
         if(param!=""){
-            setCategoriaActual(""); 
             // props.dropdownResult="";
+            setCategoriaRuta("");
+            setCategoriaActual("");
             setCategoriaActualName("Resultado de la busqueda "+"'"+param.toString()+"'"); 
-            setBusqueda(param)
+            setBusqueda(param);
         } 
     }
 
@@ -247,41 +232,6 @@ const Productos = (props) => {
                         <Divider/>
                         {/* {productTrigger ? <ProdComp nombre={nombre} descripcion={descripcion} img={imagen} subtitulo={subtitulo} enlace={video}/>  */}
                         <CatalogoProductos categoriaActual={categoriaActual} busquedaResult={busqueda} productTrigger={handlerProductTrigger}/>
-                        {/* 
-                        <div className="contenedor-catalogo">
-                            
-                            {re.map((item, i) => {                             
-                                if(categoriaActual == item.sub_rubro){
-                                    return (
-                                        <div onClick={()=>handlerOnClickProducto(item.id,item.nombre,item.descripcion)}>
-                                            <ProductosCard                                      
-                                                img={item.img}
-                                                titulo={item.nombre}
-                                                subtitulo={item.descripcion}
-                                                key={i}
-                                            />   
-                                        </div>                                                                     
-                                    );
-                                }
-                            })}    
-                            {            
-                                //Productos destacados                           
-                                onlyProductos.map((item, i) =>{
-                                    if(categoriaActual == ""){
-                                        return(                                 
-                                            <div onClick={()=>handlerOnClickProducto(item.id,item.nombre,item.descripcion)}>
-                                            <ProductosCard                                      
-                                                img={item.img}
-                                                titulo={item.nombre}
-                                                subtitulo={item.descripcion}
-                                                key={i}
-                                            />   
-                                        </div>    
-                                        )
-                                    }                                     
-                                })
-                            } 
-                        </div>*/}
                     </Grid>
                 </Grid>              
             </Container>

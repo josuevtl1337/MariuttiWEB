@@ -80,7 +80,7 @@ class App extends Component {
   //   this.setState({resultadoBusquedaDesdePC:param})
   // }
   categoriaActualCleanUp = () =>{
-    this.setState({categoriaActual:'',categoriaActualNombre:''})
+    this.setState({categoriaActual:'', categoriaActualNombre:''})
   }
 
   // categoriaActualHandler =(param,param2)=>{

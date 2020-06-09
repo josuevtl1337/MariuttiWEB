@@ -43,7 +43,6 @@ const SearchBar = (props) =>{
   const onChange = e => {
     setBusqueda(e.target.value);
     // history.push(busqueda);
-
   };
   
   return (
