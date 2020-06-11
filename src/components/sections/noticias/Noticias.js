@@ -40,6 +40,8 @@ const Noticias = (props) => {
 
             <Helmet>
                 <title>Novedades | Mariutti Hnos</title>
+                <meta name="description" content="Conocé el blog de novedades de Mariutti Hnos"/>
+                
             </Helmet>
 
             <div className="noticiasbanner">

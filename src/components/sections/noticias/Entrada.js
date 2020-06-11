@@ -15,6 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import "firebase/firebase-storage";
 import firebase from "firebase/app"
 
+import Share from '../../layout/Share'
 
 
 export default function Entrada(props) {
@@ -75,6 +76,7 @@ export default function Entrada(props) {
 
             <Helmet>
                 <title>{notinombre} | Mariutti Hnos</title>
+                <meta name="description" content="Conocé el blog de novedades de Mariutti Hnos"/>
             </Helmet>
 
 
@@ -119,13 +121,15 @@ export default function Entrada(props) {
                                     <p className="entrada-text">
                                        {item.descripcion} 
                                     </p>
+                                    <div className="divline descr" style={{marginBottom: 8}}></div>
+
                                 </div>
-                                <div className="share-wrap" style={{marginBottom: 32}}>
-                                    <h4 style={{fontSize: 14, marginLeft: 25, marginRight: 25}}>Compartir</h4>
-                                    <FacebookIcon className="share-icon"/>
-                                    <TwitterIcon className="share-icon"/>
-                                    <PinterestIcon className="share-icon"/>
-                                </div>
+
+                                <Share
+                                    url={window.location.href}
+                                    text={notinombre + " "}
+                                />
+                                
                                 </Grid>
                                 <Grid item xs={12} md={3}>
                                     <div className="postsrecientes-paper">

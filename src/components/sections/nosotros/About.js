@@ -18,6 +18,7 @@ const About = (props) => {
 
             <Helmet>
                 <title>Quiénes Somos | Mariutti Hnos</title>
+                <meta name="description" content="Mariutti Hnos es una empresa familiar comprometidaen brindar soluciones para el hogar, la construcción y la industria."/>
             </Helmet>
 
             <div className="quienes-block">

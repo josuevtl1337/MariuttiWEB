@@ -44,6 +44,8 @@ const Productos = (props) => {
     const [productoState, setProductoState] = useState(false);
     const [productTrigger, setProductTrigger] = useState(false);
     const [busqueda, setBusqueda] = useState("");
+    const [title, setTitle] = useState("");
+    const [scrollpos, setScrollPos] = useState(0)
 
     const rubros = useSelector(state => state.firebase.data.Rubro);
     const sub_rubros = useSelector(state => state.firebase.data.Sub_Rubro);
@@ -54,13 +56,13 @@ const Productos = (props) => {
     var onlyProductos = [];
     var productosArray = [];
     var re = [];
-    
+
 
     // const [categoriaActual, setCategoriaActual] = useState("-M163WoG-kWq-0jDt1CJ");
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
         // categoriaset categorianombre
-        window.scrollTo(0, 0)
+        window.scroll(0, scrollpos)
         var vardropdownResult = props.dropdownResult;
         var varcategoriaSet = props.categoriaSet;
         if(window.location.hash.includes('#/result?')){
@@ -203,16 +205,25 @@ const Productos = (props) => {
             // props.dropdownResult="";
             setCategoriaRuta("");
             setCategoriaActual("");
-            setCategoriaActualName("Resultado de la busqueda "+"'"+param.toString()+"'"); 
+            setCategoriaActualName("Resultados de la busqueda "+"'"+param.toString()+"'"); 
             setBusqueda(param);
         } 
+
+        if(window.innerWidth < 960) {
+            setScrollPos(520)
+        }
     }
+
+    
 
     return (
         <React.Fragment>
 
             <Helmet>
-                <title>Productos | Mariutti Hnos</title>
+                
+                
+                <title>{categoriaActualName} - Productos | Mariutti Hnos</title>
+                <meta name="description" content="¿Sos un profesional o tenés un proyecto personal? Conocé acá nuestro variado catálogo de productos."/>
             </Helmet>
 
             {/* banner */}
