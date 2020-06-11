@@ -36,7 +36,8 @@ class App extends Component {
     categoriaActual:"",
     categoriaActualNombre:"",
     resultadoBusquedaDesdePC:"",
-    mensajeStock:""
+    mensajeStock:"",
+    rutaToProdComp:""
   };
 
   sidenavTriggerClickHandler = () => {
@@ -84,13 +85,15 @@ class App extends Component {
     this.setState({categoriaActual:'', categoriaActualNombre:''})
   }
 
-  // categoriaActualHandler =(param,param2)=>{
-  //   //Esta funcion es para comunicar el productocomponent.js y producto.js haciendo lo mismo que la funcion anterior pero visceversa
-  //   this.setState({categoriaActual:param, categoriaActualNombre:param2})
-  // }
-
   textoStock = (param, param2) => {
     this.setState({mensajeStock:"Hola! Quiero consultar stock sobre el producto " + param + ", código " + param2});
+  }
+
+  //Comunicando Producto.js a ProductoComponent.js
+  setRutaToProdComp = (param1,param2) =>{
+    this.setState({
+      rutaToProdComp : param1
+    })
   }
 
   render(){
@@ -164,11 +167,12 @@ class App extends Component {
         {/* <Route path="/productos" component={ProdComp} /> */}
         <Route
             path='/producto'
-            render={(props) => <ProductoComponent {...props} categoriaActualHandler={this.categoriaActualHandler} cleanUp={this.cleanUpDropdown} tomarNombre={this.textoStock} />}
+            render={(props) => <ProductoComponent {...props} categoriaActualHandler={this.categoriaActualHandler} cleanUp={this.cleanUpDropdown} tomarNombre={this.textoStock} rutaToProdComp={this.state.rutaToProdComp}/>}
         />
         <Route
             path='/productos'
-            render={(props) => <Productos {...props} categoriaSet={this.state.categoriaActual} categoriaNombre={this.state.categoriaActualNombre} categoriaActualCleanUp={this.categoriaActualCleanUp} dropdownResult={this.state.dropdown} dropdownResultName={this.state.dropdownName} 
+            render={(props) => <Productos {...props} categoriaSet={this.state.categoriaActual} categoriaNombre={this.state.categoriaActualNombre} categoriaActualCleanUp={this.categoriaActualCleanUp}
+            dropdownResult={this.state.dropdown} dropdownResultName={this.state.dropdownName} setRutaToProdComp={this.setRutaToProdComp}
             cleanUp={this.cleanUpDropdown}/>}
         />
         <Route

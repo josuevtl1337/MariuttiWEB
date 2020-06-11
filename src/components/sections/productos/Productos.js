@@ -38,7 +38,7 @@ const Productos = (props) => {
     const [imagen, setImg] = useState("");
     const [subtitulo, setSubtitulo] = useState("");
     const [video, setVideo] = useState("");
-    const [categoriaActualName, setCategoriaActualName] = useState("Productos Destacados");
+    const [categoriaActualName, setCategoriaActualName] = useState("Catálogo");
     const [categoriaActual, setCategoriaActual] = useState("");
     const [categoriaRuta, setCategoriaRuta] = useState("");
     const [productoState, setProductoState] = useState(false);
@@ -66,9 +66,10 @@ const Productos = (props) => {
         if(window.location.hash.includes('#/result?')){
             var search = props.history.location.hash.substr(9);
             setBusqueda(search);
+            setCategoriaActualName("Resultado de la busqueda "+"'"+search.toString()+"'"); 
             varcategoriaSet="";
             vardropdownResult="";
-        }else if(window.location.hash.includes('#/Rubro')){
+        }else if(window.location.hash.includes('#/rubro')){
             var categoriaResult = props.history.location.hash.substr(8);
             // set(search); 
             setCategoriaActual(categoriaResult);
@@ -79,7 +80,7 @@ const Productos = (props) => {
             setCategoriaActual(vardropdownResult); 
             setCategoriaRuta("");   
             setCategoriaActualName(props.dropdownResultName);  
-            history.push("/Rubro/"+vardropdownResult);
+            history.push("/rubro/"+vardropdownResult);
             setBusqueda("");
         }else 
             //Categoria desde ProductoComponent
@@ -87,8 +88,8 @@ const Productos = (props) => {
             // console.log(props.categoriaSet);
             setCategoriaActual(varcategoriaSet);
             setCategoriaActualName(props.categoriaNombre);
-            setCategoriaRuta("");   
-            // setCategoriaActualName(props.dropdownResultName);  
+            history.push("/rubro/"+varcategoriaSet);
+            setCategoriaRuta("");    
         }
         //!!!!!!!!!!!!!!!!!!!ACA ESTA COMENTADO EL SEARCHBAR DESDE PRODUCTOCOMPONENT.JS
         // else   
@@ -165,7 +166,7 @@ const Productos = (props) => {
         setCategoriaActual(e);
         setCategoriaActualName(categoriaNombre);
         setBusqueda("");
-        history.push("/Rubro/"+e);
+        history.push("/rubro/"+e);
         // setProductTrigger(false);
     }
 
@@ -194,7 +195,7 @@ const Productos = (props) => {
         // <---LEER: Esto de abajo agrega el id de producto a la url, pero luego no funciona clickear una categoria de la izquierda.
         // e.preventDefault();
         var ruta = categoriaRuta+categoriaActualName
-
+        props.setRutaToProdComp(ruta);
         props.history.push("/producto?"+id);
     }
     const buscandoResultado = (param) => {
@@ -235,6 +236,8 @@ const Productos = (props) => {
                     </Grid>
                     <Grid item xs={12} md={9}>
                         <h4>{categoriaRuta}{categoriaActualName}</h4>
+                        {console.log(categoriaRuta)}
+                        {console.log(categoriaActualName)}
                         {/* <h4>{nombre}{subtitulo}{video}</h4> */}
                         <Divider/>
                         {/* {productTrigger ? <ProdComp nombre={nombre} descripcion={descripcion} img={imagen} subtitulo={subtitulo} enlace={video}/>  */}

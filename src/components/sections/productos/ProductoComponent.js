@@ -40,18 +40,12 @@ const ProductoComponent = (props) =>{
         { path: 'Sub_Rubro' },
         { path: 'Producto' }
     ])
-
-    // Similar to componentDidMount and componentDidUpdate:
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    });
-
-    const [categoriaActualName, setCategoriaActualName] = useState("");
     const [categoriaRuta, setCategoriaRuta] = useState("");
     const [categoriaActual, setCategoriaActual] = useState("");
-    const [busqueda, setBusqueda] = useState("");
+    // const [busqueda, setBusqueda] = useState("");
     var productosArray = [];
     var onlyProductos = [];
+    const [ruta, setRuta] = React.useState('Rubro / Subrubro /');
     const [url, setUrl] = React.useState('');
     const [pdf, setPdf] = React.useState('');
     const [prodnombre, setProdNombre] = React.useState('');
@@ -65,11 +59,16 @@ const ProductoComponent = (props) =>{
     const construccion = [];
     const ferreteria = [];
     var re = [];
-    //Hago la referencia para traer mis objetos Rubros, y Sub_Rubros
-    useFirebaseConnect([
-        { path: 'Producto' }
-    ])
 
+    // Similar to componentDidMount and componentDidUpdate:
+    useEffect(() => {
+        window.scrollTo(0, 0)
+
+        if(props.rutaToProdComp!=""){
+            console.log(props.rutaToProdComp)
+            setRuta(props.rutaToProdComp+" /")
+        }
+    });
 
 
     if(isLoaded(productos)){
@@ -118,17 +117,6 @@ const ProductoComponent = (props) =>{
         console.log(e);
         setCategoriaRuta(e + " / ");
     }
-
-    // const buscandoResultado = (param) => {
-    //     if(param!=""){
-    //         props.busquedaResultado(param)
-    //         // "Resultado de la busqueda "+"'"+param.toString()+"'"
-    //         // props.categoriaActualHandler(param,param); 
-    //         // setBusqueda(param)
-    //         props.history.push("/productos");
-    //     }
-        
-    // }
 
     const handleClick = (e,categoriaNombre,categoriaName) =>{
         props.cleanUp();
@@ -201,9 +189,8 @@ const ProductoComponent = (props) =>{
                     </Grid>
                     <Grid item xs={12} md={9}>
                         <div className="singleprod-wrap" style={{zIndex: 100}}>
-                            <h4>Rubro / Subrubro /</h4>
+                            <h4>{ruta}</h4>
                             <Divider style={{marginBottom: 28}}/>
-
                             {productosArray.map((item, i) => {
 
                                 if(search == item.id){
