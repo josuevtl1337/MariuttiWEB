@@ -167,7 +167,7 @@ class App extends Component {
         {/* <Route path="/productos" component={ProdComp} /> */}
         <Route
             path='/producto'
-            render={(props) => <ProductoComponent {...props} categoriaActualHandler={this.categoriaActualHandler} cleanUp={this.cleanUpDropdown} tomarNombre={this.textoStock} rutaToProdComp={this.state.rutaToProdComp}/>}
+            render={(props) => <ProductoComponent {...props} categoriaActualHandler={this.categoriaActualHandler} cleanUp={this.cleanUpDropdown} tomarNombre={this.textoStock} rutaToProdComp={this.state.rutaToProdComp} setRutaToProdComp={this.setRutaToProdComp}/>}
         />
         <Route
             path='/productos'

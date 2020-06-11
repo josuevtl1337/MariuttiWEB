@@ -50,7 +50,7 @@ export default function MediaCard(props) {
 
   return (
     <div className="paper-style">
-      <div className="imgwrap">
+      <div className="imgwrap" onClick={props.handlerOnClick}>
         <img src={url} className="prodimg"/>
       </div>
       

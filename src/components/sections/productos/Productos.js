@@ -176,26 +176,7 @@ const Productos = (props) => {
         console.log(e);
         setCategoriaRuta(e + " / ");
     }
-    const handlerProductTrigger = (id,nomb,descripcion,img,subt,vid) =>{
-        // props.history.push("/productos?" + id);
-        // if(productTrigger==true){           
-        //     setProductTrigger(false);
-        // }else{
-        //     props.history.push("/productos?");
-        //     setProductTrigger(true);
-        // }
-
-        // setId(id);
-        // setNombre(nomb);
-        // setSubtitulo(subt);
-        // setDescripcion(descripcion);
-        // setImg(img);
-        // setVideo(vid);
-        // handlerURL(id);
-        // props.history.push(categoriaRuta+categoriaActualName+"/"+id)
-
-        // <---LEER: Esto de abajo agrega el id de producto a la url, pero luego no funciona clickear una categoria de la izquierda.
-        // e.preventDefault();
+    const handlerProductTrigger = (id) =>{
         var ruta = categoriaRuta+categoriaActualName
         props.setRutaToProdComp(ruta);
         props.history.push("/producto?"+id);

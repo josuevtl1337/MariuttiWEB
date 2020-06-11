@@ -43,9 +43,11 @@ const ProductoComponent = (props) =>{
     const [categoriaRuta, setCategoriaRuta] = useState("");
     const [categoriaActual, setCategoriaActual] = useState("");
     // const [busqueda, setBusqueda] = useState("");
+    var only3Productos = [];
+    var reversedProduct= []; 
     var productosArray = [];
     var onlyProductos = [];
-    const [ruta, setRuta] = React.useState('Rubro / Subrubro /');
+    const [ruta, setRuta] = React.useState('Catálaogo');
     const [url, setUrl] = React.useState('');
     const [pdf, setPdf] = React.useState('');
     const [prodnombre, setProdNombre] = React.useState('');
@@ -136,7 +138,24 @@ const ProductoComponent = (props) =>{
     if(productos){
         console.log(productos)
         productosArray = Object.values(productos);
-        console.log(props.history)
+
+        productosArray = Object.values(productos);
+        // Reversed para que los mapee por el ultimo cargado y luego mapeo los ultimos 3 con slice (crotada?)
+
+        productosArray.map((item, i) => { 
+            if(item.off == true){ 
+                onlyProductos.push(
+                    {'id':item.id,
+                    'subtitulo':item.subtitulo,
+                    'nombre': item.nombre,
+                    'img':item.img,
+                    'descripcion':item.descripcion},
+                )
+            }                                                                                                    
+        })
+        
+        reversedProduct = onlyProductos.reverse(); 
+        only3Productos = reversedProduct.slice(0,3);
     }
     let search = props.history.location.search.substr(1);
     console.log(search);
@@ -162,6 +181,11 @@ const ProductoComponent = (props) =>{
     const appjstr = () => {
         props.tomarNombre(prodnombre, codproducto)
         props.history.push('/contacto')
+    }
+    const handlerProductTrigger = (id) =>{
+        // var ruta = categoriaRuta+categoriaActualName
+        props.setRutaToProdComp("Producto Recomendado");
+        props.history.push("/producto?"+id);
     }
 
     return (
@@ -292,7 +316,7 @@ const ProductoComponent = (props) =>{
                     </Grid>
                 </Grid>
                 <h3 className="homediv-title prodrel">
-                    Productos Relacionados
+                    Productos Recomendados
                     
                 </h3>
                 <div className="divline prod" style={{marginTop: 0}}/>
@@ -300,10 +324,29 @@ const ProductoComponent = (props) =>{
                 <div className="contenedor-catalogo">
                     
                     {/* Mapear aca, renderear el componente de abajo */}
+                    {/* <ProductosCard
+                        titulo="Black an dequer"
+                        subtitulo="la mejor del condado"
+                    />
                     <ProductosCard
                         titulo="Black an dequer"
                         subtitulo="la mejor del condado"
                     />
+                    <ProductosCard
+                        titulo="Black an dequer"
+                        subtitulo="la mejor del condado"
+                    /> */}
+                    {only3Productos.map((item, i) => {
+                            return (
+                                <ProductosCard 
+                                    handlerOnClick={()=>{handlerProductTrigger(item.id)}}                                     
+                                    img={item.img}
+                                    titulo={item.nombre}
+                                    subtitulo={item.subtitulo}
+                                    key={i}
+                                />                                                                  
+                            );                                                       
+                    })} 
                 </div>
 
                             
