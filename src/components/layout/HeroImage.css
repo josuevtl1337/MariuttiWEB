@@ -30,7 +30,7 @@
     position: absolute;
     z-index: 200;
     /* top: 120px; */
-    top: 100px;
+    top: 20px;
     height: calc(100vh - 100px);
     display: flex;
     justify-content: center;
@@ -148,11 +148,11 @@
 @media only screen and (max-width: 1500px) {
 
     .heroimagewrap{
-        height: calc(100vh);
+        height: calc(120vh);
     }
 
     /* .textbox{
-        margin-top: ;
+        margin-top: 0px;
     } */
 
     .herotitle{
@@ -189,6 +189,13 @@
 }
 
 @media only screen and (max-width: 600px) {
+    .textwrap{
+        top: 70px;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
     
     .heroimagewrap{
         height: 900px;
@@ -202,24 +209,40 @@
 @media only screen and (max-width: 500px) {
 
     .heroimagewrap{
-        height: 90vh;
+        height: 100vh;
         transform: translateY(0px);
     }
 
     .textwrap{
-        margin-top: 100px;
+        top: 210px;
         align-items: flex-start;
     }
 
     .herotitle{
-        font-size: 46px;
+        text-align: center;
+        font-size: 40px;
         line-height: 46px;
+        height: max-content;
+        width: auto;
+    }
+
+    .herotext{
+        margin-top: 16px;
     }
 
     .herobtn{
-        margin-top: 250px;
+        margin-top: 258px;
     }
 }
+
+@media only screen and (max-height: 800px) {
+    .heroimagewrap{
+        height: 110vh;
+        transform: translateY(0px);
+    }
+
+}
+
 
 
 

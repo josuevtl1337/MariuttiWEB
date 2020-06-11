@@ -21,6 +21,7 @@ const Contact = (props)=>{
 
         <Helmet>
           <title>Contacto | Mariutti Hnos</title>
+          <meta name="description" content="Encontrá toda nuestra información de contacto."/>
         </Helmet>
 
         <div className="noticiasbanner contact">

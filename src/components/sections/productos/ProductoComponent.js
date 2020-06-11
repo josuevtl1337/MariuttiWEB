@@ -10,14 +10,14 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Drawer from './Drawer.js'
 import Tooltip from '@material-ui/core/Tooltip';
+import Share from '../../layout/Share'
+import ProductosCard from "./ProductoCard"
+
 
 import "./ProductoComponent.css"
 import { makeStyles } from '@material-ui/core/styles';
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
-import FacebookIcon from '@material-ui/icons/Facebook';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import PinterestIcon from '@material-ui/icons/Pinterest';
 //Importar el storage
 import "firebase/firebase-storage";
 import firebase from "firebase/app"
@@ -274,6 +274,11 @@ const ProductoComponent = (props) =>{
 
                                                     {ifvidexists(item.enlace)}
 
+                                                    <Share
+                                                        url={window.location.href}
+                                                        text={prodnombre + " "}
+                                                    />
+
                                                     {/* <div className="share">
                                                         <h4 className="compartir">Compartir:</h4>
                                                         <div className="shareicons">
@@ -296,28 +301,24 @@ const ProductoComponent = (props) =>{
                                 }                               
                             })}     
                         </div> 
+                            
                     </Grid>
                 </Grid>
                 <h3 className="homediv-title prodrel">
                     Productos Relacionados
-                    {/* {   //Productos destacados                           
-                        onlyProductos.map((item, i) =>{
-                            if(props.busquedaResult!= "" && item.nombre.toUpperCase().includes(props.busquedaResult.toUpperCase())){
-                                return(                                 
-                                    <div onClick={()=>handlerOnClickProducto(item.id,item.nombre,item.descripcion,item.img,item.subtitulo,item.enlace)}>
-                                    <ProductosCard                                      
-                                        img={item.img}
-                                        titulo={item.nombre}
-                                        subtitulo={item.descripcion}
-                                        key={i}
-                                    />   
-                                </div>    
-                                )
-                            }
-                        })
-                    } */}
+                    
                 </h3>
                 <div className="divline prod" style={{marginTop: 0}}/>
+                
+                <div className="contenedor-catalogo">
+                    
+                    {/* Mapear aca, renderear el componente de abajo */}
+                    <ProductosCard
+                        titulo="Black an dequer"
+                        subtitulo="la mejor del condado"
+                    />
+                </div>
+
                             
             </Container>
 

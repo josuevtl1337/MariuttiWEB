@@ -110,6 +110,8 @@ const Home = (props) => {
 
             <Helmet>
                 <title>Mariutti Hnos | Ferretería, Máquinas y Herramientas</title>
+                <meta name="description" content="La ferretería industrial y de construcción más completa de Santa Fe, con más de 50 años a tu servicio. Herramientas manuales y eléctricas, seguridad, sanitarios, electricidad, indumentaria de trabajo, jardinería, madera, aluminio. Hormigoneras, compresores, industria civil, impermeabilizantes, pinturas, aluminio."/>
+                <meta name="keywords" content="ferretería, santa fe, herramientas, herramientas eléctricas, Herramientas manuales y eléctricas, seguridad, sanitarios, electricidad, indumentaria de trabajo, jardinería, madera, aluminio, hormigoneras, compresores, industria civil, impermeabilizantes, pinturas, aluminio"/>
             </Helmet>
 
 
@@ -213,7 +215,7 @@ const Home = (props) => {
                     </div>
 
 
-                    <HomeDivider title="Últimas Noticias" />
+                    <h3 className="homediv-title" style={{marginBottom: 48}}>Últimas Noticias</h3>
                     <div className="listado-entradas home">
                         {onlythree.map((item, i) => {
                             return (

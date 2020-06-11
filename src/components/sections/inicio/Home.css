@@ -122,7 +122,7 @@
     .bluetriangle{
         display: block;
         width: 100%;
-        transform: translateY(calc(-100% + 1px));
+        transform: translateY(calc(-100% + 3px));
     }
 
     .prod-block{
@@ -189,9 +189,9 @@
     }
 }
 
-@media only screen and (max-height: 700px) {
+@media only screen and (max-height: 600px) {
     .bluetriangle{ 
-        display: none;
+        /* display: none; */
     }
 } 
 
