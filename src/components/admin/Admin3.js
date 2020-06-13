@@ -195,64 +195,83 @@ class Admin3 extends Component {
     // });
   }
   
-  ///
-  //Subiendo PRODUCTOS
-  // handleUploadProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,f,oferta,pdf) => (e) =>{
-  //   const file = f;
-  //   const filePdf = pdf;
-  //   if(file != ""){
-  //     uploadingDocument(file);
-  //   }
-  //   if(filePdf != ""){
-  //     uploadingDocument(filePdf);
-  //   }
+  //Handle waiting to upload each file using promise
+  handleEditFiles = (file,fileRef,id) => {
+    var idLocal = id;
+    var timestamp = new Date().getTime()
+    const storageRef = firebase.storage().ref(`imagenes/${file.name+timestamp}`);
+    var task = storageRef.put(file);
+    //Update progress bar
+    task.on('state_changed', snapshot =>{
+      //Mientras carga
+      var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 
+      100;
+      console.log(percentage);
+      // Create a reference to the file to delete
+      var desertRef = firebase.storage().ref(fileRef);
+      // Delete the file
+      desertRef.delete().then(function() {
+      // File deleted successfully
+      console.log("File deleted successfully")
+      }).catch(function(error) {
+        // Uh-oh, an error occurred!
+        alert(error.message)
+      });
+    },//Lo que hgacmeos con los errores
+      error => {
+        console.log(error.message);
+        // reject(error.message);
+    },
+    () => {
+      const db = firebase.database();
+      const dbRef = db.ref("Producto");
+      const productoRef = dbRef.child(idLocal)
+      productoRef.update({
+        img: task.snapshot.metadata.fullPath
+      }).then(()=>window.location.reload());
 
-  //   var timestamp = Math.floor(Date.now() / 1000)
-  //   console.log(files);
-  //   // console.log(Math.floor(Date.now() / 1000))
+    });
+  }
+  //Handle waiting to upload each file using promise
+  handleEditPdf = (file,fileRef,id) => {
+    var idLocal = id;
+    var timestamp = new Date().getTime()
+    const storageRef = firebase.storage().ref(`imagenes/${file.name+timestamp}`);
+    var task = storageRef.put(file);
+    //Update progress bar
+    task.on('state_changed', snapshot =>{
+      //Mientras carga
+      var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 
+      100;
+      console.log(percentage);
+      // Create a reference to the file to delete
+      if(fileRef!=''){
+        var desertRef = firebase.storage().ref(fileRef);
+        // Delete the file
+        desertRef.delete().then(function() {
+          // File deleted successfully
+          console.log("File deleted successfully")
+        }).catch(function(error) {
+          // Uh-oh, an error occurred!
+          console.log("Oh No!")
+        });
+      }
+    },//Lo que hgacmeos con los errores
+      error => {
+        console.log(error.message);
+        // reject(error.message);
+    },
+    () => {
+      const db = firebase.database();
+      const dbRef = db.ref("Producto");
+      const productoRef = dbRef.child(idLocal)
+      productoRef.update({
+        pdf: task.snapshot.metadata.fullPath
+      }).then(()=>window.location.reload());
 
-  //   // console.log(filePdf);
-  //   const storageRef = firebase.storage().ref(`imagenes/${nombre+"_"+timestamp}`);
-  //   //pusheo mi archivo file dentro de mi BD
-  //   const task = storageRef.put(files);
-  //   task.on(
-  //     //Lo que hacmeos mientras sube
-  //     "state_changed",
-  //     snapshot => {
-  //     },
-  //     //Lo que hgacmeos con los errores
-  //     error => {
-  //       console.log(error.message);
-  //     },
-  //     //Lo que hacmeos ni bieen subio la foto
-  //     () => {        
-  //       const record = {
-  //         nombre: nombre,
-  //         subtitulo:subtitulo,
-  //         descripcion:descripcion,
-  //         enlace:enlace,
-  //         sub_rubro: sub_rubro,
-  //         img: task.snapshot.metadata.fullPath,
-  //         off:oferta,
-  //         createdAt: firebase.database.ServerValue.TIMESTAMP
-  //       };
-        
-  //       const db = firebase.database();
-  //       const dbRef = db.ref("Producto");
-  //       const newPicture = dbRef.push();
-  //       newPicture.set(record);
-  //       const postId = newPicture.key;
-  //       console.log(postId);
-  //       newPicture.update({
-  //         "id":postId
-  //       }).then(()=>{
-  //         console.log(postId.id)
-  //         window.location.reload();      
-  //         this.handleClick("Producto");
-  //       }) 
-  //     }   
-  //   );
-  // }
+    });
+  }
+  
   //Subiendo NOTICIAS
   handleUploadNoticia = (nombre,descripcion,f) =>{
     const file = f;
@@ -628,9 +647,9 @@ class Admin3 extends Component {
                         pageSize:10     
                         }}
                         columns={[
-                          { title: 'Titulo', field: 'nombre', filtering:false },
-                          { title: 'Subtitutlo', field: 'subtitulo', filtering:false },
-                          { title: 'Descripcion', field: 'descripcion',
+                          { title: 'Título', field: 'nombre', filtering:false },
+                          { title: 'Subtítutlo', field: 'subtitulo', filtering:false },
+                          { title: 'Descripción', field: 'descripcion',
                             cellStyle:{width:200,minWidth:200},
                             headerStlye:{width:200,minWidth:200},
                             hidden:true,
@@ -643,7 +662,7 @@ class Admin3 extends Component {
                         data={this.state.Producto}
                         detailPanel={[
                           {
-                            tooltip: 'Ver video',
+                            tooltip: 'VIDEO',
                             render: rowData => {
                               return (
                                 <iframe
@@ -663,7 +682,7 @@ class Admin3 extends Component {
                           Action: props => {
                             if(props.action.icon === 'save'){
                               return(
-                              <EditProducto sub_rubros={this.state.Sub_Rubro} handleEditProducto={this.handleEditProducto} datosProductos={props}/>        
+                              <EditProducto sub_rubros={this.state.Sub_Rubro} handleEditProducto={this.handleEditProducto} handleEditFiles={this.handleEditFiles} handleEditPdf={this.handleEditPdf} datosProductos={props}/>        
                               )
                             }
                             if(props.action.icon === 'delete'){

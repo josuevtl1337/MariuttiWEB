@@ -74,22 +74,6 @@ const useStylesSelect = makeStyles(theme => ({
 export default function SimpleModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-    //Seteo los props en mi estado local
-    console.log(props.datosProductos.data.off);
-    setNombre(props.datosProductos.data.nombre); 
-    setSubtitulo(props.datosProductos.data.subtitulo); 
-    setDescripcion(props.datosProductos.data.descripcion); 
-    setSub(props.datosProductos.data.sub_rubro);
-    setOff(props.datosProductos.data.off);
-    setEnlace(props.datosProductos.data.enlace);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
   const classesSelect = useStylesSelect();
   const [subRubro, setSub] = React.useState('');
   const [nombre, setNombre] = React.useState('');
@@ -101,6 +85,36 @@ export default function SimpleModal(props) {
   const [enlace, setEnlace] = React.useState('');
   const [off, setOff] = React.useState('');
   const [file, setFile] = React.useState('');
+  const [pdf, setPdf] = React.useState('');
+  const [fileRef, setFileRef] = React.useState('');
+  const [pdfRef, setPdfRef] = React.useState('');
+  const [fileName, setFileName] = React.useState('');
+  const [pdfName, setPdfName] = React.useState('No hay PDF Cargado');
+
+  const handleOpen = () => {
+    setOpen(true);
+    //Seteo los props en mi estado local
+    console.log(props.datosProductos.data.off);
+    setNombre(props.datosProductos.data.nombre); 
+    setSubtitulo(props.datosProductos.data.subtitulo); 
+    setDescripcion(props.datosProductos.data.descripcion); 
+    setSub(props.datosProductos.data.sub_rubro);
+    setOff(props.datosProductos.data.off);
+    setEnlace(props.datosProductos.data.enlace);
+    setPrecio(props.datosProductos.data.precio);
+    setPrecioAntiguo(props.datosProductos.data.precioAntiguo);
+    setCodigo(props.datosProductos.data.codigo);
+    setFileName("BD: "+props.datosProductos.data.img);
+    setFileRef(props.datosProductos.data.img);
+    if(props.datosProductos.data.pdf!=undefined){
+      setPdfRef(props.datosProductos.data.pdf);
+      setPdfName("BD: "+props.datosProductos.data.pdf);
+    }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleChangeSub = event => {
     setSub(event.target.value);
@@ -130,6 +144,11 @@ export default function SimpleModal(props) {
   }
   const handleFile = e =>{
     setFile(e.target.files[0]);
+    setFileName(e.target.files[0].name)
+  }
+  const handlePdf = e =>{
+    setPdf(e.target.files[0]);
+    setPdfName(e.target.files[0].name)
   }
   const onClickOfertaHandler = e => {
     if (off == false){
@@ -144,10 +163,20 @@ export default function SimpleModal(props) {
     // console.log(subtitulo);
     // console.log("Descripcion:",descripcion);
     // console.log("Enlace:",enlace);
-    // console.log("Imagen:",file);
+    console.log("Imagen:",file);
+    console.log(fileRef)
+    console.log(pdfRef)
     // console.log(subRubro);
     // console.log(props.datosProductos.data);
-    props.handleEditProducto(nombre,subtitulo,descripcion,enlace,subRubro,off,file,props.datosProductos.data.id,precio,precioAntiguo,codigo);
+    // props.handleEditProducto(nombre,subtitulo,descripcion,enlace,subRubro,off,file,props.datosProductos.data.id,precio,precioAntiguo,codigo);
+    if (pdf && file != ''){
+      props.handleEditFiles(file,fileRef,props.datosProductos.data.id);
+      props.handleEditPdf(pdf,pdfRef,props.datosProductos.data.id);
+    }else if(file != ''){
+      props.handleEditFiles(file,fileRef,props.datosProductos.data.id);
+    }else if(pdf != ''){
+      props.handleEditPdf(pdf,pdfRef,props.datosProductos.data.id);
+    }
     // recorriendoArray();
     setOpen(false);
   }
@@ -157,25 +186,7 @@ export default function SimpleModal(props) {
     {item.nombre}
   </option>
 );
-  // {if(props.datosProductos.data.sub_rubro === item.id){
-  //   const  sbEdit = item.id;
-  // }}
 
-  // const recorriendoArray = props.sub_rubros.map((item, key) =>{
-  //   if (props.datosProductos.data.sub_rubro === item.id){
-  //     const sbEdit = item.nombre;
-  //   }return sbEdit;
-  // }
-  // const recorriendoArray = () =>{
-  //   var sbEdit = '';
-  //   const sb = props.sub_rubros;
-  //   sb.forEach(elemento =>{
-  //     if (props.datosProductos.data.sub_rubro === elemento.id){
-  //       sbEdit = elemento.nombre;
-  //       console.log(sbEdit)
-  //     }return sbEdit;
-  //   })
-  // }
 
 
   return (
@@ -274,7 +285,7 @@ export default function SimpleModal(props) {
 
                   <div>
                     <input accept="image/*" className={classes.input} id="icon-button-file" type="file" 
-                    // onChange={handleFile} 
+                    onChange={handleFile} 
                     />
                       <label  htmlFor="icon-button-file">
                       <IconButton  color="primary" aria-label="upload picture" component="span">
@@ -283,7 +294,7 @@ export default function SimpleModal(props) {
                     </label>
                   </div>
 
-                  {/* {nameFile} */}
+                  {fileName}
 
                 </div>
   
@@ -293,7 +304,7 @@ export default function SimpleModal(props) {
                   <div>
 
                     <input className={classes.input} id="icon-button-pdf" type="file" accept="application/pdf" 
-                    // onChange={handlePdf} 
+                    onChange={handlePdf} 
                     />
                     <label  htmlFor="icon-button-pdf">
                       <IconButton  color="primary" aria-label="upload picture" component="span">
@@ -303,19 +314,10 @@ export default function SimpleModal(props) {
 
                   </div>
 
-                  {/* {namePdf} */}
+                  {pdfName}
 
                 </div>
-
-                {/* {Imagen} */}
-                {/* <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={handleFile} />
-                <label  htmlFor="icon-button-file">
-                  <IconButton  color="primary" aria-label="upload picture" component="span">
-                    <PhotoCamera />
-                  </IconButton>
-                </label> */}
   
-    
                 {/* Boton de enviar */}
                 <Button variant="contained" className={classesSelect.color} onClick={handleOnClick}>
                   Guardar
