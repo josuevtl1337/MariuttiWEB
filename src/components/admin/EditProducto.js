@@ -164,17 +164,22 @@ export default function SimpleModal(props) {
     // console.log("Descripcion:",descripcion);
     // console.log("Enlace:",enlace);
     console.log("Imagen:",file);
-    console.log(fileRef)
-    console.log(pdfRef)
+
+
     // console.log(subRubro);
     // console.log(props.datosProductos.data);
-    // props.handleEditProducto(nombre,subtitulo,descripcion,enlace,subRubro,off,file,props.datosProductos.data.id,precio,precioAntiguo,codigo);
-    if (pdf && file != ''){
+    props.handleEditProducto(nombre,subtitulo,descripcion,enlace,subRubro,off,props.datosProductos.data.id,precio,precioAntiguo,codigo);
+    
+    // if (pdf && file != ''){
+    //   props.handleEditFiles(file,fileRef,props.datosProductos.data.id);
+    //   props.handleEditPdf(pdf,pdfRef,props.datosProductos.data.id);
+    // }
+    if(file != ''){
+      // console.log(fileRef)
       props.handleEditFiles(file,fileRef,props.datosProductos.data.id);
-      props.handleEditPdf(pdf,pdfRef,props.datosProductos.data.id);
-    }else if(file != ''){
-      props.handleEditFiles(file,fileRef,props.datosProductos.data.id);
-    }else if(pdf != ''){
+    }
+    if(pdf != ''){
+      // console.log(pdfRef)
       props.handleEditPdf(pdf,pdfRef,props.datosProductos.data.id);
     }
     // recorriendoArray();

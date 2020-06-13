@@ -195,7 +195,7 @@ class Admin3 extends Component {
     // });
   }
   
-  //Handle waiting to upload each file using promise
+  //Editando IMG
   handleEditFiles = (file,fileRef,id) => {
     var idLocal = id;
     var timestamp = new Date().getTime()
@@ -212,10 +212,10 @@ class Admin3 extends Component {
       // Delete the file
       desertRef.delete().then(function() {
       // File deleted successfully
-      console.log("File deleted successfully")
+      console.log("Archivo viejo eliminado")
       }).catch(function(error) {
         // Uh-oh, an error occurred!
-        alert(error.message)
+        console.log("Error: ",error.message)
       });
     },//Lo que hgacmeos con los errores
       error => {
@@ -232,7 +232,7 @@ class Admin3 extends Component {
 
     });
   }
-  //Handle waiting to upload each file using promise
+  //Editando PDF
   handleEditPdf = (file,fileRef,id) => {
     var idLocal = id;
     var timestamp = new Date().getTime()
@@ -250,10 +250,10 @@ class Admin3 extends Component {
         // Delete the file
         desertRef.delete().then(function() {
           // File deleted successfully
-          console.log("File deleted successfully")
+          console.log("Archivo viejo eliminado")
         }).catch(function(error) {
           // Uh-oh, an error occurred!
-          console.log("Oh No!")
+          console.log("Error: ",error.message)
         });
       }
     },//Lo que hgacmeos con los errores
@@ -317,8 +317,8 @@ class Admin3 extends Component {
     );
   }  
   //EDITANDO PRODUCTOS
-  handleEditProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,off,f,id,precio,precioAntiguo,codigo) =>{
-        if(id!=undefined){
+  handleEditProducto = (nombre,subtitulo,descripcion,enlace,sub_rubro,off,id,precio,precioAntiguo,codigo) =>{
+        if(id!=undefined){          
           const db = firebase.database();
           const dbRef = db.ref("Producto");
           const productoRef = dbRef.child(id)
@@ -334,16 +334,8 @@ class Admin3 extends Component {
             "sub_rubro": sub_rubro
           }).then(()=>window.location.reload());
         }else{
-          alert("Ah ocurrido algo inesperado, por favor recargue la página")
+          alert("Actualice la página para seguir modificando")
         }  
-        // newPicture.update(record).then(()=>{
-        //   // console.log(postId.id)
-        //   // this.setState({
-        //   //   loading: false
-        //   // });
-        //   window.location.reload();      
-        //   this.handleClick("Producto");
-        // }) 
  
   }
   //EDITANDO NOTICIAS
