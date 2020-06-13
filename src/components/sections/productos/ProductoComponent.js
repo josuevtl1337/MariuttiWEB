@@ -174,6 +174,27 @@ const ProductoComponent = (props) =>{
             )
         }
     }
+    const ifprecio = (string) => {
+        if(string){
+            return(
+                <h4 className="precio">${string}</h4>
+            )
+        }
+    }
+    const ifprecioantiguo = (string) => {
+        if(string){
+            return(
+                <h4 className="precio_anterior">${string}</h4>
+            )
+        }
+    }
+    const ifcodigo = (string) => {
+        if(string){
+            return(
+                <h4 className="compartir">Cod: {string}</h4>
+            )
+        }
+    }
     const handlePdf = () =>{
         window.open(pdf);
     }
@@ -258,10 +279,10 @@ const ProductoComponent = (props) =>{
                                                     </div>
                                                     <div className="right">
                                                         <h3 className="singleprod-title">{item.nombre}</h3>
-                                                        <h4 className="compartir">{item.codigo}</h4>
+                                                        {ifcodigo(item.codigo)}
                                                         <div className="divline right" style={{marginLeft: 0, marginRight: 0, width: '100%'}}></div>
-                                                        <h4 className="precio">${item.precio}</h4>
-                                                        <h4 className="precio_anterior">${item.precioAntiguo}</h4>
+                                                        {ifprecio(item.precio)}
+                                                        {ifprecioantiguo(item.precioAntiguo)}
                                                         <div className="buttonscontainer">
                                                             <button className="aboutbtn prodstock" onClick={appjstr}>
                                                                 Consultar Stock

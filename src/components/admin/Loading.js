@@ -1,15 +1,17 @@
 import React from "react";
-import load from "./load.gif";
+import './Loading.css'
+
 function Loading(props) {
   return (
-    <React.Fragment>
-      <div className="upp">
-        <div className="col-md-12 centrar">
-  <h1>{props.asd}</h1>
-          <img src={load} alt="" className="lo" />
-        </div>
+    <div class="backdrop">
+      <div className="loadingcontainer">
+
+        <div class="spinner"></div>
+        <div class="logo">cargando admin</div>
+      
       </div>
-    </React.Fragment>
+    </div>
   );
 }
+
 export default Loading;
