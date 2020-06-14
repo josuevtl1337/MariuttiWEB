@@ -83,7 +83,7 @@ export default function SimpleModal(props) {
 
   return (
     <React.Fragment>
-      <div style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={handleOpen}>
+      <div className="tablebtn" style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={handleOpen}>
         <i className="material-icons" style={{marginRight: 4}} >add_circle_outline</i>
         <p style={{margin: 0, fontFamily: 'roboto', fontSize: 14}} >Agregar Noticia</p>
       </div>

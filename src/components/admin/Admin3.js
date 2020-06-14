@@ -496,7 +496,7 @@ class Admin3 extends Component {
 
                                   <div style={{background: 'white', height: '100%', width: '1px'}} />
 
-                                  <div style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={this.refreshpage}>
+                                  <div className="tablebtn" style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={this.refreshpage}>
                                     <i className="material-icons" style={{marginRight: 2}} >refresh</i>
                                     <p style={{margin: 0, fontFamily: 'roboto', fontSize: 14}} >Actualizar</p>
                                   </div>
@@ -643,6 +643,7 @@ class Admin3 extends Component {
                         data={this.state.Producto}
                         detailPanel={[
                           {
+                            icon: 'play_arrow',
                             tooltip: 'Ver video',
                             render: rowData => {
                               return (
@@ -704,7 +705,7 @@ class Admin3 extends Component {
 
                                 <div style={{background: 'white', height: '100%', width: '1px'}} />
 
-                                <div style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={this.refreshpage}>
+                                <div className="tablebtn" style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={this.refreshpage}>
                                   <i className="material-icons" style={{marginRight: 2}} >refresh</i>
                                   <p style={{margin: 0, fontFamily: 'roboto', fontSize: 14}} >Actualizar</p>
                                 </div>
@@ -712,7 +713,10 @@ class Admin3 extends Component {
 
                             </React.Fragment>
 
-                          )              
+                          ),
+
+                            
+
                         }}
                         title="Editor de Productos"
                         
@@ -845,7 +849,7 @@ class Admin3 extends Component {
 
                                 <div style={{background: 'white', height: '100%', width: '1px'}} />
 
-                                <div style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={this.refreshpage}>
+                                <div className="tablebtn" style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={this.refreshpage}>
                                   <i className="material-icons" style={{marginRight: 2}} >refresh</i>
                                   <p style={{margin: 0, fontFamily: 'roboto', fontSize: 14}} >Actualizar</p>
                                 </div>

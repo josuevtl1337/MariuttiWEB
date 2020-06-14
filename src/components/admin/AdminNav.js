@@ -43,7 +43,10 @@ state={
         };
         return (
           <div className="adminnavwrap">
-            <span className="cerrar" onClick={this.props.close}>cerrar sesión</span>
+            <div className="cerrar" onClick={this.props.close}>
+              <i className="material-icons">open_in_new</i>
+              Cerrar sesión
+            </div>
 
             <div className="listarubroswrap">
             

@@ -46,7 +46,7 @@ const Login = (props) => {
                 <h4 style={{color: "red"}} className="center">{props.error}</h4>
                 <TextField required id="standard-required" label="Email"  onChange={handleOnchangeEmail} defaultValue="" />
                 <TextField required id="standard-required" type="password" label="Password" onChange={handleOnchangePW} defaultValue="" />   
-                <Button variant="contained" className={classesSelect.color} onClick={handleSubmit}>Enviar</Button>
+                <Button variant="contained" className={classesSelect.color} onClick={handleSubmit}>Entrar</Button>
             </form>         
           </div>
         </div>

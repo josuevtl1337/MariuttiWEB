@@ -43,6 +43,12 @@ const Contact = (props)=>{
             <h4 className="contactitle" id="izq">Redes</h4>
 
             <div className="redes">
+              
+              <a href="tel:+54 342 453-5318" className="red">
+                <img className="redimg tel" src="https://image.flaticon.com/icons/png/512/455/455705.png" alt="" srcset=""/>
+                <p className="redtxt tel">+54 342 453-5318</p>
+              </a>
+
               <a href="https://www.facebook.com/MARIUTTIFERRETERIAINDUSTRIAL/" className="red" target="_blank">
                 <img className="redimg fb" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/768px-Facebook_Logo_%282019%29.png"/>
                 <p className="redtxt fb">Encontranos en Facebook</p>
@@ -56,11 +62,6 @@ const Contact = (props)=>{
               <a href="https://m.me/ferret.mariutti" className="red" target="_blank">
                 <img className="redimg" src="https://image.flaticon.com/icons/svg/733/733548.svg" alt="" srcset=""/>
                 <p className="redtxt msn">Escribinos en Messenger</p>
-              </a>
-
-              <a href="tel:+54 342 453-5318" className="red">
-                <img className="redimg tel" src="https://image.flaticon.com/icons/png/512/455/455705.png" alt="" srcset=""/>
-                <p className="redtxt tel">+54 342 453-5318</p>
               </a>
               
             </div>
