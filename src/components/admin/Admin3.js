@@ -28,7 +28,7 @@ import AddProducto from "./addProducto";
 import AddNoticia from "./addNoticia";
 import EditProducto from "./EditProducto";
 import EditNoticia from "./EditNoticia";
-import Loading from "./Loading";
+import Loading from "../layout/Loading";
 import ModalPic from "./ModalPic"
 import ModalPdf from "./ModalPdf"
 //Redux
@@ -384,7 +384,7 @@ class Admin3 extends Component {
   render(){ 
         if(this.state.loading){
           return (
-          <Loading/>
+            <Loading text='Cargando admin...'/>
           );
         }
         if(this.state.user==null){
