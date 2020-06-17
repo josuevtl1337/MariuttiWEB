@@ -654,12 +654,8 @@ class Admin3 extends Component {
                         data={this.state.Producto}
                         detailPanel={[
                           {
-<<<<<<< HEAD
                             icon: 'play_arrow',
                             tooltip: 'Ver video',
-=======
-                            tooltip: 'VIDEO',
->>>>>>> f031fb8880149fdde6b26c1adb7ca3d3d8d0a53e
                             render: rowData => {
                               return (
                                 <iframe
