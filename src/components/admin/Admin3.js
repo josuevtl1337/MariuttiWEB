@@ -196,7 +196,7 @@ class Admin3 extends Component {
   }
   
   //Editando IMG
-  handleEditFiles = (file,fileRef,id) => {
+  handleEditFiles = (file,fileRef,id,nombre,subtitulo,descripcion,enlace,sub_rubro,off,precio,precioAntiguo,codigo) => {
     var idLocal = id;
     var timestamp = new Date().getTime()
     const storageRef = firebase.storage().ref(`imagenes/${file.name+timestamp}`);
@@ -223,17 +223,30 @@ class Admin3 extends Component {
         // reject(error.message);
     },
     () => {
-      const db = firebase.database();
-      const dbRef = db.ref("Producto");
-      const productoRef = dbRef.child(idLocal)
-      productoRef.update({
-        img: task.snapshot.metadata.fullPath
-      }).then(()=>window.location.reload());
-
+      if(idLocal!=undefined){          
+        const db = firebase.database();
+        const dbRef = db.ref("Producto");
+        const productoRef = dbRef.child(idLocal)
+        productoRef.update({
+          "nombre": nombre,
+          "subtitulo":subtitulo,
+          "codigo":codigo,
+          "precio":precio,
+          "precioAntiguo":precioAntiguo,
+          "descripcion":descripcion,
+          "enlace":enlace,
+          "off":off,
+          "img": task.snapshot.metadata.fullPath,
+          "sub_rubro": sub_rubro
+        }).then(()=>window.location.reload());
+      }else{
+        alert("Actualice la página para seguir modificando")
+      } 
     });
   }
   //Editando PDF
-  handleEditPdf = (file,fileRef,id) => {
+  handleEditPdf = (file,fileRef,id,nombre,subtitulo,descripcion,enlace,sub_rubro,off,precio,precioAntiguo,codigo) => {
+
     var idLocal = id;
     var timestamp = new Date().getTime()
     const storageRef = firebase.storage().ref(`imagenes/${file.name+timestamp}`);
@@ -262,13 +275,25 @@ class Admin3 extends Component {
         // reject(error.message);
     },
     () => {
-      const db = firebase.database();
-      const dbRef = db.ref("Producto");
-      const productoRef = dbRef.child(idLocal)
-      productoRef.update({
-        pdf: task.snapshot.metadata.fullPath
-      }).then(()=>window.location.reload());
-
+      if(idLocal!=undefined){          
+        const db = firebase.database();
+        const dbRef = db.ref("Producto");
+        const productoRef = dbRef.child(idLocal)
+        productoRef.update({
+          "nombre": nombre,
+          "subtitulo":subtitulo,
+          "codigo":codigo,
+          "precio":precio,
+          "precioAntiguo":precioAntiguo,
+          "descripcion":descripcion,
+          "enlace":enlace,
+          "off":off,
+          "pdf": task.snapshot.metadata.fullPath,
+          "sub_rubro": sub_rubro
+        }).then(()=>window.location.reload());
+      }else{
+        alert("Actualice la página para seguir modificando")
+      }  
     });
   }
   
@@ -633,7 +658,7 @@ class Admin3 extends Component {
                       options={{
                         filtering:true,
                         search: true,
-                        sorting: false,
+                        sorting: true,
                         columnsButton:true,
                         paging:true,    
                         pageSize:10     

@@ -168,7 +168,7 @@ export default function SimpleModal(props) {
 
     // console.log(subRubro);
     // console.log(props.datosProductos.data);
-    props.handleEditProducto(nombre,subtitulo,descripcion,enlace,subRubro,off,props.datosProductos.data.id,precio,precioAntiguo,codigo);
+    // props.handleEditProducto(nombre,subtitulo,descripcion,enlace,subRubro,off,props.datosProductos.data.id,precio,precioAntiguo,codigo);
     
     // if (pdf && file != ''){
     //   props.handleEditFiles(file,fileRef,props.datosProductos.data.id);
@@ -176,11 +176,14 @@ export default function SimpleModal(props) {
     // }
     if(file != ''){
       // console.log(fileRef)
-      props.handleEditFiles(file,fileRef,props.datosProductos.data.id);
+      props.handleEditFiles(file,fileRef,props.datosProductos.data.id,nombre,subtitulo,descripcion,enlace,subRubro,off,precio,precioAntiguo,codigo);
     }
     if(pdf != ''){
       // console.log(pdfRef)
-      props.handleEditPdf(pdf,pdfRef,props.datosProductos.data.id);
+      props.handleEditPdf(pdf,pdfRef,props.datosProductos.data.id,nombre,subtitulo,descripcion,enlace,subRubro,off,precio,precioAntiguo,codigo);
+    }
+    if(pdf == '' && file == ''){
+      props.handleEditProducto(nombre,subtitulo,descripcion,enlace,subRubro,off,props.datosProductos.data.id,precio,precioAntiguo,codigo); 
     }
     // recorriendoArray();
     setOpen(false);
