@@ -1,7 +1,7 @@
 import React , { Component } from 'react';
 import SimpleLogo from '../../visuals/logoplano-small.png'
 import  "./ListaRubros.css"
-import Loading from "./Loading"
+import Loading from "../layout/Loading"
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -43,7 +43,10 @@ state={
         };
         return (
           <div className="adminnavwrap">
-            <span className="cerrar" onClick={this.props.close}>cerrar sesión</span>
+            <div className="cerrar" onClick={this.props.close}>
+              <i className="material-icons">open_in_new</i>
+              Cerrar sesión
+            </div>
 
             <div className="listarubroswrap">
             

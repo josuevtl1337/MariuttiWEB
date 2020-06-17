@@ -3,6 +3,7 @@ import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 import './Home.css'
 import Helmet from 'react-helmet';
+import Loading from "../../layout/Loading"
 
 import HomeDivider from './HomeDivider.js'
 import HomeCard from './HomeCard.js'
@@ -51,7 +52,7 @@ const Home = (props) => {
 
     // Show message while Rubros y Sub_Rubros are loading
     if ( !isLoaded(noticias)  && !isLoaded(productos)) {
-        return <div>Cargando...</div>
+        return <Loading text='Cargando' />
     }
     if(isLoaded(noticias)){
         noticiasArray = Object.values(noticias);

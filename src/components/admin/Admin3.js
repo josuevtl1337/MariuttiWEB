@@ -28,7 +28,7 @@ import AddProducto from "./addProducto";
 import AddNoticia from "./addNoticia";
 import EditProducto from "./EditProducto";
 import EditNoticia from "./EditNoticia";
-import Loading from "./Loading";
+import Loading from "../layout/Loading";
 import ModalPic from "./ModalPic"
 import ModalPdf from "./ModalPdf"
 //Redux
@@ -420,7 +420,7 @@ class Admin3 extends Component {
   render(){ 
         if(this.state.loading){
           return (
-          <Loading/>
+            <Loading text='Cargando admin...'/>
           );
         }
         if(this.state.user==null){
@@ -532,7 +532,7 @@ class Admin3 extends Component {
 
                                   <div style={{background: 'white', height: '100%', width: '1px'}} />
 
-                                  <div style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={this.refreshpage}>
+                                  <div className="tablebtn" style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={this.refreshpage}>
                                     <i className="material-icons" style={{marginRight: 2}} >refresh</i>
                                     <p style={{margin: 0, fontFamily: 'roboto', fontSize: 14}} >Actualizar</p>
                                   </div>
@@ -679,7 +679,12 @@ class Admin3 extends Component {
                         data={this.state.Producto}
                         detailPanel={[
                           {
+<<<<<<< HEAD
+                            icon: 'play_arrow',
+                            tooltip: 'Ver video',
+=======
                             tooltip: 'VIDEO',
+>>>>>>> f031fb8880149fdde6b26c1adb7ca3d3d8d0a53e
                             render: rowData => {
                               return (
                                 <iframe
@@ -740,7 +745,7 @@ class Admin3 extends Component {
 
                                 <div style={{background: 'white', height: '100%', width: '1px'}} />
 
-                                <div style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={this.refreshpage}>
+                                <div className="tablebtn" style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={this.refreshpage}>
                                   <i className="material-icons" style={{marginRight: 2}} >refresh</i>
                                   <p style={{margin: 0, fontFamily: 'roboto', fontSize: 14}} >Actualizar</p>
                                 </div>
@@ -748,7 +753,10 @@ class Admin3 extends Component {
 
                             </React.Fragment>
 
-                          )              
+                          ),
+
+                            
+
                         }}
                         title="Editor de Productos"
                         
@@ -881,7 +889,7 @@ class Admin3 extends Component {
 
                                 <div style={{background: 'white', height: '100%', width: '1px'}} />
 
-                                <div style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={this.refreshpage}>
+                                <div className="tablebtn" style={{display: 'flex', alignItems: 'center', padding: '8px 12px', cursor: 'pointer', color:'#736342'}} onClick={this.refreshpage}>
                                   <i className="material-icons" style={{marginRight: 2}} >refresh</i>
                                   <p style={{margin: 0, fontFamily: 'roboto', fontSize: 14}} >Actualizar</p>
                                 </div>

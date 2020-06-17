@@ -288,9 +288,9 @@
 }
 
 .slideshow li:nth-child(1) span { 
-    /* background-image: url("https://www.estudiohelsinki.com/clientes/mariutti/img-web/Depositphotos_10853155_xl-2015.jpg");  */
+    background-image: url("https://www.estudiohelsinki.com/clientes/mariutti/img-web/Depositphotos_10853155_xl-2015.jpg"); 
     /* background-image: url("https://miro.medium.com/max/9856/1*gAG21NFA76ZlCbtK6SayVQ.jpeg");  */
-    background-image: url("https://firebasestorage.googleapis.com/v0/b/mariuttiweb.appspot.com/o/Layout%2FAlServicio.jpeg?alt=media&token=8f07c0a7-9c6b-4115-b9ee-0245dcd925c7");
+    /* background-image: url("https://firebasestorage.googleapis.com/v0/b/mariuttiweb.appspot.com/o/Layout%2FAlServicio.jpeg?alt=media&token=8f07c0a7-9c6b-4115-b9ee-0245dcd925c7"); */
     animation-delay: 0s; 
     transition: opacity 0.2s;
 
