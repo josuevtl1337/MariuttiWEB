@@ -44,9 +44,9 @@ const Contact = (props)=>{
 
             <div className="redes">
               
-              <a href="tel:+54 342 453-5318" className="red">
-                <img className="redimg tel" src="https://image.flaticon.com/icons/png/512/455/455705.png" alt="" srcset=""/>
-                <p className="redtxt tel">+54 342 453-5318</p>
+              <a href="https://api.whatsapp.com/send?phone=5493425215000&text=Hola" className="red">
+                <img className="redimg tel" src="https://image.flaticon.com/icons/svg/733/733585.svg" alt="" srcset=""/>
+                <p className="redtxt tel">Escribinos por Whatsapp</p>
               </a>
 
               <a href="https://www.facebook.com/MARIUTTIFERRETERIAINDUSTRIAL/" className="red" target="_blank">
