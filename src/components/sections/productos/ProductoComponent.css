@@ -1,6 +1,7 @@
 .noticiasbanner.prod{
     background: url('../../../visuals/prodbanner.png');
     background-position: center;
+    height: 180px;
 }
 
 .containerprod{

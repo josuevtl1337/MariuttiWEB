@@ -16,16 +16,16 @@ const Footer = () => {
                             <a href="https://m.me/ferret.mariutti" className="red" target="_blank">
                                 <img className="redimg footicon" src="https://image.flaticon.com/icons/svg/733/733604.svg" alt="" srcset=""/>
                             </a>
-                            <a href="tel:+54 342 453-5318" className="red">
-                                <img className="redimg footicon" src="https://image.flaticon.com/icons/svg/455/455705.svg" alt="" srcset=""/>
-                            </a>
+                            <a href="https://api.whatsapp.com/send?phone=5493425215000&text=Hola" className="red">
+                            <img className="redimg footicon" src="https://image.flaticon.com/icons/svg/733/733641.svg" alt="" srcset=""/>
+                        </a>
                             <a href="https://www.instagram.com/ferreteria_mariutti/" className="red">
                                 <img className="redimg footicon" src="https://image.flaticon.com/icons/svg/2111/2111491.svg" alt="" srcset=""/>
                             </a>
                         </div>
 
-                        <h5 className="footertext">info@mariutti.com.ar <br/>
-                        +54 (0) 342 453-5318 <br/>
+                        <h5 className="footertext">ventas@mariutti.com.ar <br/>
+                        +54 9 3425 21-5000 <br/>
                         FRANCIA 2399 esq. 1º JUNTA <br/> 
                         (3000) Santa Fe, Argentina</h5>
                         
