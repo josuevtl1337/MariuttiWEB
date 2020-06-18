@@ -332,10 +332,11 @@ class Admin3 extends Component {
             "enlace":enlace,
             "off":off,
             "sub_rubro": sub_rubro
-          }).then(()=>window.location.reload());
+          })
+          // .then(()=> setTimeout(()=>{window.location.reload()}, 1700));
         }else{
           alert("Actualice la página para seguir modificando")
-        }  
+        }
  
   }
   //EDITANDO NOTICIAS

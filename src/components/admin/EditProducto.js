@@ -13,15 +13,17 @@ import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 //Iconos
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import Fab from '@material-ui/core/Fab';
-import Icon from '@material-ui/core/Icon';
-import CreateIcon from '@material-ui/icons/Create';
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -73,6 +75,7 @@ const useStylesSelect = makeStyles(theme => ({
 
 export default function SimpleModal(props) {
   const classes = useStyles();
+  const [alertOpen, setAlertOpen] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const classesSelect = useStylesSelect();
   const [subRubro, setSub] = React.useState('');
@@ -165,6 +168,7 @@ export default function SimpleModal(props) {
     // console.log("Enlace:",enlace);
     console.log("Imagen:",file);
 
+    setAlertOpen(true)
 
     // console.log(subRubro);
     // console.log(props.datosProductos.data);
@@ -190,7 +194,15 @@ export default function SimpleModal(props) {
   <option   value={item.id}  key={key}>
     {item.nombre}
   </option>
-);
+  );
+
+  const handleCloseAlert = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setAlertOpen(false);
+  };
 
 
 
@@ -330,6 +342,11 @@ export default function SimpleModal(props) {
                 </FormControl>
                 </div>  
         </Modal>
+        <Snackbar open={alertOpen} autoHideDuration={1700} onClose={handleCloseAlert}>
+          <Alert onClose={handleCloseAlert} severity="success">
+            ¡Cambios Guardados! Recargue la página para verlos.
+          </Alert>
+        </Snackbar>
       </React.Fragment>
     );
 }
