@@ -2,6 +2,7 @@ import React from 'react'
 import Container from '@material-ui/core/Container';
 import './Noticias.css'
 import Helmet from 'react-helmet';
+import Loading from "../../layout/Loading"
 
 import EntradaCard from './EntradaCard'
 import EntradaMini from '../inicio/EntradaMini'
@@ -17,7 +18,7 @@ const Noticias = (props) => {
     const noticias = useSelector(state => state.firebase.data.Noticia);
     // Show message while Rubros y Sub_Rubros are loading
     if ( !isLoaded(noticias)) {
-        return <div>Cargando...</div>
+        return <Loading text="Cargando Noticias" />
     }
     if(isLoaded(noticias)){
         noticiasArray = Object.values(noticias);

@@ -43,7 +43,8 @@ a{
   height: 100px;
   margin: 0px auto;
   background-color: #fffffff3;
-  background-color: #1A3163;
+  background-color: #fffffffa;
+  /* background-color: #1A3163; */
   /* background: rgba(242, 214, 124, 0.918); */
   font-size: 15px;
   /* box-shadow: 0 0px 21px -3px rgba(0, 0, 0, 0.07); */
@@ -107,9 +108,9 @@ a{
 
 .tab{
   color: #636363;
-  color: rgb(75, 75, 75);
-  color: white;
-  font-weight: 600;
+  color: rgb(129, 129, 129);
+  /* color: white; */
+  font-weight: 500;
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
@@ -265,7 +266,8 @@ a{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: calc(100% + 12px);
+  margin-right: -8px;
 }
 
 .dropbtn{
@@ -277,7 +279,8 @@ a{
 }
 
 .arrow{
-  transition: all 0.3s
+  transition: all 0.3s;
+  margin-left: 6px;
 }
 
 .arrow.active{

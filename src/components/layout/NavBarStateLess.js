@@ -17,7 +17,6 @@ import { useSelector } from 'react-redux'
 import Logo from '../../visuals/logoplano-small.png'
 
 
-
 const NavBarStateLess = (props) => {
 
     
@@ -169,11 +168,11 @@ const NavBarStateLess = (props) => {
                         <a href="https://www.facebook.com/MARIUTTIFERRETERIAINDUSTRIAL/" className="red" target="_blank">
                             <img className="redimg fb footicon navicon" src="https://image.flaticon.com/icons/svg/1384/1384005.svg"/>
                         </a>
+                        <a href="https://api.whatsapp.com/send?phone=5493425215000&text=Hola" className="red">
+                            <img className="redimg footicon navicon" src="https://image.flaticon.com/icons/svg/733/733641.svg" alt="" srcset=""/>
+                        </a>
                         <a href="https://m.me/ferret.mariutti" className="red" target="_blank">
                             <img className="redimg footicon navicon" src="https://image.flaticon.com/icons/svg/733/733604.svg" alt="" srcset=""/>
-                        </a>
-                        <a href="tel:+54 342 453-5318" className="red">
-                            <img className="redimg footicon navicon" src="https://image.flaticon.com/icons/svg/455/455705.svg" alt="" srcset=""/>
                         </a>
                         <a href="https://www.instagram.com/ferreteria_mariutti/" className="red" target="_blank">
                             <img className="redimg footicon navicon" src="https://image.flaticon.com/icons/svg/2111/2111491.svg" alt="" srcset=""/>
@@ -186,7 +185,7 @@ const NavBarStateLess = (props) => {
                             <p style={{color: 'white', fontSize: 12}}>ventas@mariutti.com.ar</p>
                             <div className="contact-divider"></div>
                             <PhoneIcon style={{color: 'white', fontSize: 18, marginRight: '5px'}}/>
-                            <p style={{color: 'white', fontSize: 12}}>+54 342 453-5318</p>
+                            <p style={{color: 'white', fontSize: 12}}>+54 9 3425 21-5000</p>
                         </div>
                     </div>
 
@@ -224,7 +223,7 @@ const NavBarStateLess = (props) => {
 
                             
                             <Link to="/noticias">
-                                <Tab isActive={window.location.href.includes('noticias')} titulo="Novedades"/>
+                                <Tab isActive={window.location.href.includes('noticias') || window.location.href.includes('entrada')} titulo="Novedades"/>
                             </Link>
                             <Link to="/contacto">
                                 <Tab isActive={window.location.href.includes('contacto')} titulo="Contáctenos"/>

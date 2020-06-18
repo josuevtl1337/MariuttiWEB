@@ -402,7 +402,7 @@ class Admin3 extends Component {
         }).then(()=>window.location.reload());
         }else{
           alert("Actualice la página para seguir modificando")
-        }  
+        }
  
   }
   //EDITANDO NOTICIAS

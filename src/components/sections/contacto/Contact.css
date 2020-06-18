@@ -68,7 +68,7 @@
 }
 
 .redimg.tel{
-    filter: invert(51%) sepia(66%) saturate(4344%) hue-rotate(90deg) brightness(98%) contrast(108%);
+    /* filter: invert(51%) sepia(66%) saturate(4344%) hue-rotate(90deg) brightness(98%) contrast(108%); */
 }
 
 .redtxt{
