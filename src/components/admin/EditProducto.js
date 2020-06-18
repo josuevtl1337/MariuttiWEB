@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
@@ -21,6 +21,7 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
 import CreateIcon from '@material-ui/icons/Create';
+// import { animateScroll } from "react-scroll";
 
 
 const useStyles = makeStyles(theme => ({
@@ -72,6 +73,7 @@ const useStylesSelect = makeStyles(theme => ({
 }));
 
 export default function SimpleModal(props) {
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const classesSelect = useStylesSelect();
@@ -92,6 +94,8 @@ export default function SimpleModal(props) {
   const [pdfName, setPdfName] = React.useState('No hay PDF Cargado');
 
   const handleOpen = () => {
+    // this.scrollToBottom();
+
     setOpen(true);
     //Seteo los props en mi estado local
     console.log(props.datosProductos.data.off);

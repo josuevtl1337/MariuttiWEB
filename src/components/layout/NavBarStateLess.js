@@ -32,9 +32,9 @@ const NavBarStateLess = (props) => {
     const [dropdown, setDropdown] = React.useState("");
     const [search, setSearch] = React.useState(false);
     const [drop, setDrop] = React.useState(false);
-    const maquinas = [];
-    const construccion = [];
-    const ferreteria = [];
+    let maquinas = [];
+    let construccion = [];
+    let ferreteria = [];
 
     if(sub_rubros){
         const categorias = Object.values(sub_rubros);
@@ -48,6 +48,20 @@ const NavBarStateLess = (props) => {
             }
         })
     }
+
+    maquinas.sort(sortFunction);
+    construccion.sort(sortFunction);
+    ferreteria.sort(sortFunction);
+
+    function sortFunction(a, b) {
+        if (a[1] === b[1]) {
+            return 0;
+        }
+        else {
+            return (a[1] < b[1]) ? -1 : 1;
+        }
+    }
+
 
     const showSearchbar = () => {
         if (search == false) {
@@ -118,14 +132,23 @@ const NavBarStateLess = (props) => {
     }
   
     // Build an array of items
+
+
+    //WITH SECOND COLUMN+
+
+
+    // console.log(maquinas[i][1].sort())
     let array = [];
     for(let i = 0; i < maquinas.length; i++) {
+        // console.log(maquinas[i][2])
+        // console.log(maquinas[i][1].sort())
         array.push(
             <li className="dropli" key={maquinas[i][0]} onClick={() => onChangeDropDown(maquinas[i][0],maquinas[i][1],"Máquinas y Herramientas / " )}>{maquinas[i][1]}</li>
         );
     }
     let arrayConstruccion = [];
     for(let i = 0; i < construccion.length; i++) {
+        construccion[1].sort();
         arrayConstruccion.push(
             <li className="dropli" key={construccion[i][0]}  onClick={() => onChangeDropDown(construccion[i][0],construccion[i][1],"Obras y Construcción / " )}>{construccion[i][1]}</li>
         );
@@ -136,7 +159,6 @@ const NavBarStateLess = (props) => {
             <li className="dropli" key={ferreteria[i][0]}  onClick={() => onChangeDropDown(ferreteria[i][0],ferreteria[i][1],"Ferretería Industrial / " )}>{ferreteria[i][1]}</li>
         );
     }
-
 
     return (
         <React.Fragment>

@@ -60,41 +60,54 @@ class Admin3 extends Component {
       this.setState({ user });
     })
     //Importo todos los datos necesarios a variables de una sola vez.
-     const importingData = () =>{
-      const dbRefRubro = db.ref("Rubro");
-      dbRefRubro.on("child_added", snapshot => {
-        this.setState({
-          Rubro: this.state.Rubro.concat(snapshot.val())
-        });
-      });
-        const dbRefSub_Rubro = db.ref("Sub_Rubro");
-        dbRefSub_Rubro.on("child_added", snapshot => {
-          this.setState({
-            Sub_Rubro: this.state.Sub_Rubro.concat(snapshot.val())
-          });
-
-        });
-        const dbRefProducto = db.ref("Producto");
-        dbRefProducto.on("child_added", snapshot => {
-          this.setState({
-            Producto: this.state.Producto.concat(snapshot.val())       
-          });
-        });
-        const dbRefNoticia = db.ref("Noticia");
-        dbRefNoticia.on("child_added", snapshot => {
-          this.setState({
-            Noticia: this.state.Noticia.concat(snapshot.val())
-          });
-        });       
-      }
+ 
       //Doy un delay de 2segundos para cargar los datos
       setTimeout(() => {
         this.setState({
           loading:false
         })
       }, 2000);
-      importingData();
+      this.importingData();
 
+  }
+  importingData = () =>{
+    const db = firebase.database();
+    const dbRefRubro = db.ref("Rubro");
+    dbRefRubro.on("child_added", snapshot => {
+      this.setState({
+        Rubro: this.state.Rubro.concat(snapshot.val())
+      });
+    });
+      const dbRefSub_Rubro = db.ref("Sub_Rubro");
+      dbRefSub_Rubro.on("child_added", snapshot => {
+        this.setState({
+          Sub_Rubro: this.state.Sub_Rubro.concat(snapshot.val())
+        });
+
+      });
+      const dbRefProducto = db.ref("Producto");
+      dbRefProducto.on("child_added", snapshot => {
+        this.setState({
+          Producto: this.state.Producto.concat(snapshot.val())       
+        });
+      });
+      const dbRefNoticia = db.ref("Noticia");
+      dbRefNoticia.on("child_added", snapshot => {
+        this.setState({
+          Noticia: this.state.Noticia.concat(snapshot.val())
+        });
+      });       
+  }
+  importProductos = () =>{
+    const db = firebase.database();
+    const dbRefProducto = db.ref("Producto");
+    dbRefProducto.on("child_added", snapshot => {
+      this.setState({
+        Producto: this.state.Producto.concat(snapshot.val())       
+      });
+    });
+    // this.importingData();
+    console.log(this.state.Producto)
   }
   //Este método sirve para cambiar la tabla dependiendo a cual le das click
   handleClick = (param) =>{
@@ -357,7 +370,7 @@ class Admin3 extends Component {
             "enlace":enlace,
             "off":off,
             "sub_rubro": sub_rubro
-          }).then(()=>window.location.reload());
+          }).then(()=>this.importProductos());
         }else{
           alert("Actualice la página para seguir modificando")
         }  
@@ -475,7 +488,7 @@ class Admin3 extends Component {
                           ]}
                           options={{
                             search: true,
-                            sorting: false,
+                            sorting: true,
                             columnsButton:true,
                             paging:true,    
                             pageSize:10,      
@@ -677,14 +690,11 @@ class Admin3 extends Component {
                         ]}
                         
                         data={this.state.Producto}
+
                         detailPanel={[
                           {
-<<<<<<< HEAD
                             icon: 'play_arrow',
                             tooltip: 'Ver video',
-=======
-                            tooltip: 'VIDEO',
->>>>>>> f031fb8880149fdde6b26c1adb7ca3d3d8d0a53e
                             render: rowData => {
                               return (
                                 <iframe
@@ -837,7 +847,7 @@ class Admin3 extends Component {
                       ]}
                       options={{
                         search: true,
-                        sorting: false,
+                        sorting: true,
                         columnsButton:true, 
                         paging:true,    
                         pageSize:10         

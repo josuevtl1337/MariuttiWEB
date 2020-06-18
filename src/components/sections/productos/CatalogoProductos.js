@@ -38,6 +38,7 @@ const CatalogoProductos = (props) =>{
         })
         console.log(onlyProductos);
         console.log(re);
+        re.reverse()
     }
     const handlerOnClickProducto = (id,nombre,descripcion,img,subtitulo,video) =>{
         props.productTrigger(id,nombre,descripcion,img,subtitulo,video);
