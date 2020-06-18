@@ -63,6 +63,34 @@ class Admin3 extends Component {
  
       //Doy un delay de 2segundos para cargar los datos
       setTimeout(() => {
+        const importingData = () =>{
+          const db = firebase.database();
+          const dbRefRubro = db.ref("Rubro");
+          dbRefRubro.on("child_added", snapshot => {
+            this.setState({
+              Rubro: this.state.Rubro.concat(snapshot.val())
+            });
+          });
+            const dbRefSub_Rubro = db.ref("Sub_Rubro");
+            dbRefSub_Rubro.on("child_added", snapshot => {
+              this.setState({
+                Sub_Rubro: this.state.Sub_Rubro.concat(snapshot.val())
+              });
+      
+            });
+            const dbRefProducto = db.ref("Producto");
+            dbRefProducto.on("child_added", snapshot => {
+              this.setState({
+                Producto: this.state.Producto.concat(snapshot.val())       
+              });
+            });
+            const dbRefNoticia = db.ref("Noticia");
+            dbRefNoticia.on("child_added", snapshot => {
+              this.setState({
+                Noticia: this.state.Noticia.concat(snapshot.val())
+              });
+            });       
+        }
         this.setState({
           loading:false
         })
@@ -370,7 +398,8 @@ class Admin3 extends Component {
             "enlace":enlace,
             "off":off,
             "sub_rubro": sub_rubro
-          }).then(()=>this.importProductos());
+          // }).then(()=>this.importProductos());
+        }).then(()=>window.location.reload());
         }else{
           alert("Actualice la página para seguir modificando")
         }  
