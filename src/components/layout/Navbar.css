@@ -132,6 +132,15 @@ a{
   background: #e12129;
 }
 
+.tab.dropclick{
+  color: #e12129;
+  border-width: 1px;
+  border-color: #e12129;
+  border-style: solid;
+  width: calc(100% - 2px);
+  transform: translateX(2px);
+}
+
 .barra{
   height: 100%;
   display: flex;

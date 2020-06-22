@@ -118,7 +118,7 @@ const NavBarStateLess = (props) => {
 
     const dropTrigger = () => {
         if(!window.location.href.includes('producto')){
-            if (drop == false){
+            if (drop == false) {
                 setDrop(true);
             } else {
                 setDrop(false)
@@ -206,7 +206,7 @@ const NavBarStateLess = (props) => {
 
                             <ClickAwayListener onClickAway={closeTrigger}>
                                 <div className="prodtab">
-                                    <Tab isActive={window.location.href.includes('producto') || window.location.href.includes('Producto')} titulo={<span className="productotab">Productos <i className={dropbtnclasses}>arrow_drop_down</i></span>} click={dropTrigger}/>
+                                    <Tab dropActive={drop} isActive={window.location.href.includes('producto') || window.location.href.includes('Producto')} titulo={<span className="productotab">Productos <i className={dropbtnclasses}>arrow_drop_down</i></span>} click={dropTrigger}/>
                                         {/* Dropdown Productos */} 
                                         <div className={dropclasses}>
                                             <ul className="drop-categorias-list">
@@ -216,7 +216,7 @@ const NavBarStateLess = (props) => {
                                                 {arrayConstruccion}
                                                 <p className="drop-rubro">Ferretería Industrial</p>
                                                 {arrayFerreteria}
-                                            </ul>                          
+                                            </ul>
                                         </div>
                                 </div>
                             </ClickAwayListener>

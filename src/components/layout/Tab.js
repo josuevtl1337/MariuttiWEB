@@ -10,9 +10,15 @@ class Tab extends React.Component {
                 // <i className="material-icons arrow">{this.props.icon}</i>
             )
         } else {
-            return(
-                <div className="tab" onClick={this.props.click}>{this.props.titulo}</div>
-            )
+            if (this.props.dropActive === true) {
+                return(
+                    <div className="tab dropclick" onClick={this.props.click}>{this.props.titulo}</div>
+                )
+            } else {
+                return(
+                    <div className="tab" onClick={this.props.click}>{this.props.titulo}</div>
+                )
+            }
         }
     }
 }
