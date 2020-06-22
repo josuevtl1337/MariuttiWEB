@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 import ProductosCard from "./ProductoCard"
@@ -10,6 +10,7 @@ const CatalogoProductos = (props) =>{
     ])
 
     const productos = useSelector(state => state.firebase.data.Producto)
+    const [contBusqueda, setContBusqueda] = useState(false);
     var onlyProductos = [];
     var productosArray = [];
     var re = [];
@@ -48,7 +49,8 @@ const CatalogoProductos = (props) =>{
             }
         })
 
-        if(arrcont == null){
+
+        if (arrcont == null && props.busquedaResult == false ){
             emptyreturn = 
             <div className="categoria-vacia">
                 <img src="https://image.flaticon.com/icons/png/512/2422/2422178.png" alt="" className="nocatimg"/>
@@ -92,6 +94,7 @@ return(
         <div className="contenedor-catalogo">
             {re.map((item, i) => {                             
                 if(props.categoriaActual == item.sub_rubro){
+                   
                     return (
                         <div onClick={()=>handlerOnClickProducto(item.id,item.nombre,item.descripcion,item.img,item.subtitulo,item.enlace)}>
                             <ProductosCard                                      
@@ -108,6 +111,7 @@ return(
                 //Productos destacados                           
                 onlyProductos.map((item, i) =>{
                     if(props.categoriaActual == "" && props.busquedaResult==""){
+                        
                         return(                                 
                             <div onClick={()=>handlerOnClickProducto(item.id,item.nombre,item.descripcion,item.img,item.subtitulo,item.enlace)}>
                             <ProductosCard                                      
@@ -123,7 +127,7 @@ return(
             }
             {   //Productos Busqueda                          
                 re.map((item, i) =>{
-                    if(props.busquedaResult!= "" && item.nombre.toUpperCase().includes(props.busquedaResult.toUpperCase())){
+                    if(props.busquedaResult!= "" && item.nombre.toUpperCase().includes(props.busquedaResult.toUpperCase())){               
                         return(                                 
                             <div onClick={()=>handlerOnClickProducto(item.id,item.nombre,item.descripcion,item.img,item.subtitulo,item.enlace)}>
                             <ProductosCard
@@ -134,7 +138,7 @@ return(
                             />   
                         </div>    
                         )
-                    }
+                    }   
                 })
             }
             {emptyreturn}
