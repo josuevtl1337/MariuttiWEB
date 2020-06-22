@@ -48,7 +48,18 @@ const CatalogoProductos = (props) =>{
             }
         })
 
-        if(arrcont == null){
+        // if(arrcont == null){
+        //     emptyreturn = 
+        //     <div className="categoria-vacia">
+        //         <img src="https://image.flaticon.com/icons/png/512/2422/2422178.png" alt="" className="nocatimg"/>
+        //         <h3 className="nocattitle">¡Ups! Parece que no hay nada aquí.</h3>
+        //         <p className="nocattext">Esta categoría aún no tiene productos. Estamos trabajando para brindarte el mejor servicio.</p>
+        //     </div>
+        // } else {
+        //     emptyreturn = null;
+        // }
+
+        if(arrcont == null && props.busquedaResult == false){
             emptyreturn = 
             <div className="categoria-vacia">
                 <img src="https://image.flaticon.com/icons/png/512/2422/2422178.png" alt="" className="nocatimg"/>
@@ -66,25 +77,6 @@ const CatalogoProductos = (props) =>{
         // props.history.push("/producto?" + id);
         // setProductoState(true);
         // console.log(productoState);
-    }
-
-    const categoriaVacia = () =>{
-        productosArray.map((item, i) => {                             
-            if(props.categoriaActual == item.sub_rubro){
-                arrcont.push(item.nombre)
-            }
-        })
-        console.log("Contador" + arrcont)
-        if(arrcont == null){
-            alert("hola")
-            // return(
-            //     <div className="categoria-vacia">
-            //         <img src="https://image.flaticon.com/icons/png/512/2422/2422178.png" alt="" className="nocatimg"/>
-            //         <h3 className="nocattitle">¡Ups! Parece que no hay nada aquí.</h3>
-            //         <p className="nocattext">Esta categoría aún no tiene productos. Estamos trabajando para brindarte el mejor servicio.</p>
-            //     </div>
-            // );
-        }
     }
 
 return(
