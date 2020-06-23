@@ -137,6 +137,18 @@ const Productos = (props) => {
                 ferreteria.push([elemento.id, elemento.nombre])
             }
         })
+    maquinas.sort(sortFunction);
+    construccion.sort(sortFunction);
+    ferreteria.sort(sortFunction);
+
+    function sortFunction(a, b) {
+        if (a[1] === b[1]) {
+            return 0;
+        }
+        else {
+            return (a[1] < b[1]) ? -1 : 1;
+        }
+    }    
         // props.trayendoCategorias(categorias);
     }
     if(productos){

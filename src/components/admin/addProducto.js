@@ -23,20 +23,22 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles(theme => ({
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    width:'50%',
-    display:'flex',
-    flexDirection:'column',
-    alignItems:'center',
-    justifyContent:'space-around'
-  },
   input: {
     display: 'none',
+  },
+  modalStyle : { 
+    height:"600px",
+    overflow:'scroll',
+    overflowX:'hidden'
   },
 }));
 const useStylesSelect = makeStyles(theme => ({
   formControl: {
+    // disableScrollLock:true,
+    // overFlow:'scroll',
+    // height:"600px",
+    // overflow:'scroll',
+    // overflowX:'hidden',
     margin: theme.spacing(1),
     width: '85%',
     // height: 600,
@@ -196,12 +198,13 @@ export default function SimpleModal(props) {
         style={{overflow: 'auto', }}
       >
         <div className="addprodform">
-          <h3 className="modaltitle">Nuevo Producto</h3>
+
 
           {/* Sub-Rubro */}
               
           <FormControl className={classesSelect.formControl}>
-
+          <h1 className="modaltitle">t</h1>
+          <h3 className="modaltitle">t</h3>
             <InputLabel id="sbLabel" ></InputLabel>
             <Select
               id="sub_rubro"

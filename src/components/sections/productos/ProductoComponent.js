@@ -23,6 +23,9 @@ import "firebase/firebase-storage";
 import firebase from "firebase/app"
 import SearchBar from "./SearchBar"
 
+import { createHashHistory } from 'history';
+export const history = createHashHistory();
+
 const useStyles = makeStyles(theme => ({
     root: {
       flexGrow: 1,
@@ -112,6 +115,18 @@ const ProductoComponent = (props) =>{
                 ferreteria.push([elemento.id, elemento.nombre])
             }
         })
+        maquinas.sort(sortFunction);
+        construccion.sort(sortFunction);
+        ferreteria.sort(sortFunction);
+    
+        function sortFunction(a, b) {
+            if (a[1] === b[1]) {
+                return 0;
+            }
+            else {
+                return (a[1] < b[1]) ? -1 : 1;
+            }
+        }   
         // props.trayendoCategorias(categorias);
     }
 
@@ -208,6 +223,20 @@ const ProductoComponent = (props) =>{
         props.setRutaToProdComp("Producto Recomendado");
         props.history.push("/producto?"+id);
     }
+    const buscandoResultado = (param) => {
+        props.history.push("productos?");
+        // if(param!=""){
+        //     // props.dropdownResult="";
+        //     // setCategoriaRuta("");
+        //     // setCategoriaActual("");
+        //     // setCategoriaActualName("Resultados de la busqueda "+"'"+param.toString()+"'"); 
+        //     // setBusqueda(param);
+        // } 
+
+        // if(window.innerWidth < 960) {
+        //     setScrollPos(520)
+        // }
+    }
 
     return (
         <div className="containerprod">
@@ -228,6 +257,7 @@ const ProductoComponent = (props) =>{
                         <h4>Categorías</h4>
                         <Divider style={{marginBottom: 28}}/>
                         {/* <SearchBar buscando={buscandoResultado}/> */}
+                        <SearchBar buscando={buscandoResultado}/>
                         <Drawer titulo="Construcción" handlerRuta={handleClickRubro} handler={handleClick} categorias={construccion}/>
                         <Drawer titulo="Máquinas y Herramientas" handlerRuta={handleClickRubro} handler={handleClick} categorias={maquinas}/>
                         <Drawer titulo="Ferretería Industrial" handlerRuta={handleClickRubro} handler={handleClick} categorias={ferreteria}/>
