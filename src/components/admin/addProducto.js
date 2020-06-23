@@ -138,7 +138,6 @@ export default function SimpleModal(props) {
         : null;
     }
     setEnlace("//www.youtube.com/embed/" + getId(e.target.value));
-    console.log("URL :" + enlace)
   }
   const handleFile = e =>{
     setNameFile(<h4>{e.target.files[0].name} <span style={{color: 'green'}}>✓</span></h4>);

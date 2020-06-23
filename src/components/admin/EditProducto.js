@@ -150,7 +150,15 @@ export default function SimpleModal(props) {
     setDescripcion(e.target.value);
   }
   const onChangeEnlace = e => {
-    setEnlace(e.target.value);
+    function getId(url) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+      const match = url.match(regExp);
+  
+      return (match && match[2].length === 11)
+        ? match[2]
+        : null;
+    }
+    setEnlace("//www.youtube.com/embed/" + getId(e.target.value));
   }
   const handleFile = e =>{
     setFile(e.target.files[0]);
