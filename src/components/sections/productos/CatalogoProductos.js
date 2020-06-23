@@ -15,6 +15,8 @@ const CatalogoProductos = (props) =>{
     var re = [];
     var arrcont;
     var emptyreturn;
+    var searchcont;
+    var emptysearch;
 
 
     if(productos){
@@ -48,27 +50,36 @@ const CatalogoProductos = (props) =>{
             }
         })
 
-        // if(arrcont == null){
-        //     emptyreturn = 
-        //     <div className="categoria-vacia">
-        //         <img src="https://image.flaticon.com/icons/png/512/2422/2422178.png" alt="" className="nocatimg"/>
-        //         <h3 className="nocattitle">¡Ups! Parece que no hay nada aquí.</h3>
-        //         <p className="nocattext">Esta categoría aún no tiene productos. Estamos trabajando para brindarte el mejor servicio.</p>
-        //     </div>
-        // } else {
-        //     emptyreturn = null;
-        // }
+        re.map((item, i) =>{
+            if(props.busquedaResult!= "" && item.nombre.toUpperCase().includes(props.busquedaResult.toUpperCase())){
+                searchcont++
+            }
+        })
 
         if(arrcont == null && props.busquedaResult == false){
             emptyreturn = 
             <div className="categoria-vacia">
                 <img src="https://image.flaticon.com/icons/png/512/2422/2422178.png" alt="" className="nocatimg"/>
-                <h3 className="nocattitle">¡Ups! Parece que no hay nada aquí.</h3>
+                <h3 className="nocattitle">Próximamente.</h3>
                 <p className="nocattext">Esta categoría aún no tiene productos. Estamos trabajando para brindarte el mejor servicio.</p>
-            </div>
+            </div>;
+
+
         } else {
             emptyreturn = null;
+            if(searchcont == null){
+                emptysearch = 
+                <div className="categoria-vacia">
+                    <img src="https://image.flaticon.com/icons/png/512/2422/2422178.png" alt="" className="nocatimg"/>
+                    <h3 className="nocattitle">no busq.</h3>
+                    <p className="nocattext">Esta categoría aún no tiene productos. Estamos trabajando para brindarte el mejor servicio.</p>
+                </div>
+            } else {
+                emptysearch = null;
+            }
         }
+
+        
         
     }
     const handlerOnClickProducto = (id,nombre,descripcion,img,subtitulo,video) =>{
@@ -130,6 +141,7 @@ return(
                 })
             }
             {emptyreturn}
+            {emptysearch}
         </div>
     </React.Fragment>
 );

@@ -50,16 +50,15 @@
     margin: 0;
     margin-top: 14px;
     font-size: 24px;
-    font-weight: 400;
+    font-weight: 500;
     color: rgb(71, 71, 71);
     text-align: center;
 }
 
 .nocattext{
     font-family: 'oswald';
-    font-weight: 300;
     text-align: center;
-    color: rgb(71, 71, 71);
+    color: rgb(109, 109, 109);
     font-size: 18px;
     padding: 0 8px;
     margin-top: 16px;

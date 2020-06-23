@@ -146,45 +146,47 @@ class App extends Component {
     }
 
     return (
-      <BrowserRouter>
-        <div>
-        {messenger}
-        </div>
-        {cfg}
-        {navbar}
-        {sidenav}
-        {backdrop}
-        {searchbar}
-        {/* {searchbarProduct} */}
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/nosotros" component={About} />
-          {/* <Route path="/producto" component={ProductoComponent} />  */}
-          <Route path="/noticias" component={Noticias} />
-          <Route path="/entrada" component={Entrada} />
-          <Route path="/login" component={Login} />
-        </Switch>
-        {/* <Route path="/productos" component={ProdComp} /> */}
-        <Route
-            path='/producto'
-            render={(props) => <ProductoComponent {...props} categoriaActualHandler={this.categoriaActualHandler} cleanUp={this.cleanUpDropdown} tomarNombre={this.textoStock} rutaToProdComp={this.state.rutaToProdComp} setRutaToProdComp={this.setRutaToProdComp}/>}
-        />
-        <Route
-            path='/productos'
-            render={(props) => <Productos {...props} categoriaSet={this.state.categoriaActual} categoriaNombre={this.state.categoriaActualNombre} categoriaActualCleanUp={this.categoriaActualCleanUp}
-            dropdownResult={this.state.dropdown} dropdownResultName={this.state.dropdownName} setRutaToProdComp={this.setRutaToProdComp}
-            cleanUp={this.cleanUpDropdown}/>}
-        />
-        <Route
-            path='/busqueda'
-            render={(props) => <SearchResult {...props} busquedaResult={this.state.busqueda} />}
-        />
-        <Route 
-          path="/contacto"
-          render= {(props => <Contact {...props} mensaje={this.state.mensajeStock} />)}
-        />
+      <BrowserRouter className="bodi">
+        <div className="content">
 
-        {footer}
+          <div>{messenger}</div>
+          {cfg}
+          {navbar}
+          {sidenav}
+          {backdrop}
+          {searchbar}
+          {/* {searchbarProduct} */}
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/nosotros" component={About} />
+            {/* <Route path="/producto" component={ProductoComponent} />  */}
+            <Route path="/noticias" component={Noticias} />
+            <Route path="/entrada" component={Entrada} />
+            <Route path="/login" component={Login} />
+          </Switch>
+          {/* <Route path="/productos" component={ProdComp} /> */}
+          <Route
+              path='/producto'
+              render={(props) => <ProductoComponent {...props} categoriaActualHandler={this.categoriaActualHandler} cleanUp={this.cleanUpDropdown} tomarNombre={this.textoStock} rutaToProdComp={this.state.rutaToProdComp} setRutaToProdComp={this.setRutaToProdComp}/>}
+          />
+          <Route
+              path='/productos'
+              render={(props) => <Productos {...props} categoriaSet={this.state.categoriaActual} categoriaNombre={this.state.categoriaActualNombre} categoriaActualCleanUp={this.categoriaActualCleanUp}
+              dropdownResult={this.state.dropdown} dropdownResultName={this.state.dropdownName} setRutaToProdComp={this.setRutaToProdComp}
+              cleanUp={this.cleanUpDropdown}/>}
+          />
+          <Route
+              path='/busqueda'
+              render={(props) => <SearchResult {...props} busquedaResult={this.state.busqueda} />}
+          />
+          <Route 
+            path="/contacto"
+            render= {(props => <Contact {...props} mensaje={this.state.mensajeStock} />)}
+          />
+
+          {footer}
+
+        </div>
       </BrowserRouter>
     );
   }

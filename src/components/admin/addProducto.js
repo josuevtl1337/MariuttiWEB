@@ -53,6 +53,14 @@ const useStylesSelect = makeStyles(theme => ({
       backgroundColor: '#FDB913'
     }
   },
+  color2:{
+    backgroundColor: '#274582',
+    color: '#ffffff',
+    width: 100,
+    '&:hover': {
+      backgroundColor: '#FDB913'
+    }
+  },
   flexHorizontal: {
     display: 'flex',
     flexDirection: 'row',
@@ -182,11 +190,10 @@ export default function SimpleModal(props) {
       </div>
 
       <Modal
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
         open={open}
+        disableBackdropClick="false"
         onClose={handleClose}
-        style={{overflow: 'auto'}}
+        style={{overflow: 'auto', }}
       >
         <div className="addprodform">
           <h3 className="modaltitle">Nuevo Producto</h3>
@@ -304,6 +311,9 @@ export default function SimpleModal(props) {
             {/* Boton de enviar */}
             <Button variant="contained" className={classesSelect.color} onClick={handleOnClick} style={{marginTop: 24}}>
               Enviar
+            </Button>
+            <Button variant="contained" className={classesSelect.color2} onClick={handleClose} style={{marginTop: 24}}>
+              Cancelar
             </Button>
           </FormControl>
         </div>

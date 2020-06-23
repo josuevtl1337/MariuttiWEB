@@ -15,6 +15,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 import Logo from '../../visuals/logoplano-small.png'
+import LogoBig from '../../visuals/logo-mariutti-2020.png'
 
 
 const NavBarStateLess = (props) => {
@@ -193,7 +194,7 @@ const NavBarStateLess = (props) => {
             </div>
             <div className="navbar">
                 <Container className="barra">
-                    <Link to="/"><img className="logo" src="http://www.mariutti.com.ar/images/logo-plano.png"/></Link>
+                    <Link to="/"><img className="logo" src={LogoBig}/></Link>
                     <Link to="/"><img className="logosmall" src={Logo}/></Link>
                     <Hidden mdDown className="displayend">
                         <div className={tabwrapclasses}>
@@ -251,7 +252,7 @@ const NavBarStateLess = (props) => {
                             <p style={{color: 'black', fontSize: 10}}>ventas@mariutti.com.ar</p>
                             <div className="contact-divider responsive"></div>
                             {/* <PhoneIcon style={{color: 'black', fontSize: 16, marginRight: '5px'}}/> */}
-                            <p style={{color: 'black', fontSize: 10}}>+54 342 453-5318</p>
+                            <p style={{color: 'black', fontSize: 10}}>+54 9 3425 21-5000</p>
                         </div>
                         <div className="phonebtns">
                             {/* <SearchTrigger click={props.searchClickHandler}/> */}

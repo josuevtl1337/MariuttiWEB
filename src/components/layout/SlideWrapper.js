@@ -29,8 +29,9 @@ export default function SlideWrapper (props) {
                 <img className="prodimg car" src={url}/>                                                 
             </div>
             <div className="car-prod-text">
-                <p className="entrada-cardtitle carousel">{props.nombre}</p>
-                <p className="entrada-cardtext carousel">{props.descripcion}</p>
+                {/* <p className="entrada-cardtitle carousel">{props.nombre}</p> */}
+                <p className="prodcardtitle">{props.nombre}</p>
+                <p className="prodcardsub">{props.descripcion}</p>
             </div>
         </div>
         </div> 
