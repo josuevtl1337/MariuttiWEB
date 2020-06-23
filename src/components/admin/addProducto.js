@@ -25,12 +25,7 @@ import AddIcon from '@material-ui/icons/Add';
 const useStyles = makeStyles(theme => ({
   input: {
     display: 'none',
-  },
-  modalStyle : { 
-    height:"600px",
-    overflow:'scroll',
-    overflowX:'hidden'
-  },
+  }
 }));
 const useStylesSelect = makeStyles(theme => ({
   formControl: {
@@ -39,10 +34,10 @@ const useStylesSelect = makeStyles(theme => ({
     // height:"600px",
     // overflow:'scroll',
     // overflowX:'hidden',
-    margin: theme.spacing(1),
+    // margin: theme.spacing(1),
     width: '85%',
-    // height: 600,
-    height: 'max-content',
+    height: '100%',
+    // height: 'max-content',
     display:'flex',
     flexDirection:'column',
     justifyContent:'space-around'
@@ -52,16 +47,20 @@ const useStylesSelect = makeStyles(theme => ({
     color: '#ffffff',
     width: 100,
     '&:hover': {
-      backgroundColor: '#FDB913'
-    }
+      backgroundColor: '#18AF31'
+    },
+    boxShadow: 'none'
   },
   color2:{
-    backgroundColor: '#274582',
-    color: '#ffffff',
+    backgroundColor: 'transparent',
+    color: '##274582',
     width: 100,
+    boxShadow: 'none',
     '&:hover': {
-      backgroundColor: '#FDB913'
-    }
+    boxShadow: 'none',
+    backgroundColor: '#e8e8e8'
+    },
+    marginRight: 12
   },
   flexHorizontal: {
     display: 'flex',
@@ -203,8 +202,8 @@ export default function SimpleModal(props) {
           {/* Sub-Rubro */}
               
           <FormControl className={classesSelect.formControl}>
-          <h1 className="modaltitle">t</h1>
-          <h3 className="modaltitle">t</h3>
+          <h1 className="modaltitle">Nuevo Producto</h1>
+          {/* <h3 className="modaltitle">t</h3> */}
             <InputLabel id="sbLabel" ></InputLabel>
             <Select
               id="sub_rubro"
@@ -311,13 +310,15 @@ export default function SimpleModal(props) {
 
                 </div>
                 
-            {/* Boton de enviar */}
-            <Button variant="contained" className={classesSelect.color} onClick={handleOnClick} style={{marginTop: 24}}>
-              Enviar
-            </Button>
-            <Button variant="contained" className={classesSelect.color2} onClick={handleClose} style={{marginTop: 24}}>
-              Cancelar
-            </Button>
+            {/* Botones enviar y cancelar */}
+            <div className="formbtns">
+              <Button variant="contained" className={classesSelect.color2} onClick={handleClose} style={{marginTop: 24}}>
+                Cancelar
+              </Button>
+              <Button variant="contained" className={classesSelect.color} onClick={handleOnClick} style={{marginTop: 24}}>
+                Enviar
+              </Button>
+            </div>
           </FormControl>
         </div>
       </Modal>

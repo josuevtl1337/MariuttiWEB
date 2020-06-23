@@ -184,9 +184,9 @@ class App extends Component {
             render= {(props => <Contact {...props} mensaje={this.state.mensajeStock} />)}
           />
 
-          {footer}
 
         </div>
+        {footer}
       </BrowserRouter>
     );
   }

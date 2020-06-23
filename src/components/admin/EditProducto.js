@@ -56,9 +56,22 @@ const useStylesSelect = makeStyles(theme => ({
     backgroundColor: '#18AF31',
     color: '#ffffff',
     width: 100,
+    boxShadow: 'none',
     '&:hover': {
-      backgroundColor: '#87DF87'
+      backgroundColor: '#87DF87',
+      boxShadow: 'none',
     }
+  },
+  color2:{
+    backgroundColor: 'transparent',
+    color: '##274582',
+    width: 100,
+    boxShadow: 'none',
+    '&:hover': {
+    boxShadow: 'none',
+    backgroundColor: '#e8e8e8'
+    },
+    marginRight: 12
   },
   flexHorizontal: {
     display: 'flex',
@@ -231,8 +244,7 @@ export default function SimpleModal(props) {
       </IconButton>
   
         <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
+          disableBackdropClick="false"
           open={open}
           onClose={handleClose}
           style={{overflow: 'auto'}}
@@ -353,10 +365,15 @@ export default function SimpleModal(props) {
 
                 </div>
   
-                {/* Boton de enviar */}
-                <Button variant="contained" className={classesSelect.color} onClick={handleOnClick}>
-                  Guardar
-                </Button>
+                {/* Botones enviar y cancelar */}
+                <div className="formbtns">
+                  <Button variant="contained" className={classesSelect.color2} onClick={handleClose} style={{marginTop: 24}}>
+                    Cancelar
+                  </Button>
+                  <Button variant="contained" className={classesSelect.color} onClick={handleOnClick} style={{marginTop: 24}}>
+                    Guardar
+                  </Button>
+                </div>
                 </FormControl>
                 </div>  
         </Modal>

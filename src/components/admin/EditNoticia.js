@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 
 const useStylesSelect = makeStyles(theme => ({
   formControl: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
     width: '85%',
     height: 550,
     display:'flex',
@@ -43,13 +43,25 @@ const useStylesSelect = makeStyles(theme => ({
     justifyContent:'space-around'
   },
   color:{
-    backgroundColor: '#18AF31',
+    backgroundColor: '#274582',
     color: '#ffffff',
     width: 100,
     '&:hover': {
-      backgroundColor: '#87DF87'
-    }
-  }
+      backgroundColor: '#18AF31'
+    },
+    boxShadow: 'none'
+  },
+  color2:{
+    backgroundColor: 'transparent',
+    color: '##274582',
+    width: 100,
+    boxShadow: 'none',
+    '&:hover': {
+    boxShadow: 'none',
+    backgroundColor: '#e8e8e8'
+    },
+    marginRight: 12
+  },
 }));
 
 export default function SimpleModal(props) {
@@ -94,11 +106,10 @@ export default function SimpleModal(props) {
       </IconButton>
   
         <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
+          disableBackdropClick="false"
           open={open}
           onClose={handleClose}
-          style={{overflow: 'auto'}}
+          // style={{overflow: 'auto'}}
 
         >
           <div className="addprodform">   
@@ -106,11 +117,16 @@ export default function SimpleModal(props) {
                 {/* Nombre Producto */}
                 <TextField id="standard-basic" label="Nombre Producto" defaultValue={props.datosNoticia.data.nombre} onChange={onChangeNombre}/>
                 {/* Descripcion */}
-                <TextField id="standard-basic" label="Descripción" multiline rows="18" defaultValue={props.datosNoticia.data.descripcion} onChange={onChangeDescripcion}/>          
-                {/* Boton de enviar */}
-                <Button variant="contained" className={classesSelect.color} onClick={handleOnClick}>
-                  Guardar
-                </Button>
+                <TextField id="standard-basic" label="Descripción" multiline rows="17" defaultValue={props.datosNoticia.data.descripcion} onChange={onChangeDescripcion}/>          
+                {/* Botones enviar y cancelar */}
+                <div className="formbtns">
+                  <Button variant="contained" className={classesSelect.color2} onClick={handleClose} style={{marginTop: 24}}>
+                    Cancelar
+                  </Button>
+                  <Button variant="contained" className={classesSelect.color} onClick={handleOnClick} style={{marginTop: 24}}>
+                    Guardar
+                  </Button>
+                </div>
                 </FormControl>       
                 </div>
         </Modal>

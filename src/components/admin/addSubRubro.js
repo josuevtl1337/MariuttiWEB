@@ -51,9 +51,21 @@ const useStylesSelect = makeStyles(theme => ({
     color: '#ffffff',
     width: 100,
     '&:hover': {
-      backgroundColor: '#FDB913'
-    }
-  }
+      backgroundColor: '#18AF31'
+    },
+    boxShadow: 'none'
+  },
+  color2:{
+    backgroundColor: 'transparent',
+    color: '##274582',
+    width: 100,
+    boxShadow: 'none',
+    '&:hover': {
+    boxShadow: 'none',
+    backgroundColor: '#e8e8e8'
+    },
+    marginRight: 12
+  },
 }));
 
 export default function SimpleModal(props) {
@@ -104,8 +116,7 @@ export default function SimpleModal(props) {
       </div>
 
       <Modal
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
+        disableBackdropClick="false"
         open={open}
         onClose={handleClose}
         style={{overflow: 'auto'}}
@@ -135,10 +146,16 @@ export default function SimpleModal(props) {
             {/* Text Input */}
             <TextField id="standard-basic" label="Nombre Subrubro" onChange={onChangeInput}/>
 
-            {/* Boton de enviar */}
-            <Button variant="contained" className={classesSelect.color} style={{marginTop: 32}} onClick={handleOnClick}>
-              Enviar
-            </Button>
+            {/* Botones enviar y cancelar */}
+            <div className="formbtns">
+              <Button variant="contained" className={classesSelect.color2} onClick={handleClose} style={{marginTop: 24}}>
+                Cancelar
+              </Button>
+              <Button variant="contained" className={classesSelect.color} onClick={handleOnClick} style={{marginTop: 24}}>
+                Enviar
+              </Button>
+            </div>
+
             <label>{ruta}</label>
           </FormControl>
         </div>
