@@ -70,25 +70,6 @@ const CatalogoProductos = (props) =>{
         // console.log(productoState);
     }
 
-    const categoriaVacia = () =>{
-        productosArray.map((item, i) => {                             
-            if(props.categoriaActual == item.sub_rubro){
-                arrcont.push(item.nombre)
-            }
-        })
-        console.log("Contador" + arrcont)
-        if(arrcont == null){
-            alert("hola")
-            // return(
-            //     <div className="categoria-vacia">
-            //         <img src="https://image.flaticon.com/icons/png/512/2422/2422178.png" alt="" className="nocatimg"/>
-            //         <h3 className="nocattitle">¡Ups! Parece que no hay nada aquí.</h3>
-            //         <p className="nocattext">Esta categoría aún no tiene productos. Estamos trabajando para brindarte el mejor servicio.</p>
-            //     </div>
-            // );
-        }
-    }
-
 return(
     <React.Fragment>
         <div className="contenedor-catalogo">

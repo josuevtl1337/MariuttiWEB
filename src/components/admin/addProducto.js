@@ -23,20 +23,22 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles(theme => ({
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    width:'50%',
-    display:'flex',
-    flexDirection:'column',
-    alignItems:'center',
-    justifyContent:'space-around'
-  },
   input: {
     display: 'none',
+  },
+  modalStyle : { 
+    height:"600px",
+    overflow:'scroll',
+    overflowX:'hidden'
   },
 }));
 const useStylesSelect = makeStyles(theme => ({
   formControl: {
+    // disableScrollLock:true,
+    // overFlow:'scroll',
+    // height:"600px",
+    // overflow:'scroll',
+    // overflowX:'hidden',
     margin: theme.spacing(1),
     width: '85%',
     // height: 600,
@@ -127,7 +129,16 @@ export default function SimpleModal(props) {
     setDescripcion(e.target.value);
   }
   const onChangeEnlace = e => {
-    setEnlace(e.target.value);
+    function getId(url) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+      const match = url.match(regExp);
+  
+      return (match && match[2].length === 11)
+        ? match[2]
+        : null;
+    }
+    setEnlace("//www.youtube.com/embed/" + getId(e.target.value));
+    console.log("URL :" + enlace)
   }
   const handleFile = e =>{
     setNameFile(<h4>{e.target.files[0].name} <span style={{color: 'green'}}>✓</span></h4>);
@@ -181,12 +192,13 @@ export default function SimpleModal(props) {
         style={{overflow: 'auto'}}
       >
         <div className="addprodform">
-          <h3 className="modaltitle">Nuevo Producto</h3>
+
 
           {/* Sub-Rubro */}
               
           <FormControl className={classesSelect.formControl}>
-
+          <h1 className="modaltitle">t</h1>
+          <h3 className="modaltitle">t</h3>
             <InputLabel id="sbLabel" ></InputLabel>
             <Select
               id="sub_rubro"

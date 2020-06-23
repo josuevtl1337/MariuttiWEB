@@ -5,7 +5,9 @@
     display: flex;
     flex-direction: column;
     justify-content: start;
-    height: 400px;
+    /* height: 400px; */
+    min-height: 400px;
+    max-height: 480px;
     width: 280px;
     cursor: pointer;
     padding: 5px;
@@ -96,6 +98,10 @@
     font-weight: 600;
     margin-bottom: 8px;
     margin-top: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .prodcardtitle.mini{

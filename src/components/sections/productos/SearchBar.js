@@ -42,6 +42,7 @@ const SearchBar = (props) =>{
   };
   const onChange = e => {
     setBusqueda(e.target.value);
+    // e.preventDefault();
     // history.push(busqueda);
   };
   
