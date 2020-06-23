@@ -61,26 +61,25 @@ const CatalogoProductos = (props) =>{
             emptyreturn = 
             <div className="categoria-vacia">
                 <img src="https://image.flaticon.com/icons/png/512/2422/2422178.png" alt="" className="nocatimg"/>
-                <h3 className="nocattitle">Próximamente.</h3>
+                <h3 className="nocattitle">¡Ups! Parece que no hay nada aquí.</h3>
                 <p className="nocattext">Esta categoría aún no tiene productos. Estamos trabajando para brindarte el mejor servicio.</p>
             </div>;
 
 
         } else {
             emptyreturn = null;
-            if(searchcont == null){
-                emptysearch = 
-                <div className="categoria-vacia">
-                    <img src="https://image.flaticon.com/icons/png/512/2422/2422178.png" alt="" className="nocatimg"/>
-                    <h3 className="nocattitle">no busq.</h3>
-                    <p className="nocattext">Esta categoría aún no tiene productos. Estamos trabajando para brindarte el mejor servicio.</p>
-                </div>
-            } else {
-                emptysearch = null;
-            }
         }
 
-        
+        if(searchcont == null && props.categoriaActual == false){
+            emptysearch = 
+            <div className="categoria-vacia">
+                <img src="https://image.flaticon.com/icons/svg/1079/1079536.svg" alt="" className="noresultimg"/>
+                <h3 className="nocattitle">No se encontraron resultados para la búsqueda "{props.busquedaResult}".</h3>
+                <p className="nocattext"> Probá buscando productos en alguno de nuestros subrubros, o no dudes en contactarte con nosotros.</p>
+            </div>
+        } else if (searchcont != null) {
+            emptysearch = null;
+        }
         
     }
     const handlerOnClickProducto = (id,nombre,descripcion,img,subtitulo,video) =>{

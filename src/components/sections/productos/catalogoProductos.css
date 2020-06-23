@@ -45,6 +45,13 @@
     filter: grayscale(70%);
 }
 
+.noresultimg{
+    margin-top: 8px;
+    height: 180px;
+    filter: grayscale(75%);
+    opacity: 0.8;
+}
+
 .nocattitle{
     font-family: 'oswald';
     margin: 0;
