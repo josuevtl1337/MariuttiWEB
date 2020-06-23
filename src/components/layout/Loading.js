@@ -7,7 +7,7 @@ function Loading(props) {
       <div className="loadingcontainer">
 
         <div class="spinner"></div>
-        <div class="logo">{props.text}</div>
+        <div class="loadingtext">{props.text}</div>
 
       </div>
     </div>
