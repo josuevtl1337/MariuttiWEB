@@ -76,26 +76,26 @@ const ProductoComponent = (props) =>{
     });
 
 
-    if(isLoaded(productos)){
-        productosArray = Object.values(productos);
-        // Reversed para que los mapee por el ultimo cargado y luego mapeo los ultimos 3 con slice (crotada?)
+    // if(isLoaded(productos)){
+    //     productosArray = Object.values(productos);
+    //     // Reversed para que los mapee por el ultimo cargado y luego mapeo los ultimos 3 con slice (crotada?)
 
-        productosArray.map((item, i) => { 
-            if(item.off == true){ 
-                onlyProductos.push(
-                    {'id':item.id,
-                    'nombre': item.nombre,
-                    'img':item.img,
-                    'subtitulo':item.subtitulo,
-                    'descripcion':item.descripcion,
-                    'enlace':item.enlace
-                },
-                )
-            }                                                                                                    
-        })
-        console.log(onlyProductos);
-        console.log(re);
-    }
+    //     productosArray.map((item, i) => { 
+    //         if(item.off == true){ 
+    //             onlyProductos.push(
+    //                 {'id':item.id,
+    //                 'nombre': item.nombre,
+    //                 'img':item.img,
+    //                 'subtitulo':item.subtitulo,
+    //                 'descripcion':item.descripcion,
+    //                 'enlace':item.enlace
+    //             },
+    //             )
+    //         }                                                                                                    
+    //     })
+    //     console.log(onlyProductos);
+    //     console.log(re);
+    // }
 
     if(rubros){
         const r = Object.values(rubros);
@@ -153,10 +153,7 @@ const ProductoComponent = (props) =>{
     if(productos){
         console.log(productos)
         productosArray = Object.values(productos);
-
-        productosArray = Object.values(productos);
         // Reversed para que los mapee por el ultimo cargado y luego mapeo los ultimos 3 con slice (crotada?)
-
         productosArray.map((item, i) => { 
             if(item.off == true){ 
                 onlyProductos.push(
@@ -167,10 +164,11 @@ const ProductoComponent = (props) =>{
                     'descripcion':item.descripcion},
                 )
             }                                                                                                    
-        })
-        
+        })  
         reversedProduct = onlyProductos.reverse(); 
-        only3Productos = reversedProduct.slice(0,3);
+        if(onlyProductos.length>3){
+            onlyProductos.slice(0,3);
+        }
     }
     let search = props.history.location.search.substr(1);
     console.log(search);
@@ -387,7 +385,7 @@ const ProductoComponent = (props) =>{
                         titulo="Black an dequer"
                         subtitulo="la mejor del condado"
                     /> */}
-                    {only3Productos.map((item, i) => {
+                    {onlyProductos.map((item, i) => {
                             return (
                                 <ProductosCard 
                                     handlerOnClick={()=>{handlerProductTrigger(item.id)}}                                     

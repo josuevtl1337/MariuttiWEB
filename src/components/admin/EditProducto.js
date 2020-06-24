@@ -23,6 +23,7 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
 import CreateIcon from '@material-ui/icons/Create';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 // import { animateScroll } from "react-scroll";
 
 function Alert(props) {
@@ -111,13 +112,14 @@ export default function SimpleModal(props) {
   const [pdfRef, setPdfRef] = React.useState('');
   const [fileName, setFileName] = React.useState('');
   const [pdfName, setPdfName] = React.useState('No hay PDF Cargado');
-
+  const [pdfDelete, setPdfDelete] = React.useState(false);
+  const [pdfTrue, setPdfTrue] = React.useState(false);
   const handleOpen = () => {
     // this.scrollToBottom();
 
     setOpen(true);
     //Seteo los props en mi estado local
-    console.log(props.datosProductos.data.off);
+    console.log(props.datosProductos.data.pdf);
     setNombre(props.datosProductos.data.nombre); 
     setSubtitulo(props.datosProductos.data.subtitulo); 
     setDescripcion(props.datosProductos.data.descripcion); 
@@ -130,6 +132,7 @@ export default function SimpleModal(props) {
     setFileName("BD: "+props.datosProductos.data.img);
     setFileRef(props.datosProductos.data.img);
     if(props.datosProductos.data.pdf!=undefined){
+      setPdfTrue(true);
       setPdfRef(props.datosProductos.data.pdf);
       setPdfName("BD: "+props.datosProductos.data.pdf);
     }
@@ -181,6 +184,17 @@ export default function SimpleModal(props) {
     setPdf(e.target.files[0]);
     setPdfName(e.target.files[0].name)
   }
+  const handleDeletePdf = e =>{
+    var result = window.confirm("Quieres borrar el PDF de este Producto?");
+    if(result==true){
+      setPdfDelete(true);
+      if(pdfDelete==true){
+        props.handleDeletePdf(pdfRef,props.datosProductos.data.id);
+      }  
+      setPdfName('No hay PDF Cargado');
+      setPdfTrue(false);
+    }
+  }
   const onClickOfertaHandler = e => {
     if (off == false){
       setOff(true);  
@@ -190,32 +204,23 @@ export default function SimpleModal(props) {
   }
 
   const handleOnClick = e => {
-    // console.log(nombre);
-    // console.log(subtitulo);
-    // console.log("Descripcion:",descripcion);
-    // console.log("Enlace:",enlace);
     console.log("Imagen:",file);
 
     setAlertOpen(true)
 
-    // console.log(subRubro);
-    // console.log(props.datosProductos.data);
-    // props.handleEditProducto(nombre,subtitulo,descripcion,enlace,subRubro,off,props.datosProductos.data.id,precio,precioAntiguo,codigo);
-    
-    // if (pdf && file != ''){
-    //   props.handleEditFiles(file,fileRef,props.datosProductos.data.id);
-    //   props.handleEditPdf(pdf,pdfRef,props.datosProductos.data.id);
-    // }
+    //DESCOMENTAR ESTO ANTES DEL DEPLOY
     if(file != ''){
-      // console.log(fileRef)
       props.handleEditFiles(file,fileRef,props.datosProductos.data.id,nombre,subtitulo,descripcion,enlace,subRubro,off,precio,precioAntiguo,codigo);
     }
     if(pdf != ''){
-      // console.log(pdfRef)
       props.handleEditPdf(pdf,pdfRef,props.datosProductos.data.id,nombre,subtitulo,descripcion,enlace,subRubro,off,precio,precioAntiguo,codigo);
     }
     if(pdf == '' && file == ''){
       props.handleEditProducto(nombre,subtitulo,descripcion,enlace,subRubro,off,props.datosProductos.data.id,precio,precioAntiguo,codigo); 
+    }
+
+    if(pdfDelete==true){
+      props.handleDeletePdf(pdfRef,props.datosProductos.data.id);
     }
     // recorriendoArray();
     setOpen(false);
@@ -362,7 +367,11 @@ export default function SimpleModal(props) {
                   </div>
 
                   {pdfName}
-
+                  {pdfTrue ? 
+                  <IconButton  onClick={handleDeletePdf} color="secondary" aria-label="upload picture" component="span">
+                    <DeleteForeverIcon />
+                  </IconButton> : console.log("#")
+                  }
                 </div>
   
                 {/* Botones enviar y cancelar */}

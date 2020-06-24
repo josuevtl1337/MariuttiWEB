@@ -287,7 +287,6 @@ class Admin3 extends Component {
   }
   //Editando PDF
   handleEditPdf = (file,fileRef,id,nombre,subtitulo,descripcion,enlace,sub_rubro,off,precio,precioAntiguo,codigo) => {
-
     var idLocal = id;
     var timestamp = new Date().getTime()
     const storageRef = firebase.storage().ref(`imagenes/${file.name+timestamp}`);
@@ -337,7 +336,31 @@ class Admin3 extends Component {
       }  
     });
   }
-  
+  //Borrando PDF
+  handleDeletePdf = (fileRef,id) =>{
+    var idLocal = id;
+    if(idLocal!=undefined){          
+      const db = firebase.database();
+      const dbRef = db.ref("Producto");
+      const productoRef = dbRef.child(idLocal)
+      productoRef.update({
+        "pdf": null
+      })
+    }
+
+    if(fileRef!=''){
+      var desertRef = firebase.storage().ref(fileRef);
+      // Delete the file
+      desertRef.delete().then(function() {
+        // alert("file deleted")
+        // File deleted successfully
+        console.log("Archivo viejo eliminado")
+      }).catch(function(error) {
+        // Uh-oh, an error occurred!
+        console.log("Error: ",error.message)
+      });
+    }
+  }
   //Subiendo NOTICIAS
   handleUploadNoticia = (nombre,descripcion,f) =>{
     const file = f;
@@ -743,7 +766,7 @@ class Admin3 extends Component {
                           Action: props => {
                             if(props.action.icon === 'save'){
                               return(
-                              <EditProducto sub_rubros={this.state.Sub_Rubro} handleEditProducto={this.handleEditProducto} handleEditFiles={this.handleEditFiles} handleEditPdf={this.handleEditPdf} datosProductos={props}/>        
+                              <EditProducto sub_rubros={this.state.Sub_Rubro} handleDeletePdf={this.handleDeletePdf} handleEditProducto={this.handleEditProducto} handleEditFiles={this.handleEditFiles} handleEditPdf={this.handleEditPdf} datosProductos={props}/>        
                               )
                             }
                             if(props.action.icon === 'delete'){
