@@ -75,28 +75,6 @@ const ProductoComponent = (props) =>{
         }
     });
 
-
-    // if(isLoaded(productos)){
-    //     productosArray = Object.values(productos);
-    //     // Reversed para que los mapee por el ultimo cargado y luego mapeo los ultimos 3 con slice (crotada?)
-
-    //     productosArray.map((item, i) => { 
-    //         if(item.off == true){ 
-    //             onlyProductos.push(
-    //                 {'id':item.id,
-    //                 'nombre': item.nombre,
-    //                 'img':item.img,
-    //                 'subtitulo':item.subtitulo,
-    //                 'descripcion':item.descripcion,
-    //                 'enlace':item.enlace
-    //             },
-    //             )
-    //         }                                                                                                    
-    //     })
-    //     console.log(onlyProductos);
-    //     console.log(re);
-    // }
-
     if(rubros){
         const r = Object.values(rubros);
         console.log(r)

@@ -22,7 +22,7 @@ export default function ProductCarouselGrande (props) {
  
                 <Slider style={{height: 400}}>
                 {props.productos.map((item, i) => {     
-                    console.log(props.productos)                   
+                    console.log(props.productos)             
                         return (
                             <Slide index={i}>                                                                        
                                 <SlideWrapper nombre={item.nombre} descripcion={item.descripcion} img={item.img} id={item.id} handlerOnClickProducto={props.handlerOnClickProducto}/>
