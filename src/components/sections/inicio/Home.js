@@ -79,6 +79,7 @@ const Home = (props) => {
         console.log(productosArray);
         console.log(onlyProductos);
         console.log(only4Productos);
+        console.log("Productos que van al carousel" + reversedProduct);
     }
     //Cambiando el history Para los Productos
     const handlerOnClickProducto = (id) =>{
@@ -119,14 +120,6 @@ const Home = (props) => {
             <HeroCarousel
                 handlerOnClickCatalogo={handlerOnClickCatalogo}
             />
-            
-            {/* <HeroImage 
-                handlerOnClickCatalogo={handlerOnClickCatalogo}
-                title="al servicio de la construcción"
-                // text="Más de 50 años brindando soluciones para el hogar, la construcción y la industria"
-                // text="La ferretería industrial más completa de la región"
-                image="https://miro.medium.com/max/9856/1*gAG21NFA76ZlCbtK6SayVQ.jpeg"
-            /> */}
 
             <img src={BlueTriangle} className="bluetriangle"/>
 

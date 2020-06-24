@@ -152,7 +152,6 @@ const ProductoComponent = (props) =>{
     }
     if(productos){
         console.log(productos)
-        productosArray = Object.values(productos);
 
         productosArray = Object.values(productos);
         // Reversed para que los mapee por el ultimo cargado y luego mapeo los ultimos 3 con slice (crotada?)

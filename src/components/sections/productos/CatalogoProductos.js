@@ -80,6 +80,11 @@ const CatalogoProductos = (props) =>{
         } else if (searchcont != null) {
             emptysearch = null;
         }
+
+        if (props.categoriaActual == false && props.busquedaResult == false) {
+            emptysearch = null
+            emptyreturn = null
+        }
         
     }
     const handlerOnClickProducto = (id,nombre,descripcion,img,subtitulo,video) =>{
