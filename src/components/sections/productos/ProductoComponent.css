@@ -42,8 +42,10 @@
 .singleprod-img{
     width: 400px;
     height: 400px;
-    object-fit: cover;
-    object-position: center;
+    -o-object-fit: cover;
+       object-fit: cover;
+    -o-object-position: center;
+       object-position: center;
     background-color: white;
     box-shadow:
     0 0px 0.7px rgba(0, 0, 0, 0.028),
@@ -74,14 +76,16 @@
 }
 
 .share-icon{
-    filter: invert(60%);
+    -webkit-filter: invert(60%);
+            filter: invert(60%);
     transition: all .2s;
     cursor: pointer;
     height: 40px;
 }
 
 .share-icon:hover{
-    filter: invert(0%);
+    -webkit-filter: invert(0%);
+            filter: invert(0%);
 }
 
 .right{
@@ -191,7 +195,7 @@
 .share{
     align-self: flex-end;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: flex-end;
     /* width: 220px; */
     width: 100%;
@@ -205,7 +209,7 @@
 
 .shareicons{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     width: 100%;
     margin-left: 350px;

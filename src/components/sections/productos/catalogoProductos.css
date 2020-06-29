@@ -9,7 +9,8 @@
     margin-bottom: 52px;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 410px; 
-    column-gap: 8px;
+    -moz-column-gap: 8px; 
+         column-gap: 8px;
     row-gap: 10px;
     justify-items: center;
     align-items: center;
@@ -35,14 +36,16 @@
     0 0.9px 2.7px rgba(0, 0, 0, 0.042),
     0 4px 12px rgba(0, 0, 0, 0.07)
     ; */
-    animation: fadeIn 0.4s;
+    -webkit-animation: fadeIn 0.4s;
+            animation: fadeIn 0.4s;
     /* border-radius: .5em; */
 }
 
 .nocatimg{
     margin-top: 8px;
     height: 250px;
-    filter: grayscale(70%);
+    -webkit-filter: grayscale(70%);
+            filter: grayscale(70%);
 }
 
 .noresultimg{
@@ -50,6 +53,7 @@
     height: 180px;
     filter: grayscale(75%);
     opacity: 0.8;
+    -webkit-filter: grayscale(75%);
 }
 
 .nocattitle{

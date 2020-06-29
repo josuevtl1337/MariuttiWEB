@@ -55,7 +55,8 @@
 .aboutimg{
     /* margin-top: 40px; */
     width: 100%;
-    object-fit: fill;
+    -o-object-fit: fill;
+       object-fit: fill;
     box-shadow:
     0 0.3px 0.8px rgba(0, 0, 0, 0.028),
     0 0.9px 2.7px rgba(0, 0, 0, 0.042),

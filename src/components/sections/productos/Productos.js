@@ -213,8 +213,6 @@ const Productos = (props) => {
         <React.Fragment>
 
             <Helmet>
-                
-                
                 <title>{categoriaActualName} - Productos | Mariutti Hnos</title>
                 <meta name="description" content="¿Sos un profesional o tenés un proyecto personal? Conocé acá nuestro variado catálogo de productos."/>
             </Helmet>

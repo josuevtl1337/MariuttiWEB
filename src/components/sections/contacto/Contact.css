@@ -60,6 +60,8 @@
     flex-direction: row;
     align-items: center;
     cursor: pointer;
+    width: -webkit-max-content;
+    width: -moz-max-content;
     width: max-content;
 }
 
@@ -98,7 +100,7 @@
 .ubicacion{
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     width: 45%;
 }
 

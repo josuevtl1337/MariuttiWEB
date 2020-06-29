@@ -16,10 +16,8 @@
 .car-prod-card{
     margin-top: 8px;
     margin-bottom: 12px;
-    display: flex;
-    flex-direction: row;
     align-items: flex-start;
-    justify-content: start;
+    justify-content: flex-start;
     cursor: pointer;
     padding: 5px;
     transition: all 0.2s;
@@ -32,7 +30,9 @@
     0 4px 12px rgba(0, 0, 0, 0.07)
     ;
 
-    animation: fadeIn 0.4s;
+    -webkit-animation: fadeIn 0.4s;
+
+            animation: fadeIn 0.4s;
     height: 250px;
     width: 100%;
 }

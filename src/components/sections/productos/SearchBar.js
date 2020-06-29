@@ -15,10 +15,15 @@ export const history = createHashHistory();
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: '2px 0px',
+    padding: '0px 0px',
     display: 'flex',
     width: '100%',
-    marginBottom: 4
+    marginBottom: 4,
+    borderRadius:0,
+    borderTopLeftRadius: '.6em',
+    borderTopRightRadius: '.6em',
+    marginBottom: 8,
+    boxShadow: '3px 3px 6px -2px rgba(0,0,0,0.2)'
   },
   input: {
     marginLeft: theme.spacing(3),

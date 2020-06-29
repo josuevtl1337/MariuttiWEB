@@ -15,9 +15,14 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     // maxWidth: 500,
     backgroundColor: theme.palette.background.paper,
+    borderBottomStyle: 'solid',
+    borderBottomColor: '#dddfe2',
+    borderBottomWidth: '1px',
+    padding: 0,
   },
   nested: {
     paddingLeft: theme.spacing(4),
+    
   },
 }));
 
